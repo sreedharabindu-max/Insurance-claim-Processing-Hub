@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,timeFromCreateToActivate=1558000,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Generates OTP for an insurance claim using the Claim Number.</description>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source/>
+        <internal_name>claim_otp_ai_agent</internal_name>
+        <label_cache>[{"name":"subflow.claim_number","label":"Input➛Claim Number","type":"string","base_type":"string","usedInstances":{"65c10e6f-0603-415e-aa87-a3df08e66b84":["objective"]},"attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"4f3024b5-4cf5-4240-ab24-70b670daeca2"}},{"name":"65c10e6f-0603-415e-aa87-a3df08e66b84.agent_message","label":"1 - Use an AI agent➛Agent Message","type":"string","base_type":"string","usedInstances":{"5c413d92-04a9-4513-8686-7dac4ad28442":["otp_result-0"]},"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"b05f488e-3dd7-46b2-9cab-0c43b7951b66"}}]</label_cache>
+        <master_snapshot>3bc836cb30ab03107f440a344beafdfe</master_snapshot>
+        <master_snapshot_digest/>
+        <name>Claim OTP AI Agent</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 09:35:17</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>83d2324b306b03107f440a344beafd40</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>Claim OTP AI Agent</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_hub_flow_83d2324b306b03107f440a344beafd40</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:18</sys_updated_on>
+        <type>subflow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record>a4d876cb30ab03107f440a344beafdab</version_record>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=83d2324b306b03107f440a344beafd40"/>
+    <sys_variable_value action="delete_multiple" query="document_key=83d2324b306b03107f440a344beafd40"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_83d2324b306b03107f440a344beafd40^id=83d2324b306b03107f440a344beafd40"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=83d2324b306b03107f440a344beafd40"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=83d2324b306b03107f440a344beafd40^sys_idNOT IN03d2324b306b03107f440a344beafd41"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>83d2324b306b03107f440a344beafd40</id>
+        <name>Claim OTP AI Agent</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 09:35:17</sys_created_on>
+        <sys_id>03d2324b306b03107f440a344beafd41</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 09:35:17</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=03d2324b306b03107f440a344beafd41"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=83d2324b306b03107f440a344beafd40^sys_idNOT IN2373f28b306b03107f440a344beafd13"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=4f3024b5-4cf5-4240-ab24-70b670daeca2</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>claim_number</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Claim Number</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Claim OTP AI Agent">83d2324b306b03107f440a344beafd40</model>
+        <model_id>83d2324b306b03107f440a344beafd40</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_83d2324b306b03107f440a344beafd40</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 09:38:03</sys_created_on>
+        <sys_id>2373f28b306b03107f440a344beafd13</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:14</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=2373f28b306b03107f440a344beafd13"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=83d2324b306b03107f440a344beafd40^sys_idNOT IN6287bac730ab03107f440a344beafdbc"/>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=b6ac7e3b-b1f8-458e-8717-6dd9ed0a147f</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>otp_result</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>OTP Result</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Claim OTP AI Agent">83d2324b306b03107f440a344beafd40</model>
+        <model_id>83d2324b306b03107f440a344beafd40</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_output_83d2324b306b03107f440a344beafd40</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 09:55:44</sys_created_on>
+        <sys_id>6287bac730ab03107f440a344beafdbc</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:14</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=6287bac730ab03107f440a344beafdbc"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=83d2324b306b03107f440a344beafd40"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=83d2324b306b03107f440a344beafd40"/>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=83d2324b306b03107f440a344beafd40^sys_idNOT INfdf3f20f306b03107f440a344beafd64"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Use an AI agent">b2e7d731ff4832100200ffffffffffed</action_type>
+        <action_type_parent display_value="Use an AI agent">74d79331ff4832100200ffffffffffb0</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot/>
+        <display_text/>
+        <flow display_value="Claim OTP AI Agent">83d2324b306b03107f440a344beafd40</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 09:40:07</sys_created_on>
+        <sys_id>fdf3f20f306b03107f440a344beafd64</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:15</sys_updated_on>
+        <ui_id>65c10e6f-0603-415e-aa87-a3df08e66b84</ui_id>
+        <updation_source/>
+        <values>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</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=fdf3f20f306b03107f440a344beafd64"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=83d2324b306b03107f440a344beafd40"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=83d2324b306b03107f440a344beafd40^sys_idNOT IN1028ba0b30ab03107f440a344beafdc7"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">17c836cb30ab03107f440a344beafdb6</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Claim OTP AI Agent">83d2324b306b03107f440a344beafd40</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2</order>
+        <outputs_assigned>otp_result</outputs_assigned>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 09:58:18</sys_created_on>
+        <sys_id>1028ba0b30ab03107f440a344beafdc7</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:15</sys_updated_on>
+        <ui_id>5c413d92-04a9-4513-8686-7dac4ad28442</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/6WPwQrCMBBE/yXnVipqLL159C5eRMqabOtiTEI2bZHSfzdFwd697TyGx84oXBd9F/nkDszUWlFdRmHhiaISLvo6IHcmikz0YLoZjqPcqXWBsskLWWzy7XqHOUC5z2Gjm6JEKW/ldgUt2lg/kTld05QEmtgbeJ3/9ag7GR1w/vSaCVaBfDyoSH2yNmAYp4TJzqM+lR4Cwc3gN2pUxOTsaWbHRU+/0m5SSzS48GiMG35segPeEXeYMgEAAA==</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=83d2324b306b03107f440a344beafd40"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=83d2324b306b03107f440a344beafd40"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>claim_number</element>
+        <help/>
+        <hint/>
+        <label>Claim Number</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_83d2324b306b03107f440a344beafd40</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 09:38:03</sys_created_on>
+        <sys_id>e373f28b306b03107f440a344beafd18</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 09:38:03</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_83d2324b306b03107f440a344beafd40"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>otp_result</element>
+        <help/>
+        <hint/>
+        <label>OTP Result</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_83d2324b306b03107f440a344beafd40</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 09:55:44</sys_created_on>
+        <sys_id>e687bac730ab03107f440a344beafdc1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 09:55:44</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_83d2324b306b03107f440a344beafd40"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Generates OTP for an insurance claim using the Claim Number.</description>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>claim_otp_ai_agent</internal_name>
+        <label_cache>[{"name":"subflow.claim_number","label":"Input➛Claim Number","type":"string","base_type":"string","usedInstances":{"65c10e6f-0603-415e-aa87-a3df08e66b84":["objective"]},"attributes":{"sourceUiUniqueId":"","sourceType":"","sourceId":"","uiUniqueId":"4f3024b5-4cf5-4240-ab24-70b670daeca2"}},{"name":"65c10e6f-0603-415e-aa87-a3df08e66b84.agent_message","label":"1 - Use an AI agent➛Agent Message","type":"string","base_type":"string","usedInstances":{"5c413d92-04a9-4513-8686-7dac4ad28442":["otp_result-0"]},"attributes":{"uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiType":"string","uiUniqueId":"b05f488e-3dd7-46b2-9cab-0c43b7951b66"}}]</label_cache>
+        <master>true</master>
+        <name>Claim OTP AI Agent</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="Claim OTP AI Agent">83d2324b306b03107f440a344beafd40</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 10:01:16</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>3bc836cb30ab03107f440a344beafdfe</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:16</sys_updated_on>
+        <type>subflow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=3bc836cb30ab03107f440a344beafdfe"/>
+    <sys_variable_value action="delete_multiple" query="document_key=3bc836cb30ab03107f440a344beafdfe"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_3bc836cb30ab03107f440a344beafdfe^id=3bc836cb30ab03107f440a344beafdfe"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=3bc836cb30ab03107f440a344beafdfe"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=3bc836cb30ab03107f440a344beafdfe^sys_idNOT IN7bc836cb30ab03107f440a344beafdff"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>3bc836cb30ab03107f440a344beafdfe</id>
+        <name>Claim OTP AI Agent</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 10:01:16</sys_created_on>
+        <sys_id>7bc836cb30ab03107f440a344beafdff</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:16</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=7bc836cb30ab03107f440a344beafdff"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=3bc836cb30ab03107f440a344beafdfe^sys_idNOT IN73c876cb30ab03107f440a344beafd01"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=4f3024b5-4cf5-4240-ab24-70b670daeca2</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>claim_number</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Claim Number</label>
+        <mandatory>true</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Claim OTP AI Agent">3bc836cb30ab03107f440a344beafdfe</model>
+        <model_id>3bc836cb30ab03107f440a344beafdfe</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_3bc836cb30ab03107f440a344beafdfe</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 10:01:16</sys_created_on>
+        <sys_id>73c876cb30ab03107f440a344beafd01</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:16</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=73c876cb30ab03107f440a344beafd01"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=3bc836cb30ab03107f440a344beafdfe^sys_idNOT INfbc876cb30ab03107f440a344beafd2d"/>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=b6ac7e3b-b1f8-458e-8717-6dd9ed0a147f</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>otp_result</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="String">string</internal_type>
+        <label>OTP Result</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Claim OTP AI Agent">3bc836cb30ab03107f440a344beafdfe</model>
+        <model_id>3bc836cb30ab03107f440a344beafdfe</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_output_3bc836cb30ab03107f440a344beafdfe</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 10:01:17</sys_created_on>
+        <sys_id>fbc876cb30ab03107f440a344beafd2d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:17</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=fbc876cb30ab03107f440a344beafd2d"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=3bc836cb30ab03107f440a344beafdfe"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=3bc836cb30ab03107f440a344beafdfe"/>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=3bc836cb30ab03107f440a344beafdfe^sys_idNOT IN84d876cb30ab03107f440a344beafd6f"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Use an AI agent">b2e7d731ff4832100200ffffffffffed</action_type>
+        <action_type_parent display_value="Use an AI agent">74d79331ff4832100200ffffffffffb0</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>b2e7d731ff4832100200ffffffffffed</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Claim OTP AI Agent">3bc836cb30ab03107f440a344beafdfe</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 10:01:18</sys_created_on>
+        <sys_id>84d876cb30ab03107f440a344beafd6f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:18</sys_updated_on>
+        <ui_id>65c10e6f-0603-415e-aa87-a3df08e66b84</ui_id>
+        <updation_source/>
+        <values>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</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=84d876cb30ab03107f440a344beafd6f"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=3bc836cb30ab03107f440a344beafdfe"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=3bc836cb30ab03107f440a344beafdfe^sys_idNOT IN00d876cb30ab03107f440a344beafd6e"/>
+    <sys_hub_flow_logic_instance_v2 action="INSERT_OR_UPDATE">
+        <attributes/>
+        <block display_value="">17c836cb30ab03107f440a344beafdb6</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <display_text/>
+        <flow display_value="Claim OTP AI Agent">3bc836cb30ab03107f440a344beafdfe</flow>
+        <flow_variables_assigned/>
+        <generation_source/>
+        <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>2</order>
+        <outputs_assigned>otp_result</outputs_assigned>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 10:01:18</sys_created_on>
+        <sys_id>00d876cb30ab03107f440a344beafd6e</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:18</sys_updated_on>
+        <ui_id>5c413d92-04a9-4513-8686-7dac4ad28442</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/6VTTW+bQBD9K9WeDYIaA/UtShQpUlpXiZtLVaGBHexVll2yu9hxkf97Zw3YVtNbb8zb+XjvzdAz3bm2c3atb6wVG8WWP3umoEG2ZNq1hUHbScdmbAey82Dfp4sqjjCtgyiN5kESLzAAyLMA5ryOckzTMk9C2KByRYPW0tfxSA24sK2Ew8v/9qm2QnKDnumvGWvBEFmHhi17JhR9KJCPQr3SiA/JghOafs6zEqpsHkEZzeMoq5MkgnmSlAg1LyuqklCipNTV+vunp8mAf5niDq3HrDNCbcb4cSx+nkBtuKcXzxi+O1QciUUN0uKMNaA4OG0OZ8Qg8JWSF2BLogYtDbxb8Zvm5VEU+cwaSVmFw+s5LEajB7i+AwdEpatcZ3AyRYsK7eAJxxpIzO01NiSsWie0GkoclHKq1rJr1LfBDXZuMO2VkM4SCWy9VM99FFI/b/X+aWJ5L9TJlfFR6grkOQJH3pWd83x61on1XzYPyAejUWJzuhZoW0KK1uidOE0h0k24kRSEtdR7YudvPYTKKwxpBRDeE353gl/ACC/3K7WhYj/uhxJvHT748ylTuh2cl0EZ13mQLHIM8izOgpTzL8gjiJOsZscZswd7K8Hai1G0oeKt8zIH20aDisFjX1IZ0bobIrXD0Yujv1rlf9BhM7uR23l5lbAkYe2xh6s8fqBzFdU1tNfm1Yu/YMc/Lfu7hf4DAAA=</values>
+        <workflow_reference/>
+    </sys_hub_flow_logic_instance_v2>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=3bc836cb30ab03107f440a344beafdfe"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=3bc836cb30ab03107f440a344beafdfe"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>claim_number</element>
+        <help/>
+        <hint/>
+        <label>Claim Number</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_3bc836cb30ab03107f440a344beafdfe</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 10:01:17</sys_created_on>
+        <sys_id>73c876cb30ab03107f440a344beafd27</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:17</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_3bc836cb30ab03107f440a344beafdfe"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>otp_result</element>
+        <help/>
+        <hint/>
+        <label>OTP Result</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_3bc836cb30ab03107f440a344beafdfe</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 10:01:17</sys_created_on>
+        <sys_id>48d876cb30ab03107f440a344beafd34</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:17</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_3bc836cb30ab03107f440a344beafdfe"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>83d2324b306b03107f440a344beafd40</sys_id>
+        <latest_snapshot>3bc836cb30ab03107f440a344beafdfe</latest_snapshot>
+        <compiler_build/>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=83d2324b306b03107f440a344beafd40"/>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=83d2324b306b03107f440a344beafd40^sys_idNOT IN10d876cb30ab03107f440a344beafd7b"/>
+    <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
+        <plan>com.snc.process_flow.engine.ProcessPlan@6b49465d</plan>
+        <plan_id display_value="Claim OTP AI Agent">83d2324b306b03107f440a344beafd40</plan_id>
+        <snapshot>3bc836cb30ab03107f440a344beafdfe</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-30 10:01:18</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>10d876cb30ab03107f440a344beafd7b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-30 10:01:18</sys_updated_on>
+    </sys_flow_subflow_plan>
+</record_update>
