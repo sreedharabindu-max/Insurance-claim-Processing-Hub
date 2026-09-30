@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-28 09:42:04</sys_created_on>
+        <sys_id>7a3168a6e06b03107f44c89b50c4a4a1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_insurance_0_claim_notification.x_snc_insurance_0.claim_notification_user</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_security_acl display_value="x_snc_insurance_0_claim_notification">323168a6e06b03107f44c89b50c4a45a</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_7a3168a6e06b03107f44c89b50c4a4a1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-28 09:42:04</sys_updated_on>
+        <sys_user_role display_value="x_snc_insurance_0.claim_notification_user" name="x_snc_insurance_0.claim_notification_user">75316c66e06b03107f44c89b50c4a444</sys_user_role>
+    </sys_security_acl_role>
+</record_update>

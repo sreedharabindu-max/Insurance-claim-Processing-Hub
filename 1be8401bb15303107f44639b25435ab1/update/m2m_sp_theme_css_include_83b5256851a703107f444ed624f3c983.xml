@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_theme_css_include">
+    <m2m_sp_theme_css_include action="INSERT_OR_UPDATE">
+        <order>40</order>
+        <sp_css_include display_value="Insurance Claim Hub Custom Style Include">fb5f85883c6743107f44afd2681c772e</sp_css_include>
+        <sp_theme display_value="La Jolla">a7a6e78277002300a6e592718a10617a</sp_theme>
+        <sys_class_name>m2m_sp_theme_css_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-22 09:37:08</sys_created_on>
+        <sys_id>83b5256851a703107f444ed624f3c983</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Insurance Claim Hub Custom Style Include.La Jolla</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>m2m_sp_theme_css_include_83b5256851a703107f444ed624f3c983</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-22 09:37:08</sys_updated_on>
+    </m2m_sp_theme_css_include>
+</record_update>

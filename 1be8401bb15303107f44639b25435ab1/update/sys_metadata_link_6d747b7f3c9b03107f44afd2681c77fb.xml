@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>2d747b7f3c9b03107f44afd2681c77f9</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_decision_question">
+    <sys_decision_question action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <answer>a1747b7f3c9b03107f44afd2681c77f2</answer>
+        <condition table="var__m_sys_decision_input_68833fbb3c9b03107f44afd2681c7711">u_amount=javascript:global.getCurrencyFilter('var__m_sys_decision_input_68833fbb3c9b03107f44afd2681c7711','u_amount','USD;100')^EQ<item endquery="false" field="u_amount" goto="false" newquery="false" operator="=" or="false" value="javascript:global.getCurrencyFilter('var__m_sys_decision_input_68833fbb3c9b03107f44afd2681c7711','u_amount','USD;100')"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <decision_table display_value="sample">68833fbb3c9b03107f44afd2681c7711</decision_table>
+        <default_answer>false</default_answer>
+        <input_table>var__m_sys_decision_input_68833fbb3c9b03107f44afd2681c7711</input_table>
+        <label>sample_100</label>
+        <marked_for_deletion>false</marked_for_deletion>
+        <order>100</order>
+        <sys_class_name>sys_decision_question</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:01:38</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2d747b7f3c9b03107f44afd2681c77f9</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>sample_100</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_decision_question_2d747b7f3c9b03107f44afd2681c77f9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:21:45</sys_updated_on>
+    </sys_decision_question>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 12:01:38</sys_created_on>
+        <sys_id>6d747b7f3c9b03107f44afd2681c77fb</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>sample_100</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_metadata_link_6d747b7f3c9b03107f44afd2681c77fb</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:21:45</sys_updated_on>
+        <tablename>sys_decision_question</tablename>
+    </sys_metadata_link>
+</record_update>

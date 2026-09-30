@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="x_snc_insurance_0_fraud_assessment" version="2" view="">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>assessment_notes</element>
+            <list_id display_value="x_snc_insurance_0_fraud_assessment" element="NULL" name="x_snc_insurance_0_fraud_assessment" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">f2be0597b15f03107f44639b25435a80</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 10:40:35</sys_created_on>
+            <sys_id>32be0597b15f03107f44639b25435a81</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 10:40:35</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>assessment_number</element>
+            <list_id display_value="x_snc_insurance_0_fraud_assessment" element="NULL" name="x_snc_insurance_0_fraud_assessment" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">f2be0597b15f03107f44639b25435a80</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 10:40:35</sys_created_on>
+            <sys_id>b6be0597b15f03107f44639b25435a81</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 10:40:35</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>assessment_status</element>
+            <list_id display_value="x_snc_insurance_0_fraud_assessment" element="NULL" name="x_snc_insurance_0_fraud_assessment" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">f2be0597b15f03107f44639b25435a80</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 10:40:35</sys_created_on>
+            <sys_id>3ebe0597b15f03107f44639b25435a81</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 10:40:35</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>claim</element>
+            <list_id display_value="x_snc_insurance_0_fraud_assessment" element="NULL" name="x_snc_insurance_0_fraud_assessment" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">f2be0597b15f03107f44639b25435a80</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 10:40:35</sys_created_on>
+            <sys_id>b2be0597b15f03107f44639b25435a82</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 10:40:35</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>claim_to_coverage_ratio</element>
+            <list_id display_value="x_snc_insurance_0_fraud_assessment" element="NULL" name="x_snc_insurance_0_fraud_assessment" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">f2be0597b15f03107f44639b25435a80</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 10:40:35</sys_created_on>
+            <sys_id>3abe0597b15f03107f44639b25435a82</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 10:40:35</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>claim_to_policy_timing</element>
+            <list_id display_value="x_snc_insurance_0_fraud_assessment" element="NULL" name="x_snc_insurance_0_fraud_assessment" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">f2be0597b15f03107f44639b25435a80</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 10:40:35</sys_created_on>
+            <sys_id>bebe0597b15f03107f44639b25435a82</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 10:40:35</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>fraud_score</element>
+            <list_id display_value="x_snc_insurance_0_fraud_assessment" element="NULL" name="x_snc_insurance_0_fraud_assessment" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">f2be0597b15f03107f44639b25435a80</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>6</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 10:40:35</sys_created_on>
+            <sys_id>36be0597b15f03107f44639b25435a83</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 10:40:35</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>inconsistent_statement</element>
+            <list_id display_value="x_snc_insurance_0_fraud_assessment" element="NULL" name="x_snc_insurance_0_fraud_assessment" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">f2be0597b15f03107f44639b25435a80</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>7</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 10:40:35</sys_created_on>
+            <sys_id>babe0597b15f03107f44639b25435a83</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 10:40:35</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>previous_claim_count</element>
+            <list_id display_value="x_snc_insurance_0_fraud_assessment" element="NULL" name="x_snc_insurance_0_fraud_assessment" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">f2be0597b15f03107f44639b25435a80</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>8</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 10:40:35</sys_created_on>
+            <sys_id>32be0597b15f03107f44639b25435a84</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 10:40:35</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>risk_level</element>
+            <list_id display_value="x_snc_insurance_0_fraud_assessment" element="NULL" name="x_snc_insurance_0_fraud_assessment" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">f2be0597b15f03107f44639b25435a80</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>9</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 10:40:35</sys_created_on>
+            <sys_id>b6be0597b15f03107f44639b25435a84</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 10:40:35</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>x_snc_insurance_0_fraud_assessment</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 10:40:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f2be0597b15f03107f44639b25435a80</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_snc_insurance_0_fraud_assessment</sys_name>
+            <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+            <sys_update_name>sys_ui_list_x_snc_insurance_0_fraud_assessment_null</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 10:40:35</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

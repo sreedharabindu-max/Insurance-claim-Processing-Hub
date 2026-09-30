@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_decision_table_decision_condition">
+    <sn_decision_table_decision_condition action="DELETE">
+        <decision_input display_value="Claim Type">2f1d95e4516703107f444ed624f3c9e4</decision_input>
+        <decision_table display_value="Claim Settlement Recommendation delta">5a1d91e4516703107f444ed624f3c9d4</decision_table>
+        <default_operator>=</default_operator>
+        <description>Type of insurance claim</description>
+        <field/>
+        <field_label/>
+        <field_parent_table/>
+        <label>Claim Type</label>
+        <order>100</order>
+        <parent display_value="">996c6aff3c1303107f44afd2681c774c</parent>
+        <reference/>
+        <sys_class_name>sn_decision_table_decision_condition</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-22 08:55:59</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>d92d59e4516703107f444ed624f3c920</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sn_decision_table_decision_condition_d92d59e4516703107f444ed624f3c920</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-22 08:55:59</sys_updated_on>
+        <type display_value="Choice">5217a7c1bf3320001875647fcf0739b7</type>
+    </sn_decision_table_decision_condition>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</application>
+        <file_path/>
+        <instance_id>3dd14dc7c38fcf94a03197af0501313c</instance_id>
+        <instance_name>ltm-hck-2876-0008</instance_name>
+        <name>sn_decision_table_decision_condition_d92d59e4516703107f444ed624f3c920</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_decision_table_decision_condition"><sn_decision_table_decision_condition action="INSERT_OR_UPDATE"><decision_input display_value="Claim Type">2f1d95e4516703107f444ed624f3c9e4</decision_input><decision_table display_value="Claim Settlement Recommendation delta">5a1d91e4516703107f444ed624f3c9d4</decision_table><default_operator>=</default_operator><description>Type of insurance claim</description><field/><field_label/><field_parent_table/><label>Claim Type</label><order>100</order><parent display_value="">996c6aff3c1303107f44afd2681c774c</parent><reference/><sys_class_name>sn_decision_table_decision_condition</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-09-22 08:55:59</sys_created_on><sys_domain>global</sys_domain><sys_id>d92d59e4516703107f444ed624f3c920</sys_id><sys_mod_count>0</sys_mod_count><sys_name/><sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package><sys_policy/><sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope><sys_update_name>sn_decision_table_decision_condition_d92d59e4516703107f444ed624f3c920</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-09-22 08:55:59</sys_updated_on><type display_value="Choice">5217a7c1bf3320001875647fcf0739b7</type></sn_decision_table_decision_condition></record_update>]]></payload>
+        <payload_hash>107415704</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>9fe8801bb15303107f44639b25435a3f</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-22 08:55:59</sys_created_on>
+        <sys_id>dd2d59e4516703107f444ed624f3c923</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0c8543d7a0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-22 08:55:59</sys_updated_on>
+        <type>Decision Condition</type>
+        <update_guid>d12d59e4d76703101684fdcc11cc3023</update_guid>
+        <update_guid_history>d12d59e4d76703101684fdcc11cc3023:107415704</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">066f112c516703107f444ed624f3c9f5</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-22 09:05:52</sys_created_on>
+        <sys_db_object display_value="" name="sn_decision_table_decision_condition">sn_decision_table_decision_condition</sys_db_object>
+        <sys_id>01736290f0174bc2801c0c61ad6207f9</sys_id>
+        <sys_metadata>d92d59e4516703107f444ed624f3c920</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_scope_delete display_value="">259a3c4aad804120a3cbf88d9f9bc8a4</sys_scope_delete>
+        <sys_update_name>sn_decision_table_decision_condition_d92d59e4516703107f444ed624f3c920</sys_update_name>
+        <sys_update_version display_value="sn_decision_table_decision_condition_d92d59e4516703107f444ed624f3c920">dd2d59e4516703107f444ed624f3c923</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-22 09:05:52</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

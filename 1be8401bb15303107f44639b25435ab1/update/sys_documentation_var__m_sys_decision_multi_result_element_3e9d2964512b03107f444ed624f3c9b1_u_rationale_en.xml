@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="u_rationale" label="Rationale" language="en" table="var__m_sys_decision_multi_result_element_3e9d2964512b03107f444ed624f3c9b1">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>u_rationale</element>
+            <help/>
+            <hint/>
+            <label>Rationale</label>
+            <language>en</language>
+            <name>var__m_sys_decision_multi_result_element_3e9d2964512b03107f444ed624f3c9b1</name>
+            <plural>Rationale</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-22 10:08:02</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Rationale</sys_name>
+            <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+            <sys_update_name>sys_documentation_var__m_sys_decision_multi_result_element_3e9d2964512b03107f444ed624f3c9b1_u_rationale_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-22 10:08:02</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

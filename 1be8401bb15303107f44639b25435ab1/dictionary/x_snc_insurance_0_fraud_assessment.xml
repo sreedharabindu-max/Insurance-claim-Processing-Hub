@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="f782dcdbb11703107f44639b25435acd" label="Fraud Assessment " max_length="40" name="x_snc_insurance_0_fraud_assessment" type="collection">
+        <element choice="1" label="Risk Level" max_length="40" name="risk_level" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="High" value="High"/>
+                <element inactive_on_update="false" label="Low" value="Low"/>
+                <element inactive_on_update="false" label="Medium" value="Medium"/>
+            </choice>
+        </element>
+        <element label="Inconsistent Statement" max_length="40" name="inconsistent_statement" type="boolean"/>
+        <element label="Assessment Notes" max_length="40" name="assessment_notes" type="string"/>
+        <element label="Claim-to-coverage Ratio" max_length="20" name="claim_to_coverage_ratio" type="decimal"/>
+        <element label="Previous Claim Count" max_length="40" name="previous_claim_count" type="integer"/>
+        <element display="true" label="Assessment Number" max_length="40" name="assessment_number" type="string"/>
+        <element label="Fraud Score" max_length="40" name="fraud_score" type="integer"/>
+        <element label="Claim" max_length="32" name="claim" reference="x_snc_insurance_0_claim" type="reference"/>
+        <element label="Claim-to-policy Timing" max_length="40" name="claim_to_policy_timing" type="integer"/>
+        <element choice="1" label="Assessment Status" max_length="40" name="assessment_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Completed" value="Completed"/>
+                <element inactive_on_update="false" label="Manual Review" value="Manual review"/>
+                <element inactive_on_update="false" label="Pending" value="Pending"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="claim"/>
+        </index>
+    </element>
+</database>

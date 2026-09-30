@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="DELETE">
+        <category>custom</category>
+        <css/>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <human_readable_url_structure/>
+        <id>documents</id>
+        <internal>false</internal>
+        <omit_watcher>false</omit_watcher>
+        <public>false</public>
+        <roles/>
+        <seo_script/>
+        <short_description>View and manage documents related to your insurance claims.</short_description>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 17:41:49</sys_created_on>
+        <sys_id>ec0289003c2743107f44afd2681c77ae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>documents</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_page_ec0289003c2743107f44afd2681c77ae</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 17:41:49</sys_updated_on>
+        <title>Documents</title>
+        <use_seo_script>false</use_seo_script>
+    </sp_page>
+    <sys_translated_text action="DELETE" query="documentkey=ec0289003c2743107f44afd2681c77ae"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</application>
+        <file_path/>
+        <instance_id>3dd14dc7c38fcf94a03197af0501313c</instance_id>
+        <instance_name>ltm-hck-2876-0008</instance_name>
+        <name>sp_page_ec0289003c2743107f44afd2681c77ae</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page"><sp_page action="INSERT_OR_UPDATE"><category>custom</category><css/><draft>false</draft><dynamic_title_structure/><human_readable_url_structure/><id>documents</id><internal>false</internal><omit_watcher>false</omit_watcher><public>false</public><roles/><seo_script/><short_description>View and manage documents related to your insurance claims.</short_description><sys_class_name>sp_page</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-09-20 17:41:49</sys_created_on><sys_id>ec0289003c2743107f44afd2681c77ae</sys_id><sys_mod_count>0</sys_mod_count><sys_name>documents</sys_name><sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package><sys_policy/><sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope><sys_update_name>sp_page_ec0289003c2743107f44afd2681c77ae</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-09-20 17:41:49</sys_updated_on><title>Documents</title><use_seo_script>false</use_seo_script></sp_page><sys_translated_text action="delete_multiple" query="documentkey=ec0289003c2743107f44afd2681c77ae"/></record_update>]]></payload>
+        <payload_hash>-1013389189</payload_hash>
+        <record_name>documents</record_name>
+        <reverted_from/>
+        <source>9fe8801bb15303107f44639b25435a3f</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 17:41:49</sys_created_on>
+        <sys_id>b452c5003c2743107f44afd2681c77be</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0bfe8f0980000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 17:41:49</sys_updated_on>
+        <type>Page</type>
+        <update_guid>7852c500012743101c586362e56bd8bd</update_guid>
+        <update_guid_history>7852c500012743101c586362e56bd8bd:-1013389189</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="documents">b5384ef080eb03107f44e29321b0a2c8</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 06:42:39</sys_created_on>
+        <sys_db_object display_value="" name="sp_page">sp_page</sys_db_object>
+        <sys_id>95e6e652c95b45dba1e6e9a9c8558331</sys_id>
+        <sys_metadata>ec0289003c2743107f44afd2681c77ae</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>documents</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_scope_delete display_value="">259a3c4aad804120a3cbf88d9f9bc8a4</sys_scope_delete>
+        <sys_update_name>sp_page_ec0289003c2743107f44afd2681c77ae</sys_update_name>
+        <sys_update_version display_value="sp_page_ec0289003c2743107f44afd2681c77ae">b452c5003c2743107f44afd2681c77be</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 06:42:39</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

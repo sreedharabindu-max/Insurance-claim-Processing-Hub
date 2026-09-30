@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_aia_version">
+    <sn_aia_version action="INSERT_OR_UPDATE">
+        <condition/>
+        <instructions>You are an Insurance Claim OTP Agent responsible for generating and verifying OTPs for insurance claims.
+
+Always identify an insurance claim using its Claim Number, such as CLM1001. Never ask for, use, or expose a sys_id.
+
+When an OTP needs to be generated:
+1. Ask for the Claim Number if it has not been provided.
+2. Use the Generate Claim OTP tool with the Claim Number.
+3. Never invent, guess, or manually generate an OTP.
+4. Report the tool's returned success message to the user.
+
+When the claimant provides an OTP:
+1. Use the Verify Claim OTP tool.
+2. Pass the Claim Number and the OTP entered by the claimant.
+3. If the verification result indicates success, tell the claimant that the OTP was verified successfully.
+4. If the verification result indicates failure, tell the claimant that the OTP is invalid.
+5. Never manually decide whether an OTP is correct; always use the Verify Claim OTP tool.
+
+Keep OTP verification status accurate and secure.</instructions>
+        <state>published</state>
+        <sys_class_name>sn_aia_version</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-29 05:32:18</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>5aa17cfa10a303107f446b235e7d6f8d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>V1</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sn_aia_version_5aa17cfa10a303107f446b235e7d6f8d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-29 10:06:53</sys_updated_on>
+        <target_id>88df60f610a303107f446b235e7d6f4e</target_id>
+        <target_table>sn_aia_agent</target_table>
+        <version_name>V1</version_name>
+        <version_number>1</version_number>
+    </sn_aia_version>
+</record_update>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cs_topic_library_usage">
+    <sys_cs_topic_library_usage action="DELETE">
+        <calling_cs_topic_id display_value="insurance_claim_assistant">005ca9f5396b03107f44a3a3c988e3b0</calling_cs_topic_id>
+        <library_cs_topic_id display_value="Data Collector">4c19933e4322211006650464dbb8f22d</library_cs_topic_id>
+        <library_usage>{"type":"LibraryCall","library_topic_name":"Data Collector","library_topic_id":"4c19933e4322211006650464dbb8f22d","library_topic_is_template":false,"parameter-mappings":[{"parameter-name":"definition","value":{"type":"String","mode":"script","value":"(function execute() {\n        var config = {\n            configuration: {\"purpose\":\"{{0}}\",\"inputs\":[{\"name\":\"claim_assistance_choice_2\",\"type\":\"choice\",\"discoverable\":false,\"description\":\"{{4}}\",\"skipMode\":\"'simple'\",\"skipCondition\":\"\\\"\\\"\",\"helpText\":\"false\",\"choices\":[{\"value\":\"track_my_claim\",\"label\":\"Track My Claim\"},{\"value\":\"check_missing_documents\",\"label\":\"Check Missing Documents\"},{\"value\":\"claim_help\",\"label\":\"Claim Help / FAQs\"},{\"value\":\"document_verification\",\"label\":\"Document Verification\"}],\"applicability\":\"\",\"validation\":\"\"}],\"instructions\":\"{{1}}\",\"advanced_parameters\":\"{{2}}\",\"callingTask\":\"{{3}}\",\"confirm_summary\":false,\"slots\":[{\"name\":\"claim_assistance_choice\",\"type\":\"choice\",\"discoverable\":false,\"description\":\"{{5}}\",\"validation\":\"\",\"choices\":[{\"value\":\"Track My Claim\",\"label\":\"Track My Claim\"},{\"value\":\"Check Missing Documents\",\"label\":\"Check Missing Documents\"},{\"value\":\"Claim Help / FAQs\",\"label\":\"Claim Help / FAQs\"}]},{\"name\":\"claim_number_input\",\"type\":\"string\",\"discoverable\":false,\"description\":\"{{6}}\",\"validation\":\"\"},{\"name\":\"missing_doc_claim_number\",\"type\":\"string\",\"discoverable\":false,\"description\":\"{{7}}\",\"validation\":\"\"},{\"name\":\"faq_question\",\"type\":\"string\",\"discoverable\":false,\"description\":\"{{8}}\",\"validation\":\"\"},{\"name\":\"get_document_name\",\"type\":\"string\",\"discoverable\":false,\"description\":\"{{9}}\",\"validation\":\"\"},{\"name\":\"verify_document_info\",\"type\":\"choice\",\"discoverable\":false,\"description\":\"{{10}}\",\"validation\":\"\",\"choices\":[{\"value\":\"yes\",\"label\":\"Yes, information is correct\"},{\"value\":\"no\",\"label\":\"No, information is incorrect\"}]}],\"applicability\":\"\",\"classificationOverrides\":[]}\n        };\n        return JSON.stringify(config);\n    })()"},"metadata":{"type":"String","list":false,"items":[],"use_items":false}},{"parameter-name":"inputs","metadata":{"type":"String","list":true,"items":[{"type":"String","mode":"string","value":"Collect user input"},{"type":"String","mode":"string","value":""},{"type":"String","mode":"string","value":""},{"type":"String","mode":"script","value":"(function() { return vaSystem.getConversationTaskId()})()"},{"type":"String","mode":"string","value":"\"Select the insurance claim service you need help with.\""},{"type":"String","mode":"string","value":"\"Select the insurance claim service you need.\""},{"type":"String","mode":"string","value":"\"The unique claim number provided by the customer to identify their insurance claim.\""},{"type":"String","mode":"string","value":"\"The unique claim number provided by the customer to identify their insurance claim.\""},{"type":"String","mode":"string","value":"\"Ask a question about submitting a claim, tracking a claim, required documents, or what happens after a claim is submitted.\""},{"type":"String","mode":"string","value":"\"The document name of the insurance claim document the customer wants to verify.\""},{"type":"String","mode":"string","value":"\"Confirm whether the document information is correct and matches the claim.\""}],"use_items":true}}],"return-value-mappings":[{"main_topic_variable_namespace":"vaInputs","library_topic_return_parameter_name":"outputs","main_topic_mapped_variable_name":"ai_data_collector_f67471684312452ea67abfc09ae505b6_output"}],"header_card_fields":[],"input_parameters_mode":"dynamic","output_parameters_mode":"dynamic","id":"f67471684312452ea67abfc09ae505b6","name":"claim_assistance_choice","goal_id":"primary","expert_mode":false,"variableIds":["0dfbdf0c799e4c139d8ad7b88d0d6b21"]}</library_usage>
+        <node_id>f67471684312452ea67abfc09ae505b6</node_id>
+        <sys_class_name>sys_cs_topic_library_usage</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 07:14:40</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>505ca9f5396b03107f44a3a3c988e3e7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_cs_topic_library_usage_505ca9f5396b03107f44a3a3c988e3e7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 07:14:40</sys_updated_on>
+    </sys_cs_topic_library_usage>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</application>
+        <file_path/>
+        <instance_id>3dd14dc7c38fcf94a03197af0501313c</instance_id>
+        <instance_name>ltm-hck-2876-0008</instance_name>
+        <name>sys_cs_topic_library_usage_505ca9f5396b03107f44a3a3c988e3e7</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cs_topic_library_usage"><sys_cs_topic_library_usage action="INSERT_OR_UPDATE"><calling_cs_topic_id display_value="insurance_claim_assistant">005ca9f5396b03107f44a3a3c988e3b0</calling_cs_topic_id><library_cs_topic_id display_value="Data Collector">4c19933e4322211006650464dbb8f22d</library_cs_topic_id><library_usage>{"type":"LibraryCall","library_topic_name":"Data Collector","library_topic_id":"4c19933e4322211006650464dbb8f22d","library_topic_is_template":false,"parameter-mappings":[{"parameter-name":"definition","value":{"type":"String","mode":"script","value":"(function execute() {\n        var config = {\n            configuration: {\"purpose\":\"{{0}}\",\"inputs\":[{\"name\":\"claim_assistance_choice_2\",\"type\":\"choice\",\"discoverable\":false,\"description\":\"{{4}}\",\"skipMode\":\"'simple'\",\"skipCondition\":\"\\\"\\\"\",\"helpText\":\"false\",\"choices\":[{\"value\":\"track_my_claim\",\"label\":\"Track My Claim\"},{\"value\":\"check_missing_documents\",\"label\":\"Check Missing Documents\"},{\"value\":\"claim_help\",\"label\":\"Claim Help / FAQs\"},{\"value\":\"document_verification\",\"label\":\"Document Verification\"}],\"applicability\":\"\",\"validation\":\"\"}],\"instructions\":\"{{1}}\",\"advanced_parameters\":\"{{2}}\",\"callingTask\":\"{{3}}\",\"confirm_summary\":false,\"slots\":[{\"name\":\"claim_assistance_choice\",\"type\":\"choice\",\"discoverable\":false,\"description\":\"{{5}}\",\"validation\":\"\",\"choices\":[{\"value\":\"Track My Claim\",\"label\":\"Track My Claim\"},{\"value\":\"Check Missing Documents\",\"label\":\"Check Missing Documents\"},{\"value\":\"Claim Help / FAQs\",\"label\":\"Claim Help / FAQs\"}]},{\"name\":\"claim_number_input\",\"type\":\"string\",\"discoverable\":false,\"description\":\"{{6}}\",\"validation\":\"\"},{\"name\":\"missing_doc_claim_number\",\"type\":\"string\",\"discoverable\":false,\"description\":\"{{7}}\",\"validation\":\"\"},{\"name\":\"faq_question\",\"type\":\"string\",\"discoverable\":false,\"description\":\"{{8}}\",\"validation\":\"\"},{\"name\":\"get_document_name\",\"type\":\"string\",\"discoverable\":false,\"description\":\"{{9}}\",\"validation\":\"\"},{\"name\":\"verify_document_info\",\"type\":\"choice\",\"discoverable\":false,\"description\":\"{{10}}\",\"validation\":\"\",\"choices\":[{\"value\":\"yes\",\"label\":\"Yes, information is correct\"},{\"value\":\"no\",\"label\":\"No, information is incorrect\"}]}],\"applicability\":\"\",\"classificationOverrides\":[]}\n        };\n        return JSON.stringify(config);\n    })()"},"metadata":{"type":"String","list":false,"items":[],"use_items":false}},{"parameter-name":"inputs","metadata":{"type":"String","list":true,"items":[{"type":"String","mode":"string","value":"Collect user input"},{"type":"String","mode":"string","value":""},{"type":"String","mode":"string","value":""},{"type":"String","mode":"script","value":"(function() { return vaSystem.getConversationTaskId()})()"},{"type":"String","mode":"string","value":"\"Select the insurance claim service you need help with.\""},{"type":"String","mode":"string","value":"\"Select the insurance claim service you need.\""},{"type":"String","mode":"string","value":"\"The unique claim number provided by the customer to identify their insurance claim.\""},{"type":"String","mode":"string","value":"\"The unique claim number provided by the customer to identify their insurance claim.\""},{"type":"String","mode":"string","value":"\"Ask a question about submitting a claim, tracking a claim, required documents, or what happens after a claim is submitted.\""},{"type":"String","mode":"string","value":"\"The document name of the insurance claim document the customer wants to verify.\""},{"type":"String","mode":"string","value":"\"Confirm whether the document information is correct and matches the claim.\""}],"use_items":true}}],"return-value-mappings":[{"main_topic_variable_namespace":"vaInputs","library_topic_return_parameter_name":"outputs","main_topic_mapped_variable_name":"ai_data_collector_f67471684312452ea67abfc09ae505b6_output"}],"header_card_fields":[],"input_parameters_mode":"dynamic","output_parameters_mode":"dynamic","id":"f67471684312452ea67abfc09ae505b6","name":"claim_assistance_choice","goal_id":"primary","expert_mode":false,"variableIds":["0dfbdf0c799e4c139d8ad7b88d0d6b21"]}</library_usage><node_id>f67471684312452ea67abfc09ae505b6</node_id><sys_class_name>sys_cs_topic_library_usage</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-09-26 07:14:40</sys_created_on><sys_domain>global</sys_domain><sys_id>505ca9f5396b03107f44a3a3c988e3e7</sys_id><sys_mod_count>0</sys_mod_count><sys_name/><sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package><sys_policy/><sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope><sys_update_name>sys_cs_topic_library_usage_505ca9f5396b03107f44a3a3c988e3e7</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-09-26 07:14:40</sys_updated_on></sys_cs_topic_library_usage></record_update>]]></payload>
+        <payload_hash>-112989282</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>9fe8801bb15303107f44639b25435a3f</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 07:14:40</sys_created_on>
+        <sys_id>d85ca9f5396b03107f44a3a3c988e3e9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0dc90eb2a0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 07:14:40</sys_updated_on>
+        <type>Topic Library Usage</type>
+        <update_guid>d85ca9f5716b031004fe05cf6dde38e8</update_guid>
+        <update_guid_history>d85ca9f5716b031004fe05cf6dde38e8:-112989282</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 09:52:04</sys_created_on>
+        <sys_db_object display_value="" name="sys_cs_topic_library_usage">sys_cs_topic_library_usage</sys_db_object>
+        <sys_id>0c14b1f8e1b04bd298a99c75a6376de4</sys_id>
+        <sys_metadata>505ca9f5396b03107f44a3a3c988e3e7</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_scope_delete display_value="">259a3c4aad804120a3cbf88d9f9bc8a4</sys_scope_delete>
+        <sys_update_name>sys_cs_topic_library_usage_505ca9f5396b03107f44a3a3c988e3e7</sys_update_name>
+        <sys_update_version display_value="sys_cs_topic_library_usage_505ca9f5396b03107f44a3a3c988e3e7">d85ca9f5396b03107f44a3a3c988e3e9</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 09:52:04</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

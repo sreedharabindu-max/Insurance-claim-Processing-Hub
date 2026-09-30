@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="7832d4dbb11703107f44639b25435aac" label="Document" max_length="40" name="x_snc_insurance_0_document" type="collection">
+        <element label="File Name" max_length="40" name="file_name" type="string"/>
+        <element display="true" label="Claim Number" max_length="32" name="claim_number" reference="x_snc_insurance_0_claim" type="reference"/>
+        <element label="Uploaded Date" max_length="40" name="uploaded_date" type="glide_date_time"/>
+        <element choice="1" label="Document Type" max_length="40" name="document_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Driving License" value="driving_license"/>
+                <element inactive_on_update="false" label="Vehicle Registration" value="vehicle_registration"/>
+                <element inactive_on_update="false" label="Medical Report" value="medical_report"/>
+                <element inactive_on_update="false" label="Other" value="other"/>
+                <element inactive_on_update="false" label="FNOL Form" value="fnol_form"/>
+                <element inactive_on_update="false" label="Police Report" value="police_report"/>
+                <element inactive_on_update="false" label="Repair Estimate" value="repair_estimate"/>
+            </choice>
+        </element>
+        <element choice="1" label="OCR Status" max_length="40" name="ocr_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Not Started" value="not_started"/>
+                <element inactive_on_update="false" label="Processing" value="processing"/>
+                <element inactive_on_update="false" label="Completed" value="completed"/>
+                <element inactive_on_update="false" label="Failed" value="failed"/>
+            </choice>
+        </element>
+        <element choice="1" label="Matching Status" max_length="40" name="matching_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Pending" value="pending"/>
+                <element inactive_on_update="false" label="Manual Review" value="manual_review"/>
+                <element inactive_on_update="false" label="Matched" value="matched"/>
+                <element inactive_on_update="false" label="Mismatch" value="mismatch"/>
+            </choice>
+        </element>
+        <element choice="1" label="Document Status" max_length="40" name="document_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Uploaded" value="uploaded"/>
+                <element inactive_on_update="false" label="Pending" value="pending"/>
+                <element inactive_on_update="false" label="Rejected" value="rejected"/>
+                <element inactive_on_update="false" label="Verified" value="verified"/>
+                <element inactive_on_update="false" label="Missing" value="missing"/>
+            </choice>
+        </element>
+        <element label="Required" max_length="40" name="required" type="boolean"/>
+        <element label="Clarity Score" max_length="40" name="clarity_score" type="integer"/>
+        <element label="Document Number" max_length="40" name="document_number" type="string"/>
+        <index name="index">
+            <element name="claim_number"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,timeFromCreateToActivate=959000,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Validate uploaded claim documents and update document validation status</description>
+        <display_name_after_preview/>
+        <flow_priority>MEDIUM</flow_priority>
+        <generation_source/>
+        <internal_name>claim__document_validation</internal_name>
+        <label_cache>[{"name":"Updated_1.current","label":"Trigger - Record Updated➛Claim Document Record","reference":"x_snc_insurance_0_claim_document","reference_display":"Claim Document","type":"reference","base_type":"reference","usedInstances":{"a369dceb-bcf3-4499-9291-2a44c491bad3":["record"]},"attributes":{}}]</label_cache>
+        <master_snapshot>46a26bfb3c1b03107f44afd2681c778c</master_snapshot>
+        <master_snapshot_digest/>
+        <name>Claim - Document Validation</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id>1aa2abfb3c1b03107f44afd2681c770d</remote_trigger_id>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <substatus/>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:27:51</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>b3fe5bf33c1b03107f44afd2681c770b</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Claim - Document Validation</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_hub_flow_b3fe5bf33c1b03107f44afd2681c770b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:52</sys_updated_on>
+        <type>flow</type>
+        <updation_source/>
+        <version>2</version>
+        <version_record>7aa2abfb3c1b03107f44afd2681c7760</version_record>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=b3fe5bf33c1b03107f44afd2681c770b"/>
+    <sys_variable_value action="delete_multiple" query="document_key=b3fe5bf33c1b03107f44afd2681c770b"/>
+    <sys_flow_record_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition table="x_snc_insurance_0_claim_document">document_validation_status=approved<item display_value="Approved" endquery="false" field="document_validation_status" goto="false" newquery="false" operator="=" or="false" value="approved"/>
+        </condition>
+        <name/>
+        <on_delete>false</on_delete>
+        <on_insert>false</on_insert>
+        <on_update>true</on_update>
+        <published_version/>
+        <run_flow_in>background</run_flow_in>
+        <run_on_extended>false</run_on_extended>
+        <run_when_setting>both</run_when_setting>
+        <run_when_user_list/>
+        <run_when_user_setting>any</run_when_user_setting>
+        <sys_class_name>sys_flow_record_trigger</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:52</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>1aa2abfb3c1b03107f44afd2681c770d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:52</sys_updated_on>
+        <table>x_snc_insurance_0_claim_document</table>
+        <trigger_definition/>
+    </sys_flow_record_trigger>
+    <sys_trigger_runner_mapping action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <data>{"run_flow_in":"background","run_when_user_list":[],"run_when_setting":"both","run_when_user_setting":"any","run_on_extended":"false"}</data>
+        <identifier>b3fe5bf33c1b03107f44afd2681c770b</identifier>
+        <identifier_type>flow</identifier_type>
+        <runner>FDTriggerRunner</runner>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:52</sys_created_on>
+        <sys_id>62a2abfb3c1b03107f44afd2681c770f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:52</sys_updated_on>
+        <trigger display_value="">1aa2abfb3c1b03107f44afd2681c770d</trigger>
+    </sys_trigger_runner_mapping>
+    <sys_trigger_runner_mapping action="delete_multiple" query="identifier=b3fe5bf33c1b03107f44afd2681c770b^sys_idNOT IN62a2abfb3c1b03107f44afd2681c770f"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=b3fe5bf33c1b03107f44afd2681c770b"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=b3fe5bf33c1b03107f44afd2681c770b^sys_idNOT IN0c0f13373c1b03107f44afd2681c77bb"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>b3fe5bf33c1b03107f44afd2681c770b</id>
+        <name>Claim - Document Validation</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:27:51</sys_created_on>
+        <sys_id>0c0f13373c1b03107f44afd2681c77bb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:27:51</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=0c0f13373c1b03107f44afd2681c77bb"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=b3fe5bf33c1b03107f44afd2681c770b^sys_idNOT IN519f9f773c1b03107f44afd2681c77b3,5d9f9f773c1b03107f44afd2681c77f5,919fdf773c1b03107f44afd2681c7700"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Claim - Document Validation">b3fe5bf33c1b03107f44afd2681c770b</model>
+        <model_id>b3fe5bf33c1b03107f44afd2681c770b</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_b3fe5bf33c1b03107f44afd2681c770b</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:30:24</sys_created_on>
+        <sys_id>519f9f773c1b03107f44afd2681c77b3</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:50</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=519f9f773c1b03107f44afd2681c77b3"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Claim - Document Validation">b3fe5bf33c1b03107f44afd2681c770b</model>
+        <model_id>b3fe5bf33c1b03107f44afd2681c770b</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_b3fe5bf33c1b03107f44afd2681c770b</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:30:25</sys_created_on>
+        <sys_id>5d9f9f773c1b03107f44afd2681c77f5</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:49</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=5d9f9f773c1b03107f44afd2681c77f5"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,co_type_name=FDCollection,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+        <model display_value="Claim - Document Validation">b3fe5bf33c1b03107f44afd2681c770b</model>
+        <model_id>b3fe5bf33c1b03107f44afd2681c770b</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_b3fe5bf33c1b03107f44afd2681c770b</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:30:25</sys_created_on>
+        <sys_id>919fdf773c1b03107f44afd2681c7700</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:30:25</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=919fdf773c1b03107f44afd2681c7700"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=b3fe5bf33c1b03107f44afd2681c770b"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=b3fe5bf33c1b03107f44afd2681c770b"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=b3fe5bf33c1b03107f44afd2681c770b^sys_idNOT IN749f93373c1b03107f44afd2681c777c"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Claim - Document Validation">b3fe5bf33c1b03107f44afd2681c770b</flow>
+        <generation_source/>
+        <name>Updated</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:30:23</sys_created_on>
+        <sys_id>749f93373c1b03107f44afd2681c777c</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:50</sys_updated_on>
+        <trigger_definition display_value="Updated">bb695e60c31322002841b63b12d3aea5</trigger_definition>
+        <trigger_inputs>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</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_update</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=b3fe5bf33c1b03107f44afd2681c770b^sys_idNOT IN6e61277b3c1b03107f44afd2681c77df"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Claim - Document Validation">b3fe5bf33c1b03107f44afd2681c770b</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:38:24</sys_created_on>
+        <sys_id>6e61277b3c1b03107f44afd2681c77df</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:59:24</sys_updated_on>
+        <ui_id>a369dceb-bcf3-4499-9291-2a44c491bad3</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVTU/jMBD9K5XPVZW0BUFvKyqklViQYJcLi6ypPQVLjpP1R2m36n/fceKkFSBoJS7V5jZf9nsv85KHNVOSTdgYZZaf56dilI9Gwywbno3z2elolg/lCBBz1mcGCqROi6K0kuIF6BAT6/WvSoJHyfOBCNai8ZsN1aVylYbVfWqjjHhWWlKdTR4e+6wCSyd6tGyyflXaF5KGGWpqvW0xvcboV1WMZSlCQbi4apNXaXKaKr3vU6rQUISTZ32GS49GIgGZg3bYZwUYYlnaFZt4GyhhEeSN0auu41kZ3xAtYOnUX7p5nMW+ORIzkUToQp4EatLzKXi4o5OFD7bTq1QCXaOJxDkE7S92c03DTeVVaZoRDzPdTpc6FOa6UYR1B+y8j+AIBFaRZ0Te0JrfPZcvty3IS2VqSRJFXQrQXQTeWzULPsJZM9RYa1xAVSnzxCtbLlQ9TFCKwZOmYDDX5Qvd6dSTGYCIuAekKgwuKT+t0/dgVSTxg46h4U2fuZW70ODclgppyP+EiKQhlijwWoVaAl5vQhwWVlX+G121wAR8009LPzv5aMPE+Xahds7cLv6SOyO4Mi5YiO8z40KDKni7bW89cBHrvem2fpgj9sDbOuJnvQfv40+meJO72p3tXTeFZImTL7PE2TFZItE4ek985oRs+OG3dmeT6uV3Oy7ovq2UUISb4HPnwQf3O2TZSBJkIo3yrRsOmDzMJ3uwaX1yqVBL9w691iRYEGSPvKH7yiip2LtPxe7/8WVuyU+z+jkiz/w3v5HHf81Refo9CQAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=6e61277b3c1b03107f44afd2681c77df"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=b3fe5bf33c1b03107f44afd2681c770b"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=b3fe5bf33c1b03107f44afd2681c770b"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=b3fe5bf33c1b03107f44afd2681c770b"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=b3fe5bf33c1b03107f44afd2681c770b"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>changed_fields</element>
+        <help/>
+        <hint/>
+        <label>Changed Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_b3fe5bf33c1b03107f44afd2681c770b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:30:25</sys_created_on>
+        <sys_id>9d9fdf773c1b03107f44afd2681c7706</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:30:25</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_b3fe5bf33c1b03107f44afd2681c770b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:30:24</sys_created_on>
+        <sys_id>d99f9f773c1b03107f44afd2681c77f0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:30:24</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_b3fe5bf33c1b03107f44afd2681c770b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:30:25</sys_created_on>
+        <sys_id>d99f9f773c1b03107f44afd2681c77fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:30:25</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_b3fe5bf33c1b03107f44afd2681c770b"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_b3fe5bf33c1b03107f44afd2681c770b"/>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <allow_high_security_roles>false</allow_high_security_roles>
+        <annotation/>
+        <attributes>browserActivatedIn=chrome,integrationActivatedIn=standalone,labelCacheCleanUpExecuted=true,viewActivatedIn=naturalLanguage</attributes>
+        <authored_on_release_version>29000</authored_on_release_version>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description>Validate uploaded claim documents and update document validation status</description>
+        <flow_priority>MEDIUM</flow_priority>
+        <internal_name>claim__document_validation</internal_name>
+        <label_cache>[{"name":"Updated_1.current","label":"Trigger - Record Updated➛Claim Document Record","reference":"x_snc_insurance_0_claim_document","reference_display":"Claim Document","type":"reference","base_type":"reference","usedInstances":{"a369dceb-bcf3-4499-9291-2a44c491bad3":["record"]},"attributes":{}}]</label_cache>
+        <master>true</master>
+        <name>Claim - Document Validation</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="Claim - Document Validation">b3fe5bf33c1b03107f44afd2681c770b</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:51</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>46a26bfb3c1b03107f44afd2681c778c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:51</sys_updated_on>
+        <type>flow</type>
+        <version>2</version>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=46a26bfb3c1b03107f44afd2681c778c"/>
+    <sys_variable_value action="delete_multiple" query="document_key=46a26bfb3c1b03107f44afd2681c778c"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=46a26bfb3c1b03107f44afd2681c778c"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=46a26bfb3c1b03107f44afd2681c778c^sys_idNOT IN82a26bfb3c1b03107f44afd2681c77cc"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>46a26bfb3c1b03107f44afd2681c778c</id>
+        <name>Claim - Document Validation</name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:51</sys_created_on>
+        <sys_id>82a26bfb3c1b03107f44afd2681c77cc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:51</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=82a26bfb3c1b03107f44afd2681c77cc"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=46a26bfb3c1b03107f44afd2681c778c^sys_idNOT IN46a26bfb3c1b03107f44afd2681c77dd,4aa26bfb3c1b03107f44afd2681c77e7,caa26bfb3c1b03107f44afd2681c77cd"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>child_label=FDChangeDetails,child_name=FDChangeDetails,child_type=object,child_type_label=Object,element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,pwd2droppable=true,uiType=array.object,uiTypeLabel=Array.Object</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>changed_fields</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>Changed Fields</label>
+        <mandatory>false</mandatory>
+        <max_length>4000</max_length>
+        <model display_value="Claim - Document Validation">46a26bfb3c1b03107f44afd2681c778c</model>
+        <model_id>46a26bfb3c1b03107f44afd2681c778c</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_46a26bfb3c1b03107f44afd2681c778c</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:51</sys_created_on>
+        <sys_id>46a26bfb3c1b03107f44afd2681c77dd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:51</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=46a26bfb3c1b03107f44afd2681c77dd"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,test_input_hidden=true,uiType=table_name,uiTypeLabel=Table Name</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>table_name</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">table_name</internal_type>
+        <label>Table Name</label>
+        <mandatory>false</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Claim - Document Validation">46a26bfb3c1b03107f44afd2681c778c</model>
+        <model_id>46a26bfb3c1b03107f44afd2681c778c</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_46a26bfb3c1b03107f44afd2681c778c</name>
+        <next_element/>
+        <order>101</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:51</sys_created_on>
+        <sys_id>4aa26bfb3c1b03107f44afd2681c77e7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:51</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=4aa26bfb3c1b03107f44afd2681c77e7"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=document_id,uiTypeLabel=Document ID</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent>table_name</dependent>
+        <dependent_on_field>table_name</dependent_on_field>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="">document_id</internal_type>
+        <label>Record</label>
+        <mandatory>true</mandatory>
+        <max_length>200</max_length>
+        <model display_value="Claim - Document Validation">46a26bfb3c1b03107f44afd2681c778c</model>
+        <model_id>46a26bfb3c1b03107f44afd2681c778c</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_46a26bfb3c1b03107f44afd2681c778c</name>
+        <next_element/>
+        <order>100</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_only_option/>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:51</sys_created_on>
+        <sys_id>caa26bfb3c1b03107f44afd2681c77cd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:51</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>true</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_action_input_action_instance action="delete_multiple" query="action_input=caa26bfb3c1b03107f44afd2681c77cd"/>
+    <sys_hub_flow_output action="delete_multiple" query="model=46a26bfb3c1b03107f44afd2681c778c"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=46a26bfb3c1b03107f44afd2681c778c"/>
+    <sys_hub_trigger_instance_v2 action="delete_multiple" query="flow=46a26bfb3c1b03107f44afd2681c778c^sys_idNOT IN5ea26bfb3c1b03107f44afd2681c77f8"/>
+    <sys_hub_trigger_instance_v2 action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Claim - Document Validation">46a26bfb3c1b03107f44afd2681c778c</flow>
+        <generation_source/>
+        <name>Updated</name>
+        <published_version/>
+        <remote_sys_id/>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:51</sys_created_on>
+        <sys_id>5ea26bfb3c1b03107f44afd2681c77f8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:51</sys_updated_on>
+        <trigger_definition display_value="Updated">bb695e60c31322002841b63b12d3aea5</trigger_definition>
+        <trigger_inputs>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</trigger_inputs>
+        <trigger_outputs/>
+        <trigger_type>record_update</trigger_type>
+        <updation_source/>
+    </sys_hub_trigger_instance_v2>
+    <sys_hub_action_instance_v2 action="delete_multiple" query="flow=46a26bfb3c1b03107f44afd2681c778c^sys_idNOT IN1aa26bfb3c1b03107f44afd2681c77f7"/>
+    <sys_hub_action_instance_v2 action="INSERT_OR_UPDATE">
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <attributes/>
+        <comment/>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Claim - Document Validation">46a26bfb3c1b03107f44afd2681c778c</flow>
+        <generation_source/>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance_v2</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:51</sys_created_on>
+        <sys_id>1aa26bfb3c1b03107f44afd2681c77f7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:51</sys_updated_on>
+        <ui_id>a369dceb-bcf3-4499-9291-2a44c491bad3</ui_id>
+        <updation_source/>
+        <values>H4sIAAAAAAAA/+VVTU/jMBD9K5XPVZW0BUFvKyqklViQYJcLi6ypPQVLjpP1R2m36n/fceKkFSBoJS7V5jZf9nsv85KHNVOSTdgYZZaf56dilI9Gwywbno3z2elolg/lCBBz1mcGCqROi6K0kuIF6BAT6/WvSoJHyfOBCNai8ZsN1aVylYbVfWqjjHhWWlKdTR4e+6wCSyd6tGyyflXaF5KGGWpqvW0xvcboV1WMZSlCQbi4apNXaXKaKr3vU6rQUISTZ32GS49GIgGZg3bYZwUYYlnaFZt4GyhhEeSN0auu41kZ3xAtYOnUX7p5nMW+ORIzkUToQp4EatLzKXi4o5OFD7bTq1QCXaOJxDkE7S92c03DTeVVaZoRDzPdTpc6FOa6UYR1B+y8j+AIBFaRZ0Te0JrfPZcvty3IS2VqSRJFXQrQXQTeWzULPsJZM9RYa1xAVSnzxCtbLlQ9TFCKwZOmYDDX5Qvd6dSTGYCIuAekKgwuKT+t0/dgVSTxg46h4U2fuZW70ODclgppyP+EiKQhlijwWoVaAl5vQhwWVlX+G121wAR8009LPzv5aMPE+Xahds7cLv6SOyO4Mi5YiO8z40KDKni7bW89cBHrvem2fpgj9sDbOuJnvQfv40+meJO72p3tXTeFZImTL7PE2TFZItE4ek985oRs+OG3dmeT6uV3Oy7ovq2UUISb4HPnwQf3O2TZSBJkIo3yrRsOmDzMJ3uwaX1yqVBL9w691iRYEGSPvKH7yiip2LtPxe7/8WVuyU+z+jkiz/w3v5HHf81Refo9CQAA</values>
+    </sys_hub_action_instance_v2>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=1aa26bfb3c1b03107f44afd2681c77f7"/>
+    <sys_hub_sub_flow_instance_v2 action="delete_multiple" query="flow=46a26bfb3c1b03107f44afd2681c778c"/>
+    <sys_hub_flow_logic_instance_v2 action="delete_multiple" query="flow=46a26bfb3c1b03107f44afd2681c778c"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=46a26bfb3c1b03107f44afd2681c778c"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=46a26bfb3c1b03107f44afd2681c778c"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>changed_fields</element>
+        <help/>
+        <hint/>
+        <label>Changed Fields</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_46a26bfb3c1b03107f44afd2681c778c</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:51</sys_created_on>
+        <sys_id>82a26bfb3c1b03107f44afd2681c77e3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:51</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>table_name</element>
+        <help/>
+        <hint/>
+        <label>Table Name</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_46a26bfb3c1b03107f44afd2681c778c</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:51</sys_created_on>
+        <sys_id>82a26bfb3c1b03107f44afd2681c77ed</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:51</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>Record</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_46a26bfb3c1b03107f44afd2681c778c</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:51</sys_created_on>
+        <sys_id>8ea26bfb3c1b03107f44afd2681c77d8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:51</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_46a26bfb3c1b03107f44afd2681c778c"/>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_46a26bfb3c1b03107f44afd2681c778c"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>b3fe5bf33c1b03107f44afd2681c770b</sys_id>
+        <latest_snapshot>46a26bfb3c1b03107f44afd2681c778c</latest_snapshot>
+        <compiler_build>glide-australia-02-11-2026__patch3-hotfix1-06-18-2026_06-19-2026_0938.zip</compiler_build>
+        <version_record/>
+    </sys_hub_flow>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=b3fe5bf33c1b03107f44afd2681c770b^sys_idNOT IN66a2abfb3c1b03107f44afd2681c7710"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.OncePerRecord</binding_strategy>
+        <plan>{"@class":"com.snc.process_flow.engine.serialization.plan_data.ChunkingPlanData","chunk_data":{"table":"sys_flow_trigger_plan","id":"66a2abfb3c1b03107f44afd2681c7710","name":"plan","plan_signature":null},"plan_data":"CHUNKING_PLAN"}</plan>
+        <plan_id>b3fe5bf33c1b03107f44afd2681c770b</plan_id>
+        <snapshot>b936a3b33c5b03107f44afd2681c775b</snapshot>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 10:43:52</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>66a2abfb3c1b03107f44afd2681c7710</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 10:43:52</sys_updated_on>
+        <trigger display_value="">1aa2abfb3c1b03107f44afd2681c770d</trigger>
+    </sys_flow_trigger_plan>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=b3fe5bf33c1b03107f44afd2681c770b"/>
+</record_update>

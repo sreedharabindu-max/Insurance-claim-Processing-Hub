@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css">
+    <sp_css action="INSERT_OR_UPDATE">
+        <css>/* Insurance Claim Hub - Professional Theme */&#13;
+&#13;
+body {&#13;
+    font-family: "Arial", sans-serif !important;&#13;
+}&#13;
+&#13;
+.navbar {&#13;
+    background: #ffffff !important;&#13;
+    border-bottom: 1px solid #e5e7eb !important;&#13;
+}&#13;
+&#13;
+.navbar .navbar-brand,&#13;
+.navbar .navbar-nav &gt; li &gt; a {&#13;
+    color: #123b63 !important;&#13;
+}&#13;
+&#13;
+.navbar .navbar-nav &gt; li &gt; a:hover {&#13;
+    color: #0b78c5 !important;&#13;
+    background: #f0f7ff !important;&#13;
+}&#13;
+&#13;
+.navbar .navbar-nav &gt; li.active &gt; a {&#13;
+    color: #0b78c5 !important;&#13;
+    background: #eaf4ff !important;&#13;
+}&#13;
+&#13;
+.btn-primary {&#13;
+    background: #0b78c5 !important;&#13;
+    border-color: #0b78c5 !important;&#13;
+}&#13;
+&#13;
+.panel,&#13;
+.card {&#13;
+    border-radius: 12px !important;&#13;
+}&#13;
+&#13;
+body {&#13;
+    background: #f7faff !important;&#13;
+}</css>
+        <name>Insurance Claim Hub Custom Style</name>
+        <sys_class_name>sp_css</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 18:27:28</sys_created_on>
+        <sys_id>188c05043c6743107f44afd2681c77aa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Insurance Claim Hub Custom Style</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_css_188c05043c6743107f44afd2681c77aa</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 18:27:28</sys_updated_on>
+        <turn_off_scss_compilation>false</turn_off_scss_compilation>
+    </sp_css>
+</record_update>

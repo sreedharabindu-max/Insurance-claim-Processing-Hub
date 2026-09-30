@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($location) {
+
+    var c = this;
+
+
+    c.form = {
+
+        name: "",
+
+        username: "",
+
+        email: "",
+
+        password: "",
+
+        confirmPassword: ""
+
+    };
+
+
+    c.submitting = false;
+
+    c.errorMessage = "";
+
+    c.successMessage = "";
+
+
+    // ==========================================
+    // REGISTER
+    // ==========================================
+
+    c.register = function() {
+
+        c.errorMessage = "";
+
+        c.successMessage = "";
+
+
+        if (!c.form.name ||
+            !c.form.username ||
+            !c.form.email ||
+            !c.form.password ||
+            !c.form.confirmPassword) {
+
+            c.errorMessage =
+                "Please fill in all fields.";
+
+            return;
+        }
+
+
+        if (c.form.password !==
+            c.form.confirmPassword) {
+
+            c.errorMessage =
+                "Passwords do not match.";
+
+            return;
+        }
+
+
+        if (c.form.password.length < 6) {
+
+            c.errorMessage =
+                "Password must contain at least 6 characters.";
+
+            return;
+        }
+
+
+        c.submitting = true;
+
+
+        c.server.get({
+
+            action: "register",
+
+            name: c.form.name,
+
+            username: c.form.username,
+
+            email: c.form.email,
+
+            password: c.form.password
+
+        }).then(function(response) {
+
+            c.submitting = false;
+
+
+            if (response.data.success === true) {
+
+                c.successMessage =
+                    "Account created successfully. Redirecting to login...";
+
+
+                setTimeout(function() {
+
+                    $location.search({
+                        id: "claim_login"
+                    });
+
+                }, 2000);
+
+
+            } else {
+
+                c.errorMessage =
+                    response.data.message ||
+                    "Unable to create account.";
+
+            }
+
+        }, function() {
+
+            c.submitting = false;
+
+            c.errorMessage =
+                "Unable to create account.";
+
+        });
+
+    };
+
+
+    // ==========================================
+    // GO TO LOGIN
+    // ==========================================
+
+    c.goToLogin = function() {
+
+        $location.search({
+            id: "claim_login"
+        });
+
+    };
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.ich-signup-page {&#13;
+&#13;
+    min-height: 100vh;&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    padding: 35px 20px;&#13;
+&#13;
+    background:&#13;
+        linear-gradient(&#13;
+            135deg,&#13;
+            #eef6ff,&#13;
+            #f8fbff,&#13;
+            #edf4ff&#13;
+        );&#13;
+&#13;
+    box-sizing: border-box;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-signup-card {&#13;
+&#13;
+    width: 100%;&#13;
+&#13;
+    max-width: 460px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    padding: 35px 40px 28px;&#13;
+&#13;
+    border-radius: 20px;&#13;
+&#13;
+    box-shadow:&#13;
+        0 20px 60px rgba(30, 64, 175, 0.14);&#13;
+&#13;
+    border: 1px solid #e5ebf3;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-brand {&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    margin-bottom: 25px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-logo {&#13;
+&#13;
+    width: 60px;&#13;
+&#13;
+    height: 60px;&#13;
+&#13;
+    margin: auto;&#13;
+&#13;
+    border-radius: 16px;&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    font-size: 28px;&#13;
+&#13;
+    background:&#13;
+        linear-gradient(&#13;
+            135deg,&#13;
+            #1261d6,&#13;
+            #2383e2&#13;
+        );&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-brand h1 {&#13;
+&#13;
+    margin: 12px 0 4px;&#13;
+&#13;
+    color: #12305b;&#13;
+&#13;
+    font-size: 23px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-brand p {&#13;
+&#13;
+    margin: 0;&#13;
+&#13;
+    color: #7c8da2;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-title {&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    margin-bottom: 22px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-title h2 {&#13;
+&#13;
+    margin: 0;&#13;
+&#13;
+    color: #16345f;&#13;
+&#13;
+    font-size: 21px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-title p {&#13;
+&#13;
+    margin: 7px 0 0;&#13;
+&#13;
+    color: #7a8ba3;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-field {&#13;
+&#13;
+    margin-bottom: 16px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-field label {&#13;
+&#13;
+    display: block;&#13;
+&#13;
+    margin-bottom: 7px;&#13;
+&#13;
+    color: #344967;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+    font-weight: 600;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-field input {&#13;
+&#13;
+    width: 100%;&#13;
+&#13;
+    height: 45px;&#13;
+&#13;
+    padding: 0 13px;&#13;
+&#13;
+    border: 1px solid #d6e0ed;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    background: #f8fbff;&#13;
+&#13;
+    color: #243b5a;&#13;
+&#13;
+    outline: none;&#13;
+&#13;
+    box-sizing: border-box;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-field input:focus {&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    border-color: #2674dc;&#13;
+&#13;
+    box-shadow:&#13;
+        0 0 0 3px rgba(37, 99, 235, 0.10);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-error {&#13;
+&#13;
+    margin: 12px 0;&#13;
+&#13;
+    padding: 10px;&#13;
+&#13;
+    border-radius: 7px;&#13;
+&#13;
+    background: #fff1f2;&#13;
+&#13;
+    color: #be123c;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-success {&#13;
+&#13;
+    margin: 12px 0;&#13;
+&#13;
+    padding: 10px;&#13;
+&#13;
+    border-radius: 7px;&#13;
+&#13;
+    background: #ecfdf5;&#13;
+&#13;
+    color: #047857;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-submit {&#13;
+&#13;
+    width: 100%;&#13;
+&#13;
+    height: 47px;&#13;
+&#13;
+    margin-top: 5px;&#13;
+&#13;
+    border: none;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    background:&#13;
+        linear-gradient(&#13;
+            135deg,&#13;
+            #1466d4,&#13;
+            #247fe0&#13;
+        );&#13;
+&#13;
+    color: white;&#13;
+&#13;
+    font-size: 13px;&#13;
+&#13;
+    font-weight: 700;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-submit:hover {&#13;
+&#13;
+    opacity: 0.94;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-submit:disabled {&#13;
+&#13;
+    opacity: 0.6;&#13;
+&#13;
+    cursor: not-allowed;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.back-login {&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    margin-top: 22px;&#13;
+&#13;
+    padding-top: 18px;&#13;
+&#13;
+    border-top: 1px solid #edf1f5;&#13;
+&#13;
+    color: #7a8ba3;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.back-login button {&#13;
+&#13;
+    border: none;&#13;
+&#13;
+    background: transparent;&#13;
+&#13;
+    color: #1769d1;&#13;
+&#13;
+    font-weight: 700;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.signup-security {&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    margin-top: 18px;&#13;
+&#13;
+    color: #9aa7b6;&#13;
+&#13;
+    font-size: 10px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+@media (max-width: 500px) {&#13;
+&#13;
+    .ich-signup-card {&#13;
+&#13;
+        padding: 28px 22px;&#13;
+&#13;
+    }&#13;
+&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>insurance_claim_hub_signup</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Insurance Claim Hub Signup</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.success = false;
+    data.message = "";
+
+
+    if (!input ||
+        input.action != "register") {
+
+        return;
+    }
+
+
+    var name =
+        String(input.name || "").trim();
+
+    var username =
+        String(input.username || "").trim();
+
+    var email =
+        String(input.email || "").trim();
+
+    var password =
+        String(input.password || "");
+
+
+    // ==========================================
+    // VALIDATION
+    // ==========================================
+
+    if (!name ||
+        !username ||
+        !email ||
+        !password) {
+
+        data.message =
+            "Please fill in all required fields.";
+
+        return;
+    }
+
+
+    // ==========================================
+    // CHECK USERNAME
+    // ==========================================
+
+    var existingUser =
+        new GlideRecord("sys_user");
+
+    existingUser.addQuery(
+        "user_name",
+        username
+    );
+
+    existingUser.setLimit(1);
+
+    existingUser.query();
+
+
+    if (existingUser.next()) {
+
+        data.message =
+            "Username already exists.";
+
+        return;
+    }
+
+
+    // ==========================================
+    // CHECK EMAIL
+    // ==========================================
+
+    var existingEmail =
+        new GlideRecord("sys_user");
+
+    existingEmail.addQuery(
+        "email",
+        email
+    );
+
+    existingEmail.setLimit(1);
+
+    existingEmail.query();
+
+
+    if (existingEmail.next()) {
+
+        data.message =
+            "Email address is already registered.";
+
+        return;
+    }
+
+
+    // ==========================================
+    // CREATE USER
+    // ==========================================
+
+    var user =
+        new GlideRecord("sys_user");
+
+    user.initialize();
+
+
+    user.setValue(
+        "name",
+        name
+    );
+
+
+    user.setValue(
+        "user_name",
+        username
+    );
+
+
+    user.setValue(
+        "email",
+        email
+    );
+
+
+    /*
+     * Password
+     */
+
+    user.setValue(
+        "user_password",
+        password
+    );
+
+
+    /*
+     * Active user
+     */
+
+    user.setValue(
+        "active",
+        true
+    );
+
+
+    var userSysId =
+        user.insert();
+
+
+    if (!userSysId) {
+
+        data.message =
+            "Unable to create user account.";
+
+        return;
+    }
+
+
+    data.success = true;
+
+    data.message =
+        "Account created successfully.";
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 09:32:50</sys_created_on>
+        <sys_id>becee2b4802343107f44e29321b0a2c7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Insurance Claim Hub Signup</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_widget_becee2b4802343107f44e29321b0a2c7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 09:32:50</sys_updated_on>
+        <template><![CDATA[<div class="ich-signup-page">
+
+    <div class="ich-signup-card">
+
+
+        <!-- BRAND -->
+
+        <div class="signup-brand">
+
+            <div class="signup-logo">
+                ]]>🛡<![CDATA[️
+            </div>
+
+            <h1>
+                Insurance Claim Hub
+            </h1>
+
+            <p>
+                Create your secure account
+            </p>
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <div class="signup-title">
+
+            <h2>
+                Create Account
+            </h2>
+
+            <p>
+                Register to submit and track your insurance claims.
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form ng-submit="c.register()">
+
+
+            <!-- FULL NAME -->
+
+            <div class="signup-field">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    ng-model="c.form.name"
+                    placeholder="Enter your full name"
+                    required>
+
+            </div>
+
+
+            <!-- USERNAME -->
+
+            <div class="signup-field">
+
+                <label>
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    ng-model="c.form.username"
+                    placeholder="Choose a username"
+                    required>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="signup-field">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    ng-model="c.form.email"
+                    placeholder="Enter your email"
+                    required>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="signup-field">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    ng-model="c.form.password"
+                    placeholder="Create a password"
+                    required>
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="signup-field">
+
+                <label>
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    ng-model="c.form.confirmPassword"
+                    placeholder="Confirm your password"
+                    required>
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div
+                class="signup-error"
+                ng-if="c.errorMessage">
+
+                ⚠ {{c.errorMessage}}
+
+            </div>
+
+
+            <!-- SUCCESS -->
+
+            <div
+                class="signup-success"
+                ng-if="c.successMessage">
+
+                ✓ {{c.successMessage}}
+
+            </div>
+
+
+            <!-- REGISTER -->
+
+            <button
+                type="submit"
+                class="signup-submit"
+                ng-disabled="c.submitting">
+
+                <span ng-if="!c.submitting">
+                    Create Account →
+                </span>
+
+                <span ng-if="c.submitting">
+                    Creating Account...
+                </span>
+
+            </button>
+
+
+        </form>
+
+
+        <!-- LOGIN -->
+
+        <div class="back-login">
+
+            Already have an account?
+
+            <button
+                type="button"
+                ng-click="c.goToLogin()">
+
+                Login
+
+            </button>
+
+        </div>
+
+
+        <!-- SECURITY -->
+
+        <div class="signup-security">
+
+            ]]>🔐<![CDATA[ Your information is securely protected
+
+        </div>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

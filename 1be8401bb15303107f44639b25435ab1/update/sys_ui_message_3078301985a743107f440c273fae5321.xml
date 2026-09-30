@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message">
+    <sys_ui_message action="INSERT_OR_UPDATE">
+        <application>Virtual Agent</application>
+        <code/>
+        <commented_message/>
+        <key>to submit a claim, provide your claim details and the required supporting documents through the insurance claim hub. follow the guided steps to complete your claim submission.</key>
+        <language>en</language>
+        <message>To submit a claim, provide your claim details and the required supporting documents through the Insurance Claim Hub. Follow the guided steps to complete your claim submission.</message>
+        <sys_class_name>sys_ui_message</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-24 14:11:06</sys_created_on>
+        <sys_id>3078301985a743107f440c273fae5321</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>to submit a claim, provide your claim details and the required supporting documents through the insurance claim hub. follow the guided steps to complete your claim submission.</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_ui_message_3078301985a743107f440c273fae5321</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-24 14:11:06</sys_updated_on>
+    </sys_ui_message>
+</record_update>

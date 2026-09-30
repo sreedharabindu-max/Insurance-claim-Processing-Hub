@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cb_topic">
+    <sys_cb_topic action="INSERT_OR_UPDATE">
+        <applicability/>
+        <applicability_mode>query</applicability_mode>
+        <autopilot_topic>false</autopilot_topic>
+        <category/>
+        <channels/>
+        <connect_queue/>
+        <context_profiles/>
+        <description>Helps customers check whether any required documents are missing for their insurance claim.</description>
+        <dialog_acts_enabled>false</dialog_acts_enabled>
+        <expose_on_palette>false</expose_on_palette>
+        <flexible_conversation_switching>false</flexible_conversation_switching>
+        <foundational>false</foundational>
+        <graph>{
+  "graph_api_version": "1.0.82",
+  "goals": {
+    "primary": {
+      "id": "primary",
+      "trigger": {
+        "type": "primary"
+      },
+      "name": "primary",
+      "applicability": "",
+      "description": "",
+      "nodes": {
+        "7e3e473fff1f4c3eb838bf48a8327e51": {
+          "id": "7e3e473fff1f4c3eb838bf48a8327e51",
+          "stepType": "Start",
+          "name": "Start",
+          "greetingResponse": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "fe61ac8c0abe49bd80ae27744c2a14ac": {
+          "id": "fe61ac8c0abe49bd80ae27744c2a14ac",
+          "stepType": "TerminateGoal",
+          "name": "End",
+          "confirmationMessage": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "9254cc742dc0466eb9450fb8cd67372f": {
+          "id": "9254cc742dc0466eb9450fb8cd67372f",
+          "stepType": "TextOutput",
+          "name": "welcome_missing_documents",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Hello! I can help you check the documents required for your insurance claim."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "8eb11ed3493a4b00a31e33aee8227539"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "094857f923be4235b500364c6f78412d": {
+          "id": "094857f923be4235b500364c6f78412d",
+          "stepType": "AiDataCollector",
+          "name": "get_claim_number",
+          "purpose": {
+            "value": "",
+            "mode": "simple"
+          },
+          "instructions": {
+            "value": "",
+            "mode": "simple"
+          },
+          "inputs": [
+            {
+              "itemId": "94125181591347349ee8c7f49ecbdfcd",
+              "displayName": "claim_number_input",
+              "name": "claim_number_input",
+              "description": "",
+              "discoverable": false,
+              "dynamicDescription": {
+                "value": "The unique claim number provided by the customer to identify their insurance claim.",
+                "mode": "simple"
+              },
+              "type": "string",
+              "variableId": "885ab634e8614f079c4bf50bb63391c6",
+              "choices": [
+                {
+                  "label": "",
+                  "value": ""
+                },
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ],
+              "mode": "",
+              "script": "",
+              "condition": {
+                "value": "",
+                "mode": "glide_query"
+              },
+              "stepType": "TextPrompt",
+              "enforcePrompt": false,
+              "helpText": false,
+              "skippable": {
+                "value": "",
+                "mode": "query"
+              },
+              "applicability": {
+                "value": "",
+                "mode": "query"
+              },
+              "promptMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "helpTextMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "inputType": {
+                "format": "Text",
+                "script": ""
+              },
+              "isMultipleSelect": false,
+              "validation": "",
+              "autoSelect": true,
+              "hasCardHeader": false,
+              "cardMetadata": {
+                "mode": "card",
+                "metadataScript": "",
+                "cardTemplate": "",
+                "cardFields": {},
+                "cardDefinition": {}
+              }
+            }
+          ],
+          "outputs": [],
+          "advanced_parameters": "",
+          "confirmSummary": false,
+          "useSlots": false,
+          "slots": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "hiddenVariableIds": [
+            "38f45b4a9a9848e0ac54b3ce546ebf03"
+          ],
+          "hiddenVariableNames": [
+            "ai_data_collector_094857f923be4235b500364c6f78412d_output"
+          ],
+          "classificationEnabled": false,
+          "classificationOverrides": [],
+          "variableIds": [
+            "885ab634e8614f079c4bf50bb63391c6"
+          ],
+          "standalone": false
+        },
+        "20a8d43b18294db480ac215f1f732df5": {
+          "id": "20a8d43b18294db480ac215f1f732df5",
+          "stepType": "LookupRecord",
+          "name": "lookup_claim",
+          "condition": {
+            "mode": "glide_query",
+            "value": "claim_number=claim_number_input"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "variableId": "7aaddb5e26ac40998980546b3b51dc0a"
+        },
+        "8548572943084b7f9d898f5082052445": {
+          "id": "8548572943084b7f9d898f5082052445",
+          "stepType": "LookupRecord",
+          "name": "lookup_documents",
+          "condition": {
+            "mode": "glide_scripted_query",
+            "value": "(function execute(table) {\n\n    var gr = new GlideRecordSecure(table);\n\n    if (vaInputs.lookup_claim) {\n        gr.addQuery('claim', vaInputs.lookup_claim.getValue('sys_id'));\n    }\n\n    gr.query();\n\n    if (gr.next()) {\n        return gr;\n    }\n\n    return null;\n\n})(table);"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "variableId": "18d6023d35ce457494d751e4a8c697b2"
+        },
+        "b44299e7c692455381c733194b134c51": {
+          "id": "b44299e7c692455381c733194b134c51",
+          "stepType": "TextOutput",
+          "name": "missing_documents_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "The following document is associated with your claim. Please review the document details and provide it if it is still pending."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "ead8366c0434482480a3ab9c6e85681c"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "b9300ab82fa4424e8069c60892eca608": {
+          "id": "b9300ab82fa4424e8069c60892eca608",
+          "stepType": "RecordOutput",
+          "name": "missing_document_card",
+          "variableId": "18d6023d35ce457494d751e4a8c697b2",
+          "cardTemplate": "General",
+          "cardFields": {},
+          "mode": "script",
+          "tableName": "x_snc_insurance_0_claim_document",
+          "fields": [
+            "document_name",
+            "document_validation_status"
+          ],
+          "cardDefinition": {
+            "name": "Record",
+            "value": "General"
+          },
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "condition": {
+            "mode": "glide_scripted_query",
+            "value": "(function execute(table) {\n\n    var gr = new GlideRecordSecure(table);\n\n    gr.addQuery('claim.claim_number', vaInputs.claim_number_input);\n\n    gr.setLimit(1);\n    gr.query();\n\n    if (gr.next()) {\n        return gr;\n    }\n\n    return null;\n\n})(table);"
+          }
+        }
+      },
+      "edges": [
+        {
+          "id": "f343187c18ce4c16ba07e46dd8e08c78",
+          "edgeType": "Edge",
+          "source": "7e3e473fff1f4c3eb838bf48a8327e51",
+          "target": "9254cc742dc0466eb9450fb8cd67372f",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "89bfc39bb17d411982be074393f1976b",
+          "edgeType": "Edge",
+          "source": "9254cc742dc0466eb9450fb8cd67372f",
+          "target": "094857f923be4235b500364c6f78412d",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "5ac0021ba32e4969bae1dc545503f831",
+          "edgeType": "Edge",
+          "source": "094857f923be4235b500364c6f78412d",
+          "target": "20a8d43b18294db480ac215f1f732df5",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "9b636c554dd44ce7b4ecd5bbea22e43e",
+          "edgeType": "Edge",
+          "source": "20a8d43b18294db480ac215f1f732df5",
+          "target": "8548572943084b7f9d898f5082052445",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "ca6f3ccfdb4e4c12a963c180a747cec8",
+          "edgeType": "Edge",
+          "source": "b44299e7c692455381c733194b134c51",
+          "target": "fe61ac8c0abe49bd80ae27744c2a14ac",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "8785f0b8059f4b9099e6caee53bffd9b",
+          "edgeType": "Edge",
+          "source": "8548572943084b7f9d898f5082052445",
+          "target": "b9300ab82fa4424e8069c60892eca608",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "e38ed06299214ecc91043f2ed7cb7b54",
+          "edgeType": "Edge",
+          "source": "b9300ab82fa4424e8069c60892eca608",
+          "target": "b44299e7c692455381c733194b134c51",
+          "sourcePort": "",
+          "targetPort": ""
+        }
+      ]
+    }
+  },
+  "variables": {
+    "current-user": {
+      "category": "vaInputs",
+      "id": "current-user",
+      "label": "User",
+      "name": "user",
+      "table": "sys_user",
+      "varType": "reference"
+    },
+    "38f45b4a9a9848e0ac54b3ce546ebf03": {
+      "id": "38f45b4a9a9848e0ac54b3ce546ebf03",
+      "name": "ai_data_collector_094857f923be4235b500364c6f78412d_output",
+      "label": "Ai_data_collector_094857f923be4235b500364c6f78412d_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "885ab634e8614f079c4bf50bb63391c6": {
+      "id": "885ab634e8614f079c4bf50bb63391c6",
+      "varType": "string",
+      "category": "vaInputs",
+      "label": "Claim_number_input",
+      "name": "claim_number_input",
+      "choices": [
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "",
+          "value": ""
+        }
+      ],
+      "mode": "",
+      "table": "",
+      "aiInput": true,
+      "nodeId": "094857f923be4235b500364c6f78412d",
+      "isHidden": false,
+      "inputId": 0,
+      "description": ""
+    },
+    "7aaddb5e26ac40998980546b3b51dc0a": {
+      "id": "7aaddb5e26ac40998980546b3b51dc0a",
+      "name": "lookup_claim",
+      "label": "Lookup_claim",
+      "varType": "reference",
+      "table": "x_snc_insurance_0_claim",
+      "category": "vaInputs",
+      "nodeId": "20a8d43b18294db480ac215f1f732df5",
+      "isHidden": false
+    },
+    "18d6023d35ce457494d751e4a8c697b2": {
+      "id": "18d6023d35ce457494d751e4a8c697b2",
+      "name": "lookup_documents",
+      "label": "Lookup_documents",
+      "varType": "reference",
+      "table": "x_snc_insurance_0_claim_document",
+      "category": "vaInputs",
+      "nodeId": "b9300ab82fa4424e8069c60892eca608",
+      "isHidden": false
+    }
+  }
+}</graph>
+        <key_phrases/>
+        <library>false</library>
+        <live_agent>false</live_agent>
+        <model_type>llm</model_type>
+        <modify_confirmation_enabled>false</modify_confirmation_enabled>
+        <name>check_missing_documents</name>
+        <nlu_intent/>
+        <nlu_intent_label/>
+        <nlu_model/>
+        <nlu_model_label/>
+        <nlu_provider/>
+        <palette_label/>
+        <roles/>
+        <root_topic_id/>
+        <secure_custom_input_control>false</secure_custom_input_control>
+        <source_topic_id/>
+        <sys_class_name>sys_cb_topic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 13:05:57</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>38ffdf3480e743107f44e29321b0a2e1</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>check_missing_documents</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_cb_topic_38ffdf3480e743107f44e29321b0a2e1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 17:57:40</sys_updated_on>
+        <title>Check Missing Documents</title>
+        <triggerable_by_notification>false</triggerable_by_notification>
+        <type>STANDARD</type>
+    </sys_cb_topic>
+    <sys_translated_text action="delete_multiple" query="documentkey=38ffdf3480e743107f44e29321b0a2e1"/>
+</record_update>

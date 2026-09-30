@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_decision_multi_result">
+    <sys_decision_multi_result action="INSERT_OR_UPDATE">
+        <decision_table display_value="Claim Settlement Recommendation">8641c6e37dd703107f4479dec5c54758</decision_table>
+        <label>Rationale: Medium-risk property claim requires addi, Approval Required: true, Maximum Amount: £72,000.00, Recommended Amount: £68,000.00, Minimum Amount: £62,000.00</label>
+        <result_elements/>
+        <sys_class_name>sys_decision_multi_result</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:10:57</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>f6cf54cc3cef03107f44afd2681c77e6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Rationale: Medium-risk property claim requires addi, Approval Required: true, Maximum Amount: £72,000.00, Recommended Amount: £68,000.00, Minimum Amount: £62,000.00</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_decision_multi_result_f6cf54cc3cef03107f44afd2681c77e6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:10:57</sys_updated_on>
+    </sys_decision_multi_result>
+    <sys_variable_value action="delete_multiple" query="document_key=f6cf54cc3cef03107f44afd2681c77e6"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_decision_multi_result</document>
+        <document_key>f6cf54cc3cef03107f44afd2681c77e6</document_key>
+        <order>150</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:10:57</sys_created_on>
+        <sys_id>becf54cc3cef03107f44afd2681c77e6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:10:57</sys_updated_on>
+        <value>96078.2487</value>
+        <variable display_value="Maximum Amount">801a66fb3c1303107f44afd2681c77a4</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_decision_multi_result</document>
+        <document_key>f6cf54cc3cef03107f44afd2681c77e6</document_key>
+        <order>125</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:10:57</sys_created_on>
+        <sys_id>b2cf54cc3cef03107f44afd2681c77e7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:10:57</sys_updated_on>
+        <value>Medium-risk property claim requires addi</value>
+        <variable display_value="Rationale">441a66fb3c1303107f44afd2681c7733</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_decision_multi_result</document>
+        <document_key>f6cf54cc3cef03107f44afd2681c77e6</document_key>
+        <order>112</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:10:57</sys_created_on>
+        <sys_id>b6cf54cc3cef03107f44afd2681c77e7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:10:57</sys_updated_on>
+        <value>1</value>
+        <variable display_value="Approval Required">7b0a26fb3c1303107f44afd2681c77f3</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_decision_multi_result</document>
+        <document_key>f6cf54cc3cef03107f44afd2681c77e6</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:10:57</sys_created_on>
+        <sys_id>bacf54cc3cef03107f44afd2681c77e7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:10:57</sys_updated_on>
+        <value>90740.5682</value>
+        <variable display_value="Recommended Amount">2b0aeebb3c1303107f44afd2681c779e</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_decision_multi_result</document>
+        <document_key>f6cf54cc3cef03107f44afd2681c77e6</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:10:57</sys_created_on>
+        <sys_id>becf54cc3cef03107f44afd2681c77e7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 15:10:57</sys_updated_on>
+        <value>82734.0475</value>
+        <variable display_value="Minimum Amount">1c1a66fb3c1303107f44afd2681c77ec</variable>
+    </sys_variable_value>
+</record_update>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="x_snc_insurance_0_policy" version="2" view="">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>coverage_amount</element>
+            <list_id display_value="x_snc_insurance_0_policy" element="NULL" name="x_snc_insurance_0_policy" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61aa22d3b11b43107f44639b25435a8d</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 17:22:11</sys_created_on>
+            <sys_id>edaa22d3b11b43107f44639b25435a8d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 17:22:11</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>end_date</element>
+            <list_id display_value="x_snc_insurance_0_policy" element="NULL" name="x_snc_insurance_0_policy" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61aa22d3b11b43107f44639b25435a8d</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 17:22:11</sys_created_on>
+            <sys_id>65aa22d3b11b43107f44639b25435a8e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 17:22:11</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>policy_number</element>
+            <list_id display_value="x_snc_insurance_0_policy" element="NULL" name="x_snc_insurance_0_policy" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61aa22d3b11b43107f44639b25435a8d</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 17:22:11</sys_created_on>
+            <sys_id>e9aa22d3b11b43107f44639b25435a8e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 17:22:11</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>policy_status</element>
+            <list_id display_value="x_snc_insurance_0_policy" element="NULL" name="x_snc_insurance_0_policy" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61aa22d3b11b43107f44639b25435a8d</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 17:22:11</sys_created_on>
+            <sys_id>61aa22d3b11b43107f44639b25435a8f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 17:22:11</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>policy_type</element>
+            <list_id display_value="x_snc_insurance_0_policy" element="NULL" name="x_snc_insurance_0_policy" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61aa22d3b11b43107f44639b25435a8d</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 17:22:11</sys_created_on>
+            <sys_id>e5aa22d3b11b43107f44639b25435a8f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 17:22:11</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>policyholder</element>
+            <list_id display_value="x_snc_insurance_0_policy" element="NULL" name="x_snc_insurance_0_policy" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61aa22d3b11b43107f44639b25435a8d</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 17:22:11</sys_created_on>
+            <sys_id>6daa22d3b11b43107f44639b25435a8f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 17:22:11</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>start_date</element>
+            <list_id display_value="x_snc_insurance_0_policy" element="NULL" name="x_snc_insurance_0_policy" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">61aa22d3b11b43107f44639b25435a8d</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>6</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 17:22:11</sys_created_on>
+            <sys_id>e1aaa6d3b11b43107f44639b25435ac8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 17:22:11</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>x_snc_insurance_0_policy</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-18 17:22:11</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>61aa22d3b11b43107f44639b25435a8d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_snc_insurance_0_policy</sys_name>
+            <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+            <sys_update_name>sys_ui_list_x_snc_insurance_0_policy_null</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-18 17:22:11</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>
