@@ -1,0 +1,2165 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($location) {
+
+    var c = this;
+
+
+    /* =====================================================
+       VARIABLES
+    ====================================================== */
+
+    c.loading = false;
+
+    c.searching = false;
+
+    c.claimFound = false;
+
+    c.showSearch = false;
+
+    c.claimNumber = "";
+
+    c.searchError = "";
+
+    c.claim = {};
+
+
+
+    /* =====================================================
+       LOAD CLAIM FROM URL
+    ====================================================== */
+
+    c.loadClaimFromURL = function() {
+
+        var params =
+            $location.search();
+
+        var sysId =
+            params.sys_id || "";
+
+
+        if (!sysId) {
+
+            c.loading = false;
+
+            c.claimFound = false;
+
+            c.showSearch = true;
+
+            return;
+        }
+
+
+        c.loading = true;
+
+        c.showSearch = false;
+
+        c.searchError = "";
+
+
+        c.server.get({
+
+            action:
+                "get_claim",
+
+            sys_id:
+                sysId
+
+        }).then(function(response) {
+
+            c.loading = false;
+
+
+            if (
+                response.data.success === true &&
+                response.data.claimFound === true
+            ) {
+
+                c.claimFound = true;
+
+                c.claim =
+                    response.data.claim;
+
+            } else {
+
+                c.claimFound = false;
+
+                c.showSearch = true;
+
+                c.searchError =
+                    response.data.message ||
+                    "Claim was not found.";
+
+            }
+
+        }, function() {
+
+            c.loading = false;
+
+            c.claimFound = false;
+
+            c.showSearch = true;
+
+            c.searchError =
+                "Unable to load claim.";
+
+        });
+
+    };
+
+
+
+    /* =====================================================
+       SEARCH CLAIM NUMBER
+    ====================================================== */
+
+    c.searchClaim = function() {
+
+        c.searchError = "";
+
+        c.claimFound = false;
+
+
+        var number =
+            String(
+                c.claimNumber || ""
+            ).trim();
+
+
+        if (!number) {
+
+            c.searchError =
+                "Please enter a claim number.";
+
+            return;
+        }
+
+
+        c.searching = true;
+
+        c.showSearch = true;
+
+
+        c.server.get({
+
+            action:
+                "get_claim",
+
+            claim_number:
+                number
+
+        }).then(function(response) {
+
+            c.searching = false;
+
+
+            if (
+                response.data.success === true &&
+                response.data.claimFound === true
+            ) {
+
+                c.claim =
+                    response.data.claim;
+
+                c.claimFound = true;
+
+                c.showSearch = false;
+
+
+                /*
+                 * Add sys_id to URL.
+                 * This allows View Claim and
+                 * direct tracking to use the
+                 * same page.
+                 */
+
+                $location.search({
+
+                    id:
+                        "track_claim",
+
+                    sys_id:
+                        c.claim.sys_id
+
+                });
+
+            } else {
+
+                c.claimFound = false;
+
+                c.showSearch = true;
+
+                c.searchError =
+                    response.data.message ||
+                    "Claim not found.";
+
+            }
+
+        }, function() {
+
+            c.searching = false;
+
+            c.searchError =
+                "Unable to search for claim.";
+
+        });
+
+    };
+
+
+
+    /* =====================================================
+       ENTER KEY SEARCH
+    ====================================================== */
+
+    c.handleKeyPress = function(event) {
+
+        if (
+            event.keyCode === 13 ||
+            event.which === 13
+        ) {
+
+            c.searchClaim();
+
+        }
+
+    };
+
+
+
+    /* =====================================================
+       GO TO MY CLAIMS
+    ====================================================== */
+
+    c.goToMyClaims = function() {
+
+        $location.search({
+
+            id:
+                "my_claims"
+
+        });
+
+    };
+
+
+
+    /* =====================================================
+       SHOW SEARCH
+    ====================================================== */
+
+    c.showClaimSearch = function() {
+
+        c.claimFound = false;
+
+        c.showSearch = true;
+
+        c.searchError = "";
+
+        c.claimNumber = "";
+
+    };
+
+
+
+    /* =====================================================
+       REFRESH
+    ====================================================== */
+
+    c.refreshClaim = function() {
+
+        var params =
+            $location.search();
+
+        var sysId =
+            params.sys_id || "";
+
+
+        if (!sysId) {
+
+            c.loadClaimFromURL();
+
+            return;
+        }
+
+
+        c.loading = true;
+
+
+        c.server.get({
+
+            action:
+                "get_claim",
+
+            sys_id:
+                sysId
+
+        }).then(function(response) {
+
+            c.loading = false;
+
+
+            if (
+                response.data.success === true
+            ) {
+
+                c.claim =
+                    response.data.claim;
+
+                c.claimFound = true;
+
+            }
+
+        });
+
+    };
+
+
+
+    /* =====================================================
+       STATUS CLASS
+    ====================================================== */
+
+    c.getStatusClass = function(status) {
+
+        if (!status) {
+
+            return "status-pending";
+
+        }
+
+
+        var value =
+            String(status)
+                .toLowerCase()
+                .replace(/\s+/g, "-");
+
+
+        if (
+            value.indexOf("approved") >= 0
+        ) {
+
+            return "status-approved";
+
+        }
+
+
+        if (
+            value.indexOf("rejected") >= 0
+        ) {
+
+            return "status-rejected";
+
+        }
+
+
+        if (
+            value.indexOf("review") >= 0
+        ) {
+
+            return "status-review";
+
+        }
+
+
+        if (
+            value.indexOf("processing") >= 0
+        ) {
+
+            return "status-processing";
+
+        }
+
+
+        return "status-pending";
+
+    };
+
+
+
+    /* =====================================================
+       PROCESS STEP
+    ====================================================== */
+
+    c.getStepClass = function(step) {
+
+        /*
+         * Keep first step completed.
+         * Later we can connect this to
+         * actual claim status values.
+         */
+
+        if (step == 1) {
+
+            return "completed";
+
+        }
+
+
+        return "";
+
+    };
+
+
+
+    /* =====================================================
+       INITIAL LOAD
+    ====================================================== */
+
+    c.loadClaimFromURL();
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* =========================================================&#13;
+   TRACK CLAIM - PROFESSIONAL UI&#13;
+========================================================= */&#13;
+&#13;
+.track-claim-container {&#13;
+&#13;
+    width: 100%;&#13;
+    max-width: 1100px;&#13;
+&#13;
+    margin: 0 auto;&#13;
+&#13;
+    padding: 38px 28px 60px;&#13;
+&#13;
+    box-sizing: border-box;&#13;
+&#13;
+    font-family:&#13;
+        "Segoe UI",&#13;
+        Arial,&#13;
+        sans-serif;&#13;
+&#13;
+    color: #1e293b;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   HEADER&#13;
+========================================================= */&#13;
+&#13;
+.track-header {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    justify-content: space-between;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    gap: 20px;&#13;
+&#13;
+    margin-bottom: 25px;&#13;
+&#13;
+    padding-bottom: 20px;&#13;
+&#13;
+    border-bottom: 1px solid #dbe5ef;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.track-badge {&#13;
+&#13;
+    display: inline-block;&#13;
+&#13;
+    margin-bottom: 7px;&#13;
+&#13;
+    padding: 5px 10px;&#13;
+&#13;
+    border-radius: 20px;&#13;
+&#13;
+    background: #e0f2fe;&#13;
+&#13;
+    color: #0369a1;&#13;
+&#13;
+    font-size: 9px;&#13;
+&#13;
+    font-weight: 800;&#13;
+&#13;
+    letter-spacing: .8px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.track-header h1 {&#13;
+&#13;
+    margin: 0;&#13;
+&#13;
+    color: #073b66;&#13;
+&#13;
+    font-size: 29px;&#13;
+&#13;
+    font-weight: 750;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.track-header p {&#13;
+&#13;
+    margin: 6px 0 0;&#13;
+&#13;
+    color: #64748b;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.back-claims-btn {&#13;
+&#13;
+    padding: 10px 18px;&#13;
+&#13;
+    border: 1px solid #0284c7;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    color: #0369a1;&#13;
+&#13;
+    font-size: 11px;&#13;
+&#13;
+    font-weight: 700;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.back-claims-btn:hover {&#13;
+&#13;
+    background: #0369a1;&#13;
+&#13;
+    color: #ffffff;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   SEARCH CARD&#13;
+========================================================= */&#13;
+&#13;
+.claim-search-card {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    gap: 20px;&#13;
+&#13;
+    align-items: flex-start;&#13;
+&#13;
+    margin-bottom: 25px;&#13;
+&#13;
+    padding: 25px;&#13;
+&#13;
+    border: 1px solid #bfdbfe;&#13;
+&#13;
+    border-radius: 15px;&#13;
+&#13;
+    background:&#13;
+        linear-gradient(&#13;
+            135deg,&#13;
+            #eff6ff,&#13;
+            #f0f9ff&#13;
+        );&#13;
+&#13;
+    box-shadow:&#13;
+        0 8px 22px rgba(30, 64, 175, .08);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.search-icon {&#13;
+&#13;
+    width: 48px;&#13;
+&#13;
+    height: 48px;&#13;
+&#13;
+    min-width: 48px;&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    border-radius: 12px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    font-size: 20px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.search-content {&#13;
+&#13;
+    width: 100%;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.search-content h2 {&#13;
+&#13;
+    margin: 0;&#13;
+&#13;
+    color: #0f3b5f;&#13;
+&#13;
+    font-size: 19px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.search-content p {&#13;
+&#13;
+    margin: 6px 0 16px;&#13;
+&#13;
+    color: #64748b;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.search-row {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    gap: 10px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.claim-search-input {&#13;
+&#13;
+    flex: 1;&#13;
+&#13;
+    height: 42px;&#13;
+&#13;
+    padding: 0 14px;&#13;
+&#13;
+    border: 1px solid #cbd5e1;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    outline: none;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    color: #1e293b;&#13;
+&#13;
+    font-size: 13px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.claim-search-input:focus {&#13;
+&#13;
+    border-color: #0284c7;&#13;
+&#13;
+    box-shadow:&#13;
+        0 0 0 3px rgba(2,132,199,.12);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.search-claim-btn {&#13;
+&#13;
+    height: 42px;&#13;
+&#13;
+    padding: 0 20px;&#13;
+&#13;
+    border: none;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    background:&#13;
+        linear-gradient(&#13;
+            135deg,&#13;
+            #2563eb,&#13;
+            #0284c7&#13;
+        );&#13;
+&#13;
+    color: #ffffff;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+    font-weight: 700;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.search-claim-btn:hover {&#13;
+&#13;
+    filter: brightness(1.08);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.search-error {&#13;
+&#13;
+    margin-top: 10px;&#13;
+&#13;
+    padding: 10px 12px;&#13;
+&#13;
+    border-radius: 7px;&#13;
+&#13;
+    background: #fff1f2;&#13;
+&#13;
+    color: #be123c;&#13;
+&#13;
+    font-size: 11px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   CLAIM NUMBER&#13;
+========================================================= */&#13;
+&#13;
+.claim-number-card {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    justify-content: space-between;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    padding: 22px;&#13;
+&#13;
+    margin-bottom: 16px;&#13;
+&#13;
+    border: 1px solid #dbe5ef;&#13;
+&#13;
+    border-radius: 12px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    box-shadow:&#13;
+        0 5px 18px rgba(15,23,42,.06);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.claim-number {&#13;
+&#13;
+    margin-top: 5px;&#13;
+&#13;
+    color: #0569a6;&#13;
+&#13;
+    font-size: 21px;&#13;
+&#13;
+    font-weight: 800;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   LABEL&#13;
+========================================================= */&#13;
+&#13;
+.field-label {&#13;
+&#13;
+    display: block;&#13;
+&#13;
+    margin-bottom: 5px;&#13;
+&#13;
+    color: #64748b;&#13;
+&#13;
+    font-size: 9px;&#13;
+&#13;
+    font-weight: 600;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   STATUS&#13;
+========================================================= */&#13;
+&#13;
+.status-badge {&#13;
+&#13;
+    display: inline-flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    gap: 6px;&#13;
+&#13;
+    padding: 7px 13px;&#13;
+&#13;
+    border-radius: 20px;&#13;
+&#13;
+    font-size: 10px;&#13;
+&#13;
+    font-weight: 700;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.status-dot {&#13;
+&#13;
+    width: 6px;&#13;
+&#13;
+    height: 6px;&#13;
+&#13;
+    border-radius: 50%;&#13;
+&#13;
+    background: currentColor;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.status-pending {&#13;
+&#13;
+    background: #fef3c7;&#13;
+&#13;
+    color: #a16207;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.status-approved {&#13;
+&#13;
+    background: #dcfce7;&#13;
+&#13;
+    color: #15803d;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.status-rejected {&#13;
+&#13;
+    background: #fee2e2;&#13;
+&#13;
+    color: #b91c1c;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.status-review {&#13;
+&#13;
+    background: #dbeafe;&#13;
+&#13;
+    color: #1d4ed8;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.status-processing {&#13;
+&#13;
+    background: #ede9fe;&#13;
+&#13;
+    color: #6d28d9;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   INFORMATION CARD&#13;
+========================================================= */&#13;
+&#13;
+.information-card {&#13;
+&#13;
+    margin-bottom: 16px;&#13;
+&#13;
+    padding: 22px;&#13;
+&#13;
+    border: 1px solid #dbe5ef;&#13;
+&#13;
+    border-radius: 12px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    box-shadow:&#13;
+        0 5px 18px rgba(15,23,42,.055);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.card-title {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    gap: 9px;&#13;
+&#13;
+    margin-bottom: 20px;&#13;
+&#13;
+    padding-bottom: 13px;&#13;
+&#13;
+    border-bottom: 1px solid #edf2f7;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.title-icon {&#13;
+&#13;
+    font-size: 16px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.card-title h2 {&#13;
+&#13;
+    margin: 0;&#13;
+&#13;
+    color: #0f3b5f;&#13;
+&#13;
+    font-size: 16px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   INFORMATION GRID&#13;
+========================================================= */&#13;
+&#13;
+.information-grid {&#13;
+&#13;
+    display: grid;&#13;
+&#13;
+    grid-template-columns:&#13;
+        1fr 1fr;&#13;
+&#13;
+    column-gap: 70px;&#13;
+&#13;
+    row-gap: 20px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.information-item strong {&#13;
+&#13;
+    display: block;&#13;
+&#13;
+    color: #334155;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+    font-weight: 650;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.information-item .amount {&#13;
+&#13;
+    color: #047857;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   DESCRIPTION&#13;
+========================================================= */&#13;
+&#13;
+.description-box {&#13;
+&#13;
+    min-height: 60px;&#13;
+&#13;
+    padding: 15px;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    background: #f8fafc;&#13;
+&#13;
+    color: #475569;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+    line-height: 1.6;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   TIMELINE&#13;
+========================================================= */&#13;
+&#13;
+.process-timeline {&#13;
+&#13;
+    position: relative;&#13;
+&#13;
+    padding-left: 10px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.process-timeline::before {&#13;
+&#13;
+    content: "";&#13;
+&#13;
+    position: absolute;&#13;
+&#13;
+    left: 14px;&#13;
+&#13;
+    top: 13px;&#13;
+&#13;
+    bottom: 13px;&#13;
+&#13;
+    width: 2px;&#13;
+&#13;
+    background: #dbeafe;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.process-step {&#13;
+&#13;
+    position: relative;&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    gap: 14px;&#13;
+&#13;
+    min-height: 70px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.step-number {&#13;
+&#13;
+    position: relative;&#13;
+&#13;
+    z-index: 2;&#13;
+&#13;
+    width: 29px;&#13;
+&#13;
+    height: 29px;&#13;
+&#13;
+    min-width: 29px;&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    border: 2px solid #3b82f6;&#13;
+&#13;
+    border-radius: 50%;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    color: #2563eb;&#13;
+&#13;
+    font-size: 10px;&#13;
+&#13;
+    font-weight: 800;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.process-step.completed .step-number {&#13;
+&#13;
+    background: #2563eb;&#13;
+&#13;
+    color: #ffffff;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.process-step.current .step-number {&#13;
+&#13;
+    background: #dbeafe;&#13;
+&#13;
+    color: #1d4ed8;&#13;
+&#13;
+    box-shadow:&#13;
+        0 0 0 5px #eff6ff;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.step-content {&#13;
+&#13;
+    padding-top: 2px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.step-content h3 {&#13;
+&#13;
+    margin: 0 0 4px;&#13;
+&#13;
+    color: #0f3b5f;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.step-content p {&#13;
+&#13;
+    margin: 0;&#13;
+&#13;
+    color: #64748b;&#13;
+&#13;
+    font-size: 10px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   REFRESH&#13;
+========================================================= */&#13;
+&#13;
+.refresh-area {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    margin-top: 20px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.refresh-btn {&#13;
+&#13;
+    padding: 10px 18px;&#13;
+&#13;
+    border: 1px solid #0284c7;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    color: #0369a1;&#13;
+&#13;
+    font-size: 11px;&#13;
+&#13;
+    font-weight: 700;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.refresh-btn:hover {&#13;
+&#13;
+    background: #0369a1;&#13;
+&#13;
+    color: #ffffff;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   LOADING&#13;
+========================================================= */&#13;
+&#13;
+.loading-card {&#13;
+&#13;
+    min-height: 250px;&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    flex-direction: column;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.loading-spinner {&#13;
+&#13;
+    width: 38px;&#13;
+&#13;
+    height: 38px;&#13;
+&#13;
+    border: 4px solid #dbeafe;&#13;
+&#13;
+    border-top-color: #0284c7;&#13;
+&#13;
+    border-radius: 50%;&#13;
+&#13;
+    animation:&#13;
+        trackSpin .8s linear infinite;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+@keyframes trackSpin {&#13;
+&#13;
+    to {&#13;
+        transform: rotate(360deg);&#13;
+    }&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.loading-card p {&#13;
+&#13;
+    margin-top: 12px;&#13;
+&#13;
+    color: #64748b;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   NOT FOUND&#13;
+========================================================= */&#13;
+&#13;
+.not-found-card {&#13;
+&#13;
+    padding: 55px 30px;&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    border: 1px solid #dbe5ef;&#13;
+&#13;
+    border-radius: 15px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    box-shadow:&#13;
+        0 8px 25px rgba(15,23,42,.07);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.not-found-icon {&#13;
+&#13;
+    font-size: 35px;&#13;
+&#13;
+    margin-bottom: 10px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.not-found-card h2 {&#13;
+&#13;
+    margin: 0 0 7px;&#13;
+&#13;
+    color: #0f3b5f;&#13;
+&#13;
+    font-size: 22px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.not-found-card p {&#13;
+&#13;
+    margin: 0 0 20px;&#13;
+&#13;
+    color: #64748b;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.back-claims-large {&#13;
+&#13;
+    padding: 10px 18px;&#13;
+&#13;
+    border: 1px solid #0284c7;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    color: #0369a1;&#13;
+&#13;
+    font-size: 11px;&#13;
+&#13;
+    font-weight: 700;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.back-claims-large:hover {&#13;
+&#13;
+    background: #0369a1;&#13;
+&#13;
+    color: #ffffff;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   MOBILE&#13;
+========================================================= */&#13;
+&#13;
+@media (max-width: 700px) {&#13;
+&#13;
+    .track-claim-container {&#13;
+&#13;
+        padding: 25px 15px 45px;&#13;
+&#13;
+    }&#13;
+&#13;
+&#13;
+    .track-header {&#13;
+&#13;
+        flex-direction: column;&#13;
+&#13;
+        align-items: flex-start;&#13;
+&#13;
+    }&#13;
+&#13;
+&#13;
+    .back-claims-btn {&#13;
+&#13;
+        width: 100%;&#13;
+&#13;
+    }&#13;
+&#13;
+&#13;
+    .claim-search-card {&#13;
+&#13;
+        flex-direction: column;&#13;
+&#13;
+    }&#13;
+&#13;
+&#13;
+    .search-row {&#13;
+&#13;
+        flex-direction: column;&#13;
+&#13;
+    }&#13;
+&#13;
+&#13;
+    .search-claim-btn {&#13;
+&#13;
+        width: 100%;&#13;
+&#13;
+    }&#13;
+&#13;
+&#13;
+    .information-grid {&#13;
+&#13;
+        grid-template-columns: 1fr;&#13;
+&#13;
+        row-gap: 16px;&#13;
+&#13;
+    }&#13;
+&#13;
+&#13;
+    .claim-number-card {&#13;
+&#13;
+        align-items: flex-start;&#13;
+&#13;
+        gap: 15px;&#13;
+&#13;
+        flex-direction: column;&#13;
+&#13;
+    }&#13;
+&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Displays complete claim details and current claim processing status.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>insurance_claim_track_claim</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Insurance Claim Track Claim</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.success = false;
+    data.claimFound = false;
+    data.claim = {};
+    data.message = "";
+
+    if (!input) {
+        return;
+    }
+
+
+    /* =====================================================
+       GET CLAIM
+    ====================================================== */
+
+    if (input.action == "get_claim") {
+
+        var sysId =
+            String(input.sys_id || "").trim();
+
+        var claimNumber =
+            String(input.claim_number || "").trim();
+
+
+        if (!sysId && !claimNumber) {
+
+            data.message =
+                "Please provide a claim number.";
+
+            return;
+        }
+
+
+        var claim =
+            new GlideRecord(
+                "x_snc_insurance_0_claim"
+            );
+
+
+        /* Search by sys_id */
+
+        if (sysId) {
+
+            if (!claim.get(sysId)) {
+
+                data.message =
+                    "Claim was not found.";
+
+                return;
+            }
+
+        }
+
+        /* Search by Claim Number */
+
+        else {
+
+            claim.addQuery(
+                "claim_number",
+                claimNumber
+            );
+
+            claim.setLimit(1);
+
+            claim.query();
+
+
+            if (!claim.next()) {
+
+                data.message =
+                    "No claim found with claim number: " +
+                    claimNumber;
+
+                return;
+            }
+
+        }
+
+
+        /* =================================================
+           GET DISPLAY VALUES
+        ================================================== */
+
+        data.claim = {
+
+            sys_id:
+                claim.getUniqueValue(),
+
+            claim_number:
+                claim.getValue(
+                    "claim_number"
+                ) || "",
+
+            claim_type:
+                claim.getDisplayValue(
+                    "claim_type"
+                ) || "",
+
+            incident_date:
+                claim.getDisplayValue(
+                    "incident_date"
+                ) || "",
+
+            claim_amount:
+                claim.getDisplayValue(
+                    "claim_amount"
+                ) || "₹0",
+
+            policy_number:
+                claim.getDisplayValue(
+                    "policy_number"
+                ) || "",
+
+            policy_match:
+                claim.getDisplayValue(
+                    "policy_match"
+                ) || "Pending",
+
+            fraud_risk:
+                claim.getDisplayValue(
+                    "fraud_risk"
+                ) || "Pending",
+
+            fraud_score:
+                claim.getValue(
+                    "fraud_score"
+                ) || "0",
+
+            recommended_payout:
+                claim.getDisplayValue(
+                    "recommended_payout"
+                ) || "₹0",
+
+            final_payout:
+                claim.getDisplayValue(
+                    "final_payout"
+                ) || "₹0",
+
+            adjuster_decision:
+                claim.getDisplayValue(
+                    "adjuster_decision"
+                ) || "Pending",
+
+            status:
+                claim.getDisplayValue(
+                    "status"
+                ) || "Pending",
+
+            description:
+                claim.getValue(
+                    "description"
+                ) || ""
+
+        };
+
+
+        data.success = true;
+        data.claimFound = true;
+
+        return;
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 10:12:21</sys_created_on>
+        <sys_id>ed977e3480a343107f44e29321b0a2e2</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>Insurance Claim Track Claim</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_widget_ed977e3480a343107f44e29321b0a2e2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-29 17:19:39</sys_updated_on>
+        <template><![CDATA[<div class="track-claim-container">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="track-header">
+
+        <div>
+            <div class="track-badge">
+                INSURANCE CLAIM HUB
+            </div>
+
+            <h1>
+                Track Your Claim
+            </h1>
+
+            <p>
+                View the current status and details of your insurance claim.
+            </p>
+        </div>
+
+        <button
+            class="back-claims-btn"
+            ng-click="c.goToMyClaims()">
+
+            ← My Claims
+
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         SEARCH CLAIM
+    ====================================================== -->
+
+    <div
+        class="claim-search-card"
+        ng-if="c.showSearch">
+
+        <div class="search-icon">
+            ]]>🔍
+<![CDATA[        </div>
+
+        <div class="search-content">
+
+            <h2>
+                Track a Claim
+            </h2>
+
+            <p>
+                Enter your claim number to view the claim details and
+                processing status.
+            </p>
+
+            <div class="search-row">
+
+                <input
+                    type="text"
+                    class="claim-search-input"
+                    placeholder="Enter Claim Number e.g. CLM0001"
+                    ng-model="c.claimNumber"
+                    ng-keypress="c.handleKeyPress($event)"
+                    autocomplete="off">
+
+                <button
+                    class="search-claim-btn"
+                    ng-click="c.searchClaim()"
+                    ng-disabled="c.searching">
+
+                    <span ng-if="!c.searching">
+                        ]]>🔍<![CDATA[ Search Claim
+                    </span>
+
+                    <span ng-if="c.searching">
+                        Searching...
+                    </span>
+
+                </button>
+
+            </div>
+
+            <div
+                class="search-error"
+                ng-if="c.searchError">
+
+                {{c.searchError}}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         LOADING
+    ====================================================== -->
+
+    <div
+        class="loading-card"
+        ng-if="c.loading">
+
+        <div class="loading-spinner"></div>
+
+        <p>
+            Loading claim details...
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         CLAIM FOUND
+    ====================================================== -->
+
+    <div
+        class="claim-result"
+        ng-if="!c.loading && c.claimFound">
+
+
+        <!-- =================================================
+             CLAIM NUMBER HEADER
+        ================================================== -->
+
+        <div class="claim-number-card">
+
+            <div>
+
+                <span class="field-label">
+                    Claim Number
+                </span>
+
+                <div class="claim-number">
+                    {{c.claim.claim_number}}
+                </div>
+
+            </div>
+
+            <span
+                class="status-badge"
+                ng-class="c.getStatusClass(c.claim.status)">
+
+                <span class="status-dot"></span>
+
+                {{c.claim.status}}
+
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             CLAIM INFORMATION
+        ================================================== -->
+
+        <div class="information-card">
+
+            <div class="card-title">
+
+                <span class="title-icon">
+                    ]]>📋
+<![CDATA[                </span>
+
+                <h2>
+                    Claim Information
+                </h2>
+
+            </div>
+
+
+            <div class="information-grid">
+
+
+                <div class="information-item">
+
+                    <span class="field-label">
+                        Claim Type
+                    </span>
+
+                    <strong>
+                        {{c.claim.claim_type}}
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span class="field-label">
+                        Incident Date
+                    </span>
+
+                    <strong>
+                        {{c.claim.incident_date}}
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span class="field-label">
+                        Claim Amount
+                    </span>
+
+                    <strong class="amount">
+                        {{c.claim.claim_amount}}
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span class="field-label">
+                        Policy Number
+                    </span>
+
+                    <strong>
+                        {{c.claim.policy_number}}
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span class="field-label">
+                        Policy Match
+                    </span>
+
+                    <strong>
+                        {{c.claim.policy_match}}
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span class="field-label">
+                        Fraud Risk
+                    </span>
+
+                    <strong>
+                        {{c.claim.fraud_risk}}
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span class="field-label">
+                        Fraud Score
+                    </span>
+
+                    <strong>
+                        {{c.claim.fraud_score}}
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span class="field-label">
+                        Recommended Payout
+                    </span>
+
+                    <strong class="amount">
+                        {{c.claim.recommended_payout}}
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span class="field-label">
+                        Final Payout
+                    </span>
+
+                    <strong class="amount">
+                        {{c.claim.final_payout}}
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span class="field-label">
+                        Adjuster Decision
+                    </span>
+
+                    <strong>
+                        {{c.claim.adjuster_decision}}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CLAIM DESCRIPTION
+        ================================================== -->
+
+        <div class="information-card">
+
+            <div class="card-title">
+
+                <span class="title-icon">
+                    ]]>📝
+<![CDATA[                </span>
+
+                <h2>
+                    Claim Description
+                </h2>
+
+            </div>
+
+            <div class="description-box">
+
+                {{c.claim.description || "No description available."}}
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CLAIM PROCESSING
+        ================================================== -->
+
+        <div class="information-card">
+
+            <div class="card-title">
+
+                <span class="title-icon">
+                    ]]>🔄
+<![CDATA[                </span>
+
+                <h2>
+                    Claim Processing
+                </h2>
+
+            </div>
+
+
+            <div class="process-timeline">
+
+
+                <!-- STEP 1 -->
+
+                <div
+                    class="process-step"
+                    ng-class="c.getStepClass(1)">
+
+                    <div class="step-number">
+                        1
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            Claim Submitted
+                        </h3>
+
+                        <p>
+                            Your claim has been submitted successfully.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STEP 2 -->
+
+                <div
+                    class="process-step"
+                    ng-class="c.getStepClass(2)">
+
+                    <div class="step-number">
+                        2
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            OTP Verification
+                        </h3>
+
+                        <p>
+                            Identity verification through OTP.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STEP 3 -->
+
+                <div
+                    class="process-step"
+                    ng-class="c.getStepClass(3)">
+
+                    <div class="step-number">
+                        3
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            Document Upload & Validation
+                        </h3>
+
+                        <p>
+                            Required claim documents are uploaded and validated.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STEP 4 -->
+
+                <div
+                    class="process-step"
+                    ng-class="c.getStepClass(4)">
+
+                    <div class="step-number">
+                        4
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            Policy/Data Matching
+                        </h3>
+
+                        <p>
+                            Claim information is matched with policy data.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STEP 5 -->
+
+                <div
+                    class="process-step"
+                    ng-class="c.getStepClass(5)">
+
+                    <div class="step-number">
+                        5
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            Fraud Risk Assessment
+                        </h3>
+
+                        <p>
+                            Claim is evaluated for fraud risk.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STEP 6 -->
+
+                <div
+                    class="process-step"
+                    ng-class="c.getStepClass(6)">
+
+                    <div class="step-number">
+                        6
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            Settlement Recommendation
+                        </h3>
+
+                        <p>
+                            Settlement recommendation is calculated.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STEP 7 -->
+
+                <div
+                    class="process-step"
+                    ng-class="c.getStepClass(7)">
+
+                    <div class="step-number">
+                        7
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            Approval
+                        </h3>
+
+                        <p>
+                            Claim approval decision is processed.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STEP 8 -->
+
+                <div
+                    class="process-step"
+                    ng-class="c.getStepClass(8)">
+
+                    <div class="step-number">
+                        8
+                    </div>
+
+                    <div class="step-content">
+
+                        <h3>
+                            Payment & Closure
+                        </h3>
+
+                        <p>
+                            Approved claim is settled and closed.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             REFRESH
+        ================================================== -->
+
+        <div class="refresh-area">
+
+            <button
+                class="refresh-btn"
+                ng-click="c.refreshClaim()">
+
+                ↻ Refresh Claim
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CLAIM NOT FOUND
+    ====================================================== -->
+
+    <div
+        class="not-found-card"
+        ng-if="!c.loading && !c.claimFound && !c.showSearch">
+
+        <div class="not-found-icon">
+            ⚠
+        </div>
+
+        <h2>
+            Claim Not Found
+        </h2>
+
+        <p>
+            We could not find the requested insurance claim.
+        </p>
+
+        <button
+            class="back-claims-large"
+            ng-click="c.showClaimSearch()">
+
+            ← Search Another Claim
+
+        </button>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

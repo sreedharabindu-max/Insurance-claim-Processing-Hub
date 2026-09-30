@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="Fraud Assessments">98d41053b15703107f44639b25435a10</application>
+        <assessment/>
+        <device_type/>
+        <filter/>
+        <hint/>
+        <homepage/>
+        <image/>
+        <link_type>LIST</link_type>
+        <map_page/>
+        <mobile_title>Fraud Assessment s</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name>x_snc_insurance_0_fraud_assessment</name>
+        <order/>
+        <override_menu_roles>false</override_menu_roles>
+        <query/>
+        <report/>
+        <require_confirmation>true</require_confirmation>
+        <roles>x_snc_insurance_0.fraud_assessment_user</roles>
+        <route/>
+        <screen/>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-18 06:27:33</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>5cd41053b15703107f44639b25435a20</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Fraud Assessment s</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_app_module_5cd41053b15703107f44639b25435a20</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-18 06:27:33</sys_updated_on>
+        <timeline_page/>
+        <title>Fraud Assessment s</title>
+        <uncancelable>false</uncancelable>
+        <ux_list/>
+        <view_name/>
+        <window_name/>
+    </sys_app_module>
+</record_update>

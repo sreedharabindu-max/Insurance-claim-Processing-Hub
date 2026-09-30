@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="0b31185bb11703107f44639b25435a3a" label="Claim" max_length="40" name="x_snc_insurance_0_claim" type="collection">
+        <element label="Incident Date" max_length="40" name="incident_date" type="glide_date"/>
+        <element label="Payment Reference" max_length="50" name="payment_reference" type="string"/>
+        <element label="Payment Date" max_length="40" name="payment_date" type="glide_date_time"/>
+        <element label="Policy Number" max_length="32" name="policy_number" reference="x_snc_insurance_0_policy" type="reference"/>
+        <element label="OTP Entered" max_length="6" name="otp_entered" type="string"/>
+        <element label="Policy Match" max_length="40" name="policy_match" type="boolean"/>
+        <element label="Description" max_length="40" name="description" type="string"/>
+        <element label="Final Payout" max_length="20" name="final_payout" type="currency"/>
+        <element choice="1" default="pending" label="Payment Status" max_length="40" name="payment_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Processing" sequence="20" value="processing"/>
+                <element inactive_on_update="false" label="Failed" sequence="40" value="failed"/>
+                <element inactive_on_update="false" label="Paid" sequence="30" value="paid"/>
+                <element inactive_on_update="false" label="Pending" sequence="10" value="pending"/>
+            </choice>
+        </element>
+        <element label="OTP Code" max_length="6" name="otp_code" type="string"/>
+        <element choice="1" label="Status" max_length="40" name="status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Settled" value="Settled"/>
+                <element inactive_on_update="false" label="Fraud Assessment" value="Fraud Assessment"/>
+                <element inactive_on_update="false" label="Document Verification" value="Document Verification"/>
+                <element inactive_on_update="false" label="Matching Verification" value="Matching Verification"/>
+                <element inactive_on_update="false" label="Approved" value="Approved"/>
+                <element inactive_on_update="false" label="SIU Investigation" value="SIU Investigation"/>
+                <element inactive_on_update="false" label="OTP Verification" value="OTP Verification"/>
+                <element inactive_on_update="false" label="Rejected" value="Rejected"/>
+                <element inactive_on_update="false" label="Approval Pending" value="Approval Pending"/>
+                <element inactive_on_update="false" label="Settlement Review" value="Settlement Review"/>
+                <element inactive_on_update="false" label="Payment Processing" value="Payment Processing"/>
+                <element inactive_on_update="false" label="Submitted" value="Submitted"/>
+            </choice>
+        </element>
+        <element label="Claim Amount" max_length="20" name="claim_amount" type="currency"/>
+        <element label="Closure Date" max_length="40" name="closure_date" type="glide_date_time"/>
+        <element label="Closure Remarks" max_length="40" name="closure_remarks" type="string"/>
+        <element label="Rejection Reason" max_length="500" name="rejection_reason" type="string"/>
+        <element choice="1" label="Adjuster decision" max_length="40" name="adjuster_decision" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Accept" value="Accept"/>
+                <element inactive_on_update="false" label="Override" value="Override"/>
+                <element inactive_on_update="false" label="Pending" value="Pending"/>
+                <element inactive_on_update="false" label="Reject" value="Reject"/>
+            </choice>
+        </element>
+        <element label="Fraud Score" max_length="40" name="fraud_score" type="integer"/>
+        <element choice="1" label="Claim Type" max_length="40" name="claim_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Property" value="Property"/>
+                <element inactive_on_update="false" label="Health" value="Health"/>
+                <element inactive_on_update="false" label="Life" value="Life"/>
+                <element inactive_on_update="false" label="Motor" value="Motor"/>
+                <element inactive_on_update="false" label="Travel" value="Travel"/>
+            </choice>
+        </element>
+        <element choice="1" label="Fraud Risk" max_length="40" name="fraud_risk" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Low" value="Low"/>
+                <element inactive_on_update="false" label="Medium" value="Medium"/>
+                <element inactive_on_update="false" label="High" value="High"/>
+            </choice>
+        </element>
+        <element display="true" label="Claim Number" max_length="40" name="claim_number" type="string"/>
+        <element label="Policyholder" max_length="32" name="policyholder" reference="x_snc_insurance_0_policyholder" type="reference"/>
+        <element label="Recommended Payout" max_length="20" name="recommended_payout" type="currency"/>
+        <element label="Claim Amount Numeric" max_length="38" name="claim_amount_numeric" type="decimal"/>
+        <element label="OTP Verified" max_length="40" name="otp_verified" type="boolean"/>
+        <index name="index">
+            <element name="policyholder"/>
+        </index>
+        <index name="index2">
+            <element name="policy_number"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,1591 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($location) {
+
+    var c = this;
+
+
+    /*
+     * ==========================================
+     * VARIABLES
+     * ==========================================
+     */
+
+    c.loading = true;
+
+    c.documents = [];
+
+    c.errorMessage = "";
+
+
+    /*
+     * ==========================================
+     * LOAD DOCUMENTS
+     * ==========================================
+     */
+
+    c.loadDocuments = function() {
+
+        c.loading = true;
+
+        c.errorMessage = "";
+
+        c.server.get({
+
+            action: "get_documents"
+
+        }).then(function(response) {
+
+            c.loading = false;
+
+            if (
+                response.data.success === true
+            ) {
+
+                c.documents =
+                    response.data.documents || [];
+
+            } else {
+
+                c.documents = [];
+
+                c.errorMessage =
+                    response.data.message ||
+                    "Unable to load documents.";
+
+            }
+
+        }, function() {
+
+            c.loading = false;
+
+            c.documents = [];
+
+            c.errorMessage =
+                "Unable to connect to the document service.";
+
+        });
+
+    };
+
+
+    /*
+     * ==========================================
+     * COUNT BY STATUS
+     * ==========================================
+     */
+
+    c.getCount = function(status) {
+
+        var count = 0;
+
+        angular.forEach(
+            c.documents,
+            function(document) {
+
+                if (
+                    document.validation_status ==
+                    status
+                ) {
+
+                    count++;
+
+                }
+
+            }
+        );
+
+        return count;
+    };
+
+
+    /*
+     * ==========================================
+     * VIEW DOCUMENT
+     * ==========================================
+     */
+
+    c.viewDocument = function(document) {
+
+        if (
+            !document ||
+            !document.attachment_sys_id
+        ) {
+
+            return;
+        }
+
+
+        var url =
+            "/sys_attachment.do?sys_id=" +
+            encodeURIComponent(
+                document.attachment_sys_id
+            );
+
+
+        window.open(
+            url,
+            "_blank"
+        );
+
+    };
+
+
+    /*
+     * ==========================================
+     * HOME
+     * ==========================================
+     */
+
+    c.goHome = function() {
+
+        $location.search({
+
+            id: "claim_home"
+
+        });
+
+    };
+
+
+    /*
+     * ==========================================
+     * SUBMIT CLAIM
+     * ==========================================
+     */
+
+    c.goToSubmitClaim = function() {
+
+        $location.search({
+
+            id: "submit_claim"
+
+        });
+
+    };
+
+
+    /*
+     * ==========================================
+     * INITIAL LOAD
+     * ==========================================
+     */
+
+    c.loadDocuments();
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* =========================================================&#13;
+   INSURANCE CLAIM HUB - DOCUMENTS&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-documents-page {&#13;
+    max-width: 1200px;&#13;
+    margin: 0 auto;&#13;
+    padding: 35px 25px 60px;&#13;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;&#13;
+    color: #17324d;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   HEADER&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-documents-header {&#13;
+    display: flex;&#13;
+    justify-content: space-between;&#13;
+    align-items: center;&#13;
+    gap: 25px;&#13;
+&#13;
+    padding-bottom: 25px;&#13;
+    margin-bottom: 25px;&#13;
+&#13;
+    border-bottom: 1px solid #dce7f2;&#13;
+}&#13;
+&#13;
+.ich-header-left {&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    gap: 16px;&#13;
+}&#13;
+&#13;
+.ich-header-icon {&#13;
+    width: 58px;&#13;
+    height: 58px;&#13;
+&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    justify-content: center;&#13;
+&#13;
+    border-radius: 16px;&#13;
+&#13;
+    background: linear-gradient(&#13;
+        135deg,&#13;
+        #e9f3ff,&#13;
+        #d7eaff&#13;
+    );&#13;
+&#13;
+    font-size: 27px;&#13;
+&#13;
+    box-shadow:&#13;
+        0 8px 20px rgba(20, 94, 160, 0.12);&#13;
+}&#13;
+&#13;
+.ich-eyebrow {&#13;
+    display: block;&#13;
+&#13;
+    margin-bottom: 5px;&#13;
+&#13;
+    color: #1976d2;&#13;
+&#13;
+    font-size: 10px;&#13;
+    font-weight: 800;&#13;
+&#13;
+    letter-spacing: 1.4px;&#13;
+}&#13;
+&#13;
+.ich-documents-header h1 {&#13;
+    margin: 0;&#13;
+&#13;
+    color: #0b3b67;&#13;
+&#13;
+    font-size: 30px;&#13;
+    font-weight: 800;&#13;
+}&#13;
+&#13;
+.ich-documents-header p {&#13;
+    margin: 6px 0 0;&#13;
+&#13;
+    color: #6b8195;&#13;
+&#13;
+    font-size: 13px;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   BUTTONS&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-header-actions {&#13;
+    display: flex;&#13;
+    gap: 10px;&#13;
+}&#13;
+&#13;
+.ich-btn {&#13;
+    border: none;&#13;
+    border-radius: 8px;&#13;
+&#13;
+    padding: 10px 17px;&#13;
+&#13;
+    font-size: 12px;&#13;
+    font-weight: 700;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+    transition:&#13;
+        transform 0.2s ease,&#13;
+        box-shadow 0.2s ease,&#13;
+        background 0.2s ease;&#13;
+}&#13;
+&#13;
+.ich-btn:hover {&#13;
+    transform: translateY(-1px);&#13;
+}&#13;
+&#13;
+.ich-btn-primary {&#13;
+    color: #ffffff;&#13;
+&#13;
+    background: linear-gradient(&#13;
+        135deg,&#13;
+        #087ff5,&#13;
+        #075fc4&#13;
+    );&#13;
+&#13;
+    box-shadow:&#13;
+        0 6px 16px rgba(8, 127, 245, 0.22);&#13;
+}&#13;
+&#13;
+.ich-btn-primary:hover {&#13;
+    background: linear-gradient(&#13;
+        135deg,&#13;
+        #096fe0,&#13;
+        #064fa7&#13;
+    );&#13;
+}&#13;
+&#13;
+.ich-btn-secondary {&#13;
+    color: #1261a0;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    border: 1px solid #b9d5ed;&#13;
+}&#13;
+&#13;
+.ich-btn-secondary:hover {&#13;
+    background: #f1f8ff;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   LOADING&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-loading-card {&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    justify-content: center;&#13;
+    gap: 13px;&#13;
+&#13;
+    padding: 45px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    border: 1px solid #dce7f2;&#13;
+    border-radius: 14px;&#13;
+&#13;
+    color: #52708a;&#13;
+&#13;
+    font-size: 13px;&#13;
+&#13;
+    box-shadow:&#13;
+        0 5px 20px rgba(21, 67, 100, 0.07);&#13;
+}&#13;
+&#13;
+.ich-spinner {&#13;
+    width: 22px;&#13;
+    height: 22px;&#13;
+&#13;
+    border: 3px solid #d7e8f8;&#13;
+    border-top-color: #087ff5;&#13;
+&#13;
+    border-radius: 50%;&#13;
+&#13;
+    animation: ich-spin 0.8s linear infinite;&#13;
+}&#13;
+&#13;
+@keyframes ich-spin {&#13;
+    to {&#13;
+        transform: rotate(360deg);&#13;
+    }&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   SUMMARY&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-summary {&#13;
+    display: grid;&#13;
+&#13;
+    grid-template-columns:&#13;
+        repeat(4, 1fr);&#13;
+&#13;
+    gap: 15px;&#13;
+&#13;
+    margin-bottom: 22px;&#13;
+}&#13;
+&#13;
+.ich-summary-card {&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    gap: 13px;&#13;
+&#13;
+    padding: 18px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    border: 1px solid #dce7f2;&#13;
+&#13;
+    border-radius: 12px;&#13;
+&#13;
+    box-shadow:&#13;
+        0 5px 18px rgba(21, 67, 100, 0.06);&#13;
+}&#13;
+&#13;
+.ich-summary-icon {&#13;
+    width: 42px;&#13;
+    height: 42px;&#13;
+&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    justify-content: center;&#13;
+&#13;
+    border-radius: 11px;&#13;
+&#13;
+    background: #eaf4ff;&#13;
+&#13;
+    color: #087ff5;&#13;
+&#13;
+    font-size: 18px;&#13;
+}&#13;
+&#13;
+.ich-summary-icon.approved {&#13;
+    background: #e8f8ef;&#13;
+    color: #159447;&#13;
+}&#13;
+&#13;
+.ich-summary-icon.pending {&#13;
+    background: #fff6dc;&#13;
+    color: #d98b00;&#13;
+}&#13;
+&#13;
+.ich-summary-icon.rejected {&#13;
+    background: #ffebeb;&#13;
+    color: #d63d3d;&#13;
+}&#13;
+&#13;
+.ich-summary-card span {&#13;
+    display: block;&#13;
+&#13;
+    color: #7a8fa2;&#13;
+&#13;
+    font-size: 11px;&#13;
+}&#13;
+&#13;
+.ich-summary-card strong {&#13;
+    display: block;&#13;
+&#13;
+    margin-top: 3px;&#13;
+&#13;
+    color: #123d63;&#13;
+&#13;
+    font-size: 21px;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   TABLE CARD&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-table-card {&#13;
+    overflow: hidden;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    border: 1px solid #dce7f2;&#13;
+&#13;
+    border-radius: 14px;&#13;
+&#13;
+    box-shadow:&#13;
+        0 8px 25px rgba(21, 67, 100, 0.08);&#13;
+}&#13;
+&#13;
+.ich-table-header {&#13;
+    padding: 20px 22px;&#13;
+&#13;
+    border-bottom: 1px solid #e5edf5;&#13;
+&#13;
+    background:&#13;
+        linear-gradient(&#13;
+            135deg,&#13;
+            #ffffff,&#13;
+            #f5faff&#13;
+        );&#13;
+}&#13;
+&#13;
+.ich-table-header h2 {&#13;
+    margin: 0;&#13;
+&#13;
+    color: #123f68;&#13;
+&#13;
+    font-size: 17px;&#13;
+    font-weight: 800;&#13;
+}&#13;
+&#13;
+.ich-table-header p {&#13;
+    margin: 5px 0 0;&#13;
+&#13;
+    color: #7890a5;&#13;
+&#13;
+    font-size: 11px;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   TABLE&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-table-wrapper {&#13;
+    width: 100%;&#13;
+&#13;
+    overflow-x: auto;&#13;
+}&#13;
+&#13;
+.ich-document-table {&#13;
+    width: 100%;&#13;
+&#13;
+    border-collapse: collapse;&#13;
+&#13;
+    font-size: 12px;&#13;
+}&#13;
+&#13;
+.ich-document-table thead {&#13;
+    background: #f4f8fc;&#13;
+}&#13;
+&#13;
+.ich-document-table th {&#13;
+    padding: 14px 15px;&#13;
+&#13;
+    text-align: left;&#13;
+&#13;
+    color: #55718a;&#13;
+&#13;
+    font-size: 10px;&#13;
+    font-weight: 800;&#13;
+&#13;
+    text-transform: uppercase;&#13;
+&#13;
+    letter-spacing: 0.5px;&#13;
+&#13;
+    border-bottom: 1px solid #dce7f2;&#13;
+}&#13;
+&#13;
+.ich-document-table td {&#13;
+    padding: 15px;&#13;
+&#13;
+    vertical-align: middle;&#13;
+&#13;
+    color: #38566f;&#13;
+&#13;
+    border-bottom: 1px solid #edf2f7;&#13;
+}&#13;
+&#13;
+.ich-document-table tbody tr {&#13;
+    transition:&#13;
+        background 0.2s ease;&#13;
+}&#13;
+&#13;
+.ich-document-table tbody tr:hover {&#13;
+    background: #f7fbff;&#13;
+}&#13;
+&#13;
+.ich-document-table tbody tr:last-child td {&#13;
+    border-bottom: none;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   CLAIM NUMBER&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-claim-number {&#13;
+    display: inline-block;&#13;
+&#13;
+    padding: 5px 8px;&#13;
+&#13;
+    border-radius: 6px;&#13;
+&#13;
+    background: #edf6ff;&#13;
+&#13;
+    color: #086bc7;&#13;
+&#13;
+    font-weight: 800;&#13;
+&#13;
+    font-size: 11px;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   DOCUMENT NAME&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-document-name {&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    gap: 9px;&#13;
+&#13;
+    min-width: 180px;&#13;
+}&#13;
+&#13;
+.ich-file-icon {&#13;
+    width: 30px;&#13;
+    height: 30px;&#13;
+&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    justify-content: center;&#13;
+&#13;
+    border-radius: 7px;&#13;
+&#13;
+    background: #eef6ff;&#13;
+&#13;
+    font-size: 14px;&#13;
+}&#13;
+&#13;
+.ich-document-name strong {&#13;
+    color: #234c6d;&#13;
+&#13;
+    font-size: 12px;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   DOCUMENT TYPE&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-type {&#13;
+    color: #5c7489;&#13;
+&#13;
+    font-size: 11px;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   STATUS&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-status {&#13;
+    display: inline-flex;&#13;
+    align-items: center;&#13;
+    gap: 5px;&#13;
+&#13;
+    padding: 6px 10px;&#13;
+&#13;
+    border-radius: 20px;&#13;
+&#13;
+    font-size: 10px;&#13;
+    font-weight: 800;&#13;
+}&#13;
+&#13;
+.status-approved {&#13;
+    color: #147a3d;&#13;
+&#13;
+    background: #e7f8ed;&#13;
+}&#13;
+&#13;
+.status-pending {&#13;
+    color: #a66a00;&#13;
+&#13;
+    background: #fff4d7;&#13;
+}&#13;
+&#13;
+.status-rejected {&#13;
+    color: #b72f2f;&#13;
+&#13;
+    background: #ffe9e9;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   REJECTION&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-rejection {&#13;
+    display: block;&#13;
+&#13;
+    max-width: 190px;&#13;
+&#13;
+    color: #bd3838;&#13;
+&#13;
+    font-size: 10px;&#13;
+&#13;
+    line-height: 1.5;&#13;
+}&#13;
+&#13;
+.ich-no-rejection {&#13;
+    color: #a6b4c0;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   VIEW BUTTON&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-view-btn {&#13;
+    padding: 8px 13px;&#13;
+&#13;
+    border: none;&#13;
+&#13;
+    border-radius: 7px;&#13;
+&#13;
+    color: #ffffff;&#13;
+&#13;
+    background: linear-gradient(&#13;
+        135deg,&#13;
+        #0b83e6,&#13;
+        #075db4&#13;
+    );&#13;
+&#13;
+    font-size: 10px;&#13;
+    font-weight: 800;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+    transition:&#13;
+        transform 0.2s ease,&#13;
+        box-shadow 0.2s ease;&#13;
+}&#13;
+&#13;
+.ich-view-btn:hover {&#13;
+    transform: translateY(-1px);&#13;
+&#13;
+    box-shadow:&#13;
+        0 5px 12px rgba(7, 93, 180, 0.25);&#13;
+}&#13;
+&#13;
+.ich-no-file {&#13;
+    color: #9aaab8;&#13;
+&#13;
+    font-size: 10px;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   EMPTY&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-empty-card {&#13;
+    padding: 60px 30px;&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    border: 1px solid #dce7f2;&#13;
+&#13;
+    border-radius: 14px;&#13;
+&#13;
+    box-shadow:&#13;
+        0 8px 25px rgba(21, 67, 100, 0.07);&#13;
+}&#13;
+&#13;
+.ich-empty-icon {&#13;
+    width: 65px;&#13;
+    height: 65px;&#13;
+&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    justify-content: center;&#13;
+&#13;
+    margin: 0 auto 15px;&#13;
+&#13;
+    border-radius: 50%;&#13;
+&#13;
+    background: #edf6ff;&#13;
+&#13;
+    font-size: 27px;&#13;
+}&#13;
+&#13;
+.ich-empty-card h2 {&#13;
+    margin: 0;&#13;
+&#13;
+    color: #153f64;&#13;
+&#13;
+    font-size: 19px;&#13;
+}&#13;
+&#13;
+.ich-empty-card p {&#13;
+    margin: 8px 0 20px;&#13;
+&#13;
+    color: #7b91a4;&#13;
+&#13;
+    font-size: 12px;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   ERROR&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-message {&#13;
+    padding: 15px 18px;&#13;
+&#13;
+    border-radius: 10px;&#13;
+&#13;
+    font-size: 12px;&#13;
+}&#13;
+&#13;
+.ich-error {&#13;
+    color: #a52828;&#13;
+&#13;
+    background: #fff0f0;&#13;
+&#13;
+    border: 1px solid #f0c7c7;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   INFORMATION&#13;
+   ========================================================= */&#13;
+&#13;
+.ich-info-box {&#13;
+    display: flex;&#13;
+    gap: 12px;&#13;
+&#13;
+    margin-top: 20px;&#13;
+&#13;
+    padding: 15px 18px;&#13;
+&#13;
+    background: #eef7ff;&#13;
+&#13;
+    border-left: 4px solid #087ff5;&#13;
+&#13;
+    border-radius: 8px;&#13;
+}&#13;
+&#13;
+.ich-info-icon {&#13;
+    color: #087ff5;&#13;
+&#13;
+    font-size: 16px;&#13;
+}&#13;
+&#13;
+.ich-info-box strong {&#13;
+    color: #245273;&#13;
+&#13;
+    font-size: 11px;&#13;
+}&#13;
+&#13;
+.ich-info-box p {&#13;
+    margin: 4px 0 0;&#13;
+&#13;
+    color: #668198;&#13;
+&#13;
+    font-size: 10px;&#13;
+&#13;
+    line-height: 1.5;&#13;
+}&#13;
+&#13;
+&#13;
+/* =========================================================&#13;
+   RESPONSIVE&#13;
+   ========================================================= */&#13;
+&#13;
+@media (max-width: 900px) {&#13;
+&#13;
+    .ich-summary {&#13;
+        grid-template-columns:&#13;
+            repeat(2, 1fr);&#13;
+    }&#13;
+&#13;
+    .ich-documents-header {&#13;
+        align-items: flex-start;&#13;
+&#13;
+        flex-direction: column;&#13;
+    }&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+@media (max-width: 600px) {&#13;
+&#13;
+    .ich-documents-page {&#13;
+        padding: 20px 12px 40px;&#13;
+    }&#13;
+&#13;
+    .ich-summary {&#13;
+        grid-template-columns: 1fr;&#13;
+    }&#13;
+&#13;
+    .ich-header-actions {&#13;
+        width: 100%;&#13;
+    }&#13;
+&#13;
+    .ich-btn {&#13;
+        flex: 1;&#13;
+    }&#13;
+&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Displays documents submitted for the customer's insurance claims.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>insurance_claim_documents</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Insurance Claim Documents</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.success = false;
+    data.documents = [];
+    data.message = "";
+
+    if (!input ||
+        input.action != "get_documents") {
+
+        return;
+    }
+
+    try {
+
+        /*
+         * ==========================================
+         * CURRENT LOGGED-IN USER
+         * ==========================================
+         */
+
+        var currentUser =
+            gs.getUser();
+
+        var userEmail =
+            currentUser.getEmail();
+
+        if (!userEmail) {
+
+            data.message =
+                "Unable to identify the logged-in customer.";
+
+            return;
+        }
+
+
+        /*
+         * ==========================================
+         * FIND POLICYHOLDER
+         * ==========================================
+         */
+
+        var policyholder =
+            new GlideRecord(
+                "x_snc_insurance_0_policyholder"
+            );
+
+        policyholder.addQuery(
+            "email",
+            userEmail
+        );
+
+        policyholder.setLimit(1);
+        policyholder.query();
+
+
+        if (!policyholder.next()) {
+
+            data.success = true;
+
+            data.message =
+                "No policyholder record is linked to this account.";
+
+            return;
+        }
+
+
+        var policyholderSysId =
+            policyholder.getUniqueValue();
+
+
+        /*
+         * ==========================================
+         * FIND CUSTOMER CLAIMS
+         * ==========================================
+         */
+
+        var claim =
+            new GlideRecord(
+                "x_snc_insurance_0_claim"
+            );
+
+        claim.addQuery(
+            "policyholder",
+            policyholderSysId
+        );
+
+        claim.query();
+
+
+        var claimIds = [];
+
+        while (claim.next()) {
+
+            claimIds.push(
+                claim.getUniqueValue()
+            );
+
+        }
+
+
+        if (claimIds.length === 0) {
+
+            data.success = true;
+
+            return;
+        }
+
+
+        /*
+         * ==========================================
+         * FIND CLAIM DOCUMENTS
+         * ==========================================
+         */
+
+        var document =
+            new GlideRecord(
+                "x_snc_insurance_0_claim_document"
+            );
+
+        document.addQuery(
+            "claim",
+            "IN",
+            claimIds.join(",")
+        );
+
+        document.orderByDesc(
+            "sys_created_on"
+        );
+
+        document.query();
+
+
+        while (document.next()) {
+
+            var claimSysId =
+                document.getValue("claim");
+
+            var claimNumber = "";
+
+
+            /*
+             * Get claim number
+             */
+
+            if (claimSysId) {
+
+                var claimRecord =
+                    new GlideRecord(
+                        "x_snc_insurance_0_claim"
+                    );
+
+                if (claimRecord.get(claimSysId)) {
+
+                    claimNumber =
+                        claimRecord.getValue(
+                            "claim_number"
+                        ) || "";
+
+                }
+
+            }
+
+
+            /*
+             * ======================================
+             * FIND ATTACHMENT
+             * ======================================
+             */
+
+            var attachmentSysId = "";
+
+            var attachment =
+                new GlideRecord(
+                    "sys_attachment"
+                );
+
+            attachment.addQuery(
+                "table_name",
+                "x_snc_insurance_0_claim_document"
+            );
+
+            attachment.addQuery(
+                "table_sys_id",
+                document.getUniqueValue()
+            );
+
+            attachment.orderByDesc(
+                "sys_created_on"
+            );
+
+            attachment.setLimit(1);
+
+            attachment.query();
+
+
+            if (attachment.next()) {
+
+                attachmentSysId =
+                    attachment.getUniqueValue();
+
+            }
+
+
+            /*
+             * ======================================
+             * ADD DOCUMENT
+             * ======================================
+             */
+
+            data.documents.push({
+
+                sys_id:
+                    document.getUniqueValue(),
+
+                claim_number:
+                    claimNumber,
+
+                document_name:
+                    document.getValue(
+                        "document_name"
+                    ) || "",
+
+                document_type:
+                    document.getDisplayValue(
+                        "document_type"
+                    ) || "",
+
+                validation_status:
+                    document.getDisplayValue(
+                        "document_validation_status"
+                    ) || "Pending",
+
+                rejection_reason:
+                    document.getValue(
+                        "rejection_reason"
+                    ) || "",
+
+                attachment_sys_id:
+                    attachmentSysId
+
+            });
+
+        }
+
+
+        data.success = true;
+
+
+    } catch (e) {
+
+        data.success = false;
+
+        data.message =
+            "Unable to load documents: " +
+            e.message;
+
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 14:56:08</sys_created_on>
+        <sys_id>4b09b7f480ab43107f44e29321b0a271</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Insurance Claim Documents</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_widget_4b09b7f480ab43107f44e29321b0a271</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 15:00:06</sys_updated_on>
+        <template><![CDATA[<div class="ich-documents-page">
+
+    <!-- HEADER -->
+    <div class="ich-documents-header">
+
+        <div class="ich-header-left">
+
+            <div class="ich-header-icon">
+                ]]>📄
+<![CDATA[            </div>
+
+            <div>
+                <span class="ich-eyebrow">
+                    INSURANCE CLAIM HUB
+                </span>
+
+                <h1>My Documents</h1>
+
+                <p>
+                    View documents submitted for your insurance claims.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="ich-header-actions">
+
+            <button
+                class="ich-btn ich-btn-secondary"
+                ng-click="c.goHome()">
+
+                ← Home
+
+            </button>
+
+            <button
+                class="ich-btn ich-btn-primary"
+                ng-click="c.loadDocuments()"
+                ng-disabled="c.loading">
+
+                ↻ Refresh
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOADING -->
+    <div
+        class="ich-loading-card"
+        ng-if="c.loading">
+
+        <div class="ich-spinner"></div>
+
+        <div>
+            Loading your documents...
+        </div>
+
+    </div>
+
+
+    <!-- ERROR -->
+    <div
+        class="ich-message ich-error"
+        ng-if="!c.loading && c.errorMessage">
+
+        ⚠ {{c.errorMessage}}
+
+    </div>
+
+
+    <!-- DOCUMENT SUMMARY -->
+    <div
+        class="ich-summary"
+        ng-if="!c.loading && !c.errorMessage">
+
+        <div class="ich-summary-card">
+
+            <div class="ich-summary-icon">
+                ]]>📁
+<![CDATA[            </div>
+
+            <div>
+
+                <span>
+                    Total Documents
+                </span>
+
+                <strong>
+                    {{c.documents.length}}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="ich-summary-card">
+
+            <div class="ich-summary-icon approved">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Approved
+                </span>
+
+                <strong>
+                    {{c.getCount("Approved")}}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="ich-summary-card">
+
+            <div class="ich-summary-icon pending">
+                ⏳
+            </div>
+
+            <div>
+
+                <span>
+                    Pending
+                </span>
+
+                <strong>
+                    {{c.getCount("Pending")}}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="ich-summary-card">
+
+            <div class="ich-summary-icon rejected">
+                !
+            </div>
+
+            <div>
+
+                <span>
+                    Rejected
+                </span>
+
+                <strong>
+                    {{c.getCount("Rejected")}}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NO DOCUMENTS -->
+    <div
+        class="ich-empty-card"
+        ng-if="
+            !c.loading &&
+            !c.errorMessage &&
+            c.documents.length === 0
+        ">
+
+        <div class="ich-empty-icon">
+            ]]>📂
+<![CDATA[        </div>
+
+        <h2>No Documents Found</h2>
+
+        <p>
+            You have not uploaded any documents for your insurance claims yet.
+        </p>
+
+        <button
+            class="ich-btn ich-btn-primary"
+            ng-click="c.goToSubmitClaim()">
+
+            + Submit a Claim
+
+        </button>
+
+    </div>
+
+
+    <!-- DOCUMENT TABLE -->
+    <div
+        class="ich-table-card"
+        ng-if="
+            !c.loading &&
+            !c.errorMessage &&
+            c.documents.length > 0
+        ">
+
+        <div class="ich-table-header">
+
+            <div>
+
+                <h2>Your Documents</h2>
+
+                <p>
+                    Documents associated with your insurance claims
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="ich-table-wrapper">
+
+            <table class="ich-document-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Claim Number</th>
+
+                        <th>Document Name</th>
+
+                        <th>Document Type</th>
+
+                        <th>Validation Status</th>
+
+                        <th>Rejection Reason</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr
+                        ng-repeat="document in c.documents track by document.sys_id">
+
+                        <!-- CLAIM -->
+                        <td>
+
+                            <span class="ich-claim-number">
+                                {{document.claim_number}}
+                            </span>
+
+                        </td>
+
+
+                        <!-- DOCUMENT NAME -->
+                        <td>
+
+                            <div class="ich-document-name">
+
+                                <div class="ich-file-icon">
+                                    ]]>📄
+<![CDATA[                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        {{document.document_name}}
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- TYPE -->
+                        <td>
+
+                            <span class="ich-type">
+                                {{document.document_type}}
+                            </span>
+
+                        </td>
+
+
+                        <!-- STATUS -->
+                        <td>
+
+                            <span
+                                class="ich-status"
+                                ng-class="{
+                                    'status-approved':
+                                        document.validation_status == 'Approved',
+
+                                    'status-pending':
+                                        document.validation_status == 'Pending',
+
+                                    'status-rejected':
+                                        document.validation_status == 'Rejected'
+                                }">
+
+                                <span
+                                    ng-if="
+                                        document.validation_status == 'Approved'
+                                    ">
+                                    ✓
+                                </span>
+
+                                <span
+                                    ng-if="
+                                        document.validation_status == 'Pending'
+                                    ">
+                                    ⏳
+                                </span>
+
+                                <span
+                                    ng-if="
+                                        document.validation_status == 'Rejected'
+                                    ">
+                                    !
+                                </span>
+
+                                {{document.validation_status}}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- REJECTION REASON -->
+                        <td>
+
+                            <span
+                                class="ich-rejection"
+                                ng-if="document.rejection_reason">
+
+                                {{document.rejection_reason}}
+
+                            </span>
+
+                            <span
+                                class="ich-no-rejection"
+                                ng-if="!document.rejection_reason">
+
+                                —
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- ACTION -->
+                        <td>
+
+                            <button
+                                class="ich-view-btn"
+                                ng-if="document.attachment_sys_id"
+                                ng-click="c.viewDocument(document)">
+
+                                ]]>👁<![CDATA[ View
+
+                            </button>
+
+                            <span
+                                class="ich-no-file"
+                                ng-if="!document.attachment_sys_id">
+
+                                No file
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER NOTE -->
+    <div
+        class="ich-info-box"
+        ng-if="!c.loading && !c.errorMessage">
+
+        <span class="ich-info-icon">
+            ℹ
+        </span>
+
+        <div>
+
+            <strong>Document Information</strong>
+
+            <p>
+                Documents are validated as part of your insurance claim
+                processing workflow. Rejected documents may require
+                re-uploading with the required information.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

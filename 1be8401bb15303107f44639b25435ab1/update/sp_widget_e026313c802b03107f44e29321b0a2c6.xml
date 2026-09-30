@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, $location) {
+
+    var c = this;
+
+    // -----------------------------------------
+    // Form data
+    // -----------------------------------------
+
+    c.form = {
+        claim_type: "",
+        policy_number: "",
+        incident_date: "",
+        claim_amount: "",
+        description: ""
+    };
+
+    c.submitting = false;
+    c.successMessage = "";
+    c.errorMessage = "";
+
+    // -----------------------------------------
+    // Submit Claim
+    // -----------------------------------------
+
+    c.submitClaim = function() {
+
+        c.successMessage = "";
+        c.errorMessage = "";
+
+        // Check required fields
+        if (!c.form.claim_type ||
+            !c.form.policy_number ||
+            !c.form.incident_date ||
+            !c.form.claim_amount ||
+            !c.form.description) {
+
+            c.errorMessage =
+                "Please fill in all required fields.";
+
+            return;
+        }
+
+        c.submitting = true;
+
+        // Send data to Server Script
+        c.server.get({
+
+            action: "submit_claim",
+
+            claim: {
+                claim_type: c.form.claim_type,
+                policy_number: c.form.policy_number,
+                incident_date: c.form.incident_date,
+                claim_amount: c.form.claim_amount,
+                description: c.form.description
+            }
+
+        }).then(function(response) {
+
+            c.submitting = false;
+
+            // -----------------------------------------
+            // Claim successfully created
+            // -----------------------------------------
+
+            if (response.data.success === true) {
+
+                c.successMessage =
+                    "Claim " +
+                    response.data.claim_number +
+                    " has been submitted successfully.";
+
+                // Clear form
+                c.form = {
+                    claim_type: "",
+                    policy_number: "",
+                    incident_date: "",
+                    claim_amount: "",
+                    description: ""
+                };
+
+                // -----------------------------------------
+                // Go to OTP Verification
+                // Pass exact Claim Sys ID
+                // -----------------------------------------
+
+                setTimeout(function() {
+
+                    $scope.$apply(function() {
+
+                        $location.search({
+
+                            id: "otp_verification",
+
+                            sys_id:
+                                response.data.claim_sys_id
+
+                        });
+
+                    });
+
+                }, 1000);
+
+            } else {
+
+                // -----------------------------------------
+                // Server returned an error
+                // -----------------------------------------
+
+                c.errorMessage =
+                    response.data.message ||
+                    "Unable to submit the claim.";
+            }
+
+        }, function() {
+
+            c.submitting = false;
+
+            c.errorMessage =
+                "An error occurred while submitting the claim.";
+
+        });
+
+    };
+
+    // -----------------------------------------
+    // Cancel / Go Home
+    // -----------------------------------------
+
+    c.goHome = function() {
+
+        $location.search({
+
+            id: "claim_home"
+
+        });
+
+    };
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.claim-submit-container {&#13;
+    max-width: 1000px;&#13;
+    margin: 40px auto;&#13;
+    padding: 20px;&#13;
+    font-family: Arial, sans-serif;&#13;
+}&#13;
+&#13;
+.claim-header {&#13;
+    background: linear-gradient(135deg, #0d6efd, #1554a5);&#13;
+    color: white;&#13;
+    padding: 30px;&#13;
+    border-radius: 12px 12px 0 0;&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    gap: 20px;&#13;
+}&#13;
+&#13;
+.claim-icon {&#13;
+    width: 60px;&#13;
+    height: 60px;&#13;
+    background: rgba(255,255,255,0.18);&#13;
+    border-radius: 50%;&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    justify-content: center;&#13;
+    font-size: 30px;&#13;
+}&#13;
+&#13;
+.claim-header h1 {&#13;
+    margin: 0 0 8px;&#13;
+    font-size: 28px;&#13;
+    font-weight: 600;&#13;
+}&#13;
+&#13;
+.claim-header p {&#13;
+    margin: 0;&#13;
+    opacity: 0.9;&#13;
+}&#13;
+&#13;
+.claim-form-card {&#13;
+    background: white;&#13;
+    padding: 35px;&#13;
+    border: 1px solid #e1e5eb;&#13;
+    border-radius: 0 0 12px 12px;&#13;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);&#13;
+}&#13;
+&#13;
+.section-title {&#13;
+    margin-bottom: 25px;&#13;
+}&#13;
+&#13;
+.section-title h2 {&#13;
+    margin: 0 0 6px;&#13;
+    color: #183b67;&#13;
+    font-size: 22px;&#13;
+}&#13;
+&#13;
+.section-title p {&#13;
+    margin: 0;&#13;
+    color: #6c757d;&#13;
+}&#13;
+&#13;
+.form-row {&#13;
+    display: flex;&#13;
+    gap: 25px;&#13;
+    margin-bottom: 20px;&#13;
+}&#13;
+&#13;
+.form-group {&#13;
+    flex: 1;&#13;
+    margin-bottom: 20px;&#13;
+}&#13;
+&#13;
+.form-group label {&#13;
+    display: block;&#13;
+    margin-bottom: 8px;&#13;
+    font-weight: 600;&#13;
+    color: #34495e;&#13;
+}&#13;
+&#13;
+.form-group label span {&#13;
+    color: #dc3545;&#13;
+}&#13;
+&#13;
+.form-control {&#13;
+    width: 100%;&#13;
+    min-height: 44px;&#13;
+    padding: 10px 12px;&#13;
+    border: 1px solid #ccd4dd;&#13;
+    border-radius: 6px;&#13;
+    font-size: 14px;&#13;
+    box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.form-control:focus {&#13;
+    border-color: #0d6efd;&#13;
+    outline: none;&#13;
+    box-shadow: 0 0 0 2px rgba(13,110,253,0.12);&#13;
+}&#13;
+&#13;
+.description-box {&#13;
+    resize: vertical;&#13;
+}&#13;
+&#13;
+.information-box {&#13;
+    background: #eef6ff;&#13;
+    border-left: 4px solid #0d6efd;&#13;
+    padding: 15px;&#13;
+    margin: 10px 0 25px;&#13;
+    color: #36516c;&#13;
+    border-radius: 4px;&#13;
+}&#13;
+&#13;
+.form-actions {&#13;
+    display: flex;&#13;
+    justify-content: flex-end;&#13;
+    gap: 12px;&#13;
+    margin-top: 25px;&#13;
+}&#13;
+&#13;
+.cancel-btn,&#13;
+.submit-btn {&#13;
+    padding: 12px 25px;&#13;
+    border-radius: 6px;&#13;
+    cursor: pointer;&#13;
+    font-weight: 600;&#13;
+    font-size: 14px;&#13;
+}&#13;
+&#13;
+.cancel-btn {&#13;
+    background: white;&#13;
+    border: 1px solid #adb5bd;&#13;
+    color: #495057;&#13;
+}&#13;
+&#13;
+.submit-btn {&#13;
+    background: #0d6efd;&#13;
+    border: none;&#13;
+    color: white;&#13;
+}&#13;
+&#13;
+.submit-btn:hover {&#13;
+    background: #0b5ed7;&#13;
+}&#13;
+&#13;
+.submit-btn:disabled {&#13;
+    opacity: 0.6;&#13;
+    cursor: not-allowed;&#13;
+}&#13;
+&#13;
+.message {&#13;
+    padding: 14px;&#13;
+    border-radius: 6px;&#13;
+    margin-top: 15px;&#13;
+}&#13;
+&#13;
+.success-message {&#13;
+    background: #e8f7ee;&#13;
+    color: #18733c;&#13;
+    border: 1px solid #b8e0c7;&#13;
+}&#13;
+&#13;
+.error-message {&#13;
+    background: #fdecec;&#13;
+    color: #a52834;&#13;
+    border: 1px solid #f1b7bc;&#13;
+}&#13;
+&#13;
+@media (max-width: 700px) {&#13;
+&#13;
+    .claim-submit-container {&#13;
+        margin: 15px auto;&#13;
+        padding: 10px;&#13;
+    }&#13;
+&#13;
+    .claim-header {&#13;
+        padding: 22px;&#13;
+    }&#13;
+&#13;
+    .claim-header h1 {&#13;
+        font-size: 22px;&#13;
+    }&#13;
+&#13;
+    .claim-form-card {&#13;
+        padding: 22px;&#13;
+    }&#13;
+&#13;
+    .form-row {&#13;
+        flex-direction: column;&#13;
+        gap: 0;&#13;
+    }&#13;
+&#13;
+    .form-actions {&#13;
+        flex-direction: column;&#13;
+    }&#13;
+&#13;
+    .cancel-btn,&#13;
+    .submit-btn {&#13;
+        width: 100%;&#13;
+    }&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Secure insurance claim submission form for the Insurance Claim Hub.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>insurance_claim_submit_form</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Insurance Claim Submit Form</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.success = false;
+    data.message = "";
+    data.claim_number = "";
+    data.claim_sys_id = "";
+
+    if (!input || input.action != "submit_claim") {
+        return;
+    }
+
+    try {
+
+        var claimData = input.claim;
+
+        if (!claimData) {
+            data.message = "Claim information is missing.";
+            return;
+        }
+
+        // Validate required fields
+        if (!claimData.claim_type ||
+            !claimData.policy_number ||
+            !claimData.incident_date ||
+            !claimData.claim_amount ||
+            !claimData.description) {
+
+            data.message = "Please fill in all required fields.";
+            return;
+        }
+
+        // ------------------------------------------------
+        // 1. Find Policy using Policy Number
+        // ------------------------------------------------
+
+        var policy = new GlideRecord("x_snc_insurance_0_policy");
+
+        policy.addQuery(
+            "policy_number",
+            claimData.policy_number
+        );
+
+        policy.setLimit(1);
+        policy.query();
+
+        if (!policy.next()) {
+
+            data.message =
+                "Policy number " +
+                claimData.policy_number +
+                " was not found.";
+
+            return;
+        }
+
+        // ------------------------------------------------
+        // 2. Create Claim
+        // ------------------------------------------------
+
+        var claim = new GlideRecord("x_snc_insurance_0_claim");
+
+        claim.initialize();
+
+        // Claim Type
+        claim.setValue(
+            "claim_type",
+            claimData.claim_type
+        );
+
+        // Policy Number reference
+        claim.setValue(
+            "policy_number",
+            policy.getUniqueValue()
+        );
+
+        // Incident Date
+        claim.setValue(
+            "incident_date",
+            claimData.incident_date
+        );
+
+        // Claim Amount
+        claim.setValue(
+            "claim_amount",
+            claimData.claim_amount
+        );
+
+        // Description
+        claim.setValue(
+            "description",
+            claimData.description
+        );
+
+        // ------------------------------------------------
+        // 3. Insert Claim
+        // ------------------------------------------------
+
+        var newSysId = claim.insert();
+
+        if (!newSysId) {
+
+            data.message =
+                "Claim could not be created.";
+
+            return;
+        }
+
+        // ------------------------------------------------
+        // 4. Return Claim information to Client
+        // ------------------------------------------------
+
+        data.success = true;
+
+        data.claim_sys_id =
+            claim.getUniqueValue();
+
+        data.claim_number =
+            claim.getValue("claim_number");
+
+        data.message =
+            "Claim submitted successfully.";
+
+    } catch (e) {
+
+        data.success = false;
+
+        data.message =
+            "Error while submitting claim: " +
+            e.message;
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 05:24:11</sys_created_on>
+        <sys_id>e026313c802b03107f44e29321b0a2c6</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Insurance Claim Submit Form</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_widget_e026313c802b03107f44e29321b0a2c6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 06:27:32</sys_updated_on>
+        <template><![CDATA[<div class="claim-submit-container">
+
+  <div class="claim-header">
+    <div class="claim-icon">]]>🛡<![CDATA[️</div>
+    <div>
+      <h1>Submit an Insurance Claim</h1>
+      <p>Provide your claim details securely and submit your request.</p>
+    </div>
+  </div>
+
+  <div class="claim-form-card">
+
+    <div class="section-title">
+      <h2>Claim Details</h2>
+      <p>Please enter the information related to your claim.</p>
+    </div>
+
+    <form ng-submit="c.submitClaim()" novalidate>
+
+      <div class="form-row">
+
+        <div class="form-group">
+          <label>Claim Type <span>*</span></label>
+
+          <select class="form-control"
+                  ng-model="c.form.claim_type"
+                  required>
+
+            <option value="">Select Claim Type</option>
+            <option value="Motor">Motor</option>
+            <option value="Health">Health</option>
+            <option value="Travel">Travel</option>
+            <option value="Property">Property</option>
+            <option value="Life">Life</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Policy Number <span>*</span></label>
+
+          <input type="text"
+                 class="form-control"
+                 ng-model="c.form.policy_number"
+                 placeholder="Example: POL1001"
+                 required>
+        </div>
+
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="form-group">
+          <label>Incident Date <span>*</span></label>
+
+          <input type="date"
+                 class="form-control"
+                 ng-model="c.form.incident_date"
+                 required>
+        </div>
+
+        <div class="form-group">
+          <label>Claim Amount <span>*</span></label>
+
+          <input type="number"
+                 class="form-control"
+                 ng-model="c.form.claim_amount"
+                 placeholder="Enter claim amount"
+                 min="1"
+                 required>
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+        <label>Claim Description <span>*</span></label>
+
+        <textarea class="form-control description-box"
+                  ng-model="c.form.description"
+                  placeholder="Describe the incident and provide relevant details..."
+                  rows="5"
+                  required></textarea>
+      </div>
+
+
+      <div class="information-box">
+        <strong>Important:</strong>
+        Please make sure that the information provided is accurate.
+        You can upload supporting documents after submitting the claim.
+      </div>
+
+
+      <div class="message success-message"
+           ng-if="c.successMessage">
+
+        ✓ {{c.successMessage}}
+
+      </div>
+
+
+      <div class="message error-message"
+           ng-if="c.errorMessage">
+
+        ⚠ {{c.errorMessage}}
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button type="button"
+                class="cancel-btn"
+                ng-click="c.goHome()">
+
+          Cancel
+
+        </button>
+
+        <button type="submit"
+                class="submit-btn"
+                ng-disabled="c.submitting">
+
+          <span ng-if="!c.submitting">
+            Submit Claim
+          </span>
+
+          <span ng-if="c.submitting">
+            Submitting...
+          </span>
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

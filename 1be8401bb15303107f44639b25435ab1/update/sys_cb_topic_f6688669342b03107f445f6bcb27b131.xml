@@ -1,0 +1,2511 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cb_topic">
+    <sys_cb_topic action="INSERT_OR_UPDATE">
+        <applicability/>
+        <applicability_mode>query</applicability_mode>
+        <autopilot_topic>false</autopilot_topic>
+        <category/>
+        <channels/>
+        <connect_queue/>
+        <context_profiles/>
+        <description>Assist customers with insurance claims by helping them track claims, check missing documents, and get answers to common claim questions.</description>
+        <dialog_acts_enabled>false</dialog_acts_enabled>
+        <expose_on_palette>false</expose_on_palette>
+        <flexible_conversation_switching>false</flexible_conversation_switching>
+        <foundational>false</foundational>
+        <graph>{
+  "graph_api_version": "1.0.82",
+  "goals": {
+    "primary": {
+      "id": "primary",
+      "trigger": {
+        "type": "primary"
+      },
+      "name": "primary",
+      "applicability": "",
+      "description": "",
+      "nodes": {
+        "b7614c10293f4090a6a262511338a3fa": {
+          "id": "b7614c10293f4090a6a262511338a3fa",
+          "stepType": "Start",
+          "name": "Start",
+          "greetingResponse": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "470742f0cbec477e987712353be52711": {
+          "id": "470742f0cbec477e987712353be52711",
+          "stepType": "TerminateGoal",
+          "name": "End",
+          "confirmationMessage": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "e423cda17ec149a897cb9803d5df0ef7": {
+          "id": "e423cda17ec149a897cb9803d5df0ef7",
+          "stepType": "TextOutput",
+          "name": "welcome_claim_assistant",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Hello! Welcome to the Insurance Claim Assistant. I can help you track your claim, check missing documents, or answer common insurance claim questions. Please select an option below."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "d08323a95ff240d3acbbd4f10123da57"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "7589923c134b4e4190e3ce840b98d543": {
+          "id": "7589923c134b4e4190e3ce840b98d543",
+          "stepType": "StandaloneAIChoicePrompt",
+          "name": "claim_assistance_choice",
+          "purpose": {
+            "value": "",
+            "mode": "simple"
+          },
+          "instructions": {
+            "value": "",
+            "mode": "simple"
+          },
+          "inputs": [
+            {
+              "itemId": "4d5f36f74d0f4cfaba4dd28cbd252b67",
+              "displayName": "claim_assistance_choice",
+              "name": "claim_assistance_choice",
+              "description": "",
+              "discoverable": false,
+              "dynamicDescription": {
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "text": "Select the insurance claim service you need."
+                      }
+                    ]
+                  }
+                ],
+                "mode": "simple"
+              },
+              "type": "choice",
+              "variableId": "eb2c3bae03954089957899194a7fd2bd",
+              "choices": [
+                {
+                  "label": "Track My Claim",
+                  "value": "track_my_claim"
+                },
+                {
+                  "label": "Check Missing Documents",
+                  "value": "check_missing_documents"
+                },
+                {
+                  "label": "Claim Help / FAQs",
+                  "value": "claim_help",
+                  "checked": true,
+                  "meta": {}
+                },
+                {
+                  "label": "Document Verification",
+                  "value": "document_verification",
+                  "checked": true,
+                  "meta": {}
+                },
+                {
+                  "label": "Review Claim Decision",
+                  "value": "review_claim_decision",
+                  "checked": true,
+                  "meta": {}
+                }
+              ],
+              "mode": "",
+              "script": "",
+              "condition": {
+                "value": "",
+                "mode": "glide_query"
+              },
+              "stepType": "ChoicePrompt",
+              "enforcePrompt": false,
+              "helpText": false,
+              "skippable": {
+                "value": "",
+                "mode": "query"
+              },
+              "applicability": {
+                "value": "",
+                "mode": "query"
+              },
+              "promptMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "helpTextMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "inputType": {
+                "format": "Text",
+                "script": ""
+              },
+              "isMultipleSelect": false,
+              "validation": "",
+              "autoSelect": true,
+              "hasCardHeader": false,
+              "cardMetadata": {
+                "mode": "card",
+                "metadataScript": "",
+                "cardTemplate": "",
+                "cardFields": {},
+                "cardDefinition": {}
+              }
+            }
+          ],
+          "outputs": [],
+          "advanced_parameters": "",
+          "confirmSummary": false,
+          "useSlots": false,
+          "slots": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "hiddenVariableIds": [
+            "05f3f3d5827545ba91301d26f9ff2580"
+          ],
+          "hiddenVariableNames": [
+            "ai_data_collector_7589923c134b4e4190e3ce840b98d543_output"
+          ],
+          "classificationEnabled": false,
+          "classificationOverrides": [],
+          "standalone": true,
+          "variableIds": [
+            "eb2c3bae03954089957899194a7fd2bd"
+          ]
+        },
+        "025897ec0f7142e191a59101acea9ed4": {
+          "id": "025897ec0f7142e191a59101acea9ed4",
+          "stepType": "Decision",
+          "name": "claim_assistance_choice"
+        },
+        "de09adc9cfa24dc08df2d38e5871d41e": {
+          "id": "de09adc9cfa24dc08df2d38e5871d41e",
+          "stepType": "AiDataCollector",
+          "name": "get_claim_number",
+          "purpose": {
+            "value": "",
+            "mode": "simple"
+          },
+          "instructions": {
+            "value": "",
+            "mode": "simple"
+          },
+          "inputs": [
+            {
+              "itemId": "517ca7ec83874dce8c74710370e40bd9",
+              "displayName": "claim_number_input",
+              "name": "claim_number_input",
+              "description": "",
+              "discoverable": false,
+              "dynamicDescription": {
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "text": "The unique claim number provided by the customer to identify their insurance claim."
+                      }
+                    ]
+                  }
+                ],
+                "mode": "simple"
+              },
+              "type": "string",
+              "variableId": "96139d9b02c640e2a8d85c1e6bf8b444",
+              "choices": [
+                {
+                  "label": "",
+                  "value": ""
+                },
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ],
+              "mode": "",
+              "script": "",
+              "condition": {
+                "value": "",
+                "mode": "glide_query"
+              },
+              "stepType": "TextPrompt",
+              "enforcePrompt": false,
+              "helpText": false,
+              "skippable": {
+                "value": "",
+                "mode": "query"
+              },
+              "applicability": {
+                "value": "",
+                "mode": "query"
+              },
+              "promptMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "helpTextMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "inputType": {
+                "format": "Text",
+                "script": ""
+              },
+              "isMultipleSelect": false,
+              "validation": "",
+              "autoSelect": true,
+              "hasCardHeader": false,
+              "cardMetadata": {
+                "mode": "card",
+                "metadataScript": "",
+                "cardTemplate": "",
+                "cardFields": {},
+                "cardDefinition": {}
+              }
+            }
+          ],
+          "outputs": [],
+          "advanced_parameters": "",
+          "confirmSummary": true,
+          "useSlots": false,
+          "slots": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "hiddenVariableIds": [
+            "ed14c6883c084e96aed2e0d5ccd134ad"
+          ],
+          "hiddenVariableNames": [
+            "ai_data_collector_de09adc9cfa24dc08df2d38e5871d41e_output"
+          ],
+          "classificationEnabled": false,
+          "classificationOverrides": [],
+          "variableIds": [
+            "96139d9b02c640e2a8d85c1e6bf8b444"
+          ],
+          "standalone": false
+        },
+        "810fe6f5b1194ed8a3856a3a2c4eb4c6": {
+          "id": "810fe6f5b1194ed8a3856a3a2c4eb4c6",
+          "stepType": "LookupRecord",
+          "name": "get_claim_status",
+          "condition": {
+            "mode": "glide_query",
+            "value": "claim_number={{vaInputs.claim_number_input}}"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "variableId": "4433324abc3842a0813fb66a5d38a761"
+        },
+        "758007977b3e46da83278ddb9f433889": {
+          "id": "758007977b3e46da83278ddb9f433889",
+          "stepType": "Decision",
+          "name": "check_claim_status"
+        },
+        "8c9a8fb7b27147279125e8e86112120d": {
+          "id": "8c9a8fb7b27147279125e8e86112120d",
+          "stepType": "AITextOutput",
+          "name": "invalid_claim_response",
+          "description": {
+            "value": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "Sorry, we couldn't find a claim with that claim number. Please check the claim number and try again."
+                  }
+                ]
+              }
+            ],
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "021401b06a854683a774838407a45afe": {
+          "id": "021401b06a854683a774838407a45afe",
+          "stepType": "AITextOutput",
+          "name": "claim_number_response",
+          "description": {
+            "value": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "Your claim number is:"
+                  },
+                  {
+                    "type": "datapill",
+                    "dataPill": {
+                      "value": "{{vaInputs.claim_number_input}}",
+                      "displayValue": "Input Variables➛Claim_number_input"
+                    },
+                    "children": [
+                      {
+                        "text": ""
+                      }
+                    ]
+                  },
+                  {
+                    "text": ""
+                  }
+                ]
+              }
+            ],
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "63894116311b40af99029403168753fa": {
+          "id": "63894116311b40af99029403168753fa",
+          "stepType": "AITextOutput",
+          "name": "claim_status_response",
+          "description": {
+            "value": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "Current claim status:"
+                  },
+                  {
+                    "type": "datapill",
+                    "dataPill": {
+                      "value": "{{vaInputs.get_claim_status.status}}",
+                      "displayValue": "Input Variables➛Get_claim_status➛Status"
+                    },
+                    "children": [
+                      {
+                        "text": ""
+                      }
+                    ]
+                  },
+                  {
+                    "text": ""
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "Next step: Please follow the instructions provided for your claim."
+                  }
+                ]
+              }
+            ],
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "c466bee45b3f4e6dab2bc157543019b9": {
+          "id": "c466bee45b3f4e6dab2bc157543019b9",
+          "stepType": "AiDataCollector",
+          "name": "get_missing_doc_claim_number",
+          "purpose": {
+            "value": "",
+            "mode": "simple"
+          },
+          "instructions": {
+            "value": "",
+            "mode": "simple"
+          },
+          "inputs": [
+            {
+              "itemId": "3377ad84614a405a856a83ee71bff17f",
+              "displayName": "missing_doc_claim_number",
+              "name": "missing_doc_claim_number",
+              "description": "",
+              "discoverable": false,
+              "dynamicDescription": {
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "text": "The unique claim number provided by the customer to identify their insurance claim."
+                      }
+                    ]
+                  }
+                ],
+                "mode": "simple"
+              },
+              "type": "string",
+              "variableId": "ef8c4db202914929a46dc24db902b279",
+              "choices": [
+                {
+                  "label": "",
+                  "value": ""
+                },
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ],
+              "mode": "",
+              "script": "",
+              "condition": {
+                "value": "",
+                "mode": "glide_query"
+              },
+              "stepType": "TextPrompt",
+              "enforcePrompt": false,
+              "helpText": false,
+              "skippable": {
+                "value": "",
+                "mode": "query"
+              },
+              "applicability": {
+                "value": "",
+                "mode": "query"
+              },
+              "promptMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "helpTextMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "inputType": {
+                "format": "Text",
+                "script": ""
+              },
+              "isMultipleSelect": false,
+              "validation": "",
+              "autoSelect": true,
+              "hasCardHeader": false,
+              "cardMetadata": {
+                "mode": "card",
+                "metadataScript": "",
+                "cardTemplate": "",
+                "cardFields": {},
+                "cardDefinition": {}
+              }
+            }
+          ],
+          "outputs": [],
+          "advanced_parameters": "",
+          "confirmSummary": true,
+          "useSlots": false,
+          "slots": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "hiddenVariableIds": [
+            "005669bd9b174e1e8347f068184447ed"
+          ],
+          "hiddenVariableNames": [
+            "ai_data_collector_c466bee45b3f4e6dab2bc157543019b9_output"
+          ],
+          "classificationEnabled": false,
+          "classificationOverrides": [],
+          "variableIds": [
+            "ef8c4db202914929a46dc24db902b279"
+          ],
+          "standalone": false
+        },
+        "2084f0b5fe2d4cdcb5232a3fbb6d9f15": {
+          "id": "2084f0b5fe2d4cdcb5232a3fbb6d9f15",
+          "stepType": "LookupRecord",
+          "name": "lookup_missing_documents",
+          "condition": {
+            "mode": "glide_query",
+            "value": "claim={{vaInputs.missing_doc_claim_number}}"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "variableId": "c0d7a384b92b4a849ae0dce09d58517d"
+        },
+        "14eb91470c1b4cb49d7c5d14267f2329": {
+          "id": "14eb91470c1b4cb49d7c5d14267f2329",
+          "stepType": "RecordOutput",
+          "name": "missing_document_card",
+          "variableId": "",
+          "cardTemplate": "General",
+          "cardFields": {},
+          "mode": "script",
+          "tableName": "x_snc_insurance_0_claim_document",
+          "fields": [
+            "document_name",
+            "document_validation_status"
+          ],
+          "cardDefinition": {
+            "name": "Record",
+            "value": "General"
+          },
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "condition": {
+            "mode": "glide_scripted_query",
+            "value": "(function execute(table) {\n\n    var gr = new GlideRecordSecure(table);\n\n    gr.addQuery('claim.claim_number', vaInputs.missing_doc_claim_number);\n\n    gr.setLimit(1);\n    gr.query();\n\n    if (gr.next()) {\n        return gr;\n    }\n\n    return null;\n\n})(table);"
+          }
+        },
+        "5438820522184432942c633fcd58d785": {
+          "id": "5438820522184432942c633fcd58d785",
+          "stepType": "AITextOutput",
+          "name": "missing_documents_response",
+          "description": {
+            "value": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "The following document is associated with your claim. Please review the document details and provide it if it is still pending."
+                  }
+                ]
+              }
+            ],
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "abfea732a9f340f7826ce6f55855ca9f": {
+          "id": "abfea732a9f340f7826ce6f55855ca9f",
+          "stepType": "StandaloneAITextPrompt",
+          "name": "faq_question",
+          "purpose": {
+            "value": "",
+            "mode": "simple"
+          },
+          "instructions": {
+            "value": "",
+            "mode": "simple"
+          },
+          "inputs": [
+            {
+              "itemId": "690de0fa9a9246799319a1fd25704c3f",
+              "displayName": "faq_question",
+              "name": "faq_question",
+              "description": "",
+              "discoverable": false,
+              "dynamicDescription": {
+                "value": "Ask a question about submitting a claim, tracking a claim, required documents, or what happens after a claim is submitted.",
+                "mode": "simple"
+              },
+              "type": "string",
+              "variableId": "a45e1c9864304fc59bcd8bc26b2e916f",
+              "choices": [
+                {
+                  "label": "",
+                  "value": ""
+                },
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ],
+              "mode": "",
+              "script": "",
+              "condition": {
+                "value": "",
+                "mode": "glide_query"
+              },
+              "stepType": "TextPrompt",
+              "enforcePrompt": false,
+              "helpText": false,
+              "skippable": {
+                "value": "",
+                "mode": "query"
+              },
+              "applicability": {
+                "value": "",
+                "mode": "query"
+              },
+              "promptMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "helpTextMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "inputType": {
+                "format": "Text",
+                "script": ""
+              },
+              "isMultipleSelect": false,
+              "validation": "",
+              "autoSelect": true,
+              "hasCardHeader": false,
+              "cardMetadata": {
+                "mode": "card",
+                "metadataScript": "",
+                "cardTemplate": "",
+                "cardFields": {},
+                "cardDefinition": {}
+              }
+            }
+          ],
+          "outputs": [],
+          "advanced_parameters": "",
+          "confirmSummary": false,
+          "useSlots": false,
+          "slots": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "hiddenVariableIds": [
+            "5627d1863bee46949aaa104e5af6e100"
+          ],
+          "hiddenVariableNames": [
+            "ai_data_collector_abfea732a9f340f7826ce6f55855ca9f_output"
+          ],
+          "classificationEnabled": false,
+          "classificationOverrides": [],
+          "standalone": true,
+          "variableIds": [
+            "a45e1c9864304fc59bcd8bc26b2e916f"
+          ]
+        },
+        "a12e21a7d0cb43549897b8b5da3b80e6": {
+          "id": "a12e21a7d0cb43549897b8b5da3b80e6",
+          "stepType": "Decision",
+          "name": " faq_decision"
+        },
+        "3eb8ad27dc244c79b053244b524c5acf": {
+          "id": "3eb8ad27dc244c79b053244b524c5acf",
+          "stepType": "TextOutput",
+          "name": "track_claim_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "To track your claim, select \"Track My Claim\" in the Insurance Claim Hub and enter your claim number. The assistant will show your current claim status and next step."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "e10b880287534c8a857953fdeb94a2da"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "2e02090590314fc7bd87e6b16d42fcbb": {
+          "id": "2e02090590314fc7bd87e6b16d42fcbb",
+          "stepType": "TextOutput",
+          "name": "submit_claim_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "To submit an insurance claim, open the Insurance Claim Hub and provide your claim details along with the required supporting documents. Follow the guided steps to complete your claim submission."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "2228569106514cb7b5eb2dee18fa3f57"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "0d64617cca0c4c57998808aa2c7a3de4": {
+          "id": "0d64617cca0c4c57998808aa2c7a3de4",
+          "stepType": "TextOutput",
+          "name": "required_documents_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "The documents required depend on your claim type. Common supporting documents may include identification, policy details, and relevant claim documents. Check the Insurance Claim Hub for the documents required for your claim."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "1f15926ed6a244ffacdeb1188d44b4bb"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "fd9fe704065f4645aba298471f8d3f01": {
+          "id": "fd9fe704065f4645aba298471f8d3f01",
+          "stepType": "TextOutput",
+          "name": "claim_process_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "After you submit a claim, it goes through verification, document validation, policy and data matching, fraud risk assessment, settlement recommendation, approval, and finally payment and closure. You can track your claim status through the Insurance Claim Hub."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "c989c5313f5d4f739810c061fb52760a"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "02fec35cc5a44cea9214822c0c1896e7": {
+          "id": "02fec35cc5a44cea9214822c0c1896e7",
+          "stepType": "StandaloneAITextPrompt",
+          "name": "get_document_name",
+          "purpose": {
+            "value": "",
+            "mode": "simple"
+          },
+          "instructions": {
+            "value": "",
+            "mode": "simple"
+          },
+          "inputs": [
+            {
+              "itemId": "1ea2b72b19564d7da6eb0c77e5938c6c",
+              "displayName": "get_document_name",
+              "name": "get_document_name",
+              "description": "",
+              "discoverable": false,
+              "dynamicDescription": {
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "text": "The document name of the insurance claim document the customer wants to verify."
+                      }
+                    ]
+                  }
+                ],
+                "mode": "simple"
+              },
+              "type": "string",
+              "variableId": "dfc0ee039d6d4b68a2e57f8108bf88b9",
+              "choices": [
+                {
+                  "label": "",
+                  "value": ""
+                },
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ],
+              "mode": "",
+              "script": "",
+              "condition": {
+                "value": "",
+                "mode": "glide_query"
+              },
+              "stepType": "TextPrompt",
+              "enforcePrompt": false,
+              "helpText": false,
+              "skippable": {
+                "value": "",
+                "mode": "query"
+              },
+              "applicability": {
+                "value": "",
+                "mode": "query"
+              },
+              "promptMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "helpTextMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "inputType": {
+                "format": "Text",
+                "script": ""
+              },
+              "isMultipleSelect": false,
+              "validation": "",
+              "autoSelect": true,
+              "hasCardHeader": false,
+              "cardMetadata": {
+                "mode": "card",
+                "metadataScript": "",
+                "cardTemplate": "",
+                "cardFields": {},
+                "cardDefinition": {}
+              }
+            }
+          ],
+          "outputs": [],
+          "advanced_parameters": "",
+          "confirmSummary": false,
+          "useSlots": false,
+          "slots": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "hiddenVariableIds": [
+            "21cf3db0e97d4e50ab857cedd74a644d"
+          ],
+          "hiddenVariableNames": [
+            "ai_data_collector_02fec35cc5a44cea9214822c0c1896e7_output"
+          ],
+          "classificationEnabled": false,
+          "classificationOverrides": [],
+          "standalone": false,
+          "variableIds": [
+            "dfc0ee039d6d4b68a2e57f8108bf88b9"
+          ]
+        },
+        "cd0938693a0942318883fd13aa1cbe2f": {
+          "id": "cd0938693a0942318883fd13aa1cbe2f",
+          "stepType": "LookupRecord",
+          "name": "get_document_details",
+          "condition": {
+            "mode": "glide_query",
+            "value": "document_name={{vaInputs.get_document_name}}"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "variableId": "7eb5635104804df2b1ef763acae6eb75"
+        },
+        "e2d0583204bf4656801442c61889e38a": {
+          "id": "e2d0583204bf4656801442c61889e38a",
+          "stepType": "Decision",
+          "name": "Decision"
+        },
+        "6b638507b8ea432284f21e99044ebe7f": {
+          "id": "6b638507b8ea432284f21e99044ebe7f",
+          "stepType": "StandaloneAIChoicePrompt",
+          "name": "verify_document_info",
+          "purpose": {
+            "value": "",
+            "mode": "simple"
+          },
+          "instructions": {
+            "value": "",
+            "mode": "simple"
+          },
+          "inputs": [
+            {
+              "itemId": "412c918f85e04c598489b54d5efb0a18",
+              "displayName": "verify_document_info",
+              "name": "verify_document_info",
+              "description": "",
+              "discoverable": false,
+              "dynamicDescription": {
+                "value": "Confirm whether the document information is correct and matches the claim.",
+                "mode": "simple"
+              },
+              "type": "choice",
+              "variableId": "fa58108502c64ff0a5c0e79450a59c37",
+              "choices": [
+                {
+                  "label": "Yes, information is correct",
+                  "value": "yes"
+                },
+                {
+                  "label": "No, information is incorrect",
+                  "value": "no"
+                }
+              ],
+              "mode": "",
+              "script": "",
+              "condition": {
+                "value": "",
+                "mode": "glide_query"
+              },
+              "stepType": "ChoicePrompt",
+              "enforcePrompt": false,
+              "helpText": false,
+              "skippable": {
+                "value": "",
+                "mode": "query"
+              },
+              "applicability": {
+                "value": "",
+                "mode": "query"
+              },
+              "promptMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "helpTextMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "inputType": {
+                "format": "Text",
+                "script": ""
+              },
+              "isMultipleSelect": false,
+              "validation": "",
+              "autoSelect": true,
+              "hasCardHeader": false,
+              "cardMetadata": {
+                "mode": "card",
+                "metadataScript": "",
+                "cardTemplate": "",
+                "cardFields": {},
+                "cardDefinition": {}
+              }
+            }
+          ],
+          "outputs": [],
+          "advanced_parameters": "",
+          "confirmSummary": false,
+          "useSlots": false,
+          "slots": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "hiddenVariableIds": [
+            "c34460e5a9ee405d87e48c9d3d34cbb6"
+          ],
+          "hiddenVariableNames": [
+            "ai_data_collector_6b638507b8ea432284f21e99044ebe7f_output"
+          ],
+          "classificationEnabled": false,
+          "classificationOverrides": [],
+          "standalone": true,
+          "variableIds": [
+            "fa58108502c64ff0a5c0e79450a59c37"
+          ]
+        },
+        "01656b81f7804d4689aadc9830940f70": {
+          "id": "01656b81f7804d4689aadc9830940f70",
+          "stepType": "TextOutput",
+          "name": "document_verified_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Your document information has been verified successfully. The document matches the information provided for your claim."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "202c0a49cee54df588f82281d52353ab"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "75516ee4571949869b94b93ef616875b": {
+          "id": "75516ee4571949869b94b93ef616875b",
+          "stepType": "TextOutput",
+          "name": "document_not_verified_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "The document information could not be verified. Please check the document details and upload a corrected document if necessary."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "6615e631682a453bbff0b7c7425112f4"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "2bad1f97c24a4ece956d18fe90b347a4": {
+          "id": "2bad1f97c24a4ece956d18fe90b347a4",
+          "stepType": "AiDataCollector",
+          "name": "get_review_claim_number",
+          "purpose": {
+            "value": "",
+            "mode": "simple"
+          },
+          "instructions": {
+            "value": "",
+            "mode": "simple"
+          },
+          "inputs": [
+            {
+              "itemId": "d3af7f5459b946bc83c506a5db6e2cab",
+              "displayName": "get_review_claim_number",
+              "name": "get_review_claim_number",
+              "description": "",
+              "discoverable": false,
+              "dynamicDescription": {
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "text": "The claim number of the insurance claim the user wants to review."
+                      }
+                    ]
+                  }
+                ],
+                "mode": "simple"
+              },
+              "type": "string",
+              "variableId": "cb53d08fa78947d4b52d37c562cd1814",
+              "choices": [
+                {
+                  "label": "",
+                  "value": ""
+                },
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ],
+              "mode": "",
+              "script": "",
+              "condition": {
+                "value": "",
+                "mode": "glide_query"
+              },
+              "stepType": "TextPrompt",
+              "enforcePrompt": false,
+              "helpText": false,
+              "skippable": {
+                "value": "",
+                "mode": "query"
+              },
+              "applicability": {
+                "value": "",
+                "mode": "query"
+              },
+              "promptMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "helpTextMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "inputType": {
+                "format": "Text",
+                "script": ""
+              },
+              "isMultipleSelect": false,
+              "validation": "",
+              "autoSelect": true,
+              "hasCardHeader": false,
+              "cardMetadata": {
+                "mode": "card",
+                "metadataScript": "",
+                "cardTemplate": "",
+                "cardFields": {},
+                "cardDefinition": {}
+              }
+            }
+          ],
+          "outputs": [],
+          "advanced_parameters": "",
+          "confirmSummary": true,
+          "useSlots": false,
+          "slots": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "hiddenVariableIds": [
+            "677f2f2a4cc848969c799c406f194b14"
+          ],
+          "hiddenVariableNames": [
+            "ai_data_collector_2bad1f97c24a4ece956d18fe90b347a4_output"
+          ],
+          "classificationEnabled": false,
+          "classificationOverrides": [],
+          "variableIds": [
+            "cb53d08fa78947d4b52d37c562cd1814"
+          ],
+          "standalone": false
+        },
+        "667a66b1c81d4f6780dd88ffb183a235": {
+          "id": "667a66b1c81d4f6780dd88ffb183a235",
+          "stepType": "LookupRecord",
+          "name": "get_review_claim",
+          "condition": {
+            "mode": "glide_query",
+            "value": "claim_number=get_review_claim_number"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "variableId": "590a331b22f84cd782837f24baaa277b"
+        },
+        "13f0c3da8e3645cda03a53bf2e95a2b0": {
+          "id": "13f0c3da8e3645cda03a53bf2e95a2b0",
+          "stepType": "StandaloneAIChoicePrompt",
+          "name": "review_decision",
+          "purpose": {
+            "value": "",
+            "mode": "simple"
+          },
+          "instructions": {
+            "value": "",
+            "mode": "simple"
+          },
+          "inputs": [
+            {
+              "itemId": "549cf85575c5491f90ef2643a10adb00",
+              "displayName": "review_decision",
+              "name": "review_decision",
+              "description": "",
+              "discoverable": false,
+              "dynamicDescription": {
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "text": "Select whether the claim should be approved or rejected."
+                      }
+                    ]
+                  }
+                ],
+                "mode": "simple"
+              },
+              "type": "choice",
+              "variableId": "a8d040f5104b42cfb9fd8eb79ea6538c",
+              "choices": [
+                {
+                  "label": "Approve Claim",
+                  "value": "approve_claim"
+                },
+                {
+                  "label": "Reject Claim",
+                  "value": "reject_claim"
+                }
+              ],
+              "mode": "",
+              "script": "",
+              "condition": {
+                "value": "",
+                "mode": "glide_query"
+              },
+              "stepType": "ChoicePrompt",
+              "enforcePrompt": false,
+              "helpText": false,
+              "skippable": {
+                "value": "",
+                "mode": "query"
+              },
+              "applicability": {
+                "value": "",
+                "mode": "query"
+              },
+              "promptMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "helpTextMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "inputType": {
+                "format": "Text",
+                "script": ""
+              },
+              "isMultipleSelect": false,
+              "validation": "",
+              "autoSelect": true,
+              "hasCardHeader": false,
+              "cardMetadata": {
+                "mode": "card",
+                "metadataScript": "",
+                "cardTemplate": "",
+                "cardFields": {},
+                "cardDefinition": {}
+              }
+            }
+          ],
+          "outputs": [],
+          "advanced_parameters": "",
+          "confirmSummary": false,
+          "useSlots": false,
+          "slots": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "hiddenVariableIds": [
+            "0e1837d7400a4742b12901068e39403a"
+          ],
+          "hiddenVariableNames": [
+            "ai_data_collector_13f0c3da8e3645cda03a53bf2e95a2b0_output"
+          ],
+          "classificationEnabled": false,
+          "classificationOverrides": [],
+          "standalone": true,
+          "variableIds": [
+            "a8d040f5104b42cfb9fd8eb79ea6538c"
+          ]
+        },
+        "94a95c1262114f14aa5d5dc3939f7da9": {
+          "id": "94a95c1262114f14aa5d5dc3939f7da9",
+          "stepType": "Decision",
+          "name": "Decision"
+        },
+        "0855fab5d172479eb48c61e62606de7c": {
+          "id": "0855fab5d172479eb48c61e62606de7c",
+          "stepType": "AiDataCollector",
+          "name": "get_rejection_reason",
+          "purpose": {
+            "value": "",
+            "mode": "simple"
+          },
+          "instructions": {
+            "value": "",
+            "mode": "simple"
+          },
+          "inputs": [
+            {
+              "itemId": "9359fdcce85945ff9afc633e168d9b30",
+              "displayName": "get_rejection_reason",
+              "name": "get_rejection_reason",
+              "description": "",
+              "discoverable": false,
+              "dynamicDescription": {
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "children": [
+                      {
+                        "text": "The actual reason why the claim is being rejected."
+                      }
+                    ]
+                  }
+                ],
+                "mode": "simple"
+              },
+              "type": "string",
+              "variableId": "1a9324d3f0ef4135bf9ee7d1fec96f56",
+              "choices": [
+                {
+                  "label": "",
+                  "value": ""
+                },
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ],
+              "mode": "",
+              "script": "",
+              "condition": {
+                "value": "",
+                "mode": "glide_query"
+              },
+              "stepType": "TextPrompt",
+              "enforcePrompt": false,
+              "helpText": false,
+              "skippable": {
+                "value": "",
+                "mode": "query"
+              },
+              "applicability": {
+                "value": "",
+                "mode": "query"
+              },
+              "promptMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "helpTextMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "inputType": {
+                "format": "Text",
+                "script": ""
+              },
+              "isMultipleSelect": false,
+              "validation": "",
+              "autoSelect": true,
+              "hasCardHeader": false,
+              "cardMetadata": {
+                "mode": "card",
+                "metadataScript": "",
+                "cardTemplate": "",
+                "cardFields": {},
+                "cardDefinition": {}
+              }
+            }
+          ],
+          "outputs": [],
+          "advanced_parameters": "",
+          "confirmSummary": true,
+          "useSlots": false,
+          "slots": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "hiddenVariableIds": [
+            "34583a0920ba483d9b518127d28c53af"
+          ],
+          "hiddenVariableNames": [
+            "ai_data_collector_0855fab5d172479eb48c61e62606de7c_output"
+          ],
+          "classificationEnabled": false,
+          "classificationOverrides": [],
+          "variableIds": [
+            "1a9324d3f0ef4135bf9ee7d1fec96f56"
+          ],
+          "standalone": false
+        },
+        "5d64c32587ca4037ae3e9c769bdb42a0": {
+          "id": "5d64c32587ca4037ae3e9c769bdb42a0",
+          "stepType": "CrudAction",
+          "name": "update_rejection_reason",
+          "template": {
+            "query": {
+              "terms": [
+                {
+                  "prefix": "",
+                  "operator": "=",
+                  "operand": "rejection_reason",
+                  "expression": "get_rejection_reason",
+                  "deserializedExpression": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "text": "get_rejection_reason"
+                        }
+                      ]
+                    }
+                  ],
+                  "id": "88b1d843da5c4a79815a606b5ab6be2f"
+                },
+                {
+                  "prefix": "",
+                  "operator": "=",
+                  "operand": "status",
+                  "expression": "Rejected",
+                  "id": "d5393821b5d7440eaac9ce1f7572adea"
+                }
+              ]
+            },
+            "queryString": "rejection_reason=get_rejection_reason^status=Rejected"
+          },
+          "mode": "update",
+          "record": "590a331b22f84cd782837f24baaa277b",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "attachments": [
+            {
+              "value": "",
+              "mode": "simple"
+            }
+          ],
+          "variableId": "f1d60228bcb342e1bde0477d9b9db429"
+        },
+        "134b36d3721243e5b0f7e96564c7939e": {
+          "id": "134b36d3721243e5b0f7e96564c7939e",
+          "stepType": "CrudAction",
+          "name": "approve_claim",
+          "template": {
+            "query": {
+              "terms": [
+                {
+                  "prefix": "",
+                  "operator": "=",
+                  "operand": "status",
+                  "expression": "Approved",
+                  "id": "acbd392ca41c4a37a3f3857fd80a6a7c"
+                }
+              ]
+            },
+            "queryString": "status=Approved"
+          },
+          "mode": "update",
+          "record": "590a331b22f84cd782837f24baaa277b",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "attachments": [
+            {
+              "value": "",
+              "mode": "simple"
+            }
+          ],
+          "variableId": "2a946dfa3e2548b3ac15acfc598e8513"
+        },
+        "11083fb86b594d9a93c96f4a4c262209": {
+          "id": "11083fb86b594d9a93c96f4a4c262209",
+          "stepType": "TextOutput",
+          "name": "claim_approved_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Your claim has been approved successfully. The claim status has been updated to Approved."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "ca4c4806daa6447c8019fa513aeb77be"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "03860b9cc22749c4a4ed74d7faa4d4fd": {
+          "id": "03860b9cc22749c4a4ed74d7faa4d4fd",
+          "stepType": "TextOutput",
+          "name": "claim_rejected_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Your claim has been rejected. The rejection reason has been recorded successfully."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "1f5401dd59434c8fbf49346c9af9c290"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        }
+      },
+      "edges": [
+        {
+          "id": "452c434422f1430db732d39e6c68f0a0",
+          "edgeType": "Branch",
+          "source": "025897ec0f7142e191a59101acea9ed4",
+          "target": "02fec35cc5a44cea9214822c0c1896e7",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.claim_assistance_choice=document_verification",
+            "mode": "query"
+          },
+          "label": "Document Verification"
+        },
+        {
+          "id": "602d6a0d9d304551be1548cb801c2886",
+          "edgeType": "Edge",
+          "source": "8c9a8fb7b27147279125e8e86112120d",
+          "target": "470742f0cbec477e987712353be52711",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "07f24c457bde4855aae1e17034849e39",
+          "edgeType": "Edge",
+          "source": "b7614c10293f4090a6a262511338a3fa",
+          "target": "e423cda17ec149a897cb9803d5df0ef7",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "b7c294385d7444ae83cdc50ead88fbb0",
+          "edgeType": "Edge",
+          "source": "e423cda17ec149a897cb9803d5df0ef7",
+          "target": "7589923c134b4e4190e3ce840b98d543",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "f8d9210616c44680956bdbb9314d6ec2",
+          "edgeType": "Edge",
+          "source": "7589923c134b4e4190e3ce840b98d543",
+          "target": "025897ec0f7142e191a59101acea9ed4",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "8a7d4c8e4386453183bb400a58b7fc12",
+          "edgeType": "Branch",
+          "source": "025897ec0f7142e191a59101acea9ed4",
+          "target": "de09adc9cfa24dc08df2d38e5871d41e",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.claim_assistance_choice=track_my_claim",
+            "mode": "query"
+          },
+          "label": "Track My Claim"
+        },
+        {
+          "id": "5493bca1e9a545b9934c3935a20898cd",
+          "edgeType": "Edge",
+          "source": "de09adc9cfa24dc08df2d38e5871d41e",
+          "target": "810fe6f5b1194ed8a3856a3a2c4eb4c6",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "f940ed2db53b45b9b827b1f3c7b01692",
+          "edgeType": "Edge",
+          "source": "810fe6f5b1194ed8a3856a3a2c4eb4c6",
+          "target": "758007977b3e46da83278ddb9f433889",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "056f529d10394f6b8017d1af29ce17f3",
+          "edgeType": "Branch",
+          "source": "758007977b3e46da83278ddb9f433889",
+          "target": "8c9a8fb7b27147279125e8e86112120d",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.get_claim_status=",
+            "mode": "query"
+          },
+          "label": "Invalid Claim"
+        },
+        {
+          "id": "2281fb9cd57c493fb999b82e0dc1da5f",
+          "edgeType": "Branch",
+          "source": "758007977b3e46da83278ddb9f433889",
+          "target": "021401b06a854683a774838407a45afe",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "query",
+            "value": ""
+          },
+          "label": "Valid Claim"
+        },
+        {
+          "id": "9c6aa8b4e58a4cc9a5eae397262070d5",
+          "edgeType": "Edge",
+          "source": "021401b06a854683a774838407a45afe",
+          "target": "63894116311b40af99029403168753fa",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "ccf82c1166d140b8baa180f380ff4f36",
+          "edgeType": "Edge",
+          "source": "63894116311b40af99029403168753fa",
+          "target": "470742f0cbec477e987712353be52711",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "14ee7326691745d89e8e6ea677646510",
+          "edgeType": "Branch",
+          "source": "025897ec0f7142e191a59101acea9ed4",
+          "target": "c466bee45b3f4e6dab2bc157543019b9",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.claim_assistance_choice=check_missing_documents",
+            "mode": "query"
+          },
+          "label": "Check Missing Documents"
+        },
+        {
+          "id": "2d27bcb6f5934e1cbec1c27673977ff5",
+          "edgeType": "Edge",
+          "source": "c466bee45b3f4e6dab2bc157543019b9",
+          "target": "2084f0b5fe2d4cdcb5232a3fbb6d9f15",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "29a0c6ed905649638d4ae556e005e99a",
+          "edgeType": "Edge",
+          "source": "2084f0b5fe2d4cdcb5232a3fbb6d9f15",
+          "target": "14eb91470c1b4cb49d7c5d14267f2329",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "4dbdfb44b4ba48ff90c9344532dac8af",
+          "edgeType": "Edge",
+          "source": "14eb91470c1b4cb49d7c5d14267f2329",
+          "target": "5438820522184432942c633fcd58d785",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "8cf6614d658d4ef4967c6686ec63ef37",
+          "edgeType": "Edge",
+          "source": "5438820522184432942c633fcd58d785",
+          "target": "470742f0cbec477e987712353be52711",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "c6b91aad1a3b4421bb41f35952a9757b",
+          "edgeType": "Branch",
+          "source": "025897ec0f7142e191a59101acea9ed4",
+          "target": "abfea732a9f340f7826ce6f55855ca9f",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.claim_assistance_choice=claim_help",
+            "mode": "query"
+          },
+          "label": "Claim Help / FAQs"
+        },
+        {
+          "id": "f006cca1f2664c5d8ed72d23f61d9efb",
+          "edgeType": "Edge",
+          "source": "abfea732a9f340f7826ce6f55855ca9f",
+          "target": "a12e21a7d0cb43549897b8b5da3b80e6",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "5705301e318f4a4d88e0dc6c20568dc5",
+          "edgeType": "Branch",
+          "source": "a12e21a7d0cb43549897b8b5da3b80e6",
+          "target": "3eb8ad27dc244c79b053244b524c5acf",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.faq_question=How do I track my claim?",
+            "mode": "query"
+          },
+          "label": "Track My Claim"
+        },
+        {
+          "id": "da37afc2fda74b7a9399d9fcbe16e808",
+          "edgeType": "Edge",
+          "source": "3eb8ad27dc244c79b053244b524c5acf",
+          "target": "470742f0cbec477e987712353be52711",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "ddbe1bcac7974b56a0f184fac16cb7ee",
+          "edgeType": "Branch",
+          "source": "a12e21a7d0cb43549897b8b5da3b80e6",
+          "target": "2e02090590314fc7bd87e6b16d42fcbb",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.faq_question=How do I submit a claim?",
+            "mode": "query"
+          },
+          "label": "Submit Claim"
+        },
+        {
+          "id": "3e976811920346d489b0d7f3de58c98b",
+          "edgeType": "Edge",
+          "source": "2e02090590314fc7bd87e6b16d42fcbb",
+          "target": "470742f0cbec477e987712353be52711",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "517109d6dc6b4b9bbcea47564ad4b6f9",
+          "edgeType": "Branch",
+          "source": "a12e21a7d0cb43549897b8b5da3b80e6",
+          "target": "0d64617cca0c4c57998808aa2c7a3de4",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.faq_question=What documents are required?",
+            "mode": "query"
+          },
+          "label": "Required Documents"
+        },
+        {
+          "id": "8104ec55fca840c8ad7ff04d6b8512a0",
+          "edgeType": "Edge",
+          "source": "0d64617cca0c4c57998808aa2c7a3de4",
+          "target": "470742f0cbec477e987712353be52711",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "3ee8827efdca48799c687131d1345a15",
+          "edgeType": "Branch",
+          "source": "a12e21a7d0cb43549897b8b5da3b80e6",
+          "target": "fd9fe704065f4645aba298471f8d3f01",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "",
+            "mode": "query"
+          },
+          "label": "Claim Process"
+        },
+        {
+          "id": "6f2ca0a5b8f940dfb53cacc61bedf05b",
+          "edgeType": "Edge",
+          "source": "fd9fe704065f4645aba298471f8d3f01",
+          "target": "470742f0cbec477e987712353be52711",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "fa8697c591954a648ac8dc84a65a0bbe",
+          "edgeType": "Edge",
+          "source": "02fec35cc5a44cea9214822c0c1896e7",
+          "target": "cd0938693a0942318883fd13aa1cbe2f",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "7bca0d7d5ea8428ba04460ce41b9e7a0",
+          "edgeType": "Edge",
+          "source": "cd0938693a0942318883fd13aa1cbe2f",
+          "target": "6b638507b8ea432284f21e99044ebe7f",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "c59158e3a6df4a45a928480dadc2610b",
+          "edgeType": "Edge",
+          "source": "6b638507b8ea432284f21e99044ebe7f",
+          "target": "e2d0583204bf4656801442c61889e38a",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "7c236a6a95b54b7a95b0b80034aae6b2",
+          "edgeType": "Branch",
+          "source": "e2d0583204bf4656801442c61889e38a",
+          "target": "01656b81f7804d4689aadc9830940f70",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.verify_document_info=yes",
+            "mode": "query"
+          },
+          "label": "Verified"
+        },
+        {
+          "id": "4d81384ea57044299a252ee4077ecef7",
+          "edgeType": "Edge",
+          "source": "01656b81f7804d4689aadc9830940f70",
+          "target": "470742f0cbec477e987712353be52711",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "d57a82117c2c4e458eaab2f5521c27d7",
+          "edgeType": "Branch",
+          "source": "e2d0583204bf4656801442c61889e38a",
+          "target": "75516ee4571949869b94b93ef616875b",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.verify_document_info=no",
+            "mode": "query"
+          },
+          "label": "Not Verified"
+        },
+        {
+          "id": "2542b2fa7d6646819b7d827ef8cc9521",
+          "edgeType": "Edge",
+          "source": "75516ee4571949869b94b93ef616875b",
+          "target": "470742f0cbec477e987712353be52711",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "c928c24e56f4464ba1725721253c04b5",
+          "edgeType": "Branch",
+          "source": "025897ec0f7142e191a59101acea9ed4",
+          "target": "2bad1f97c24a4ece956d18fe90b347a4",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.claim_assistance_choice=review_claim_decision",
+            "mode": "query"
+          },
+          "label": "Review Claim Decision"
+        },
+        {
+          "id": "71d4089bcc3345c1be5fc168f2838477",
+          "edgeType": "Edge",
+          "source": "2bad1f97c24a4ece956d18fe90b347a4",
+          "target": "667a66b1c81d4f6780dd88ffb183a235",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "6727788ae06f4f6b8db8b7aa7afd727b",
+          "edgeType": "Edge",
+          "source": "667a66b1c81d4f6780dd88ffb183a235",
+          "target": "13f0c3da8e3645cda03a53bf2e95a2b0",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "ab703a323b3d4560a7733f1412736fa8",
+          "edgeType": "Edge",
+          "source": "13f0c3da8e3645cda03a53bf2e95a2b0",
+          "target": "94a95c1262114f14aa5d5dc3939f7da9",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "bed317cac1c44b4d8618b4850b0c0727",
+          "edgeType": "Branch",
+          "source": "94a95c1262114f14aa5d5dc3939f7da9",
+          "target": "0855fab5d172479eb48c61e62606de7c",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.review_decision=reject_claim",
+            "mode": "query"
+          },
+          "label": "Reject Claim"
+        },
+        {
+          "id": "f75ad73c93c04c3db04b235ca09ebecd",
+          "edgeType": "Edge",
+          "source": "0855fab5d172479eb48c61e62606de7c",
+          "target": "5d64c32587ca4037ae3e9c769bdb42a0",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "18889b8bb9244a2f92617f15b5eb83ef",
+          "edgeType": "Branch",
+          "source": "94a95c1262114f14aa5d5dc3939f7da9",
+          "target": "134b36d3721243e5b0f7e96564c7939e",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.review_decision=approve_claim",
+            "mode": "query"
+          },
+          "label": "Approve Claim"
+        },
+        {
+          "id": "e28e6e4fcfa145f0997beba6270e736f",
+          "edgeType": "Edge",
+          "source": "134b36d3721243e5b0f7e96564c7939e",
+          "target": "11083fb86b594d9a93c96f4a4c262209",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "a30b67bb91ad4f68809235d93eeb0780",
+          "edgeType": "Edge",
+          "source": "11083fb86b594d9a93c96f4a4c262209",
+          "target": "470742f0cbec477e987712353be52711",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "3a5e2c9f63974112a1638820cd8ac027",
+          "edgeType": "Edge",
+          "source": "5d64c32587ca4037ae3e9c769bdb42a0",
+          "target": "03860b9cc22749c4a4ed74d7faa4d4fd",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "29afdea4172b4c6799e45e25a31d1f28",
+          "edgeType": "Edge",
+          "source": "03860b9cc22749c4a4ed74d7faa4d4fd",
+          "target": "470742f0cbec477e987712353be52711",
+          "sourcePort": "",
+          "targetPort": ""
+        }
+      ]
+    }
+  },
+  "variables": {
+    "current-user": {
+      "category": "vaInputs",
+      "id": "current-user",
+      "label": "User",
+      "name": "user",
+      "table": "sys_user",
+      "varType": "reference"
+    },
+    "05f3f3d5827545ba91301d26f9ff2580": {
+      "id": "05f3f3d5827545ba91301d26f9ff2580",
+      "name": "ai_data_collector_7589923c134b4e4190e3ce840b98d543_output",
+      "label": "Ai_data_collector_7589923c134b4e4190e3ce840b98d543_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "eb2c3bae03954089957899194a7fd2bd": {
+      "id": "eb2c3bae03954089957899194a7fd2bd",
+      "varType": "choice",
+      "category": "vaInputs",
+      "label": "Claim_assistance_choice",
+      "name": "claim_assistance_choice",
+      "choices": [
+        {
+          "label": "Track My Claim",
+          "value": "track_my_claim"
+        },
+        {
+          "label": "Check Missing Documents",
+          "value": "check_missing_documents"
+        },
+        {
+          "label": "Claim Help / FAQs",
+          "value": "claim_help",
+          "checked": true,
+          "meta": {}
+        },
+        {
+          "label": "Document Verification",
+          "value": "document_verification",
+          "checked": true,
+          "meta": {}
+        },
+        {
+          "label": "Review Claim Decision",
+          "value": "review_claim_decision",
+          "checked": true,
+          "meta": {}
+        }
+      ],
+      "mode": "",
+      "table": "",
+      "aiInput": true,
+      "inputId": 0,
+      "nodeId": "7589923c134b4e4190e3ce840b98d543",
+      "isHidden": false,
+      "description": "",
+      "translation": true
+    },
+    "cf592e50125f43148853e03924b47deb": {
+      "id": "cf592e50125f43148853e03924b47deb",
+      "name": "ai_data_collector_40d9c51f25414da38bbf02151b014ba2_output",
+      "label": "Ai_data_collector_40d9c51f25414da38bbf02151b014ba2_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "ed14c6883c084e96aed2e0d5ccd134ad": {
+      "id": "ed14c6883c084e96aed2e0d5ccd134ad",
+      "name": "ai_data_collector_de09adc9cfa24dc08df2d38e5871d41e_output",
+      "label": "Ai_data_collector_de09adc9cfa24dc08df2d38e5871d41e_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "96139d9b02c640e2a8d85c1e6bf8b444": {
+      "id": "96139d9b02c640e2a8d85c1e6bf8b444",
+      "varType": "string",
+      "category": "vaInputs",
+      "label": "Claim_number_input",
+      "name": "claim_number_input",
+      "choices": [
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "",
+          "value": ""
+        }
+      ],
+      "mode": "",
+      "table": "",
+      "aiInput": true,
+      "nodeId": "de09adc9cfa24dc08df2d38e5871d41e",
+      "isHidden": false,
+      "inputId": 0,
+      "description": ""
+    },
+    "4433324abc3842a0813fb66a5d38a761": {
+      "id": "4433324abc3842a0813fb66a5d38a761",
+      "name": "get_claim_status",
+      "label": "Get_claim_status",
+      "varType": "reference",
+      "table": "x_snc_insurance_0_claim",
+      "category": "vaInputs",
+      "nodeId": "810fe6f5b1194ed8a3856a3a2c4eb4c6",
+      "isHidden": false
+    },
+    "005669bd9b174e1e8347f068184447ed": {
+      "id": "005669bd9b174e1e8347f068184447ed",
+      "name": "ai_data_collector_c466bee45b3f4e6dab2bc157543019b9_output",
+      "label": "Ai_data_collector_c466bee45b3f4e6dab2bc157543019b9_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "ef8c4db202914929a46dc24db902b279": {
+      "id": "ef8c4db202914929a46dc24db902b279",
+      "varType": "string",
+      "category": "vaInputs",
+      "label": "Missing_doc_claim_number",
+      "name": "missing_doc_claim_number",
+      "choices": [
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "",
+          "value": ""
+        }
+      ],
+      "mode": "",
+      "table": "",
+      "aiInput": true,
+      "nodeId": "c466bee45b3f4e6dab2bc157543019b9",
+      "isHidden": false,
+      "inputId": 0,
+      "description": ""
+    },
+    "c0d7a384b92b4a849ae0dce09d58517d": {
+      "id": "c0d7a384b92b4a849ae0dce09d58517d",
+      "name": "lookup_missing_documents",
+      "label": "Lookup_missing_documents",
+      "varType": "reference",
+      "table": "x_snc_insurance_0_claim_document",
+      "category": "vaInputs",
+      "nodeId": "2084f0b5fe2d4cdcb5232a3fbb6d9f15",
+      "isHidden": false
+    },
+    "1dcec390ca9e43bf98b92a0fe59fb8c7": {
+      "id": "1dcec390ca9e43bf98b92a0fe59fb8c7",
+      "name": "ai_data_collector_11a8db5aa67e4ed9bc212e2185350032_output",
+      "label": "Ai_data_collector_11a8db5aa67e4ed9bc212e2185350032_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "5627d1863bee46949aaa104e5af6e100": {
+      "id": "5627d1863bee46949aaa104e5af6e100",
+      "name": "ai_data_collector_abfea732a9f340f7826ce6f55855ca9f_output",
+      "label": "Ai_data_collector_abfea732a9f340f7826ce6f55855ca9f_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "a45e1c9864304fc59bcd8bc26b2e916f": {
+      "id": "a45e1c9864304fc59bcd8bc26b2e916f",
+      "varType": "string",
+      "category": "vaInputs",
+      "label": "Faq_question",
+      "name": "faq_question",
+      "choices": [
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "",
+          "value": ""
+        }
+      ],
+      "mode": "",
+      "table": "",
+      "aiInput": true,
+      "inputId": 0,
+      "nodeId": "abfea732a9f340f7826ce6f55855ca9f",
+      "isHidden": false,
+      "description": ""
+    },
+    "39afe33a293a4d2a969f5a45d3824844": {
+      "id": "39afe33a293a4d2a969f5a45d3824844",
+      "name": "ai_data_collector_f67471684312452ea67abfc09ae505b6_output",
+      "label": "Ai_data_collector_f67471684312452ea67abfc09ae505b6_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "21cf3db0e97d4e50ab857cedd74a644d": {
+      "id": "21cf3db0e97d4e50ab857cedd74a644d",
+      "name": "ai_data_collector_02fec35cc5a44cea9214822c0c1896e7_output",
+      "label": "Ai_data_collector_02fec35cc5a44cea9214822c0c1896e7_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "dfc0ee039d6d4b68a2e57f8108bf88b9": {
+      "id": "dfc0ee039d6d4b68a2e57f8108bf88b9",
+      "varType": "string",
+      "category": "vaInputs",
+      "label": "Get_document_name",
+      "name": "get_document_name",
+      "choices": [
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "",
+          "value": ""
+        }
+      ],
+      "mode": "",
+      "table": "",
+      "aiInput": true,
+      "inputId": 0,
+      "nodeId": "02fec35cc5a44cea9214822c0c1896e7",
+      "isHidden": false,
+      "description": ""
+    },
+    "7eb5635104804df2b1ef763acae6eb75": {
+      "id": "7eb5635104804df2b1ef763acae6eb75",
+      "name": "get_document_details",
+      "label": "Get_document_details",
+      "varType": "reference",
+      "table": "x_snc_insurance_0_claim_document",
+      "category": "vaInputs",
+      "nodeId": "cd0938693a0942318883fd13aa1cbe2f",
+      "isHidden": false
+    },
+    "c34460e5a9ee405d87e48c9d3d34cbb6": {
+      "id": "c34460e5a9ee405d87e48c9d3d34cbb6",
+      "name": "ai_data_collector_6b638507b8ea432284f21e99044ebe7f_output",
+      "label": "Ai_data_collector_6b638507b8ea432284f21e99044ebe7f_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "fa58108502c64ff0a5c0e79450a59c37": {
+      "id": "fa58108502c64ff0a5c0e79450a59c37",
+      "varType": "choice",
+      "category": "vaInputs",
+      "label": "Verify_document_info",
+      "name": "verify_document_info",
+      "choices": [
+        {
+          "label": "Yes, information is correct",
+          "value": "yes"
+        },
+        {
+          "label": "No, information is incorrect",
+          "value": "no"
+        }
+      ],
+      "mode": "",
+      "table": "",
+      "aiInput": true,
+      "inputId": 0,
+      "nodeId": "6b638507b8ea432284f21e99044ebe7f",
+      "isHidden": false,
+      "description": "",
+      "translation": true
+    },
+    "eb60a2bdb6db4d53a8dad0693e45918d": {
+      "id": "eb60a2bdb6db4d53a8dad0693e45918d",
+      "name": "ai_data_collector_b27ea350c79e42de85b2d164f604f9e4_output",
+      "label": "Ai_data_collector_b27ea350c79e42de85b2d164f604f9e4_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "677f2f2a4cc848969c799c406f194b14": {
+      "id": "677f2f2a4cc848969c799c406f194b14",
+      "name": "ai_data_collector_2bad1f97c24a4ece956d18fe90b347a4_output",
+      "label": "Ai_data_collector_2bad1f97c24a4ece956d18fe90b347a4_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "cb53d08fa78947d4b52d37c562cd1814": {
+      "id": "cb53d08fa78947d4b52d37c562cd1814",
+      "varType": "string",
+      "category": "vaInputs",
+      "label": "Get_review_claim_number",
+      "name": "get_review_claim_number",
+      "choices": [
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "",
+          "value": ""
+        }
+      ],
+      "mode": "",
+      "table": "",
+      "aiInput": true,
+      "nodeId": "2bad1f97c24a4ece956d18fe90b347a4",
+      "isHidden": false,
+      "inputId": 0,
+      "description": ""
+    },
+    "590a331b22f84cd782837f24baaa277b": {
+      "id": "590a331b22f84cd782837f24baaa277b",
+      "name": "get_review_claim",
+      "label": "Get_review_claim",
+      "varType": "reference",
+      "table": "x_snc_insurance_0_claim",
+      "category": "vaInputs",
+      "nodeId": "667a66b1c81d4f6780dd88ffb183a235",
+      "isHidden": false
+    },
+    "0e1837d7400a4742b12901068e39403a": {
+      "id": "0e1837d7400a4742b12901068e39403a",
+      "name": "ai_data_collector_13f0c3da8e3645cda03a53bf2e95a2b0_output",
+      "label": "Ai_data_collector_13f0c3da8e3645cda03a53bf2e95a2b0_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "a8d040f5104b42cfb9fd8eb79ea6538c": {
+      "id": "a8d040f5104b42cfb9fd8eb79ea6538c",
+      "varType": "choice",
+      "category": "vaInputs",
+      "label": "Review_decision",
+      "name": "review_decision",
+      "choices": [
+        {
+          "label": "Approve Claim",
+          "value": "approve_claim"
+        },
+        {
+          "label": "Reject Claim",
+          "value": "reject_claim"
+        }
+      ],
+      "mode": "",
+      "table": "",
+      "aiInput": true,
+      "inputId": 0,
+      "nodeId": "13f0c3da8e3645cda03a53bf2e95a2b0",
+      "isHidden": false,
+      "description": "",
+      "translation": true
+    },
+    "34583a0920ba483d9b518127d28c53af": {
+      "id": "34583a0920ba483d9b518127d28c53af",
+      "name": "ai_data_collector_0855fab5d172479eb48c61e62606de7c_output",
+      "label": "Ai_data_collector_0855fab5d172479eb48c61e62606de7c_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "1a9324d3f0ef4135bf9ee7d1fec96f56": {
+      "id": "1a9324d3f0ef4135bf9ee7d1fec96f56",
+      "varType": "string",
+      "category": "vaInputs",
+      "label": "Get_rejection_reason",
+      "name": "get_rejection_reason",
+      "choices": [
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "",
+          "value": ""
+        }
+      ],
+      "mode": "",
+      "table": "",
+      "aiInput": true,
+      "nodeId": "0855fab5d172479eb48c61e62606de7c",
+      "isHidden": false,
+      "inputId": 0,
+      "description": ""
+    },
+    "f1d60228bcb342e1bde0477d9b9db429": {
+      "id": "f1d60228bcb342e1bde0477d9b9db429",
+      "name": "update_rejection_reason",
+      "label": "Update_rejection_reason",
+      "varType": "reference",
+      "table": "",
+      "inactive": true,
+      "category": "vaInputs",
+      "nodeId": "5d64c32587ca4037ae3e9c769bdb42a0",
+      "isHidden": false
+    },
+    "2a946dfa3e2548b3ac15acfc598e8513": {
+      "id": "2a946dfa3e2548b3ac15acfc598e8513",
+      "name": "approve_claim",
+      "label": "Approve_claim",
+      "varType": "reference",
+      "table": "",
+      "inactive": true,
+      "category": "vaInputs",
+      "nodeId": "134b36d3721243e5b0f7e96564c7939e",
+      "isHidden": false
+    }
+  }
+}</graph>
+        <key_phrases/>
+        <library>false</library>
+        <live_agent>false</live_agent>
+        <model_type>llm</model_type>
+        <modify_confirmation_enabled>false</modify_confirmation_enabled>
+        <name>insurance_claim_assistant</name>
+        <nlu_intent/>
+        <nlu_intent_label/>
+        <nlu_model/>
+        <nlu_model_label/>
+        <nlu_provider/>
+        <palette_label/>
+        <roles/>
+        <root_topic_id/>
+        <secure_custom_input_control>false</secure_custom_input_control>
+        <source_topic_id/>
+        <sys_class_name>sys_cb_topic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-25 14:38:57</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>f6688669342b03107f445f6bcb27b131</sys_id>
+        <sys_mod_count>66</sys_mod_count>
+        <sys_name>insurance_claim_assistant</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_cb_topic_f6688669342b03107f445f6bcb27b131</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-28 15:19:16</sys_updated_on>
+        <title>Insurance Claim Assistant</title>
+        <triggerable_by_notification>false</triggerable_by_notification>
+        <type>STANDARD</type>
+    </sys_cb_topic>
+    <sys_translated_text action="delete_multiple" query="documentkey=f6688669342b03107f445f6bcb27b131"/>
+</record_update>

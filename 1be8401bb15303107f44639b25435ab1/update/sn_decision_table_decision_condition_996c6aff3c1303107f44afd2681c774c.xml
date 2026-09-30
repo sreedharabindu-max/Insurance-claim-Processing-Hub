@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_decision_table_decision_condition">
+    <sn_decision_table_decision_condition action="INSERT_OR_UPDATE">
+        <decision_input display_value="Claim Type">b7dccee37d5b03107f4479dec5c5478e</decision_input>
+        <decision_table display_value="Claim Settlement Recommendation">8641c6e37dd703107f4479dec5c54758</decision_table>
+        <default_operator>=</default_operator>
+        <description>Type of insurance claim</description>
+        <field/>
+        <field_label/>
+        <field_parent_table/>
+        <label>Claim Type</label>
+        <order>100</order>
+        <parent/>
+        <reference/>
+        <sys_class_name>sn_decision_table_decision_condition</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 06:46:46</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>996c6aff3c1303107f44afd2681c774c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sn_decision_table_decision_condition_996c6aff3c1303107f44afd2681c774c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 06:46:46</sys_updated_on>
+        <type display_value="Choice">5217a7c1bf3320001875647fcf0739b7</type>
+    </sn_decision_table_decision_condition>
+</record_update>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_decision_table_decision_condition">
+    <sn_decision_table_decision_condition action="INSERT_OR_UPDATE">
+        <decision_input display_value="Claim Amount Numeric">2f2944043c6f03107f44afd2681c77c9</decision_input>
+        <decision_table display_value="Claim Settlement Recommendation">8641c6e37dd703107f4479dec5c54758</decision_table>
+        <default_operator>=</default_operator>
+        <description>Amount claimed by the policyholder</description>
+        <field/>
+        <field_label/>
+        <field_parent_table/>
+        <label>Claim Amount Numeric</label>
+        <order>300</order>
+        <parent/>
+        <reference/>
+        <sys_class_name>sn_decision_table_decision_condition</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 06:46:47</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>d56caaff3c1303107f44afd2681c7710</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sn_decision_table_decision_condition_d56caaff3c1303107f44afd2681c7710</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-20 13:32:10</sys_updated_on>
+        <type display_value="Decimal">f52567c1bf3320001875647fcf07396a</type>
+    </sn_decision_table_decision_condition>
+</record_update>

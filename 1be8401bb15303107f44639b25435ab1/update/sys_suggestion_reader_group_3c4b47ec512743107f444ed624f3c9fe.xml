@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_suggestion_reader_group">
+    <sys_suggestion_reader_group action="INSERT_OR_UPDATE">
+        <click_in_mode>false</click_in_mode>
+        <context_config_id/>
+        <limit>3</limit>
+        <order>250</order>
+        <section_header>Ask Now Assist</section_header>
+        <suggestion_type>Now Assist Suggested Query Reader Group for Service Portal Default Search Application</suggestion_type>
+        <sys_class_name>sys_suggestion_reader_group</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-22 16:57:05</sys_created_on>
+        <sys_id>3c4b47ec512743107f444ed624f3c9fe</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Now Assist Suggested Query Reader Group for Service Portal Default Search Application</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_suggestion_reader_group_3c4b47ec512743107f444ed624f3c9fe</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-22 16:57:05</sys_updated_on>
+    </sys_suggestion_reader_group>
+</record_update>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_decision_delta">
+    <sys_decision_delta action="DELETE">
+        <access>public</access>
+        <active>false</active>
+        <answer_table>sys_decision_multi_result</answer_table>
+        <answer_type>reference</answer_type>
+        <delta/>
+        <description/>
+        <enable_publishing>false</enable_publishing>
+        <label/>
+        <name>Claim Settlement Recommendation delta</name>
+        <parent display_value="Claim Settlement Recommendation">8641c6e37dd703107f4479dec5c54758</parent>
+        <reference_qualifier/>
+        <status>draft</status>
+        <sys_class_name>sys_decision_delta</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-22 08:55:46</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>5a1d91e4516703107f444ed624f3c9d4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Claim Settlement Recommendation delta</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_decision_delta_5a1d91e4516703107f444ed624f3c9d4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-22 08:55:46</sys_updated_on>
+    </sys_decision_delta>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</application>
+        <file_path/>
+        <instance_id>3dd14dc7c38fcf94a03197af0501313c</instance_id>
+        <instance_name>ltm-hck-2876-0008</instance_name>
+        <name>sys_decision_delta_5a1d91e4516703107f444ed624f3c9d4</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_decision_delta"><sys_decision_delta action="INSERT_OR_UPDATE"><access>public</access><active>false</active><answer_table>sys_decision_multi_result</answer_table><answer_type>reference</answer_type><delta/><description/><enable_publishing>false</enable_publishing><label/><name>Claim Settlement Recommendation delta</name><parent display_value="Claim Settlement Recommendation">8641c6e37dd703107f4479dec5c54758</parent><reference_qualifier/><status>draft</status><sys_class_name>sys_decision_delta</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-09-22 08:55:46</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>5a1d91e4516703107f444ed624f3c9d4</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Claim Settlement Recommendation delta</sys_name><sys_overrides/><sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package><sys_policy/><sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope><sys_update_name>sys_decision_delta_5a1d91e4516703107f444ed624f3c9d4</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-09-22 08:55:46</sys_updated_on></sys_decision_delta></record_update>]]></payload>
+        <payload_hash>-90088973</payload_hash>
+        <record_name>Claim Settlement Recommendation delta</record_name>
+        <reverted_from/>
+        <source>9fe8801bb15303107f44639b25435a3f</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-22 08:55:46</sys_created_on>
+        <sys_id>1e1d95e4516703107f444ed624f3c9e1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0c8540d4b0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-22 08:55:46</sys_updated_on>
+        <type>Delta Decision Table</type>
+        <update_guid>961d91e4fd670310b184d3e62c8926d8</update_guid>
+        <update_guid_history>961d91e4fd670310b184d3e62c8926d8:-90088973</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-22 09:05:56</sys_created_on>
+        <sys_db_object display_value="" name="sys_decision_delta">sys_decision_delta</sys_db_object>
+        <sys_id>2eeee26a94b14efaaa4adcfa386ff189</sys_id>
+        <sys_metadata>5a1d91e4516703107f444ed624f3c9d4</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Claim Settlement Recommendation delta</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_scope_delete display_value="">259a3c4aad804120a3cbf88d9f9bc8a4</sys_scope_delete>
+        <sys_update_name>sys_decision_delta_5a1d91e4516703107f444ed624f3c9d4</sys_update_name>
+        <sys_update_version display_value="sys_decision_delta_5a1d91e4516703107f444ed624f3c9d4">1e1d95e4516703107f444ed624f3c9e1</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-22 09:05:56</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

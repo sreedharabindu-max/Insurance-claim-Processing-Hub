@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container">
+    <sp_container action="DELETE">
+        <aria_label/>
+        <background_color/>
+        <background_image/>
+        <background_style>default</background_style>
+        <bootstrap_alt>false</bootstrap_alt>
+        <class_name/>
+        <container_class_name/>
+        <name>Insurance Claim Hub Home - Container 2</name>
+        <order>2</order>
+        <semantic_tag/>
+        <sp_page display_value="claim_home">c2de297880e703107f44e29321b0a231</sp_page>
+        <subheader>false</subheader>
+        <sys_class_name>sp_container</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 04:55:06</sys_created_on>
+        <sys_id>a69f69f880e703107f44e29321b0a23a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Insurance Claim Hub Home - Container 2</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_container_a69f69f880e703107f44e29321b0a23a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 04:56:09</sys_updated_on>
+        <title/>
+        <width>container</width>
+    </sp_container>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</application>
+        <file_path/>
+        <instance_id>3dd14dc7c38fcf94a03197af0501313c</instance_id>
+        <instance_name>ltm-hck-2876-0008</instance_name>
+        <name>sp_container_a69f69f880e703107f44e29321b0a23a</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container"><sp_container action="INSERT_OR_UPDATE"><aria_label/><background_color/><background_image/><background_style>default</background_style><bootstrap_alt>false</bootstrap_alt><class_name/><container_class_name/><name>Insurance Claim Hub Home - Container 2</name><order>2</order><semantic_tag/><sp_page display_value="claim_home">c2de297880e703107f44e29321b0a231</sp_page><subheader>false</subheader><sys_class_name>sp_container</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-09-23 04:55:06</sys_created_on><sys_id>a69f69f880e703107f44e29321b0a23a</sys_id><sys_mod_count>1</sys_mod_count><sys_name>Insurance Claim Hub Home - Container 2</sys_name><sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package><sys_policy/><sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope><sys_update_name>sp_container_a69f69f880e703107f44e29321b0a23a</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-09-23 04:56:09</sys_updated_on><title/><width>container</width></sp_container></record_update>]]></payload>
+        <payload_hash>1125155157</payload_hash>
+        <record_name>Insurance Claim Hub Home - Container 2</record_name>
+        <reverted_from/>
+        <source>9fe8801bb15303107f44639b25435a3f</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 04:56:09</sys_created_on>
+        <sys_id>cadfe13c80e703107f44e29321b0a23f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0cc9f082a0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 04:56:09</sys_updated_on>
+        <type>Container</type>
+        <update_guid>cedfe13cfde70310d944fe7e3d86333e</update_guid>
+        <update_guid_history>cedfe13cfde70310d944fe7e3d86333e:1125155157,fe9f69f85be7031085964fb42c59c83c:194939798</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Insurance Claim Hub Home - Container 2">1bdf253c80e703107f44e29321b0a26f</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 04:56:15</sys_created_on>
+        <sys_db_object display_value="" name="sp_container">sp_container</sys_db_object>
+        <sys_id>1cafde3f029744ac9ec10915942d6f71</sys_id>
+        <sys_metadata>a69f69f880e703107f44e29321b0a23a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Insurance Claim Hub Home - Container 2</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_scope_delete display_value="">259a3c4aad804120a3cbf88d9f9bc8a4</sys_scope_delete>
+        <sys_update_name>sp_container_a69f69f880e703107f44e29321b0a23a</sys_update_name>
+        <sys_update_version display_value="sp_container_a69f69f880e703107f44e29321b0a23a">cadfe13c80e703107f44e29321b0a23f</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 04:56:15</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

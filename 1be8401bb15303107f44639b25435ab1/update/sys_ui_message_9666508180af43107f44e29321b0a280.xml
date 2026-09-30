@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message">
+    <sys_ui_message action="INSERT_OR_UPDATE">
+        <application>Virtual Agent</application>
+        <code/>
+        <commented_message/>
+        <key>va:topic:38ffdf3480e743107f44e29321b0a2e1:node:b44299e7c692455381c733194b134c51:field:0 {0}</key>
+        <language>en</language>
+        <message>The document associated with your claim is:{0}
+Please review your claim documents for any missing or pending items.</message>
+        <sys_class_name>sys_ui_message</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 17:03:53</sys_created_on>
+        <sys_id>9666508180af43107f44e29321b0a280</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>va:topic:38ffdf3480e743107f44e29321b0a2e1:node:b44299e7c692455381c733194b134c51:field:0 {0}</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_ui_message_9666508180af43107f44e29321b0a280</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 17:03:53</sys_updated_on>
+    </sys_ui_message>
+</record_update>

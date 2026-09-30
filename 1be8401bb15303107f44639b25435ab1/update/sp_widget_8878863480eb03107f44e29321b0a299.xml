@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($location, $http) {
+
+    var c = this;
+
+    c.form = {
+        document_type: "",
+        document_name: ""
+    };
+
+    c.selectedFile = null;
+    c.fileName = "";
+    c.uploading = false;
+    c.successMessage = "";
+    c.errorMessage = "";
+
+    // Get Claim Sys ID from URL
+    var params = $location.search();
+
+    c.claimSysId = params.sys_id || "";
+
+    // -----------------------------------------
+    // File selection
+    // -----------------------------------------
+
+    c.fileSelected = function(input) {
+
+        c.errorMessage = "";
+        c.selectedFile = null;
+        c.fileName = "";
+
+        if (input.files && input.files.length > 0) {
+
+            c.selectedFile = input.files[0];
+            c.fileName = input.files[0].name;
+
+        }
+    };
+
+
+    // -----------------------------------------
+    // Upload Document
+    // -----------------------------------------
+
+    c.uploadDocument = function() {
+
+        c.successMessage = "";
+        c.errorMessage = "";
+
+        // Check Claim
+        if (!c.claimSysId) {
+
+            c.errorMessage =
+                "Claim information is missing.";
+
+            return;
+        }
+
+        // Check Document Type
+        if (!c.form.document_type) {
+
+            c.errorMessage =
+                "Please select a document type.";
+
+            return;
+        }
+
+        // Check Document Name
+        if (!c.form.document_name) {
+
+            c.errorMessage =
+                "Please enter the document name.";
+
+            return;
+        }
+
+        // Check File
+        if (!c.selectedFile) {
+
+            c.errorMessage =
+                "Please select a file.";
+
+            return;
+        }
+
+        c.uploading = true;
+
+
+        // -----------------------------------------
+        // Create Claim Document record
+        // -----------------------------------------
+
+        c.server.get({
+
+            action: "create_document",
+
+            claim_sys_id: c.claimSysId,
+
+            document_type: c.form.document_type,
+
+            document_name: c.form.document_name
+
+        }).then(function(response) {
+
+            if (!response.data.success) {
+
+                c.uploading = false;
+
+                c.errorMessage =
+                    response.data.message ||
+                    "Unable to create document record.";
+
+                return;
+            }
+
+
+            // Get Document Sys ID
+            var documentSysId =
+                response.data.document_sys_id;
+
+
+            // -----------------------------------------
+            // Prepare attachment
+            // -----------------------------------------
+
+            var formData = new FormData();
+
+            formData.append(
+                "file",
+                c.selectedFile
+            );
+
+
+            var uploadUrl =
+                "/api/now/attachment/file" +
+                "?table_name=x_snc_insurance_0_claim_document" +
+                "&table_sys_id=" +
+                encodeURIComponent(documentSysId) +
+                "&file_name=" +
+                encodeURIComponent(c.selectedFile.name);
+
+
+            // -----------------------------------------
+            // Upload attachment
+            // -----------------------------------------
+
+            $http({
+
+                method: "POST",
+
+                url: uploadUrl,
+
+                data: formData,
+
+                transformRequest: angular.identity,
+
+                headers: {
+                    "Content-Type": undefined,
+                    "Accept": "application/json",
+                    "X-UserToken": window.g_ck
+                }
+
+            }).then(function(response) {
+
+                c.uploading = false;
+
+                /*
+                 * Upload completed successfully.
+                 */
+
+                c.successMessage =
+                    "Document uploaded successfully.";
+
+
+                /*
+                 * Move directly to Document Status.
+                 *
+                 * Pass the exact Document Sys ID.
+                 */
+
+                var statusUrl =
+                    "?id=document_status" +
+                    "&document_sys_id=" +
+                    encodeURIComponent(documentSysId);
+
+
+                window.location.href = statusUrl;
+
+
+            }, function(error) {
+
+                c.uploading = false;
+
+                c.errorMessage =
+                    "Document record was created, but file upload failed.";
+
+            });
+
+
+        }, function(error) {
+
+            c.uploading = false;
+
+            c.errorMessage =
+                "Unable to create document record.";
+
+        });
+
+    };
+
+
+    // -----------------------------------------
+    // Back to Home
+    // -----------------------------------------
+
+    c.goHome = function() {
+
+        window.location.href =
+            "?id=claim_home";
+
+    };
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.document-container {&#13;
+    max-width: 900px;&#13;
+    margin: 40px auto;&#13;
+    padding: 20px;&#13;
+    font-family: Arial, sans-serif;&#13;
+}&#13;
+&#13;
+.document-header {&#13;
+    background: linear-gradient(135deg, #0d6efd, #1554a5);&#13;
+    color: white;&#13;
+    padding: 30px;&#13;
+    border-radius: 12px 12px 0 0;&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    gap: 18px;&#13;
+}&#13;
+&#13;
+.document-icon {&#13;
+    width: 60px;&#13;
+    height: 60px;&#13;
+    border-radius: 50%;&#13;
+    background: rgba(255,255,255,0.18);&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    justify-content: center;&#13;
+    font-size: 30px;&#13;
+}&#13;
+&#13;
+.document-header h1 {&#13;
+    margin: 0 0 8px;&#13;
+    font-size: 27px;&#13;
+}&#13;
+&#13;
+.document-header p {&#13;
+    margin: 0;&#13;
+    opacity: 0.9;&#13;
+}&#13;
+&#13;
+.document-card {&#13;
+    background: white;&#13;
+    padding: 35px;&#13;
+    border: 1px solid #e1e5eb;&#13;
+    border-radius: 0 0 12px 12px;&#13;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);&#13;
+}&#13;
+&#13;
+.document-card h2 {&#13;
+    color: #183b67;&#13;
+    margin-top: 0;&#13;
+}&#13;
+&#13;
+.subtitle {&#13;
+    color: #6c757d;&#13;
+    margin-bottom: 25px;&#13;
+}&#13;
+&#13;
+.form-group {&#13;
+    margin-bottom: 22px;&#13;
+}&#13;
+&#13;
+.form-group label {&#13;
+    display: block;&#13;
+    font-weight: 600;&#13;
+    color: #34495e;&#13;
+    margin-bottom: 8px;&#13;
+}&#13;
+&#13;
+.form-group label span {&#13;
+    color: #dc3545;&#13;
+}&#13;
+&#13;
+.form-control {&#13;
+    width: 100%;&#13;
+    min-height: 44px;&#13;
+    padding: 10px 12px;&#13;
+    border: 1px solid #ccd4dd;&#13;
+    border-radius: 6px;&#13;
+    box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.file-input {&#13;
+    width: 100%;&#13;
+    padding: 12px;&#13;
+    border: 1px dashed #9db5cf;&#13;
+    border-radius: 6px;&#13;
+    background: #f8fbff;&#13;
+    box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.form-group small {&#13;
+    display: block;&#13;
+    margin-top: 7px;&#13;
+    color: #6c757d;&#13;
+}&#13;
+&#13;
+.selected-file {&#13;
+    background: #eef6ff;&#13;
+    padding: 12px;&#13;
+    border-radius: 6px;&#13;
+    margin-bottom: 20px;&#13;
+    color: #24527a;&#13;
+}&#13;
+&#13;
+.info-box {&#13;
+    background: #eef6ff;&#13;
+    border-left: 4px solid #0d6efd;&#13;
+    padding: 15px;&#13;
+    margin: 20px 0;&#13;
+    color: #36516c;&#13;
+}&#13;
+&#13;
+.form-actions {&#13;
+    display: flex;&#13;
+    justify-content: flex-end;&#13;
+    gap: 12px;&#13;
+    margin-top: 25px;&#13;
+}&#13;
+&#13;
+.back-btn,&#13;
+.upload-btn {&#13;
+    padding: 12px 24px;&#13;
+    border-radius: 6px;&#13;
+    font-weight: 600;&#13;
+    cursor: pointer;&#13;
+}&#13;
+&#13;
+.back-btn {&#13;
+    background: white;&#13;
+    border: 1px solid #adb5bd;&#13;
+    color: #495057;&#13;
+}&#13;
+&#13;
+.upload-btn {&#13;
+    background: #0d6efd;&#13;
+    border: none;&#13;
+    color: white;&#13;
+}&#13;
+&#13;
+.upload-btn:disabled {&#13;
+    opacity: 0.6;&#13;
+    cursor: not-allowed;&#13;
+}&#13;
+&#13;
+.success-message {&#13;
+    background: #e8f7ee;&#13;
+    color: #18733c;&#13;
+    border: 1px solid #b8e0c7;&#13;
+    padding: 13px;&#13;
+    border-radius: 6px;&#13;
+    margin-top: 15px;&#13;
+}&#13;
+&#13;
+.error-message {&#13;
+    background: #fdecec;&#13;
+    color: #a52834;&#13;
+    border: 1px solid #f1b7bc;&#13;
+    padding: 13px;&#13;
+    border-radius: 6px;&#13;
+    margin-top: 15px;&#13;
+}&#13;
+&#13;
+@media (max-width: 700px) {&#13;
+&#13;
+    .document-container {&#13;
+        padding: 10px;&#13;
+    }&#13;
+&#13;
+    .document-card {&#13;
+        padding: 22px;&#13;
+    }&#13;
+&#13;
+    .form-actions {&#13;
+        flex-direction: column;&#13;
+    }&#13;
+&#13;
+    .back-btn,&#13;
+    .upload-btn {&#13;
+        width: 100%;&#13;
+    }&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Upload supporting documents for an insurance claim.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>insurance_claim_document_upload</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Insurance Claim Document Upload</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.success = false;
+    data.message = "";
+    data.document_sys_id = "";
+
+    if (!input || input.action != "create_document") {
+        return;
+    }
+
+    try {
+
+        var claimSysId =
+            String(input.claim_sys_id || "");
+
+        var documentType =
+            String(input.document_type || "");
+
+        var documentName =
+            String(input.document_name || "");
+
+
+        if (!claimSysId) {
+
+            data.message =
+                "Claim information is missing.";
+
+            return;
+        }
+
+
+        if (!documentType) {
+
+            data.message =
+                "Document type is required.";
+
+            return;
+        }
+
+
+        if (!documentName) {
+
+            data.message =
+                "Document name is required.";
+
+            return;
+        }
+
+
+        // Find Claim
+        var claim =
+            new GlideRecord(
+                "x_snc_insurance_0_claim"
+            );
+
+        if (!claim.get(claimSysId)) {
+
+            data.message =
+                "Claim record was not found.";
+
+            return;
+        }
+
+
+        // Create Claim Document
+        var document =
+            new GlideRecord(
+                "x_snc_insurance_0_claim_document"
+            );
+
+        document.initialize();
+
+
+        // Link document to Claim
+        document.setValue(
+            "claim",
+            claimSysId
+        );
+
+
+        // Document Type
+        document.setValue(
+            "document_type",
+            documentType
+        );
+
+
+        // Document Name
+        document.setValue(
+            "document_name",
+            documentName
+        );
+
+
+        // Initial validation status
+        document.setValue(
+            "document_validation_status",
+            "pending"
+        );
+
+
+        // Insert
+        var documentSysId =
+            document.insert();
+
+
+        if (!documentSysId) {
+
+            data.message =
+                "Unable to create document record.";
+
+            return;
+        }
+
+
+        data.success = true;
+
+        data.document_sys_id =
+            documentSysId;
+
+        data.message =
+            "Document record created successfully.";
+
+
+    } catch (e) {
+
+        data.success = false;
+
+        data.message =
+            "Error creating document: " +
+            e.message;
+
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 06:44:16</sys_created_on>
+        <sys_id>8878863480eb03107f44e29321b0a299</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Insurance Claim Document Upload</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_widget_8878863480eb03107f44e29321b0a299</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 07:25:29</sys_updated_on>
+        <template><![CDATA[<div class="document-container">
+
+    <div class="document-header">
+        <div class="document-icon">]]>📄<![CDATA[</div>
+        <div>
+            <h1>Upload Claim Documents</h1>
+            <p>Upload supporting documents for your insurance claim.</p>
+        </div>
+    </div>
+
+    <div class="document-card">
+
+        <h2>Supporting Documents</h2>
+        <p class="subtitle">
+            Please provide the required documents to process your claim.
+        </p>
+
+        <form ng-submit="c.uploadDocument()">
+
+            <div class="form-group">
+                <label>Document Type <span>*</span></label>
+
+                <select class="form-control"
+                        ng-model="c.form.document_type"
+                        required>
+
+                    <option value="">Select Document Type</option>
+                    <option value="Vehicle Registration">
+                        Vehicle Registration
+                    </option>
+                    <option value="Driving License">
+                        Driving License
+                    </option>
+                    <option value="Insurance Policy">
+                        Insurance Policy
+                    </option>
+                    <option value="Medical Report">
+                        Medical Report
+                    </option>
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Document Name <span>*</span></label>
+
+                <input type="text"
+                       class="form-control"
+                       ng-model="c.form.document_name"
+                       placeholder="Example: Vehicle Registration Document"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Select File <span>*</span></label>
+
+                <input type="file"
+                       id="claimFile"
+                       class="file-input"
+                       accept=".pdf,.jpg,.jpeg,.png"
+                       onchange="angular.element(this).scope().c.fileSelected(this)">
+
+                <small>
+                    Supported formats: PDF, JPG, JPEG, PNG
+                </small>
+            </div>
+
+            <div class="selected-file"
+                 ng-if="c.fileName">
+
+                ]]>📎<![CDATA[ {{c.fileName}}
+
+            </div>
+
+            <div class="info-box">
+                <strong>Important:</strong>
+                Upload clear and readable documents related to your claim.
+            </div>
+
+            <div class="success-message"
+                 ng-if="c.successMessage">
+
+                ✓ {{c.successMessage}}
+
+            </div>
+
+            <div class="error-message"
+                 ng-if="c.errorMessage">
+
+                ⚠ {{c.errorMessage}}
+
+            </div>
+
+            <div class="form-actions">
+
+                <button type="button"
+                        class="back-btn"
+                        ng-click="c.goHome()">
+
+                    Back to Home
+
+                </button>
+
+                <button type="submit"
+                        class="upload-btn"
+                        ng-disabled="c.uploading">
+
+                    <span ng-if="!c.uploading">
+                        Upload Document
+                    </span>
+
+                    <span ng-if="c.uploading">
+                        Uploading...
+                    </span>
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

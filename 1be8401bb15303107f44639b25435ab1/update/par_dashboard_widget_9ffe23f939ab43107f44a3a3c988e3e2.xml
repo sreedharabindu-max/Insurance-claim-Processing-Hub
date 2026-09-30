@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="par_dashboard_widget">
+    <par_dashboard_widget action="INSERT_OR_UPDATE">
+        <canvas display_value="">2de54f3d396743107f44a3a3c988e30d</canvas>
+        <component display_value="Single score">d24d53f60350de7a652caf3188a46ed2</component>
+        <component_props>{"configVersion":"23.0.0-ci-SNAPSHOT","scoreSize":"auto","scoreAlignment":"start","headingPosition":"top","sparklineStyle":"area","iconStyle":"background","showScoreDate":false,"useRelativeScoreTime":false,"showScoreUpdateTime":false,"showZero":true,"wrapElements":false,"colorConfig":{"type":"default"},"newReporting":false,"enableAddZerosAtApi":true,"dataSources":[{"isDatabaseView":false,"allowRealTime":true,"label":"Claim","sourceType":"table","tableOrViewName":"x_snc_insurance_0_claim","preferredVisualizations":["d24d53f60350de7a652caf3188a46ed2"],"id":"dGFibGV4X3NuY19pbnN1cmFuY2VfMF9jbGFpbTE3OTA0NDA5ODg5NzQ=","dataCategories":["trend","group","simple"]}],"showHeader":true,"showTotalAggregate":false,"showSubAggregate":false,"showFirstGroupAggregate":false,"showSecondGroupAggregate":false,"hideMatrixAggregate":false,"lineClamp":1,"headerTitleAlignment":"start","wrapTitle":false,"showLoadingIndicator":false,"showHeaderSeparator":false,"headerTitle":"Average Claim Amount","headingLevel":2,"showBorder":true,"bareBorder":false,"showDataPassthrough":false,"showAdditionalGroupBySelector":false,"allowAdditionalGroupByPerMetric":false,"metrics":[{"dataSource":"dGFibGV4X3NuY19pbnN1cmFuY2VfMF9jbGFpbTE3OTA0NDA5ODg5NzQ=","id":"ZEdGaWJHVjRYM051WTE5cGJuTjFjbUZ1WTJWZk1GOWpiR0ZwYlRFM09UQTBOREE1T0RnNU56UT0xNzkwNDQwOTkxMTEx","aggregateFunction":"AVG","numberFormat":{"customFormat":false},"axisId":"primary","aggregateField":"claim_amount"}],"sortBy":"value","sortByOrder":"desc","showChange":false,"showChangePercentage":false,"showTarget":false,"showForecast":false,"showForecastRange":false,"showTrend":false,"showConfidenceBand":false,"showGapPercentage":false,"showSparkline":false,"showMetricLabel":false,"showThreshold":false,"showComment":false,"followFilters":true,"showFilterIcon":true,"enableRealTimeUpdate":false,"enableDrilldown":true,"enableClickAndStay":false,"showDataTable":false,"enableCustomEmptyState":false,"componentId":"irk3hs2v","emptyStateIllustration":"no-data","emptyStateHeading":"No data available.","emptyStateHeadingLevel":3,"emptyStateContent":"There are no scores available for the selected criteria. Contact your admin for more info.","emptyStateAlignment":"vertical-centered","hideDevSettings":false,"filterConfigurations":"@state.parFilters","showMaximumRange":false,"allowChangeDateRange":false,"showDateRangeByDefault":false,"applyDateRange":false,"numberOfPeriods":3,"showAbsolutePeriod":false,"autoAggregatePeriods":false,"showChangeFrom":false,"useCurrentDateForEnd":false,"period":"M","useDataCache":false,"cacheExpirationTime":0,"showCacheTime":true,"dateFormat":"default","showRefresh":true,"showExportOptions":true,"showFilterAsSeparateSeries":false,"userInfo":"@context.session.user","headerColor":{"themeVariable":"--now-color_alert--info-0","value":"#bddcf2"},"titleColor":{"value":"#075985"}}</component_props>
+        <h>9</h>
+        <name/>
+        <required_translations>[{"comment":"","message":"Claim","code":"PAR_DASHBOARD.2de54f3d396743107f44a3a3c988e30d.9ffe23f939ab43107f44a3a3c988e3e2"},{"comment":"","message":"Average Claim Amount","code":"PAR_DASHBOARD.2de54f3d396743107f44a3a3c988e30d.9ffe23f939ab43107f44a3a3c988e3e2"},{"comment":"","message":"No data available.","code":"PAR_DASHBOARD.2de54f3d396743107f44a3a3c988e30d.9ffe23f939ab43107f44a3a3c988e3e2"},{"comment":"","message":"There are no scores available for the selected criteria. Contact your admin for more info.","code":"PAR_DASHBOARD.2de54f3d396743107f44a3a3c988e30d.9ffe23f939ab43107f44a3a3c988e3e2"}]</required_translations>
+        <stored_component/>
+        <sys_class_name>par_dashboard_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 16:45:34</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>9ffe23f939ab43107f44a3a3c988e3e2</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>par_dashboard_widget_9ffe23f939ab43107f44a3a3c988e3e2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-29 08:51:56</sys_updated_on>
+        <visualization/>
+        <w>4</w>
+        <widget_props/>
+        <x>0</x>
+        <y>10</y>
+    </par_dashboard_widget>
+</record_update>

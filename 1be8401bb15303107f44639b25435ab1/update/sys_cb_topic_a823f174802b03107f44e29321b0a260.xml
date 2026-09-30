@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cb_topic">
+    <sys_cb_topic action="INSERT_OR_UPDATE">
+        <applicability/>
+        <applicability_mode>query</applicability_mode>
+        <autopilot_topic>false</autopilot_topic>
+        <category/>
+        <channels/>
+        <connect_queue/>
+        <context_profiles/>
+        <description>Helps insurance customers check their claim status, claim details, and next step by providing their claim number.</description>
+        <dialog_acts_enabled>false</dialog_acts_enabled>
+        <expose_on_palette>false</expose_on_palette>
+        <flexible_conversation_switching>false</flexible_conversation_switching>
+        <foundational>false</foundational>
+        <graph>{
+  "graph_api_version": "1.0.82",
+  "goals": {
+    "primary": {
+      "id": "primary",
+      "trigger": {
+        "type": "primary"
+      },
+      "name": "primary",
+      "applicability": "",
+      "description": "",
+      "nodes": {
+        "64c1befcf137490b84d01aee9e0c488f": {
+          "id": "64c1befcf137490b84d01aee9e0c488f",
+          "stepType": "Start",
+          "name": "Start",
+          "greetingResponse": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "90e64deb584541f18b382f0497d73f58": {
+          "id": "90e64deb584541f18b382f0497d73f58",
+          "stepType": "TerminateGoal",
+          "name": "End",
+          "confirmationMessage": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "54145732bdf742328cc249d4e102c74c": {
+          "id": "54145732bdf742328cc249d4e102c74c",
+          "stepType": "TextOutput",
+          "name": "welcome_message",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Hello! Welcome to Insurance Claim Hub. I can help you track your insurance claim."
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": ""
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Please provide your claim number to continue."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "ac12c8f6122f43af88ae67688f7efddb"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "9bc7ef633f6a4c5b8adff3d2282b83cd": {
+          "id": "9bc7ef633f6a4c5b8adff3d2282b83cd",
+          "stepType": "AiDataCollector",
+          "name": "get_claim_number",
+          "purpose": {
+            "value": "",
+            "mode": "simple"
+          },
+          "instructions": {
+            "value": "",
+            "mode": "simple"
+          },
+          "inputs": [
+            {
+              "itemId": "c8ce87abbe9a45329acb8fac1f574412",
+              "displayName": "claim_number_input",
+              "name": "claim_number_input",
+              "description": "",
+              "discoverable": false,
+              "dynamicDescription": {
+                "value": "The unique claim number provided by the customer to identify their insurance claim.",
+                "mode": "simple"
+              },
+              "type": "string",
+              "variableId": "3ba17856856248368524f12785aa1b43",
+              "choices": [
+                {
+                  "label": "",
+                  "value": ""
+                },
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ],
+              "mode": "",
+              "script": "",
+              "condition": {
+                "value": "",
+                "mode": "glide_query"
+              },
+              "stepType": "TextPrompt",
+              "enforcePrompt": false,
+              "helpText": false,
+              "skippable": {
+                "value": "",
+                "mode": "query"
+              },
+              "applicability": {
+                "value": "",
+                "mode": "query"
+              },
+              "promptMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "helpTextMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "inputType": {
+                "format": "Text",
+                "script": ""
+              },
+              "isMultipleSelect": false,
+              "validation": "",
+              "autoSelect": true,
+              "hasCardHeader": false,
+              "cardMetadata": {
+                "mode": "card",
+                "metadataScript": "",
+                "cardTemplate": "",
+                "cardFields": {},
+                "cardDefinition": {}
+              }
+            }
+          ],
+          "outputs": [],
+          "advanced_parameters": "",
+          "confirmSummary": false,
+          "useSlots": false,
+          "slots": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "hiddenVariableIds": [
+            "abf6a4293896481c8383f1ad8466d537"
+          ],
+          "hiddenVariableNames": [
+            "ai_data_collector_9bc7ef633f6a4c5b8adff3d2282b83cd_output"
+          ],
+          "classificationEnabled": false,
+          "classificationOverrides": [],
+          "variableIds": [
+            "3ba17856856248368524f12785aa1b43"
+          ],
+          "standalone": false
+        },
+        "99fb07fe351d4d22aaf5409e65363c3c": {
+          "id": "99fb07fe351d4d22aaf5409e65363c3c",
+          "name": "get_claim_status",
+          "script": "(function execute() {\n\n    var claim = new GlideRecord('x_snc_insurance_0_claim');\n\n    claim.addQuery('claim_number', vaInputs.claim_number_input);\n\n    claim.setLimit(1);\n    claim.query();\n\n    if (claim.next()) {\n        vaVars.claim_status = claim.getDisplayValue('status');\n    } else {\n        vaVars.claim_status = 'Claim not found';\n    }\n\n})()",
+          "stepType": "ScriptAction",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "c42fe359046e4659b1212b152d619247": {
+          "id": "c42fe359046e4659b1212b152d619247",
+          "stepType": "TextOutput",
+          "name": "claim_status_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Current claim status: "
+                    },
+                    {
+                      "type": "datapill",
+                      "dataPill": {
+                        "value": "{{vaVars.claim_status}}",
+                        "displayValue": "Script Variables➛claim_status"
+                      },
+                      "children": [
+                        {
+                          "text": ""
+                        }
+                      ]
+                    },
+                    {
+                      "text": " Next step: Please follow the instructions provided for your claim."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "7908402ecfc0477d931142e05bf4ebc3"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "3919cfeb81ee436daffd34f9363c0d1f": {
+          "id": "3919cfeb81ee436daffd34f9363c0d1f",
+          "stepType": "TextOutput",
+          "name": "claim_number_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Your claim number is:  "
+                    },
+                    {
+                      "type": "datapill",
+                      "dataPill": {
+                        "value": "{{vaInputs.claim_number_input}}",
+                        "displayValue": "Input Variables➛Claim_number_input"
+                      },
+                      "children": [
+                        {
+                          "text": ""
+                        }
+                      ]
+                    },
+                    {
+                      "text": ""
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "867f3dbb1c9e489c85b4257cfa12e9ae"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "56f3eba425c9496095793295757d4244": {
+          "id": "56f3eba425c9496095793295757d4244",
+          "stepType": "Decision",
+          "name": "check_claim_status"
+        },
+        "baa8ee1d8c2542b5b58ebcabb37a8f43": {
+          "id": "baa8ee1d8c2542b5b58ebcabb37a8f43",
+          "stepType": "TextOutput",
+          "name": "invalid_claim_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Sorry, I couldn't find a claim with that claim number. Please check the claim number and try again."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "5d74e20bda3a43a6936f5dc2c7e7d3c8"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        }
+      },
+      "edges": [
+        {
+          "id": "d25a926b38e04bc5af93f292121d8eaf",
+          "edgeType": "Edge",
+          "source": "c42fe359046e4659b1212b152d619247",
+          "target": "90e64deb584541f18b382f0497d73f58",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "afd6dd2361834367a36f93109429e4d7",
+          "edgeType": "Edge",
+          "source": "64c1befcf137490b84d01aee9e0c488f",
+          "target": "54145732bdf742328cc249d4e102c74c",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "99008f9f961345b2ad8abd25a5e4e968",
+          "edgeType": "Edge",
+          "source": "54145732bdf742328cc249d4e102c74c",
+          "target": "9bc7ef633f6a4c5b8adff3d2282b83cd",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "94324a3ed4104df3b7e10d408161f983",
+          "edgeType": "Edge",
+          "source": "9bc7ef633f6a4c5b8adff3d2282b83cd",
+          "target": "99fb07fe351d4d22aaf5409e65363c3c",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "4ab5a9e5f6f14b8594503dc3ccdab7c5",
+          "edgeType": "Edge",
+          "source": "3919cfeb81ee436daffd34f9363c0d1f",
+          "target": "c42fe359046e4659b1212b152d619247",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "cd08fdaac5c045b795172ca977c23b89",
+          "edgeType": "Edge",
+          "source": "99fb07fe351d4d22aaf5409e65363c3c",
+          "target": "56f3eba425c9496095793295757d4244",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "ed822966601745568c9f8ee41da6c7ee",
+          "edgeType": "Branch",
+          "source": "56f3eba425c9496095793295757d4244",
+          "target": "3919cfeb81ee436daffd34f9363c0d1f",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "script",
+            "value": "(function execute() {\n    return vaVars.claim_status != 'Claim not found';\n})()"
+          },
+          "label": "Valid Claim"
+        },
+        {
+          "id": "938505895ccb4600bbf31b38525f3cad",
+          "edgeType": "Branch",
+          "source": "56f3eba425c9496095793295757d4244",
+          "target": "baa8ee1d8c2542b5b58ebcabb37a8f43",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "script",
+            "value": "(function execute() {\n    return vaVars.claim_status == 'Claim not found';\n})()"
+          },
+          "label": "Invalid Claim"
+        },
+        {
+          "id": "9bbcb2823a72453ba3fbce1344babd31",
+          "edgeType": "Edge",
+          "source": "baa8ee1d8c2542b5b58ebcabb37a8f43",
+          "target": "90e64deb584541f18b382f0497d73f58",
+          "sourcePort": "",
+          "targetPort": ""
+        }
+      ]
+    }
+  },
+  "variables": {
+    "current-user": {
+      "category": "vaInputs",
+      "id": "current-user",
+      "label": "User",
+      "name": "user",
+      "table": "sys_user",
+      "varType": "reference"
+    },
+    "abf6a4293896481c8383f1ad8466d537": {
+      "id": "abf6a4293896481c8383f1ad8466d537",
+      "name": "ai_data_collector_9bc7ef633f6a4c5b8adff3d2282b83cd_output",
+      "label": "Ai_data_collector_9bc7ef633f6a4c5b8adff3d2282b83cd_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "3ba17856856248368524f12785aa1b43": {
+      "id": "3ba17856856248368524f12785aa1b43",
+      "varType": "string",
+      "category": "vaInputs",
+      "label": "Claim_number_input",
+      "name": "claim_number_input",
+      "choices": [
+        {
+          "label": "",
+          "value": ""
+        },
+        {
+          "label": "",
+          "value": ""
+        }
+      ],
+      "mode": "",
+      "table": "",
+      "aiInput": true,
+      "nodeId": "9bc7ef633f6a4c5b8adff3d2282b83cd",
+      "isHidden": false,
+      "inputId": 0,
+      "description": ""
+    },
+    "710bb0b4860142fca0e657b612adec47": {
+      "id": "710bb0b4860142fca0e657b612adec47",
+      "value": {
+        "value": "",
+        "mode": "simple"
+      },
+      "name": "claim_status",
+      "label": "claim_status",
+      "varType": "script",
+      "category": "vaVars"
+    }
+  }
+}</graph>
+        <key_phrases/>
+        <library>false</library>
+        <live_agent>false</live_agent>
+        <model_type>llm</model_type>
+        <modify_confirmation_enabled>false</modify_confirmation_enabled>
+        <name>track_my_claim</name>
+        <nlu_intent/>
+        <nlu_intent_label/>
+        <nlu_model/>
+        <nlu_model_label/>
+        <nlu_provider/>
+        <palette_label/>
+        <roles/>
+        <root_topic_id/>
+        <secure_custom_input_control>false</secure_custom_input_control>
+        <source_topic_id/>
+        <sys_class_name>sys_cb_topic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 05:10:31</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>a823f174802b03107f44e29321b0a260</sys_id>
+        <sys_mod_count>25</sys_mod_count>
+        <sys_name>track_my_claim</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_cb_topic_a823f174802b03107f44e29321b0a260</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 12:43:28</sys_updated_on>
+        <title>Track My Claim</title>
+        <triggerable_by_notification>false</triggerable_by_notification>
+        <type>STANDARD</type>
+    </sys_cb_topic>
+    <sys_translated_text action="delete_multiple" query="documentkey=a823f174802b03107f44e29321b0a260"/>
+</record_update>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="DELETE">
+        <active>true</active>
+        <advanced_placeholder_dimensions>false</advanced_placeholder_dimensions>
+        <async_load>false</async_load>
+        <async_load_device_type>desktop,tablet,mobile</async_load_device_type>
+        <async_load_trigger>viewport</async_load_trigger>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <placeholder_dimensions>{&#13;	"mobile": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	},&#13;	"desktop": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	},&#13;	"tablet": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	}&#13;}</placeholder_dimensions>
+        <placeholder_dimensions_script><![CDATA[function evaluateConfig(options) { return {	"mobile": {		"height": "250px",		"width": "100%"	},	"desktop": {		"height": "250px",		"width": "100%"	},	"tablet": {		"height": "250px",		"width": "100%"	}}; }]]></placeholder_dimensions_script>
+        <placeholder_template>&lt;!-- 
+	AngularJS template with configurable options.
+	Use the `options` object to control dynamic behavior.
+	Example: Display an element when max row count is 10:
+	&lt;div ng-if="options.maxRowCount === 10"&gt;&lt;/div&gt;
+	The `skeleton-container` class is used for loading placeholders.
+--&gt;
+	&lt;div class="skeleton-container"&gt;
+	&lt;!-- Header Skeleton --&gt;
+	&lt;div class="skeleton-box skeleton-header"&gt;&lt;/div&gt;
+	&lt;!-- Body Skeleton --&gt;
+	&lt;div class="skeleton-box skeleton-line"&gt;&lt;/div&gt;
+	&lt;div class="skeleton-box skeleton-line small"&gt;&lt;/div&gt;
+	&lt;div class="skeleton-box skeleton-line medium"&gt;&lt;/div&gt;
+&lt;/div&gt;</placeholder_template>
+        <preserve_placeholder_size>false</preserve_placeholder_size>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="4">82d1e0c03c2343107f44afd2681c7712</sp_column>
+        <sp_widget display_value="HTML">8679ef89cb21120000f8d856634c9c4f</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-20 15:26:57</sys_created_on>
+        <sys_id>0d7360843c2343107f44afd2681c77e3</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Documents Card</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_instance_0d7360843c2343107f44afd2681c77e3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-22 10:22:56</sys_updated_on>
+        <title>Documents Card</title>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"html": {
+		"value": "<div style=\"background: #fff4e8; padding: 28px 15px; border-radius: 16px; text-align: center; border: 1px solid #ffd9b3; min-height: 150px;\">\r\n<div style=\"font-size: 38px; margin-bottom: 8px;\">]]>📂<![CDATA[</div>\r\n<h3 style=\"color: #d97706; font-size: 22px; margin: 8px 0;\">Documents</h3>\r\n<p style=\"color: #45627a; font-size: 14px; margin: 0;\">View and manage documents related to your claims.</p>\r\n</div>",
+		"displayValue": "<div style=\"background: #fff4e8; padding: 28px 15px; border-radius: 16px; text-align: center; border: 1px solid #ffd9b3; min-height: 150px;\">\n<div style=\"font-size: 38px; margin-bottom: 8px;\">]]>📂<![CDATA[</div>\n<h3 style=\"color: #d97706; font-size: 22px; margin: 8px 0;\">Documents</h3>\n<p style=\"color: #45627a; font-size: 14px; margin: 0;\">View and manage documents related to your claims.</p>\n</div>"
+	}
+}]]></widget_parameters>
+    </sp_instance>
+    <sys_translated_text action="DELETE" query="documentkey=0d7360843c2343107f44afd2681c77e3"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</application>
+        <file_path/>
+        <instance_id>3dd14dc7c38fcf94a03197af0501313c</instance_id>
+        <instance_name>ltm-hck-2876-0008</instance_name>
+        <name>sp_instance_0d7360843c2343107f44afd2681c77e3</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_instance"&gt;&lt;sp_instance action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;advanced_placeholder_dimensions&gt;false&lt;/advanced_placeholder_dimensions&gt;&lt;async_load&gt;false&lt;/async_load&gt;&lt;async_load_device_type&gt;desktop,tablet,mobile&lt;/async_load_device_type&gt;&lt;async_load_trigger&gt;viewport&lt;/async_load_trigger&gt;&lt;class_name/&gt;&lt;color&gt;default&lt;/color&gt;&lt;css/&gt;&lt;glyph/&gt;&lt;id/&gt;&lt;order&gt;1&lt;/order&gt;&lt;placeholder_dimensions&gt;{&amp;#13;	"mobile": {&amp;#13;		"height": "250px",&amp;#13;		"width": "100%"&amp;#13;	},&amp;#13;	"desktop": {&amp;#13;		"height": "250px",&amp;#13;		"width": "100%"&amp;#13;	},&amp;#13;	"tablet": {&amp;#13;		"height": "250px",&amp;#13;		"width": "100%"&amp;#13;	}&amp;#13;}&lt;/placeholder_dimensions&gt;&lt;placeholder_dimensions_script&gt;&lt;![CDATA[function evaluateConfig(options) { return {	"mobile": {		"height": "250px",		"width": "100%"	},	"desktop": {		"height": "250px",		"width": "100%"	},	"tablet": {		"height": "250px",		"width": "100%"	}}; }]]&gt;&lt;/placeholder_dimensions_script&gt;&lt;placeholder_template&gt;&amp;lt;!-- 
+	AngularJS template with configurable options.
+	Use the `options` object to control dynamic behavior.
+	Example: Display an element when max row count is 10:
+	&amp;lt;div ng-if="options.maxRowCount === 10"&amp;gt;&amp;lt;/div&amp;gt;
+	The `skeleton-container` class is used for loading placeholders.
+--&amp;gt;
+	&amp;lt;div class="skeleton-container"&amp;gt;
+	&amp;lt;!-- Header Skeleton --&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-header"&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;!-- Body Skeleton --&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-line"&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-line small"&amp;gt;&amp;lt;/div&amp;gt;
+	&amp;lt;div class="skeleton-box skeleton-line medium"&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/placeholder_template&gt;&lt;preserve_placeholder_size&gt;false&lt;/preserve_placeholder_size&gt;&lt;roles/&gt;&lt;short_description/&gt;&lt;size&gt;md&lt;/size&gt;&lt;sp_column display_value="4"&gt;82d1e0c03c2343107f44afd2681c7712&lt;/sp_column&gt;&lt;sp_widget display_value="HTML"&gt;8679ef89cb21120000f8d856634c9c4f&lt;/sp_widget&gt;&lt;sys_class_name&gt;sp_instance&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2026-09-20 15:26:57&lt;/sys_created_on&gt;&lt;sys_id&gt;0d7360843c2343107f44afd2681c77e3&lt;/sys_id&gt;&lt;sys_mod_count&gt;2&lt;/sys_mod_count&gt;&lt;sys_name&gt;Documents Card&lt;/sys_name&gt;&lt;sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0"&gt;1be8401bb15303107f44639b25435ab1&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Insurance Claim Processing Hub"&gt;1be8401bb15303107f44639b25435ab1&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_instance_0d7360843c2343107f44afd2681c77e3&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2026-09-22 10:22:56&lt;/sys_updated_on&gt;&lt;title&gt;Documents Card&lt;/title&gt;&lt;url/&gt;&lt;widget_parameters&gt;&lt;![CDATA[{
+	"html": {
+		"value": "&lt;div style=\"background: #fff4e8; padding: 28px 15px; border-radius: 16px; text-align: center; border: 1px solid #ffd9b3; min-height: 150px;\"&gt;\r\n&lt;div style=\"font-size: 38px; margin-bottom: 8px;\"&gt;]]&gt;📂&lt;![CDATA[&lt;/div&gt;\r\n&lt;h3 style=\"color: #d97706; font-size: 22px; margin: 8px 0;\"&gt;Documents&lt;/h3&gt;\r\n&lt;p style=\"color: #45627a; font-size: 14px; margin: 0;\"&gt;View and manage documents related to your claims.&lt;/p&gt;\r\n&lt;/div&gt;",
+		"displayValue": "&lt;div style=\"background: #fff4e8; padding: 28px 15px; border-radius: 16px; text-align: center; border: 1px solid #ffd9b3; min-height: 150px;\"&gt;\n&lt;div style=\"font-size: 38px; margin-bottom: 8px;\"&gt;]]&gt;📂&lt;![CDATA[&lt;/div&gt;\n&lt;h3 style=\"color: #d97706; font-size: 22px; margin: 8px 0;\"&gt;Documents&lt;/h3&gt;\n&lt;p style=\"color: #45627a; font-size: 14px; margin: 0;\"&gt;View and manage documents related to your claims.&lt;/p&gt;\n&lt;/div&gt;"
+	}
+}]]&gt;&lt;/widget_parameters&gt;&lt;/sp_instance&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=0d7360843c2343107f44afd2681c77e3"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1452376307</payload_hash>
+        <record_name>Documents Card</record_name>
+        <reverted_from/>
+        <source>9fe8801bb15303107f44639b25435a3f</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-22 10:22:56</sys_created_on>
+        <sys_id>87013d24516b03107f444ed624f3c917</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1a0c8a3d8c40000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-22 10:22:56</sys_updated_on>
+        <type>Instance</type>
+        <update_guid>cb013d24e06b0310c61b48a948d8ac16</update_guid>
+        <update_guid_history>cb013d24e06b0310c61b48a948d8ac16:1452376307,05b3648476234310f04f4473f1b5f506:-1078628055,4d73608453234310b9bb099b195690e5:1862172472</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Documents Card">f3ce657880e703107f44e29321b0a21c</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 04:51:38</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance">sp_instance</sys_db_object>
+        <sys_id>0fd84ee0e3ac444a9b307f238ac80b64</sys_id>
+        <sys_metadata>0d7360843c2343107f44afd2681c77e3</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Documents Card</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_scope_delete display_value="">259a3c4aad804120a3cbf88d9f9bc8a4</sys_scope_delete>
+        <sys_update_name>sp_instance_0d7360843c2343107f44afd2681c77e3</sys_update_name>
+        <sys_update_version display_value="sp_instance_0d7360843c2343107f44afd2681c77e3">87013d24516b03107f444ed624f3c917</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 04:51:38</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,1221 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, $location) {
+
+    /* widget controller */
+
+    var c = this;
+
+    // Navigate to another Service Portal page
+    c.goToPage = function(pageId) {
+
+        if (!pageId) {
+            return;
+        }
+
+        $location.search({
+            id: pageId
+        });
+
+    };
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* =====================================================&#13;
+   INSURANCE CLAIM HUB&#13;
+   PROFESSIONAL HOME PAGE&#13;
+   ===================================================== */&#13;
+&#13;
+.claim-hub-home {&#13;
+  font-family: "Segoe UI", Arial, sans-serif;&#13;
+  background: #f5f8fc;&#13;
+  color: #172033;&#13;
+  margin: 0;&#13;
+  padding: 0;&#13;
+}&#13;
+&#13;
+&#13;
+/* =====================================================&#13;
+   HERO&#13;
+   ===================================================== */&#13;
+&#13;
+.claim-hub-home .hero {&#13;
+  background:&#13;
+    linear-gradient(&#13;
+      135deg,&#13;
+      #0757b8 0%,&#13;
+      #0b6fd3 55%,&#13;
+      #124c9b 100%&#13;
+    );&#13;
+&#13;
+  color: #ffffff;&#13;
+  padding: 70px 25px;&#13;
+  text-align: center;&#13;
+}&#13;
+&#13;
+.claim-hub-home .hero-content {&#13;
+  max-width: 850px;&#13;
+  margin: auto;&#13;
+}&#13;
+&#13;
+.claim-hub-home .hero-logo {&#13;
+  width: 68px;&#13;
+  height: 68px;&#13;
+&#13;
+  margin: 0 auto 18px;&#13;
+&#13;
+  display: flex;&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+&#13;
+  background: rgba(255,255,255,0.15);&#13;
+&#13;
+  border: 1px solid rgba(255,255,255,0.35);&#13;
+&#13;
+  border-radius: 18px;&#13;
+&#13;
+  font-size: 36px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .hero-badge {&#13;
+  font-size: 11px;&#13;
+  font-weight: 700;&#13;
+  letter-spacing: 2px;&#13;
+&#13;
+  margin-bottom: 12px;&#13;
+&#13;
+  opacity: 0.9;&#13;
+}&#13;
+&#13;
+.claim-hub-home .hero h1 {&#13;
+  font-size: 44px;&#13;
+  font-weight: 700;&#13;
+&#13;
+  margin: 0 0 10px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .hero h2 {&#13;
+  font-size: 22px;&#13;
+  font-weight: 500;&#13;
+&#13;
+  margin: 0 0 18px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .hero p {&#13;
+  max-width: 680px;&#13;
+  margin: 0 auto 28px;&#13;
+&#13;
+  font-size: 16px;&#13;
+  line-height: 1.7;&#13;
+&#13;
+  opacity: 0.94;&#13;
+}&#13;
+&#13;
+&#13;
+/* =====================================================&#13;
+   HERO BUTTONS&#13;
+   ===================================================== */&#13;
+&#13;
+.claim-hub-home .hero-actions {&#13;
+  display: flex;&#13;
+  justify-content: center;&#13;
+&#13;
+  gap: 14px;&#13;
+&#13;
+  flex-wrap: wrap;&#13;
+}&#13;
+&#13;
+.claim-hub-home .btn-primary,&#13;
+.claim-hub-home .btn-outline {&#13;
+  min-width: 180px;&#13;
+&#13;
+  padding: 13px 25px;&#13;
+&#13;
+  border-radius: 7px;&#13;
+&#13;
+  font-size: 14px;&#13;
+  font-weight: 600;&#13;
+&#13;
+  cursor: pointer;&#13;
+&#13;
+  transition: all 0.2s ease;&#13;
+}&#13;
+&#13;
+.claim-hub-home .btn-primary {&#13;
+  background: #ffffff;&#13;
+  color: #0757b8;&#13;
+  border: 2px solid #ffffff;&#13;
+}&#13;
+&#13;
+.claim-hub-home .btn-outline {&#13;
+  background: transparent;&#13;
+  color: #ffffff;&#13;
+  border: 2px solid rgba(255,255,255,0.85);&#13;
+}&#13;
+&#13;
+.claim-hub-home .btn-primary:hover,&#13;
+.claim-hub-home .btn-outline:hover {&#13;
+  transform: translateY(-2px);&#13;
+}&#13;
+&#13;
+&#13;
+/* =====================================================&#13;
+   SECTION HEADING&#13;
+   ===================================================== */&#13;
+&#13;
+.claim-hub-home .section-heading {&#13;
+  max-width: 800px;&#13;
+&#13;
+  margin: auto;&#13;
+&#13;
+  text-align: center;&#13;
+}&#13;
+&#13;
+.claim-hub-home .small-title {&#13;
+  color: #0b63ce;&#13;
+&#13;
+  font-size: 11px;&#13;
+  font-weight: 700;&#13;
+&#13;
+  letter-spacing: 2px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .section-heading h2 {&#13;
+  color: #173b6c;&#13;
+&#13;
+  font-size: 29px;&#13;
+&#13;
+  margin: 8px 0 12px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .section-heading p {&#13;
+  color: #687386;&#13;
+&#13;
+  line-height: 1.7;&#13;
+}&#13;
+&#13;
+&#13;
+/* =====================================================&#13;
+   WELCOME&#13;
+   ===================================================== */&#13;
+&#13;
+.claim-hub-home .welcome {&#13;
+  padding: 48px 25px 25px;&#13;
+&#13;
+  background: #ffffff;&#13;
+}&#13;
+&#13;
+&#13;
+/* =====================================================&#13;
+   QUICK ACTIONS&#13;
+   ===================================================== */&#13;
+&#13;
+.claim-hub-home .quick-actions {&#13;
+  max-width: 1200px;&#13;
+&#13;
+  margin: 0 auto;&#13;
+&#13;
+  padding: 30px 25px 55px;&#13;
+&#13;
+  display: grid;&#13;
+&#13;
+  grid-template-columns:&#13;
+    repeat(4, 1fr);&#13;
+&#13;
+  gap: 18px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-card {&#13;
+  background: #ffffff;&#13;
+&#13;
+  border-radius: 12px;&#13;
+&#13;
+  padding: 25px;&#13;
+&#13;
+  min-height: 190px;&#13;
+&#13;
+  cursor: pointer;&#13;
+&#13;
+  border: 1px solid #e5eaf1;&#13;
+&#13;
+  box-shadow:&#13;
+    0 4px 15px rgba(20,40,70,0.07);&#13;
+&#13;
+  transition:&#13;
+    transform 0.2s ease,&#13;
+    box-shadow 0.2s ease;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-card:hover {&#13;
+  transform: translateY(-5px);&#13;
+&#13;
+  box-shadow:&#13;
+    0 10px 28px rgba(20,40,70,0.13);&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-icon {&#13;
+  width: 48px;&#13;
+  height: 48px;&#13;
+&#13;
+  display: flex;&#13;
+&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+&#13;
+  border-radius: 11px;&#13;
+&#13;
+  font-size: 25px;&#13;
+&#13;
+  margin-bottom: 17px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-content h3 {&#13;
+  font-size: 18px;&#13;
+&#13;
+  margin: 0 0 9px;&#13;
+&#13;
+  color: #1c3154;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-content p {&#13;
+  color: #687386;&#13;
+&#13;
+  font-size: 13px;&#13;
+&#13;
+  line-height: 1.6;&#13;
+&#13;
+  min-height: 55px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-content span {&#13;
+  font-size: 13px;&#13;
+&#13;
+  font-weight: 700;&#13;
+}&#13;
+&#13;
+&#13;
+/* CARD COLORS */&#13;
+&#13;
+.claim-hub-home .action-blue {&#13;
+  border-top: 4px solid #2684ff;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-blue .action-icon {&#13;
+  background: #eaf3ff;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-blue span {&#13;
+  color: #2684ff;&#13;
+}&#13;
+&#13;
+&#13;
+.claim-hub-home .action-green {&#13;
+  border-top: 4px solid #27a56a;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-green .action-icon {&#13;
+  background: #e9f8f0;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-green span {&#13;
+  color: #218653;&#13;
+}&#13;
+&#13;
+&#13;
+.claim-hub-home .action-purple {&#13;
+  border-top: 4px solid #7657d9;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-purple .action-icon {&#13;
+  background: #f0ecff;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-purple span {&#13;
+  color: #7657d9;&#13;
+}&#13;
+&#13;
+&#13;
+.claim-hub-home .action-orange {&#13;
+  border-top: 4px solid #e99420;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-orange .action-icon {&#13;
+  background: #fff3df;&#13;
+}&#13;
+&#13;
+.claim-hub-home .action-orange span {&#13;
+  color: #d67c0b;&#13;
+}&#13;
+&#13;
+&#13;
+/* =====================================================&#13;
+   FEATURES&#13;
+   ===================================================== */&#13;
+&#13;
+.claim-hub-home .features {&#13;
+  background: #f5f8fc;&#13;
+&#13;
+  padding: 55px 25px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .feature-grid {&#13;
+  max-width: 1100px;&#13;
+&#13;
+  margin: 35px auto 0;&#13;
+&#13;
+  display: grid;&#13;
+&#13;
+  grid-template-columns:&#13;
+    repeat(4, 1fr);&#13;
+&#13;
+  gap: 20px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .feature {&#13;
+  background: #ffffff;&#13;
+&#13;
+  text-align: center;&#13;
+&#13;
+  padding: 30px 20px;&#13;
+&#13;
+  border-radius: 11px;&#13;
+&#13;
+  border: 1px solid #e6ebf2;&#13;
+}&#13;
+&#13;
+.claim-hub-home .feature-icon {&#13;
+  font-size: 32px;&#13;
+&#13;
+  margin-bottom: 12px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .feature h3 {&#13;
+  color: #203a62;&#13;
+&#13;
+  font-size: 18px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .feature p {&#13;
+  color: #687386;&#13;
+&#13;
+  font-size: 13px;&#13;
+&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+&#13;
+/* =====================================================&#13;
+   PROCESS&#13;
+   ===================================================== */&#13;
+&#13;
+.claim-hub-home .process {&#13;
+  background: #ffffff;&#13;
+&#13;
+  padding: 60px 25px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .process-grid {&#13;
+  max-width: 1100px;&#13;
+&#13;
+  margin: 35px auto 0;&#13;
+&#13;
+  display: grid;&#13;
+&#13;
+  grid-template-columns:&#13;
+    repeat(3, 1fr);&#13;
+&#13;
+  gap: 18px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .process-item {&#13;
+  display: flex;&#13;
+&#13;
+  gap: 15px;&#13;
+&#13;
+  padding: 22px;&#13;
+&#13;
+  border-radius: 10px;&#13;
+&#13;
+  background: #f7f9fc;&#13;
+&#13;
+  border: 1px solid #e5eaf0;&#13;
+}&#13;
+&#13;
+.claim-hub-home .process-number {&#13;
+  flex-shrink: 0;&#13;
+&#13;
+  width: 42px;&#13;
+  height: 42px;&#13;
+&#13;
+  border-radius: 50%;&#13;
+&#13;
+  display: flex;&#13;
+&#13;
+  align-items: center;&#13;
+  justify-content: center;&#13;
+&#13;
+  background: #0b63ce;&#13;
+&#13;
+  color: #ffffff;&#13;
+&#13;
+  font-size: 12px;&#13;
+&#13;
+  font-weight: 700;&#13;
+}&#13;
+&#13;
+.claim-hub-home .process-item h3 {&#13;
+  margin: 2px 0 7px;&#13;
+&#13;
+  font-size: 16px;&#13;
+&#13;
+  color: #1d3558;&#13;
+}&#13;
+&#13;
+.claim-hub-home .process-item p {&#13;
+  margin: 0;&#13;
+&#13;
+  font-size: 12px;&#13;
+&#13;
+  color: #687386;&#13;
+&#13;
+  line-height: 1.6;&#13;
+}&#13;
+&#13;
+&#13;
+/* =====================================================&#13;
+   HELP&#13;
+   ===================================================== */&#13;
+&#13;
+.claim-hub-home .help-section {&#13;
+  max-width: 1100px;&#13;
+&#13;
+  margin: 50px auto;&#13;
+&#13;
+  padding: 35px;&#13;
+&#13;
+  border-radius: 14px;&#13;
+&#13;
+  background:&#13;
+    linear-gradient(&#13;
+      135deg,&#13;
+      #eaf4ff,&#13;
+      #f4f8ff&#13;
+    );&#13;
+&#13;
+  border: 1px solid #d9e7f8;&#13;
+}&#13;
+&#13;
+.claim-hub-home .help-content {&#13;
+  display: flex;&#13;
+&#13;
+  align-items: center;&#13;
+&#13;
+  justify-content: space-between;&#13;
+&#13;
+  gap: 25px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .help-content h2 {&#13;
+  margin: 7px 0;&#13;
+&#13;
+  color: #173b6c;&#13;
+}&#13;
+&#13;
+.claim-hub-home .help-content p {&#13;
+  color: #687386;&#13;
+}&#13;
+&#13;
+.claim-hub-home .help-actions {&#13;
+  display: flex;&#13;
+&#13;
+  gap: 10px;&#13;
+&#13;
+  flex-wrap: wrap;&#13;
+}&#13;
+&#13;
+.claim-hub-home .help-btn {&#13;
+  padding: 11px 18px;&#13;
+&#13;
+  border-radius: 7px;&#13;
+&#13;
+  border: 0;&#13;
+&#13;
+  background: #0b63ce;&#13;
+&#13;
+  color: #ffffff;&#13;
+&#13;
+  font-weight: 600;&#13;
+&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+.claim-hub-home .help-btn.secondary {&#13;
+  background: #ffffff;&#13;
+&#13;
+  color: #0b63ce;&#13;
+&#13;
+  border: 1px solid #0b63ce;&#13;
+}&#13;
+&#13;
+&#13;
+/* =====================================================&#13;
+   FOOTER&#13;
+   ===================================================== */&#13;
+&#13;
+.claim-hub-home .hub-footer {&#13;
+  background: #10243f;&#13;
+&#13;
+  color: #ffffff;&#13;
+&#13;
+  padding: 25px 35px;&#13;
+&#13;
+  display: flex;&#13;
+&#13;
+  justify-content: space-between;&#13;
+&#13;
+  align-items: center;&#13;
+&#13;
+  gap: 20px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .footer-brand {&#13;
+  display: flex;&#13;
+&#13;
+  align-items: center;&#13;
+&#13;
+  gap: 12px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .footer-shield {&#13;
+  font-size: 28px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .footer-brand strong {&#13;
+  display: block;&#13;
+&#13;
+  font-size: 15px;&#13;
+}&#13;
+&#13;
+.claim-hub-home .footer-brand small {&#13;
+  display: block;&#13;
+&#13;
+  margin-top: 3px;&#13;
+&#13;
+  color: #b9c7d9;&#13;
+}&#13;
+&#13;
+.claim-hub-home .footer-text {&#13;
+  color: #b9c7d9;&#13;
+&#13;
+  font-size: 12px;&#13;
+}&#13;
+&#13;
+&#13;
+/* =====================================================&#13;
+   RESPONSIVE&#13;
+   ===================================================== */&#13;
+&#13;
+@media (max-width: 1000px) {&#13;
+&#13;
+  .claim-hub-home .quick-actions,&#13;
+  .claim-hub-home .feature-grid {&#13;
+    grid-template-columns: repeat(2, 1fr);&#13;
+  }&#13;
+&#13;
+  .claim-hub-home .process-grid {&#13;
+    grid-template-columns: repeat(2, 1fr);&#13;
+  }&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+@media (max-width: 650px) {&#13;
+&#13;
+  .claim-hub-home .hero h1 {&#13;
+    font-size: 32px;&#13;
+  }&#13;
+&#13;
+  .claim-hub-home .hero h2 {&#13;
+    font-size: 18px;&#13;
+  }&#13;
+&#13;
+  .claim-hub-home .quick-actions,&#13;
+  .claim-hub-home .feature-grid,&#13;
+  .claim-hub-home .process-grid {&#13;
+    grid-template-columns: 1fr;&#13;
+  }&#13;
+&#13;
+  .claim-hub-home .help-content {&#13;
+    flex-direction: column;&#13;
+&#13;
+    align-items: flex-start;&#13;
+  }&#13;
+&#13;
+  .claim-hub-home .hub-footer {&#13;
+    flex-direction: column;&#13;
+&#13;
+    align-items: flex-start;&#13;
+  }&#13;
+&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>insurance_claim_hub_home</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Insurance Claim Hub Home</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    data.portal_name = "Insurance Claim Hub";
+    data.tagline = "Secure Claims. Smarter Tomorrow.";
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 05:02:35</sys_created_on>
+        <sys_id>e5213dfc80e703107f44e29321b0a260</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Insurance Claim Hub Home</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_widget_e5213dfc80e703107f44e29321b0a260</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 18:17:07</sys_updated_on>
+        <template><![CDATA[<div class="claim-hub-home">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="hero-logo">
+        ]]>🛡<![CDATA[️
+      </div>
+
+      <div class="hero-badge">
+        INSURANCE CLAIM PROCESSING HUB
+      </div>
+
+      <h1>
+        Insurance Claim Hub
+      </h1>
+
+      <h2>
+        Secure Claims. Smarter Tomorrow.
+      </h2>
+
+      <p>
+        Submit, manage and track your insurance claims
+        through one secure and transparent platform.
+      </p>
+
+      <div class="hero-actions">
+
+        <button
+          class="btn-primary"
+          ng-click="c.goToPage('submit_claim')">
+          <span>＋</span>
+          Submit a Claim
+        </button>
+
+        <button
+          class="btn-outline"
+          ng-click="c.goToPage('track_claim')">
+          Track My Claim
+          <span>→</span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= WELCOME ================= -->
+
+  <section class="welcome">
+
+    <div class="section-heading">
+
+      <span class="small-title">
+        INSURANCE CLAIM MANAGEMENT
+      </span>
+
+      <h2>
+        Everything You Need in One Place
+      </h2>
+
+      <p>
+        Manage your insurance claim journey from submission
+        to settlement with a simple and secure experience.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= QUICK ACTIONS ================= -->
+
+  <section class="quick-actions">
+
+    <div
+      class="action-card action-blue"
+      ng-click="c.goToPage('submit_claim')">
+
+      <div class="action-icon">
+        ]]>📄
+<![CDATA[      </div>
+
+      <div class="action-content">
+
+        <h3>
+          Submit a Claim
+        </h3>
+
+        <p>
+          Start a new insurance claim and provide the required details.
+        </p>
+
+        <span>
+          Submit Claim →
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="action-card action-green"
+      ng-click="c.goToPage('my_claims')">
+
+      <div class="action-icon">
+        ]]>📋
+<![CDATA[      </div>
+
+      <div class="action-content">
+
+        <h3>
+          My Claims
+        </h3>
+
+        <p>
+          View and manage your submitted insurance claims.
+        </p>
+
+        <span>
+          View Claims →
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="action-card action-purple"
+      ng-click="c.goToPage('track_claim')">
+
+      <div class="action-icon">
+        ]]>🔍
+<![CDATA[      </div>
+
+      <div class="action-content">
+
+        <h3>
+          Track Claim
+        </h3>
+
+        <p>
+          Check your claim status and follow its progress.
+        </p>
+
+        <span>
+          Track Claim →
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= DOCUMENTS ================= -->
+
+    <div
+      class="action-card action-orange"
+      ng-click="c.goToPage('claim_documents')">
+
+      <div class="action-icon">
+        ]]>📁
+<![CDATA[      </div>
+
+      <div class="action-content">
+
+        <h3>
+          Documents
+        </h3>
+
+        <p>
+          Manage documents associated with your insurance claims.
+        </p>
+
+        <span>
+          View Documents →
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FEATURES ================= -->
+
+  <section class="features">
+
+    <div class="section-heading">
+
+      <span class="small-title">
+        OUR PLATFORM
+      </span>
+
+      <h2>
+        Designed for a Simple Claim Experience
+      </h2>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ]]>🔐
+<![CDATA[        </div>
+
+        <h3>
+          Secure
+        </h3>
+
+        <p>
+          Secure authentication and protected claim information
+          throughout the claim journey.
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ]]>📱
+<![CDATA[        </div>
+
+        <h3>
+          Easy to Use
+        </h3>
+
+        <p>
+          A simple portal to submit claims, upload documents
+          and view claim information.
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ]]>👁<![CDATA[️
+        </div>
+
+        <h3>
+          Transparent
+        </h3>
+
+        <p>
+          Track your claim progress and stay informed about
+          important claim updates.
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ⚡
+        </div>
+
+        <h3>
+          Efficient
+        </h3>
+
+        <p>
+          A connected workflow helps move your claim through
+          verification, assessment and settlement.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CLAIM PROCESS ================= -->
+
+  <section class="process">
+
+    <div class="section-heading">
+
+      <span class="small-title">
+        CLAIM JOURNEY
+      </span>
+
+      <h2>
+        How Your Claim Moves Forward
+      </h2>
+
+      <p>
+        Follow the major stages of the insurance claim process.
+      </p>
+
+    </div>
+
+
+    <div class="process-grid">
+
+
+      <div class="process-item">
+
+        <div class="process-number">
+          01
+        </div>
+
+        <div>
+
+          <h3>
+            Claim Submission
+          </h3>
+
+          <p>
+            Submit your First Notice of Loss and claim details.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="process-item">
+
+        <div class="process-number">
+          02
+        </div>
+
+        <div>
+
+          <h3>
+            OTP Verification
+          </h3>
+
+          <p>
+            Verify the policyholder identity using OTP verification.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="process-item">
+
+        <div class="process-number">
+          03
+        </div>
+
+        <div>
+
+          <h3>
+            Document Validation
+          </h3>
+
+          <p>
+            Upload and validate the required claim documents.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="process-item">
+
+        <div class="process-number">
+          04
+        </div>
+
+        <div>
+
+          <h3>
+            Policy Matching
+          </h3>
+
+          <p>
+            Claim and policy information are checked for matching.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="process-item">
+
+        <div class="process-number">
+          05
+        </div>
+
+        <div>
+
+          <h3>
+            Fraud Assessment
+          </h3>
+
+          <p>
+            Claim information is assessed for potential fraud risk.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="process-item">
+
+        <div class="process-number">
+          06
+        </div>
+
+        <div>
+
+          <h3>
+            Settlement
+          </h3>
+
+          <p>
+            The claim proceeds through approval and settlement.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= HELP ================= -->
+
+  <section class="help-section">
+
+    <div class="help-content">
+
+      <div>
+
+        <span class="small-title">
+          NEED ASSISTANCE?
+        </span>
+
+        <h2>
+          We're Here to Help
+        </h2>
+
+        <p>
+          Use the Insurance Claim Hub to manage your claim
+          information and follow its progress.
+        </p>
+
+      </div>
+
+
+      <div class="help-actions">
+
+        <button
+          class="help-btn"
+          ng-click="c.goToPage('my_claims')">
+
+          View My Claims
+
+        </button>
+
+
+        <!-- DOCUMENTS FIX -->
+
+        <button
+          class="help-btn secondary"
+          ng-click="c.goToPage('claim_documents')">
+
+          View Documents
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="hub-footer">
+
+    <div class="footer-brand">
+
+      <span class="footer-shield">
+        ]]>🛡<![CDATA[️
+      </span>
+
+      <div>
+
+        <strong>
+          Insurance Claim Hub
+        </strong>
+
+        <small>
+          Secure Claims. Smarter Tomorrow.
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-text">
+
+      Insurance Claim Processing Hub
+
+    </div>
+
+  </footer>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

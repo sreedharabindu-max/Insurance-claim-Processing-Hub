@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="otp_code" label="OTP Code" language="en" table="x_snc_insurance_0_claim">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>otp_code</element>
+            <help/>
+            <hint/>
+            <label>OTP Code</label>
+            <language>en</language>
+            <name>x_snc_insurance_0_claim</name>
+            <plural>OTP Codes</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-19 14:34:08</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>OTP Code</sys_name>
+            <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+            <sys_update_name>sys_documentation_x_snc_insurance_0_claim_otp_code_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-19 14:34:08</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message">
+    <sys_ui_message action="INSERT_OR_UPDATE">
+        <application>Virtual Agent</application>
+        <code/>
+        <commented_message/>
+        <key>va:topic:f6688669342b03107f445f6bcb27b131:node:fd9fe704065f4645aba298471f8d3f01:field:0</key>
+        <language>en</language>
+        <message>After you submit a claim, it goes through verification, document validation, policy and data matching, fraud risk assessment, settlement recommendation, approval, and finally payment and closure. You can track your claim status through the Insurance Claim Hub.</message>
+        <sys_class_name>sys_ui_message</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-26 06:20:20</sys_created_on>
+        <sys_id>24ef55f939e703107f44a3a3c988e32b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>va:topic:f6688669342b03107f445f6bcb27b131:node:fd9fe704065f4645aba298471f8d3f01:field:0</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_ui_message_24ef55f939e703107f44a3a3c988e32b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-26 06:20:20</sys_updated_on>
+    </sys_ui_message>
+</record_update>

@@ -1,0 +1,1602 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>standard</category>
+        <client_script><![CDATA[function loginCtrl($scope, $http, $window, $location, glideUserSession, glideSystemProperties, spUtil) {
+
+	var c = this;
+
+
+	// ==========================================
+	// INITIAL SETTINGS
+	// ==========================================
+
+	c.remember_me =
+		c.data.forgetMe ?
+		false :
+		c.data.rememberMeDefault;
+
+	c.data.url_suffix =
+		$scope.portal ?
+		$scope.portal.url_suffix :
+		"";
+
+	c.masked = true;
+
+
+	// ==========================================
+	// SSO LOGIN
+	// ==========================================
+
+	if (!c.data.is_logged_in &&
+		c.data.multisso_enabled &&
+		c.data.default_idp) {
+
+		var pageId =
+			$location.search().id ||
+			$scope.page.id;
+
+		var isLoginPage =
+			($scope.portal.login_page_dv == pageId) ||
+			('login' == pageId);
+
+		c.server.get({
+
+			action: "set_sso_destination",
+
+			pageURI:
+				isLoginPage ?
+				null :
+				$location.url()
+
+		}).then(function() {
+
+			$window.location =
+				"/login_with_sso.do?glide_sso_id=" +
+				c.data.default_idp;
+
+		});
+
+	}
+
+
+	// ==========================================
+	// CERTIFICATE LOGIN
+	// ==========================================
+
+	else if (
+		!c.data.is_logged_in &&
+		c.data.certAuthRedirect &&
+		c.data.cert_based_auth &&
+		c.data.certHeader == "true"
+	) {
+
+		login(null, null, true);
+
+	}
+
+
+	// ==========================================
+	// LOGIN BUTTON
+	// ==========================================
+
+	c.login = function(username, password, isCertLogin) {
+
+		login(
+			username,
+			password,
+			isCertLogin
+		);
+
+	};
+
+
+	// ==========================================
+	// LOGIN FUNCTION
+	// ==========================================
+
+	function login(username, password, isCertLogin) {
+
+		var url =
+			spUtil.getURL({
+				sysparm_type:
+					'view_form.login'
+			});
+
+
+		var pageId =
+			$location.search().id ||
+			$scope.page.id;
+
+
+		var isLoginPage =
+			($scope.portal.login_page_dv == pageId) ||
+			('login' == pageId);
+
+
+		return $http({
+
+			method: 'post',
+
+			url: url,
+
+			data: $.param({
+
+				'sysparm_type':
+					'login',
+
+				'ni.nolog.user_password':
+					true,
+
+				'remember_me':
+					!!c.remember_me,
+
+				'user_name':
+					username,
+
+				'user_password':
+					password,
+
+				'get_redirect_url':
+					true,
+
+				'is_direct_redirect':
+					true,
+
+				'sysparm_goto_url':
+					isLoginPage ?
+					null :
+					$location.url(),
+
+				'mfa_redirect_url':
+					isLoginPage ?
+					null :
+					c.data.pageURI,
+
+				'cert_login':
+					!!isCertLogin
+
+			}),
+
+			headers: {
+
+				'Content-Type':
+					'application/x-www-form-urlencoded'
+
+			}
+
+		}).then(function(response) {
+
+
+			// ======================================
+			// EMPTY RESPONSE
+			// ======================================
+
+			if (!response.data) {
+
+				c.message =
+					$scope.data.errorMsg;
+
+				return;
+
+			}
+
+
+			// ======================================
+			// SUCCESSFUL LOGIN
+			// ======================================
+
+			if (response.data.status == 'success') {
+
+
+				// MFA enabled
+				if (c.data.multiFactorAuthEnabled) {
+
+
+					if (response.data.session_token) {
+
+						window.g_ck =
+							response.data.session_token;
+
+					}
+
+
+					c.server.get({
+
+						action:
+							"multi_factor_auth_setup",
+
+						directTo:
+							response.data.redirect_url
+
+					}).then(
+
+						handleLoginResponse.bind(response),
+
+						handleLoginResponse.bind(response)
+
+					);
+
+				}
+
+
+				// Normal login
+				else {
+
+					handleLoginResponse.call(response);
+
+				}
+
+			}
+
+
+			// ======================================
+			// MFA CODE REQUIRED
+			// ======================================
+
+			else if (
+				response.data.status ==
+				'mfa_code_required'
+			) {
+
+				$window.location =
+					'/validate_multifactor_auth_code.do';
+
+			}
+
+
+			// ======================================
+			// LOGIN FAILED
+			// ======================================
+
+			else {
+
+				c.message =
+					response.data.message ||
+					"Invalid username or password.";
+
+				c.password = "";
+
+				c.username = "";
+
+				setTimeout(function() {
+
+					var usernameElement =
+						document.getElementById(
+							"username"
+						);
+
+					if (usernameElement) {
+
+						usernameElement.focus();
+
+					}
+
+				}, 100);
+
+			}
+
+
+		}, function errorCallback(response) {
+
+			c.message =
+				$scope.data.errorMsg ||
+				"Unable to process login.";
+
+		});
+
+	}
+
+
+	// ==========================================
+	// LOGIN SUCCESS RESPONSE
+	// ==========================================
+
+	function handleLoginResponse() {
+
+		c.success =
+			this.data.message;
+
+
+		/*
+		 * IMPORTANT:
+		 *
+		 * Do NOT use:
+		 *
+		 * $window.location =
+		 * this.data.redirect_url;
+		 *
+		 * We want the Insurance Claim Hub
+		 * home page every time.
+		 */
+
+
+		var portalSuffix =
+			c.data.url_suffix ||
+			($scope.portal ?
+				$scope.portal.url_suffix :
+				"");
+
+
+		var homeUrl;
+
+
+		if (portalSuffix) {
+
+			homeUrl =
+				"/" +
+				portalSuffix +
+				"?id=claim_home";
+
+		} else {
+
+			homeUrl =
+				"?id=claim_home";
+
+		}
+
+
+		// Force navigation to claim_home
+
+		$window.location.href =
+			homeUrl;
+
+	}
+
+
+	// ==========================================
+	// OIDC LOGIN
+	// ==========================================
+
+	c.oidcLogin = function(idProvider) {
+
+		var pageId =
+			$location.search().id ||
+			$scope.page.id;
+
+		var isLoginPage =
+			$scope.portal.login_page_dv ==
+			pageId;
+
+
+		c.server.get({
+
+			action:
+				"set_sso_destination",
+
+			pageURI:
+				isLoginPage ?
+				null :
+				$location.url()
+
+		}).then(function() {
+
+			$window.location =
+				"/login_with_sso.do?glide_sso_id=" +
+				idProvider;
+
+		});
+
+	};
+
+
+	// ==========================================
+	// EXTERNAL LOGIN
+	// ==========================================
+
+	c.externalLogin = function() {
+
+		var pageId =
+			$location.search().id ||
+			$scope.page.id;
+
+
+		var isLoginPage =
+			($scope.portal.login_page_dv == pageId) ||
+			('login' == pageId);
+
+
+		c.server.get({
+
+			action:
+				"set_sso_destination",
+
+			pageURI:
+				isLoginPage ?
+				null :
+				$location.url()
+
+		}).then(function() {
+
+			glideSystemProperties.set(
+				"glide.authenticate.multisso.enabled",
+				true
+			);
+
+
+			glideUserSession
+				.getSsoRedirectUrlForUsername(
+					c.username
+				)
+				.then(function(url) {
+
+					$window.location =
+						url;
+
+				}, function(err) {
+
+					spUtil.addErrorMessage(
+						$scope.data.errorMsg2
+					);
+
+				});
+
+		});
+
+	};
+
+
+	// ==========================================
+	// EXTERNAL LOGIN MODE
+	// ==========================================
+
+	c.setExternalLogin = function(newVal) {
+
+		c.externalLoginMode =
+			newVal;
+
+
+		if (!newVal) {
+
+			c.masked = true;
+
+		}
+
+	};
+
+
+	// ==========================================
+	// PASSWORD SHOW / HIDE
+	// ==========================================
+
+	c.renderMaskIcon = function() {
+
+		var passwordEle =
+			document.getElementById(
+				"password"
+			);
+
+		var maskEle =
+			document.getElementById(
+				"mask_icon"
+			);
+
+		var btnDescription =
+			document.getElementById(
+				"btnDescription"
+			);
+
+
+		if (!passwordEle) {
+			return;
+		}
+
+
+		var isPasswordType =
+			passwordEle.type ===
+			'password';
+
+
+		if (maskEle) {
+
+			maskEle.classList.toggle(
+				'active',
+				isPasswordType
+			);
+
+		}
+
+
+		passwordEle.type =
+			isPasswordType ?
+			'text' :
+			'password';
+
+
+		if (btnDescription) {
+
+			btnDescription.textContent =
+				isPasswordType ?
+				'Password shown' :
+				'Password hidden';
+
+		}
+
+	};
+
+
+	// ==========================================
+	// CREATE ACCOUNT
+	// ==========================================
+
+	c.goToSignup = function() {
+
+		$location.search({
+
+			id: "claim_signup"
+
+		});
+
+	};
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* ==========================================&#13;
+   LOGIN PAGE&#13;
+   ========================================== */&#13;
+&#13;
+.ich-login-page {&#13;
+&#13;
+    min-height: 100vh;&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    position: relative;&#13;
+&#13;
+    overflow: hidden;&#13;
+&#13;
+    padding: 35px 20px;&#13;
+&#13;
+    box-sizing: border-box;&#13;
+&#13;
+    background:&#13;
+        linear-gradient(&#13;
+            135deg,&#13;
+            #edf6ff 0%,&#13;
+            #f8fbff 50%,&#13;
+            #edf3ff 100%&#13;
+        );&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   BACKGROUND&#13;
+   ========================================== */&#13;
+&#13;
+.ich-bg-circle {&#13;
+&#13;
+    position: absolute;&#13;
+&#13;
+    border-radius: 50%;&#13;
+&#13;
+    pointer-events: none;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-circle-one {&#13;
+&#13;
+    width: 430px;&#13;
+&#13;
+    height: 430px;&#13;
+&#13;
+    top: -220px;&#13;
+&#13;
+    left: -140px;&#13;
+&#13;
+    background:&#13;
+        rgba(37, 99, 235, 0.08);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-circle-two {&#13;
+&#13;
+    width: 380px;&#13;
+&#13;
+    height: 380px;&#13;
+&#13;
+    right: -150px;&#13;
+&#13;
+    bottom: -200px;&#13;
+&#13;
+    background:&#13;
+        rgba(59, 130, 246, 0.07);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   LOGIN CARD&#13;
+   ========================================== */&#13;
+&#13;
+.ich-login-card {&#13;
+&#13;
+    width: 100%;&#13;
+&#13;
+    max-width: 440px;&#13;
+&#13;
+    padding: 38px 42px 28px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    border-radius: 20px;&#13;
+&#13;
+    border: 1px solid #e4ebf4;&#13;
+&#13;
+    box-shadow:&#13;
+        0 25px 70px&#13;
+        rgba(30, 64, 175, 0.14);&#13;
+&#13;
+    position: relative;&#13;
+&#13;
+    z-index: 2;&#13;
+&#13;
+    box-sizing: border-box;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   BRAND&#13;
+   ========================================== */&#13;
+&#13;
+.ich-brand {&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    margin-bottom: 28px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-logo {&#13;
+&#13;
+    width: 68px;&#13;
+&#13;
+    height: 68px;&#13;
+&#13;
+    margin: 0 auto 14px;&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    border-radius: 18px;&#13;
+&#13;
+    font-size: 32px;&#13;
+&#13;
+    background:&#13;
+        linear-gradient(&#13;
+            135deg,&#13;
+            #0757c9,&#13;
+            #2486e8&#13;
+        );&#13;
+&#13;
+    box-shadow:&#13;
+        0 12px 28px&#13;
+        rgba(37, 99, 235, 0.25);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-brand h1 {&#13;
+&#13;
+    margin: 0;&#13;
+&#13;
+    color: #12315b;&#13;
+&#13;
+    font-size: 25px;&#13;
+&#13;
+    font-weight: 700;&#13;
+&#13;
+    letter-spacing: -0.4px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-brand p {&#13;
+&#13;
+    margin: 6px 0 0;&#13;
+&#13;
+    color: #718198;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   WELCOME&#13;
+   ========================================== */&#13;
+&#13;
+.ich-welcome {&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    margin-bottom: 25px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-welcome h2 {&#13;
+&#13;
+    margin: 0;&#13;
+&#13;
+    color: #16365f;&#13;
+&#13;
+    font-size: 22px;&#13;
+&#13;
+    font-weight: 700;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-welcome p {&#13;
+&#13;
+    margin: 7px auto 0;&#13;
+&#13;
+    max-width: 320px;&#13;
+&#13;
+    color: #7b8ca2;&#13;
+&#13;
+    font-size: 13px;&#13;
+&#13;
+    line-height: 1.5;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   FORM&#13;
+   ========================================== */&#13;
+&#13;
+.ich-field {&#13;
+&#13;
+    margin-bottom: 18px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-field label {&#13;
+&#13;
+    display: block;&#13;
+&#13;
+    margin-bottom: 8px;&#13;
+&#13;
+    color: #344a68;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+    font-weight: 600;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-password-label {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    justify-content: space-between;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-password-label label {&#13;
+&#13;
+    margin-bottom: 8px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-password-label a {&#13;
+&#13;
+    color: #1769d1;&#13;
+&#13;
+    font-size: 11px;&#13;
+&#13;
+    text-decoration: none;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-password-label a:hover {&#13;
+&#13;
+    text-decoration: underline;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   INPUT&#13;
+   ========================================== */&#13;
+&#13;
+.ich-input-wrapper {&#13;
+&#13;
+    position: relative;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-input-icon {&#13;
+&#13;
+    position: absolute;&#13;
+&#13;
+    left: 14px;&#13;
+&#13;
+    top: 50%;&#13;
+&#13;
+    transform: translateY(-50%);&#13;
+&#13;
+    font-size: 15px;&#13;
+&#13;
+    opacity: 0.65;&#13;
+&#13;
+    pointer-events: none;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-input {&#13;
+&#13;
+    width: 100%;&#13;
+&#13;
+    height: 48px;&#13;
+&#13;
+    padding:&#13;
+        0 14px 0 43px;&#13;
+&#13;
+    border:&#13;
+        1px solid #d5dfeb;&#13;
+&#13;
+    border-radius: 9px;&#13;
+&#13;
+    background: #f8fbff;&#13;
+&#13;
+    color: #263d5c;&#13;
+&#13;
+    font-size: 13px;&#13;
+&#13;
+    outline: none;&#13;
+&#13;
+    box-sizing: border-box;&#13;
+&#13;
+    transition:&#13;
+        border 0.2s,&#13;
+        box-shadow 0.2s,&#13;
+        background 0.2s;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-input::placeholder {&#13;
+&#13;
+    color: #a0adbc;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-input:focus {&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    border-color: #2774d7;&#13;
+&#13;
+    box-shadow:&#13;
+        0 0 0 3px&#13;
+        rgba(39, 116, 215, 0.10);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   REMEMBER ME&#13;
+   ========================================== */&#13;
+&#13;
+.ich-options {&#13;
+&#13;
+    margin:&#13;
+        2px 0 18px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-remember {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    gap: 7px;&#13;
+&#13;
+    color: #718198;&#13;
+&#13;
+    font-size: 11px;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-remember input {&#13;
+&#13;
+    width: 14px;&#13;
+&#13;
+    height: 14px;&#13;
+&#13;
+    accent-color: #1769d1;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   LOGIN BUTTON&#13;
+   ========================================== */&#13;
+&#13;
+.ich-login-btn {&#13;
+&#13;
+    width: 100%;&#13;
+&#13;
+    height: 49px;&#13;
+&#13;
+    border: none;&#13;
+&#13;
+    border-radius: 9px;&#13;
+&#13;
+    background:&#13;
+        linear-gradient(&#13;
+            135deg,&#13;
+            #1467d5,&#13;
+            #2582e3&#13;
+        );&#13;
+&#13;
+    color: #ffffff;&#13;
+&#13;
+    font-size: 14px;&#13;
+&#13;
+    font-weight: 700;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    gap: 10px;&#13;
+&#13;
+    box-shadow:&#13;
+        0 9px 22px&#13;
+        rgba(37, 99, 235, 0.22);&#13;
+&#13;
+    transition:&#13;
+        transform 0.2s,&#13;
+        box-shadow 0.2s;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-login-btn:hover {&#13;
+&#13;
+    transform: translateY(-1px);&#13;
+&#13;
+    box-shadow:&#13;
+        0 12px 27px&#13;
+        rgba(37, 99, 235, 0.28);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-arrow {&#13;
+&#13;
+    font-size: 18px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   ERROR MESSAGE&#13;
+   ========================================== */&#13;
+&#13;
+.ich-message {&#13;
+&#13;
+    margin-top: 13px;&#13;
+&#13;
+    padding: 10px 12px;&#13;
+&#13;
+    border-radius: 7px;&#13;
+&#13;
+    background: #fff1f2;&#13;
+&#13;
+    border: 1px solid #fecdd3;&#13;
+&#13;
+    color: #be123c;&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   DIVIDER&#13;
+   ========================================== */&#13;
+&#13;
+.ich-divider {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    gap: 10px;&#13;
+&#13;
+    margin: 25px 0 17px;&#13;
+&#13;
+    color: #9aa8b8;&#13;
+&#13;
+    font-size: 10px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-divider::before,&#13;
+.ich-divider::after {&#13;
+&#13;
+    content: "";&#13;
+&#13;
+    flex: 1;&#13;
+&#13;
+    height: 1px;&#13;
+&#13;
+    background: #e7edf3;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-divider span {&#13;
+&#13;
+    white-space: nowrap;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   SIGNUP BUTTON&#13;
+   ========================================== */&#13;
+&#13;
+.ich-signup-btn {&#13;
+&#13;
+    width: 100%;&#13;
+&#13;
+    height: 46px;&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    gap: 8px;&#13;
+&#13;
+    border:&#13;
+        1px solid #2471d5;&#13;
+&#13;
+    border-radius: 9px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    color: #1769d1;&#13;
+&#13;
+    font-size: 13px;&#13;
+&#13;
+    font-weight: 600;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+    transition:&#13;
+        background 0.2s,&#13;
+        border 0.2s;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-signup-btn:hover {&#13;
+&#13;
+    background: #f0f6ff;&#13;
+&#13;
+    border-color: #145db8;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-signup-btn span:last-child {&#13;
+&#13;
+    font-size: 17px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   SECURITY&#13;
+   ========================================== */&#13;
+&#13;
+.ich-security {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    gap: 6px;&#13;
+&#13;
+    margin-top: 21px;&#13;
+&#13;
+    padding-top: 17px;&#13;
+&#13;
+    border-top: 1px solid #edf1f5;&#13;
+&#13;
+    color: #8b99aa;&#13;
+&#13;
+    font-size: 10px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   FOOTER&#13;
+   ========================================== */&#13;
+&#13;
+.ich-footer {&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    margin-top: 13px;&#13;
+&#13;
+    color: #b2bcc8;&#13;
+&#13;
+    font-size: 9px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   MOBILE&#13;
+   ========================================== */&#13;
+&#13;
+@media (max-width: 500px) {&#13;
+&#13;
+    .ich-login-page {&#13;
+&#13;
+        padding:&#13;
+            20px 12px;&#13;
+&#13;
+    }&#13;
+&#13;
+&#13;
+    .ich-login-card {&#13;
+&#13;
+        padding:&#13;
+            30px 24px 24px;&#13;
+&#13;
+        border-radius: 17px;&#13;
+&#13;
+    }&#13;
+&#13;
+&#13;
+    .ich-brand h1 {&#13;
+&#13;
+        font-size: 22px;&#13;
+&#13;
+    }&#13;
+&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Professional login page for Insurance Claim Hub</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>insurance_claim_hub_login</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Insurance Claim Hub Login</name>
+        <option_schema>[{"name":"show_panel","section":"Presentation","default_value":"true","label":"Show Panel","type":"boolean"},{"name":"use_advanced","section":"Presentation","default_value":"false","label":"Use Advanced View","type":"boolean"}]</option_schema>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    options.show_panel = options.show_panel == "true" || options.show_panel == true;
+
+    if (input && input.action === "multi_factor_auth_setup") {
+        if (gs.getSession().getProperty("setup_multifactor_authn")) {
+            if (input.directTo && input.directTo != "/login_cpw.do") {
+              gs.getSession().putProperty("nav_to", input.directTo);
+              gs.getSession().putProperty("starting_page", input.directTo);
+            }
+            gs.getSession().putProperty("is_direct_redirect", "true");
+        }
+        return;
+    }
+    var portalRecord = $sp.getPortalRecord();
+    var idpList = [];
+    data.isMultiSSOActive = gs.getProperty('glide.authenticate.multisso.enabled', 'false') == 'true';
+
+    if (data.isMultiSSOActive) {
+        data.portal_authentication_mode = $sp.getValue("enable_portal_authentication") == 'true';
+        data.use_local_login = $sp.getValue("enable_local_login") == 'true';
+        var portalIdentityProviders = $sp.getValue('portal_identity_providers');
+        if (data.portal_authentication_mode && portalIdentityProviders) {
+            var arr = portalIdentityProviders.split(',');
+            for (var i = 0; i < arr.length; i++) {
+                var val = arr[i];
+                if (val) idpList.push(val.trim() + "");
+            }
+        }
+    }
+
+
+    var ssoSelectorField = gs.getProperty('glide.authenticate.multisso.login_locate.user_field', 'user_name');
+    var td = new GlideTableDescriptor('sys_user');
+    var ed = td.getElementDescriptor(ssoSelectorField);
+    if (ed)
+        data.ssoSelectorFieldLabel = ed.getLabel();
+
+
+    // We don't want to set a starting page until we've begun the login process.
+    if (input && input.action === "set_sso_destination") {
+        var gs_nav_to = gs.getSession().getProperty("nav_to");
+        gs.getSession().putProperty("nav_to", null);
+
+        if (input.pageURI) {
+            gs.getSession().putProperty("is_direct_redirect", "true");
+            gs.getSession().putProperty("starting_page", input.pageURI);
+        } else if (!gs.getSession().getProperty("starting_page") && gs_nav_to)
+            gs.getSession().putProperty("starting_page", gs_nav_to);
+        return;
+
+    }
+
+    // for self registration fields
+    var self_registration_field = portalRecord ? portalRecord.getValue("user_registration_config") : "";
+    if (self_registration_field) {
+        var registration_config = new GlideRecord("sys_user_registration_config");
+        registration_config.addActiveQuery();
+        registration_config.query('sys_id', self_registration_field);
+        if (registration_config.next()) {
+            var self_registration_record_producer = registration_config.getValue("record_producer");
+            var self_registration_label = registration_config.getDisplayValue("registration_label") || gs.getMessage("Sign Up");
+            data.self_registration_record_producer = self_registration_record_producer;
+            data.self_registration_label = self_registration_label;
+        }
+    }
+
+    //Enabling certificate based authentication per portal
+    if (portalRecord && (portalRecord.getValue('enable_certificate_based_authentication') == 1))
+        data.cert_based_auth = gs.getProperty('glide.authenticate.mutual.enabled', 'false') == 'true';
+    
+    //get the certificate header
+    if (data.cert_based_auth) {
+	var request = GlideTransaction.get().getRequest();
+	var certHeader = request.getHeader("X-Client-Cert");
+	if (!certHeader) {
+		data.certHeader = "false";
+            gs.log("Failed to register PIV/CAC certificate to the user account.");
+        } else
+		data.certHeader = "true";    
+    }
+
+    //Get the OpenID Connect and SAML type Identity provider which can be shown on the Portal login page.
+    data.isShowLoginWithIdps = false;
+    data.isMultiSSOActive = gs.getProperty('glide.authenticate.multisso.enabled', 'false') == 'true';
+    var ssoRecords = [];
+    data.ssoRecords = [];
+
+    var gr = new GlideRecord("sso_properties");
+    if (data.isMultiSSOActive && gr.isValid()) {
+        ssoRecords = new MultiSSO_OidcUtil().getSSORecords();
+    }
+
+    if (!data.portal_authentication_mode) {
+        data.ssoRecords = ssoRecords;
+    } else if (idpList.length > 0) {
+        for (var i = 0; i < ssoRecords.length; i++) {
+            var idp = ssoRecords[i];
+            if (idpList.indexOf(idp.sysId.trim()) !== -1)
+                data.ssoRecords.push(idp);
+        }
+    }
+    data.isShowLoginWithIdps = (data.ssoRecords.length > 0);
+
+    //STRY50033370: Forgot Password link in the login widget
+    data.pswdResetUrl = gs.getProperty('glide.security.password_reset.uri');
+    data.forgotPwdLinkProp = gs.getProperty('glide.security.forgot_password.display.link');
+
+    data.errorMsg = gs.getMessage("There was an error processing your request");
+    data.errorMsg2 = gs.getMessage("An error has occurred - please contact your system administrator");
+    data.passwordMsg = gs.getMessage("Password");
+    data.usernameMsg = gs.getMessage("User name");
+    data.forgetMe = GlideProperties.getBoolean("glide.ui.forgetme");
+    data.rememberMeDefault = GlideProperties.getBoolean('glide.ui.remember.me.default', true);
+    data.is_logged_in = gs.getSession().isLoggedIn();
+    var bypass_sso = options.bypass_sso == "true";
+    data.multisso_enabled = !bypass_sso && GlideProperties.getBoolean("glide.authenticate.multisso.enabled");
+    data.default_idp = GlideProperties.get("glide.authenticate.sso.redirect.idp");
+    data.pageURI = new GlideSPUtil().getPageUri();
+    data.multiFactorAuthEnabled = GlideProperties.getBoolean('glide.authenticate.multifactor', false);
+    data.certAuthRedirect = gs.getProperty('glide.authenticate.cert.redirect.enable', 'false') == 'true';
+    if (data.portal_authentication_mode && data.use_local_login)
+        data.default_idp = null;
+    if (data.portal_authentication_mode && data.ssoRecords.length > 0) {
+        if (data.ssoRecords.length == 1)
+            data.default_idp = data.ssoRecords[0].sysId;
+        else if (data.ssoRecords.length > 1)
+            data.default_idp = null;
+
+    }
+
+    //STRY53144967: Handle user redirection to specific Identity provider mapped in Custom Url record for Portals
+    var customURL = GlideProperties.getBoolean('glide.customurl.enabled', false);
+    if (customURL == true && data.multisso_enabled == true) {
+		var idp = SNC.CustomURLSPUtil.getAutoRedirectIDPForCustomURLWithPortal();
+		if(GlideStringUtil.notNil(idp))
+			data.default_idp = idp;
+    }
+	
+	//Show info message is session access is reduced
+    var isSessionAccessReduced = GlideSession.get().getBooleanProperty("isSessionAccessReduced", false);
+    var isSessionAccessMessageShown = GlideSession.get().getBooleanProperty("isSessionAccessReducedMessageShown", false);
+    if (isSessionAccessReduced && !isSessionAccessMessageShown)
+        SNC.SessionAccessUtil.showUserInfoMessageIfAccessReduced();
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-22 13:49:28</sys_created_on>
+        <sys_id>a45026e851ef03107f444ed624f3c9f3</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Insurance Claim Hub Login</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_widget_a45026e851ef03107f444ed624f3c9f3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 09:41:54</sys_updated_on>
+        <template><![CDATA[<div class="ich-login-page">
+
+    <!-- Background decorations -->
+
+    <div class="ich-bg-circle ich-circle-one"></div>
+
+    <div class="ich-bg-circle ich-circle-two"></div>
+
+
+    <!-- LOGIN CARD -->
+
+    <div class="ich-login-card">
+
+
+        <!-- BRAND -->
+
+        <div class="ich-brand">
+
+            <div class="ich-logo">
+                ]]>🛡<![CDATA[️
+            </div>
+
+            <h1>
+                Insurance Claim Hub
+            </h1>
+
+            <p>
+                Secure Claims. Smarter Tomorrow.
+            </p>
+
+        </div>
+
+
+        <!-- WELCOME -->
+
+        <div class="ich-welcome">
+
+            <h2>
+                Welcome Back
+            </h2>
+
+            <p>
+                Sign in to manage your insurance claims
+                securely and easily.
+            </p>
+
+        </div>
+
+
+        <!-- LOGIN FORM -->
+
+        <form
+            ng-submit="c.login(c.username, c.password)"
+            class="ich-form">
+
+
+            <!-- USERNAME -->
+
+            <div class="ich-field">
+
+                <label>
+                    Username
+                </label>
+
+                <div class="ich-input-wrapper">
+
+                    <span class="ich-input-icon">
+                        ]]>👤
+<![CDATA[                    </span>
+
+                    <input
+                        id="username"
+                        type="text"
+                        name="username"
+                        ng-model="c.username"
+                        class="ich-input"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="ich-field">
+
+                <div class="ich-password-label">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <a href="?id=forgot_password">
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+                <div class="ich-input-wrapper">
+
+                    <span class="ich-input-icon">
+                        ]]>🔒
+<![CDATA[                    </span>
+
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        ng-model="c.password"
+                        class="ich-input"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <!-- REMEMBER ME -->
+
+            <div class="ich-options">
+
+                <label class="ich-remember">
+
+                    <input
+                        type="checkbox"
+                        ng-model="c.remember_me">
+
+                    <span>
+                        Remember me
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="ich-login-btn">
+
+                <span>
+                    Log in
+                </span>
+
+                <span class="ich-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <!-- LOGIN MESSAGE -->
+
+            <div
+                ng-if="c.message"
+                class="ich-message">
+
+                ⚠ {{c.message}}
+
+            </div>
+
+        </form>
+
+
+        <!-- DIVIDER -->
+
+        <div class="ich-divider">
+
+            <span>
+                New to Insurance Claim Hub?
+            </span>
+
+        </div>
+
+
+        <!-- SIGNUP -->
+
+        <button
+            type="button"
+            class="ich-signup-btn"
+            ng-click="c.goToSignup()">
+
+            <span>
+                Create an Account
+            </span>
+
+            <span>
+                →
+            </span>
+
+        </button>
+
+
+        <!-- SECURITY -->
+
+        <div class="ich-security">
+
+            <span>
+                ]]>🔐
+<![CDATA[            </span>
+
+            <span>
+                Your information is securely protected
+            </span>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="ich-footer">
+
+            Insurance Claim Processing Hub
+
+        </div>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

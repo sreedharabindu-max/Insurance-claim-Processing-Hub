@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cb_topic">
+    <sys_cb_topic action="INSERT_OR_UPDATE">
+        <applicability/>
+        <applicability_mode>query</applicability_mode>
+        <autopilot_topic>false</autopilot_topic>
+        <category/>
+        <channels/>
+        <connect_queue/>
+        <context_profiles/>
+        <description>Help customers with common questions about insurance claims, including how to submit a claim, track a claim, check required documents, and understand the claim process.</description>
+        <dialog_acts_enabled>false</dialog_acts_enabled>
+        <expose_on_palette>false</expose_on_palette>
+        <flexible_conversation_switching>false</flexible_conversation_switching>
+        <foundational>false</foundational>
+        <graph>{
+  "graph_api_version": "1.0.82",
+  "goals": {
+    "primary": {
+      "id": "primary",
+      "trigger": {
+        "type": "primary"
+      },
+      "name": "primary",
+      "applicability": "",
+      "description": "",
+      "nodes": {
+        "eb90ba8137a34b2ba7524a760d779c90": {
+          "id": "eb90ba8137a34b2ba7524a760d779c90",
+          "stepType": "Start",
+          "name": "Start",
+          "greetingResponse": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "7d8a0e8d60804493b536079f36a1d116": {
+          "id": "7d8a0e8d60804493b536079f36a1d116",
+          "stepType": "TerminateGoal",
+          "name": "End",
+          "confirmationMessage": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "f22fe26065494b959362fa403a89c50f": {
+          "id": "f22fe26065494b959362fa403a89c50f",
+          "stepType": "TextOutput",
+          "name": "welcome_claim_help",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Hello! I can help you with common questions about your insurance claim. You can ask me how to submit a claim, track a claim, check required documents, or understand the claim process."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "897c220b42164528a701827641bc94fb"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "236367a4cb41491b99b47757193b4ee4": {
+          "id": "236367a4cb41491b99b47757193b4ee4",
+          "stepType": "StandaloneAIChoicePrompt",
+          "name": "faq_choice",
+          "purpose": {
+            "value": "",
+            "mode": "simple"
+          },
+          "instructions": {
+            "value": "",
+            "mode": "simple"
+          },
+          "inputs": [
+            {
+              "itemId": "03e9638615bd4ceab640e47aab2b4e52",
+              "displayName": "faq_choice",
+              "name": "faq_choice",
+              "description": "Select the insurance claim topic you need help with.",
+              "discoverable": true,
+              "dynamicDescription": {
+                "value": "",
+                "mode": "simple"
+              },
+              "type": "choice",
+              "variableId": "3735dd9c0ad64cb6a2ca6cd5e67cd458",
+              "choices": [
+                {
+                  "label": "How do I submit a claim?",
+                  "value": "submit_claim"
+                },
+                {
+                  "label": "How do I track my claim?",
+                  "value": "track_claim"
+                },
+                {
+                  "label": "What documents are required?",
+                  "value": "required_documents",
+                  "checked": true,
+                  "meta": {}
+                },
+                {
+                  "label": "What happens after I submit a claim?",
+                  "value": "claim_process",
+                  "checked": true,
+                  "meta": {}
+                }
+              ],
+              "mode": "",
+              "script": "",
+              "condition": {
+                "value": "",
+                "mode": "glide_query"
+              },
+              "stepType": "ChoicePrompt",
+              "enforcePrompt": false,
+              "helpText": false,
+              "skippable": {
+                "value": "",
+                "mode": "query"
+              },
+              "applicability": {
+                "value": "",
+                "mode": "query"
+              },
+              "promptMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "helpTextMessage": {
+                "value": "",
+                "mode": "simple"
+              },
+              "inputType": {
+                "format": "Text",
+                "script": ""
+              },
+              "isMultipleSelect": false,
+              "validation": "",
+              "autoSelect": true,
+              "hasCardHeader": false,
+              "cardMetadata": {
+                "mode": "card",
+                "metadataScript": "",
+                "cardTemplate": "",
+                "cardFields": {},
+                "cardDefinition": {}
+              }
+            }
+          ],
+          "outputs": [],
+          "advanced_parameters": "",
+          "confirmSummary": false,
+          "useSlots": false,
+          "slots": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "hiddenVariableIds": [
+            "d60034d844824c46b2cd37496ae74b45"
+          ],
+          "hiddenVariableNames": [
+            "ai_data_collector_236367a4cb41491b99b47757193b4ee4_output"
+          ],
+          "classificationEnabled": false,
+          "classificationOverrides": [],
+          "standalone": true,
+          "variableIds": [
+            "3735dd9c0ad64cb6a2ca6cd5e67cd458"
+          ]
+        },
+        "1a461ba0f0f64efabbb1066c57e58dec": {
+          "id": "1a461ba0f0f64efabbb1066c57e58dec",
+          "stepType": "Decision",
+          "name": "faq_decision"
+        },
+        "f7085c57b5ff4ec887a6be5ecbfd6caf": {
+          "id": "f7085c57b5ff4ec887a6be5ecbfd6caf",
+          "stepType": "ImplicitEnd"
+        },
+        "5c717cc2824c4e15a5fb7180ccd036b7": {
+          "id": "5c717cc2824c4e15a5fb7180ccd036b7",
+          "stepType": "ImplicitEnd"
+        },
+        "14fb4aa839f0454088946e770f5d98fa": {
+          "id": "14fb4aa839f0454088946e770f5d98fa",
+          "stepType": "TextOutput",
+          "name": "required_documents_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "The documents required depend on your claim type. Common supporting documents may include identification, policy details, and relevant claim documents. Please check your claim's document requirements in the Insurance Claim Hub."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "c6995f456b29409e9b9082a2ab2903a9"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "4fae1a348fe149e6816692ba940a4e68": {
+          "id": "4fae1a348fe149e6816692ba940a4e68",
+          "stepType": "ImplicitEnd"
+        },
+        "8c1a7ff2cd394b9f8134f030fc6215ac": {
+          "id": "8c1a7ff2cd394b9f8134f030fc6215ac",
+          "stepType": "TextOutput",
+          "name": "track_claim_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "To track your claim, select “Track My Claim” from the Insurance Claim Hub and provide your claim number. You can view the current claim status and next steps."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "d993edab567e4e58916cfc1568625102"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "dba3b3086f3b410bb3d3a60418c27da3": {
+          "id": "dba3b3086f3b410bb3d3a60418c27da3",
+          "stepType": "TextOutput",
+          "name": "submit_claim_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "To submit a claim, provide your claim details and the required supporting documents through the Insurance Claim Hub. Follow the guided steps to complete your claim submission."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "a3ef3a740881419095b87560dd4bc189"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "36f89dc9d69d4c8689f1b159030c4a21": {
+          "id": "36f89dc9d69d4c8689f1b159030c4a21",
+          "stepType": "TextOutput",
+          "name": "claim_process_response",
+          "secure": false,
+          "value": [
+            {
+              "value": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "After you submit a claim, it goes through verification, document validation, policy and data matching, fraud risk assessment, settlement recommendation, approval, and finally payment and closure. You can track the status of your claim through the Insurance Claim Hub."
+                    }
+                  ]
+                }
+              ],
+              "mode": "simple",
+              "_key": "3861c8edf2624b07acbe2553793ccd7e"
+            }
+          ],
+          "isCollapsible": true,
+          "requestFeedback": true,
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        }
+      },
+      "edges": [
+        {
+          "id": "332f52c2c77b44d38688d9064f236f1b",
+          "edgeType": "Branch",
+          "source": "1a461ba0f0f64efabbb1066c57e58dec",
+          "target": "8c1a7ff2cd394b9f8134f030fc6215ac",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.faq_choice=track_claim",
+            "mode": "query"
+          },
+          "label": "Track My Claim"
+        },
+        {
+          "id": "ee9a9842abf54d52b0dbdee4bad1e70f",
+          "edgeType": "Branch",
+          "source": "1a461ba0f0f64efabbb1066c57e58dec",
+          "target": "14fb4aa839f0454088946e770f5d98fa",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.faq_choice=required_documents",
+            "mode": "query"
+          },
+          "label": "Required Documents"
+        },
+        {
+          "id": "3edd44502031494d885c5f40fc6e8c67",
+          "edgeType": "Edge",
+          "source": "eb90ba8137a34b2ba7524a760d779c90",
+          "target": "f22fe26065494b959362fa403a89c50f",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "5c25b38f1ebe476b99c0e95a6a2dca89",
+          "edgeType": "Edge",
+          "source": "f22fe26065494b959362fa403a89c50f",
+          "target": "236367a4cb41491b99b47757193b4ee4",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "d2359c505f5740e3901d7834338c5b52",
+          "edgeType": "Edge",
+          "source": "236367a4cb41491b99b47757193b4ee4",
+          "target": "1a461ba0f0f64efabbb1066c57e58dec",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "6a1aec3b248048c8803193ed7a8fb0d4",
+          "edgeType": "Edge",
+          "source": "14fb4aa839f0454088946e770f5d98fa",
+          "target": "7d8a0e8d60804493b536079f36a1d116",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "b8f02e4d5f194e81b1ff67989039f328",
+          "edgeType": "Edge",
+          "source": "8c1a7ff2cd394b9f8134f030fc6215ac",
+          "target": "5c717cc2824c4e15a5fb7180ccd036b7",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "3ae2271c9b844050928cf73f4d829b2c",
+          "edgeType": "Branch",
+          "source": "1a461ba0f0f64efabbb1066c57e58dec",
+          "target": "dba3b3086f3b410bb3d3a60418c27da3",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.faq_choice=submit_claim",
+            "mode": "query"
+          },
+          "label": "Submit Claim"
+        },
+        {
+          "id": "a854f93e9bbd4f00b906d3ee35ac65a9",
+          "edgeType": "Edge",
+          "source": "dba3b3086f3b410bb3d3a60418c27da3",
+          "target": "f7085c57b5ff4ec887a6be5ecbfd6caf",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "84d340ef481b423bb8b66a63e23b1ba3",
+          "edgeType": "Branch",
+          "source": "1a461ba0f0f64efabbb1066c57e58dec",
+          "target": "36f89dc9d69d4c8689f1b159030c4a21",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "value": "vaInputs.faq_choice=claim_process",
+            "mode": "query"
+          },
+          "label": "Claim Process"
+        },
+        {
+          "id": "0f57f3d5b4e24dc8be4108dd6c607e89",
+          "edgeType": "Edge",
+          "source": "36f89dc9d69d4c8689f1b159030c4a21",
+          "target": "4fae1a348fe149e6816692ba940a4e68",
+          "sourcePort": "",
+          "targetPort": ""
+        }
+      ]
+    }
+  },
+  "variables": {
+    "current-user": {
+      "category": "vaInputs",
+      "id": "current-user",
+      "label": "User",
+      "name": "user",
+      "table": "sys_user",
+      "varType": "reference"
+    },
+    "d60034d844824c46b2cd37496ae74b45": {
+      "id": "d60034d844824c46b2cd37496ae74b45",
+      "name": "ai_data_collector_236367a4cb41491b99b47757193b4ee4_output",
+      "label": "Ai_data_collector_236367a4cb41491b99b47757193b4ee4_output",
+      "isReferenceable": false,
+      "varType": "string",
+      "category": "vaInputs",
+      "metadata": {
+        "libraryMappingType": "output"
+      }
+    },
+    "3735dd9c0ad64cb6a2ca6cd5e67cd458": {
+      "id": "3735dd9c0ad64cb6a2ca6cd5e67cd458",
+      "varType": "choice",
+      "category": "vaInputs",
+      "label": "Faq_choice",
+      "name": "faq_choice",
+      "choices": [
+        {
+          "label": "How do I submit a claim?",
+          "value": "submit_claim"
+        },
+        {
+          "label": "How do I track my claim?",
+          "value": "track_claim"
+        },
+        {
+          "label": "What documents are required?",
+          "value": "required_documents",
+          "checked": true,
+          "meta": {}
+        },
+        {
+          "label": "What happens after I submit a claim?",
+          "value": "claim_process",
+          "checked": true,
+          "meta": {}
+        }
+      ],
+      "mode": "",
+      "table": "",
+      "aiInput": true,
+      "inputId": 0,
+      "nodeId": "236367a4cb41491b99b47757193b4ee4",
+      "isHidden": false,
+      "description": "Select the insurance claim topic you need help with.",
+      "translation": true
+    }
+  }
+}</graph>
+        <key_phrases/>
+        <library>false</library>
+        <live_agent>false</live_agent>
+        <model_type>llm</model_type>
+        <modify_confirmation_enabled>false</modify_confirmation_enabled>
+        <name>claim_help</name>
+        <nlu_intent/>
+        <nlu_intent_label/>
+        <nlu_model/>
+        <nlu_model_label/>
+        <nlu_provider/>
+        <palette_label/>
+        <roles/>
+        <root_topic_id/>
+        <secure_custom_input_control>false</secure_custom_input_control>
+        <source_topic_id/>
+        <sys_class_name>sys_cb_topic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-24 04:51:39</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>7d6836cd852703107f440c273fae538f</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>claim_help</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sys_cb_topic_7d6836cd852703107f440c273fae538f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-24 14:15:15</sys_updated_on>
+        <title>Claim Help</title>
+        <triggerable_by_notification>false</triggerable_by_notification>
+        <type>STANDARD</type>
+    </sys_cb_topic>
+    <sys_translated_text action="delete_multiple" query="documentkey=7d6836cd852703107f440c273fae538f"/>
+</record_update>

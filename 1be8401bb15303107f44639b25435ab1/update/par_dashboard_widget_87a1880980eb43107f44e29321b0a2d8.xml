@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="par_dashboard_widget">
+    <par_dashboard_widget action="INSERT_OR_UPDATE">
+        <canvas display_value="">910a777880ab43107f44e29321b0a297</canvas>
+        <component display_value="Vertical bar">23051643b7e03010097cb81cde11a910</component>
+        <component_props>{"configVersion":"23.0.0-ci-SNAPSHOT","chartVariation":"stacked","yAxisPosition":"bottom","yAxisShowGrid":true,"xAxisWrapLabels":false,"xAxisMaxLabelSize":100,"showClosestSeriesOnHover":true,"xAxisTruncationType":"end","yAxisStyle":"clean","showLegend":true,"showLegendValue":false,"legendPosition":"bottom","legendHorizontalAlignment":"center","legendExpandToFit":false,"showDataLabels":false,"dataLabelPosition":"middle","showStackedValues":"none","showOverlappingLabels":false,"showPercentageOfTotalInTooltip":true,"yAxisHidden":false,"xAxisHidden":false,"colorConfig":{"type":"default"},"newReporting":false,"enableAddZerosAtApi":true,"dataSources":[{"isDatabaseView":false,"allowRealTime":true,"label":"Fraud Assessment ","sourceType":"table","tableOrViewName":"x_snc_insurance_0_fraud_assessment","filterQuery":"risk_level=High","preferredVisualizations":["d24d53f60350de7a652caf3188a46ed2"],"id":"dGFibGV4X3NuY19pbnN1cmFuY2VfMF9mcmF1ZF9hc3Nlc3NtZW50MTc5MDE3NzQzOTk2NA==","dataCategories":["trend","group","simple"]}],"showHeader":true,"showTotalAggregate":false,"showSubAggregate":false,"showFirstGroupAggregate":false,"showSecondGroupAggregate":false,"hideMatrixAggregate":false,"lineClamp":1,"headerTitleAlignment":"start","wrapTitle":false,"showLoadingIndicator":false,"showHeaderSeparator":false,"headingLevel":2,"showBorder":true,"bareBorder":false,"showDataPassthrough":false,"showAdditionalGroupBySelector":false,"allowAdditionalGroupByPerMetric":false,"metrics":[{"dataSource":"dGFibGV4X3NuY19pbnN1cmFuY2VfMF9mcmF1ZF9hc3Nlc3NtZW50MTc5MDE3NzQzOTk2NA==","id":"ZEdGaWJHVjRYM051WTE5cGJuTjFjbUZ1WTJWZk1GOW1jbUYxWkY5aGMzTmxjM050Wlc1ME1UYzVNREUzTnpRek9UazJOQT09MTc5MDE3NzQ0MjE5NA==","aggregateFunction":"COUNT","numberFormat":{"customFormat":false},"axisId":"primary"}],"groupBy":[{"groupBy":[{"dataSource":"dGFibGV4X3NuY19pbnN1cmFuY2VfMF9mcmF1ZF9hc3Nlc3NtZW50MTc5MDE3NzQzOTk2NA==","groupByField":"claim","isRange":false,"isChoice":false,"isPaBucket":false}],"maxNumberOfGroups":10,"numberOfGroupsBasedOn":"NO_OF_GROUP_BASED_ON_PER_METRIC","showOthers":false,"disableRanges":false}],"sortBy":"value","sortByOrder":"desc","showChange":false,"showChangePercentage":false,"showTarget":false,"showForecast":false,"showForecastRange":false,"showTrend":false,"showConfidenceBand":false,"showGapPercentage":false,"showSparkline":false,"showMetricLabel":false,"showThreshold":false,"showComment":false,"followFilters":true,"showFilterIcon":true,"enableRealTimeUpdate":false,"enableDrilldown":true,"enableClickAndStay":false,"showDataTable":false,"enableCustomEmptyState":false,"componentId":"bfr45ngl","emptyStateIllustration":"no-data","emptyStateHeading":"No data available.","emptyStateHeadingLevel":3,"emptyStateContent":"There are no scores available for the selected criteria. Contact your admin for more info.","emptyStateAlignment":"vertical-centered","hideDevSettings":false,"filterConfigurations":"@state.parFilters","showMaximumRange":false,"allowChangeDateRange":false,"showDateRangeByDefault":false,"applyDateRange":false,"numberOfPeriods":3,"showAbsolutePeriod":false,"autoAggregatePeriods":false,"showChangeFrom":false,"useCurrentDateForEnd":false,"period":"M","useDataCache":false,"cacheExpirationTime":0,"showCacheTime":true,"dateFormat":"default","showRefresh":true,"showExportOptions":true,"showFilterAsSeparateSeries":false,"userInfo":"@context.session.user","filterPerMetric":[],"scoreType":null}</component_props>
+        <h>13</h>
+        <name/>
+        <required_translations>[{"comment":"","code":"PAR_DASHBOARD.910a777880ab43107f44e29321b0a297.87a1880980eb43107f44e29321b0a2d8","message":"Fraud Assessment "},{"comment":"","code":"PAR_DASHBOARD.910a777880ab43107f44e29321b0a297.87a1880980eb43107f44e29321b0a2d8","message":"No data available."},{"comment":"","code":"PAR_DASHBOARD.910a777880ab43107f44e29321b0a297.87a1880980eb43107f44e29321b0a2d8","message":"There are no scores available for the selected criteria. Contact your admin for more info."}]</required_translations>
+        <stored_component/>
+        <sys_class_name>par_dashboard_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 15:33:17</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>87a1880980eb43107f44e29321b0a2d8</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>par_dashboard_widget_87a1880980eb43107f44e29321b0a2d8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-27 16:53:47</sys_updated_on>
+        <visualization/>
+        <w>3</w>
+        <widget_props/>
+        <x>3</x>
+        <y>12</y>
+    </par_dashboard_widget>
+</record_update>

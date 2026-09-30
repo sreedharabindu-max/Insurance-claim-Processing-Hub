@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_aia_tool">
+    <sn_aia_tool action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description>Generates a secure six-digit OTP for an insurance claim, stores it in the OTP Code field, and sets OTP Verified to false.</description>
+        <input_schema>[]</input_schema>
+        <name>Generate Claim OTP</name>
+        <record_type>custom</record_type>
+        <script><![CDATA[undefined]]></script>
+        <sys_class_name>sn_aia_tool</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-29 08:35:20</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>1f8b1176102b03107f446b235e7d6f41</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Generate Claim OTP</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sn_aia_tool_1f8b1176102b03107f446b235e7d6f41</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-29 08:35:20</sys_updated_on>
+        <target_document>cf93e03e102303107f446b235e7d6f1e</target_document>
+        <target_document_table>sys_hub_action_type_definition</target_document_table>
+        <type>action</type>
+    </sn_aia_tool>
+</record_update>

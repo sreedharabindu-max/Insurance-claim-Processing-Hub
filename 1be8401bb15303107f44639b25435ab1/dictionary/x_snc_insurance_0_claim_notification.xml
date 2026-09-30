@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="3901e866e06b03107f44c89b50c4a490" label="Claim Notification" max_length="40" name="x_snc_insurance_0_claim_notification" type="collection">
+        <element label="Read" max_length="40" name="read" type="boolean"/>
+        <element label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <element choice="1" label="Notification Type" max_length="40" name="notification_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="OTP" sequence="20" value="otp"/>
+                <element inactive_on_update="false" label="General" sequence="70" value="general"/>
+                <element inactive_on_update="false" label="Payment" sequence="50" value="payment"/>
+                <element inactive_on_update="false" label="Document" sequence="30" value="document"/>
+                <element inactive_on_update="false" label="Claim Submitted" sequence="10" value="claim_submitted"/>
+                <element inactive_on_update="false" label="Claim Status" sequence="40" value="claim_status"/>
+                <element inactive_on_update="false" label="Settlement" sequence="60" value="settlement"/>
+            </choice>
+        </element>
+        <element label="Message" max_length="500" name="message" type="string"/>
+        <element label="Claim" max_length="32" name="claim" reference="x_snc_insurance_0_claim" type="reference"/>
+        <index name="index">
+            <element name="user"/>
+        </index>
+        <index name="index2">
+            <element name="claim"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($location) {
+
+    var c = this;
+
+    c.otp = "";
+    c.verifying = false;
+    c.errorMessage = "";
+    c.successMessage = "";
+
+    c.verifyOTP = function() {
+
+        c.errorMessage = "";
+        c.successMessage = "";
+
+        if (!c.otp || !/^\d{6}$/.test(c.otp)) {
+            c.errorMessage = "Please enter any 6-digit number.";
+            return;
+        }
+
+        var params = $location.search();
+        var claimSysId = params.sys_id || "";
+
+        if (!claimSysId) {
+            c.errorMessage = "Claim information is missing.";
+            return;
+        }
+
+        c.verifying = true;
+
+        c.server.get({
+            action: "verify_otp",
+            otp: c.otp,
+            claim_sys_id: claimSysId
+        }).then(function(response) {
+
+            c.verifying = false;
+
+            if (response.data.success === true) {
+
+                c.successMessage =
+                    "OTP verified successfully.";
+
+                setTimeout(function() {
+
+                    $location.search({
+                        id: "documents",
+                        sys_id: claimSysId
+                    });
+
+                }, 1500);
+
+            } else {
+
+                c.errorMessage =
+                    response.data.message ||
+                    "OTP verification failed.";
+
+            }
+
+        }, function() {
+
+            c.verifying = false;
+
+            c.errorMessage =
+                "Unable to process OTP.";
+
+        });
+
+    };
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.otp-container {&#13;
+    min-height: 70vh;&#13;
+    display: flex;&#13;
+    justify-content: center;&#13;
+    align-items: center;&#13;
+    padding: 30px;&#13;
+    background: #f4f8fc;&#13;
+}&#13;
+&#13;
+.otp-card {&#13;
+    width: 450px;&#13;
+    background: white;&#13;
+    padding: 40px;&#13;
+    border-radius: 12px;&#13;
+    text-align: center;&#13;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);&#13;
+}&#13;
+&#13;
+.otp-icon {&#13;
+    font-size: 42px;&#13;
+    margin-bottom: 15px;&#13;
+}&#13;
+&#13;
+.otp-card h1 {&#13;
+    color: #183b67;&#13;
+    margin-bottom: 10px;&#13;
+}&#13;
+&#13;
+.otp-subtitle {&#13;
+    color: #6c757d;&#13;
+    margin-bottom: 25px;&#13;
+}&#13;
+&#13;
+.otp-info {&#13;
+    background: #eef6ff;&#13;
+    border-left: 4px solid #0d6efd;&#13;
+    padding: 15px;&#13;
+    text-align: left;&#13;
+    margin-bottom: 25px;&#13;
+}&#13;
+&#13;
+.otp-info p {&#13;
+    margin: 5px 0 0;&#13;
+}&#13;
+&#13;
+.otp-card label {&#13;
+    display: block;&#13;
+    text-align: left;&#13;
+    font-weight: 600;&#13;
+    margin-bottom: 8px;&#13;
+}&#13;
+&#13;
+.otp-input {&#13;
+    width: 100%;&#13;
+    padding: 14px;&#13;
+    text-align: center;&#13;
+    font-size: 22px;&#13;
+    letter-spacing: 6px;&#13;
+    border: 1px solid #ccd4dd;&#13;
+    border-radius: 6px;&#13;
+    box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.verify-btn {&#13;
+    width: 100%;&#13;
+    margin-top: 20px;&#13;
+    padding: 13px;&#13;
+    border: none;&#13;
+    border-radius: 6px;&#13;
+    background: #0d6efd;&#13;
+    color: white;&#13;
+    font-weight: 600;&#13;
+    cursor: pointer;&#13;
+}&#13;
+&#13;
+.error-message {&#13;
+    margin-top: 15px;&#13;
+    padding: 10px;&#13;
+    background: #fdecec;&#13;
+    color: #a52834;&#13;
+}&#13;
+&#13;
+.success-message {&#13;
+    margin-top: 15px;&#13;
+    padding: 10px;&#13;
+    background: #e8f7ee;&#13;
+    color: #18733c;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>OTP verification widget for Insurance Claim Hub policyholders.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>insurance_claim_otp_verification</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Insurance Claim OTP Verification</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[// (function() {
+
+//     data.success = false;
+//     data.message = "";
+
+//     if (input && input.action == "verify_otp") {
+
+//         var enteredOTP = String(input.otp || "").trim();
+//         var claimSysId = String(input.claim_sys_id || "").trim();
+
+//         if (!enteredOTP || !/^\d{6}$/.test(enteredOTP)) {
+//             data.message = "Please enter any 6-digit number.";
+//             return;
+//         }
+
+//         // Update the submitted claim, if Claim Sys ID is available
+//         if (claimSysId) {
+
+//             var claim = new GlideRecord("x_snc_insurance_0_claim");
+
+//             if (claim.get(claimSysId)) {
+
+//                 claim.setValue("otp_entered", enteredOTP);
+//                 claim.setValue("otp_verified", true);
+//                 claim.update();
+
+//             }
+//         }
+
+//         // Demo verification: accept any 6-digit number
+//         data.success = true;
+//         data.message = "OTP verified successfully.";
+
+//     }
+
+// })();
+
+
+
+
+
+(function() {
+
+    data.success = false;
+    data.message = "";
+
+    if (input && input.action == "verify_otp") {
+
+        var enteredOTP = String(input.otp || "").trim();
+        var claimSysId = String(input.claim_sys_id || "").trim();
+
+        if (!enteredOTP || !/^\d{6}$/.test(enteredOTP)) {
+            data.message = "Please enter any 6-digit number.";
+            return;
+        }
+
+        if (claimSysId) {
+
+            var claim = new GlideRecord("x_snc_insurance_0_claim");
+
+            if (claim.get(claimSysId)) {
+
+                claim.setValue("otp_entered", enteredOTP);
+                claim.setValue("otp_verified", true);
+                claim.update();
+
+            }
+        }
+
+        data.success = true;
+        data.message = "OTP verified successfully.";
+
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 05:51:15</sys_created_on>
+        <sys_id>7b4cb178806b03107f44e29321b0a27f</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Insurance Claim OTP Verification</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_widget_7b4cb178806b03107f44e29321b0a27f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 06:53:37</sys_updated_on>
+        <template><![CDATA[<div class="otp-container">
+
+  <div class="otp-card">
+
+    <div class="otp-icon">]]>🔐<![CDATA[</div>
+
+    <h1>OTP Verification</h1>
+
+    <p class="otp-subtitle">
+      Verify your identity to continue with your insurance claim.
+    </p>
+
+    <div class="otp-info">
+      <strong>OTP Sent</strong>
+      <p>
+        A 6-digit OTP has been sent to your registered email address.
+      </p>
+    </div>
+
+    <form ng-submit="c.verifyOTP()">
+
+      <label>Enter OTP</label>
+
+      <input
+        type="text"
+        class="otp-input"
+        ng-model="c.otp"
+        maxlength="6"
+        placeholder="Enter 6-digit OTP"
+        autocomplete="one-time-code"
+        required>
+
+      <div class="error-message" ng-if="c.errorMessage">
+        ⚠ {{c.errorMessage}}
+      </div>
+
+      <div class="success-message" ng-if="c.successMessage">
+        ✓ {{c.successMessage}}
+      </div>
+
+      <button
+        type="submit"
+        class="verify-btn"
+        ng-disabled="c.verifying">
+
+        <span ng-if="!c.verifying">
+          Verify OTP
+        </span>
+
+        <span ng-if="c.verifying">
+          Verifying...
+        </span>
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

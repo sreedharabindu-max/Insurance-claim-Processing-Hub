@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <css>/* Insurance Claim Hub - Professional Login */&#13;
+&#13;
+body {&#13;
+    background: linear-gradient(135deg, #eef6ff, #f8fbff) !important;&#13;
+}&#13;
+&#13;
+main.page {&#13;
+    min-height: 100vh !important;&#13;
+    background: linear-gradient(135deg, #eef6ff, #f8fbff) !important;&#13;
+}&#13;
+&#13;
+/* Login card */&#13;
+.panel {&#13;
+    border: none !important;&#13;
+    border-radius: 18px !important;&#13;
+    box-shadow: 0 12px 35px rgba(30, 90, 160, 0.15) !important;&#13;
+    overflow: hidden !important;&#13;
+}&#13;
+&#13;
+/* Login heading */&#13;
+.panel-heading {&#13;
+    background: #ffffff !important;&#13;
+    color: #123b66 !important;&#13;
+    text-align: center !important;&#13;
+    font-size: 22px !important;&#13;
+    font-weight: 700 !important;&#13;
+    padding: 22px !important;&#13;
+    border-bottom: 1px solid #e5edf7 !important;&#13;
+}&#13;
+&#13;
+/* Login form */&#13;
+.panel-body {&#13;
+    background: #ffffff !important;&#13;
+    padding: 30px !important;&#13;
+}&#13;
+&#13;
+/* Labels */&#13;
+.form-group label {&#13;
+    color: #23415f !important;&#13;
+    font-weight: 600 !important;&#13;
+}&#13;
+&#13;
+/* Input fields */&#13;
+.form-control {&#13;
+    height: 46px !important;&#13;
+    border: 1px solid #cbd9e8 !important;&#13;
+    border-radius: 9px !important;&#13;
+    box-shadow: none !important;&#13;
+    font-size: 14px !important;&#13;
+    padding: 10px 14px !important;&#13;
+}&#13;
+&#13;
+.form-control:focus {&#13;
+    border-color: #1976d2 !important;&#13;
+    box-shadow: 0 0 0 3px rgba(25,118,210,0.12) !important;&#13;
+}&#13;
+&#13;
+/* Login button */&#13;
+.btn-primary {&#13;
+    width: 100% !important;&#13;
+    height: 46px !important;&#13;
+    border: none !important;&#13;
+    border-radius: 9px !important;&#13;
+    background: linear-gradient(90deg, #1976d2, #1565c0) !important;&#13;
+    font-size: 15px !important;&#13;
+    font-weight: 700 !important;&#13;
+}&#13;
+&#13;
+.btn-primary:hover {&#13;
+    box-shadow: 0 6px 15px rgba(25,118,210,0.25) !important;&#13;
+}&#13;
+&#13;
+/* Forgot password */&#13;
+a {&#13;
+    color: #1976d2 !important;&#13;
+    font-weight: 500 !important;&#13;
+}</css>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <human_readable_url_structure/>
+        <id>claim_login</id>
+        <internal>false</internal>
+        <omit_watcher>false</omit_watcher>
+        <public>true</public>
+        <roles/>
+        <seo_script/>
+        <short_description/>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-22 11:21:19</sys_created_on>
+        <sys_id>230e796851eb03107f444ed624f3c904</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>claim_login</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_page_230e796851eb03107f444ed624f3c904</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-22 13:26:59</sys_updated_on>
+        <title>Insurance Claim Login</title>
+        <use_seo_script>false</use_seo_script>
+    </sp_page>
+    <sys_translated_text action="delete_multiple" query="documentkey=230e796851eb03107f444ed624f3c904"/>
+</record_update>

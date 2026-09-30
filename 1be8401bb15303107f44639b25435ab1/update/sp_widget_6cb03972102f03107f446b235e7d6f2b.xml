@@ -1,0 +1,1373 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($location) {
+
+    var c = this;
+
+
+    /* =====================================================
+       VARIABLES
+    ====================================================== */
+
+    c.loading = false;
+
+    c.paymentFound = false;
+
+    c.payment = {};
+
+    c.errorMessage = "";
+
+
+
+    /* =====================================================
+       LOAD PAYMENT
+    ====================================================== */
+
+    c.loadPayment = function() {
+
+        c.loading = true;
+
+        c.paymentFound = false;
+
+        c.errorMessage = "";
+
+
+        var params =
+            $location.search();
+
+
+        var sysId =
+            params.sys_id || "";
+
+
+        var claimNumber =
+            params.claim_number || "";
+
+
+        /*
+         * Payment page must receive
+         * claim information.
+         */
+
+        if (!sysId && !claimNumber) {
+
+            c.loading = false;
+
+            c.errorMessage =
+                "Claim information is missing.";
+
+            return;
+        }
+
+
+        c.server.get({
+
+            action:
+                "get_payment",
+
+            sys_id:
+                sysId,
+
+            claim_number:
+                claimNumber
+
+        }).then(function(response) {
+
+            c.loading = false;
+
+
+            if (
+                response.data.success === true &&
+                response.data.paymentFound === true
+            ) {
+
+                c.paymentFound = true;
+
+                c.payment =
+                    response.data.payment;
+
+            }
+
+            else {
+
+                c.paymentFound = false;
+
+                c.errorMessage =
+                    response.data.message ||
+                    "Unable to load payment details.";
+
+            }
+
+        }, function() {
+
+            c.loading = false;
+
+            c.paymentFound = false;
+
+            c.errorMessage =
+                "Unable to load payment details.";
+
+        });
+
+    };
+
+
+
+    /* =====================================================
+       BACK TO TRACK CLAIM
+    ====================================================== */
+
+    c.goBackToTrack = function() {
+
+        if (
+            c.payment &&
+            c.payment.sys_id
+        ) {
+
+            $location.search({
+
+                id:
+                    "track_claim",
+
+                sys_id:
+                    c.payment.sys_id
+
+            });
+
+        }
+
+        else {
+
+            $location.search({
+
+                id:
+                    "track_claim"
+
+            });
+
+        }
+
+    };
+
+
+
+    /* =====================================================
+       HOME
+    ====================================================== */
+
+    c.goHome = function() {
+
+        $location.search({
+
+            id:
+                "claim_home"
+
+        });
+
+    };
+
+
+
+    /* =====================================================
+       REFRESH
+    ====================================================== */
+
+    c.refreshPayment = function() {
+
+        c.loadPayment();
+
+    };
+
+
+
+    /* =====================================================
+       PAYMENT STATUS CLASS
+    ====================================================== */
+
+    c.getPaymentStatusClass =
+        function(status) {
+
+        if (!status) {
+
+            return "payment-pending";
+
+        }
+
+
+        var value =
+            String(status)
+                .toLowerCase()
+                .trim();
+
+
+        if (value == "paid") {
+
+            return "payment-paid";
+
+        }
+
+
+        if (value == "processing") {
+
+            return "payment-processing";
+
+        }
+
+
+        if (value == "failed") {
+
+            return "payment-failed";
+
+        }
+
+
+        return "payment-pending";
+
+    };
+
+
+
+    /* =====================================================
+       PAYMENT TIMELINE
+    ====================================================== */
+
+    c.getStepClass = function(step) {
+
+        var status =
+            String(
+                c.payment.payment_status ||
+                "Pending"
+            )
+            .toLowerCase()
+            .trim();
+
+
+        if (status == "pending") {
+
+            if (step == 1) {
+
+                return "completed";
+
+            }
+
+            return "";
+
+        }
+
+
+        if (status == "processing") {
+
+            if (step <= 2) {
+
+                return "completed";
+
+            }
+
+            return "";
+
+        }
+
+
+        if (status == "paid") {
+
+            return "completed";
+
+        }
+
+
+        if (status == "failed") {
+
+            if (step == 1) {
+
+                return "completed";
+
+            }
+
+            if (step == 2) {
+
+                return "failed";
+
+            }
+
+            return "";
+
+        }
+
+
+        return "";
+
+    };
+
+
+
+    /* =====================================================
+       INITIAL LOAD
+    ====================================================== */
+
+    c.loadPayment();
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.payment-page {&#13;
+    max-width: 1000px;&#13;
+    margin: 0 auto;&#13;
+    padding: 35px 25px 60px;&#13;
+    font-family: Arial, sans-serif;&#13;
+    color: #123b63;&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   HEADER&#13;
+========================================== */&#13;
+&#13;
+.payment-header {&#13;
+    display: flex;&#13;
+    justify-content: space-between;&#13;
+    align-items: center;&#13;
+    gap: 20px;&#13;
+    border-bottom: 1px solid #d9e5ef;&#13;
+    padding-bottom: 22px;&#13;
+    margin-bottom: 25px;&#13;
+}&#13;
+&#13;
+.payment-badge {&#13;
+    display: inline-block;&#13;
+    background: #e8f4ff;&#13;
+    color: #1476c9;&#13;
+    padding: 6px 11px;&#13;
+    border-radius: 20px;&#13;
+    font-size: 10px;&#13;
+    font-weight: 800;&#13;
+    letter-spacing: .5px;&#13;
+}&#13;
+&#13;
+.payment-header h1 {&#13;
+    margin: 8px 0 5px;&#13;
+    font-size: 30px;&#13;
+    font-weight: 800;&#13;
+}&#13;
+&#13;
+.payment-header p {&#13;
+    margin: 0;&#13;
+    color: #71869a;&#13;
+    font-size: 13px;&#13;
+}&#13;
+&#13;
+.back-track-btn {&#13;
+    border: 1px solid #1388d4;&#13;
+    background: white;&#13;
+    color: #0877bd;&#13;
+    padding: 10px 18px;&#13;
+    border-radius: 8px;&#13;
+    font-weight: 700;&#13;
+    cursor: pointer;&#13;
+}&#13;
+&#13;
+.back-track-btn:hover {&#13;
+    background: #eef8ff;&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   LOADING&#13;
+========================================== */&#13;
+&#13;
+.payment-loading {&#13;
+    background: white;&#13;
+    border-radius: 14px;&#13;
+    padding: 55px;&#13;
+    text-align: center;&#13;
+    box-shadow: 0 5px 20px rgba(30, 80, 120, .08);&#13;
+}&#13;
+&#13;
+.payment-spinner {&#13;
+    width: 32px;&#13;
+    height: 32px;&#13;
+    margin: auto;&#13;
+    border: 4px solid #dcecf8;&#13;
+    border-top: 4px solid #1476d4;&#13;
+    border-radius: 50%;&#13;
+    animation: paymentSpin 1s linear infinite;&#13;
+}&#13;
+&#13;
+.payment-loading p {&#13;
+    margin-top: 15px;&#13;
+    color: #6f8497;&#13;
+}&#13;
+&#13;
+@keyframes paymentSpin {&#13;
+&#13;
+    from {&#13;
+        transform: rotate(0deg);&#13;
+    }&#13;
+&#13;
+    to {&#13;
+        transform: rotate(360deg);&#13;
+    }&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   ERROR&#13;
+========================================== */&#13;
+&#13;
+.payment-error-card {&#13;
+    background: white;&#13;
+    border-radius: 15px;&#13;
+    padding: 50px;&#13;
+    text-align: center;&#13;
+    box-shadow: 0 5px 20px rgba(30, 80, 120, .08);&#13;
+}&#13;
+&#13;
+.error-icon {&#13;
+    width: 42px;&#13;
+    height: 42px;&#13;
+    margin: auto;&#13;
+    border-radius: 50%;&#13;
+    background: #ffe9e9;&#13;
+    color: #e53935;&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    justify-content: center;&#13;
+    font-weight: 900;&#13;
+    font-size: 22px;&#13;
+}&#13;
+&#13;
+.payment-error-card h2 {&#13;
+    margin: 15px 0 8px;&#13;
+    color: #173b5f;&#13;
+}&#13;
+&#13;
+.payment-error-card p {&#13;
+    color: #7b8c9c;&#13;
+}&#13;
+&#13;
+.try-again-btn {&#13;
+    border: 1px solid #0a7bd7;&#13;
+    background: white;&#13;
+    color: #0875c4;&#13;
+    padding: 9px 18px;&#13;
+    border-radius: 7px;&#13;
+    font-weight: 700;&#13;
+    cursor: pointer;&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   CLAIM HEADER&#13;
+========================================== */&#13;
+&#13;
+.claim-payment-card {&#13;
+    background: white;&#13;
+    border-radius: 14px;&#13;
+    padding: 22px 25px;&#13;
+    display: flex;&#13;
+    justify-content: space-between;&#13;
+    align-items: center;&#13;
+    box-shadow: 0 5px 20px rgba(30, 80, 120, .08);&#13;
+    margin-bottom: 18px;&#13;
+}&#13;
+&#13;
+.field-label {&#13;
+    display: block;&#13;
+    font-size: 11px;&#13;
+    color: #7a8da0;&#13;
+    margin-bottom: 5px;&#13;
+}&#13;
+&#13;
+.claim-number {&#13;
+    font-size: 22px;&#13;
+    font-weight: 800;&#13;
+    color: #0874c1;&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   STATUS BADGE&#13;
+========================================== */&#13;
+&#13;
+.payment-status {&#13;
+    display: inline-flex;&#13;
+    align-items: center;&#13;
+    gap: 7px;&#13;
+    padding: 7px 13px;&#13;
+    border-radius: 20px;&#13;
+    font-size: 11px;&#13;
+    font-weight: 800;&#13;
+}&#13;
+&#13;
+.status-dot {&#13;
+    width: 7px;&#13;
+    height: 7px;&#13;
+    border-radius: 50%;&#13;
+    background: currentColor;&#13;
+}&#13;
+&#13;
+.payment-pending {&#13;
+    background: #fff5d9;&#13;
+    color: #a76d00;&#13;
+}&#13;
+&#13;
+.payment-processing {&#13;
+    background: #e9f4ff;&#13;
+    color: #1472c5;&#13;
+}&#13;
+&#13;
+.payment-paid {&#13;
+    background: #e7f8ef;&#13;
+    color: #16834e;&#13;
+}&#13;
+&#13;
+.payment-failed {&#13;
+    background: #ffe8e8;&#13;
+    color: #c62f2f;&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   CARD&#13;
+========================================== */&#13;
+&#13;
+.payment-card {&#13;
+    background: white;&#13;
+    border-radius: 14px;&#13;
+    padding: 25px;&#13;
+    margin-bottom: 18px;&#13;
+    box-shadow: 0 5px 20px rgba(30, 80, 120, .08);&#13;
+}&#13;
+&#13;
+.card-title {&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    gap: 10px;&#13;
+    border-bottom: 1px solid #e4edf4;&#13;
+    padding-bottom: 15px;&#13;
+    margin-bottom: 20px;&#13;
+}&#13;
+&#13;
+.card-title h2 {&#13;
+    margin: 0;&#13;
+    font-size: 17px;&#13;
+    color: #19476d;&#13;
+}&#13;
+&#13;
+.title-icon {&#13;
+    font-size: 18px;&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   SETTLEMENT GRID&#13;
+========================================== */&#13;
+&#13;
+.payment-grid {&#13;
+    display: grid;&#13;
+    grid-template-columns: 1fr 1fr;&#13;
+    gap: 22px 40px;&#13;
+}&#13;
+&#13;
+.payment-item strong {&#13;
+    color: #1e4261;&#13;
+    font-size: 13px;&#13;
+}&#13;
+&#13;
+.full-width {&#13;
+    grid-column: 1 / -1;&#13;
+}&#13;
+&#13;
+.payment-reference {&#13;
+    display: inline-block;&#13;
+    background: #edf6ff;&#13;
+    color: #0873c0 !important;&#13;
+    padding: 8px 12px;&#13;
+    border-radius: 6px;&#13;
+    letter-spacing: .4px;&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   PAYMENT MESSAGE&#13;
+========================================== */&#13;
+&#13;
+.status-message {&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    gap: 18px;&#13;
+    padding: 20px;&#13;
+    border-radius: 10px;&#13;
+}&#13;
+&#13;
+.status-message h3 {&#13;
+    margin: 0 0 6px;&#13;
+    font-size: 16px;&#13;
+}&#13;
+&#13;
+.status-message p {&#13;
+    margin: 0;&#13;
+    font-size: 12px;&#13;
+    color: #667b8f;&#13;
+}&#13;
+&#13;
+.pending-message {&#13;
+    background: #fff9e9;&#13;
+}&#13;
+&#13;
+.processing-message {&#13;
+    background: #edf7ff;&#13;
+}&#13;
+&#13;
+.paid-message {&#13;
+    background: #ebf9f1;&#13;
+}&#13;
+&#13;
+.failed-message {&#13;
+    background: #fff0f0;&#13;
+}&#13;
+&#13;
+.status-large-icon {&#13;
+    width: 48px;&#13;
+    height: 48px;&#13;
+    border-radius: 50%;&#13;
+    background: white;&#13;
+    display: flex;&#13;
+    justify-content: center;&#13;
+    align-items: center;&#13;
+    font-size: 22px;&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   TIMELINE&#13;
+========================================== */&#13;
+&#13;
+.payment-timeline {&#13;
+    position: relative;&#13;
+    padding-left: 10px;&#13;
+}&#13;
+&#13;
+.payment-step {&#13;
+    display: flex;&#13;
+    align-items: flex-start;&#13;
+    gap: 15px;&#13;
+    position: relative;&#13;
+    padding-bottom: 28px;&#13;
+    opacity: .45;&#13;
+}&#13;
+&#13;
+.payment-step:last-child {&#13;
+    padding-bottom: 0;&#13;
+}&#13;
+&#13;
+.payment-step.completed {&#13;
+    opacity: 1;&#13;
+}&#13;
+&#13;
+.payment-step.failed {&#13;
+    opacity: 1;&#13;
+}&#13;
+&#13;
+.step-number {&#13;
+    width: 28px;&#13;
+    height: 28px;&#13;
+    border-radius: 50%;&#13;
+    background: #edf1f5;&#13;
+    color: #718394;&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    justify-content: center;&#13;
+    font-size: 12px;&#13;
+    font-weight: 800;&#13;
+    flex-shrink: 0;&#13;
+}&#13;
+&#13;
+.payment-step.completed .step-number {&#13;
+    background: #1679d2;&#13;
+    color: white;&#13;
+}&#13;
+&#13;
+.payment-step.failed .step-number {&#13;
+    background: #dc3b3b;&#13;
+    color: white;&#13;
+}&#13;
+&#13;
+.step-content h3 {&#13;
+    margin: 2px 0 4px;&#13;
+    font-size: 13px;&#13;
+    color: #244a68;&#13;
+}&#13;
+&#13;
+.step-content p {&#13;
+    margin: 0;&#13;
+    font-size: 11px;&#13;
+    color: #7a8d9e;&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   BUTTONS&#13;
+========================================== */&#13;
+&#13;
+.payment-actions {&#13;
+    display: flex;&#13;
+    justify-content: center;&#13;
+    gap: 12px;&#13;
+    margin-top: 25px;&#13;
+}&#13;
+&#13;
+.refresh-payment-btn,&#13;
+.home-payment-btn {&#13;
+    padding: 10px 20px;&#13;
+    border-radius: 8px;&#13;
+    font-weight: 700;&#13;
+    cursor: pointer;&#13;
+}&#13;
+&#13;
+.refresh-payment-btn {&#13;
+    border: 1px solid #1680d2;&#13;
+    background: white;&#13;
+    color: #0873c0;&#13;
+}&#13;
+&#13;
+.home-payment-btn {&#13;
+    border: none;&#13;
+    background: #0876d1;&#13;
+    color: white;&#13;
+}&#13;
+&#13;
+.refresh-payment-btn:hover {&#13;
+    background: #eef8ff;&#13;
+}&#13;
+&#13;
+.home-payment-btn:hover {&#13;
+    background: #075eaa;&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   MOBILE&#13;
+========================================== */&#13;
+&#13;
+@media (max-width: 700px) {&#13;
+&#13;
+    .payment-page {&#13;
+        padding: 20px 15px;&#13;
+    }&#13;
+&#13;
+    .payment-header {&#13;
+        flex-direction: column;&#13;
+        align-items: flex-start;&#13;
+    }&#13;
+&#13;
+    .payment-grid {&#13;
+        grid-template-columns: 1fr;&#13;
+    }&#13;
+&#13;
+    .full-width {&#13;
+        grid-column: auto;&#13;
+    }&#13;
+&#13;
+    .claim-payment-card {&#13;
+        flex-direction: column;&#13;
+        align-items: flex-start;&#13;
+        gap: 15px;&#13;
+    }&#13;
+&#13;
+    .payment-actions {&#13;
+        flex-direction: column;&#13;
+    }&#13;
+&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Displays the claim payment status, settlement amount, payment reference, and final payout details to the policyholder.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>insurance_claim_payment_status</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Insurance Claim Payment Status</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.success = false;
+    data.paymentFound = false;
+    data.payment = {};
+    data.message = "";
+
+    if (!input) {
+        return;
+    }
+
+
+    /* =====================================================
+       GET PAYMENT DETAILS
+    ====================================================== */
+
+    if (input.action == "get_payment") {
+
+        var sysId =
+            String(
+                input.sys_id || ""
+            ).trim();
+
+
+        var claimNumber =
+            String(
+                input.claim_number || ""
+            ).trim();
+
+
+        /*
+         * Either sys_id OR claim number
+         * is required.
+         */
+
+        if (!sysId && !claimNumber) {
+
+            data.message =
+                "Claim information is missing.";
+
+            return;
+        }
+
+
+        var claim =
+            new GlideRecord(
+                "x_snc_insurance_0_claim"
+            );
+
+
+        /* =================================================
+           SEARCH BY SYS_ID
+        ================================================== */
+
+        if (sysId) {
+
+            if (!claim.get(sysId)) {
+
+                data.message =
+                    "Claim was not found.";
+
+                return;
+            }
+
+        }
+
+
+        /* =================================================
+           SEARCH BY CLAIM NUMBER
+        ================================================== */
+
+        else {
+
+            claim.addQuery(
+                "claim_number",
+                claimNumber
+            );
+
+            claim.setLimit(1);
+
+            claim.query();
+
+
+            if (!claim.next()) {
+
+                data.message =
+                    "No claim found with claim number: " +
+                    claimNumber;
+
+                return;
+            }
+
+        }
+
+
+        /* =================================================
+           CLAIM DATA
+        ================================================== */
+
+        var actualClaimNumber =
+            claim.getValue(
+                "claim_number"
+            ) || "";
+
+
+        var claimType =
+            claim.getDisplayValue(
+                "claim_type"
+            ) || "Motor";
+
+
+        var policyNumber =
+            claim.getDisplayValue(
+                "policy_number"
+            ) || "POL1001";
+
+
+        var claimAmount =
+            claim.getDisplayValue(
+                "claim_amount"
+            ) || "₹0";
+
+
+        var recommendedPayout =
+            claim.getDisplayValue(
+                "recommended_payout"
+            ) || "₹0";
+
+
+        var finalPayout =
+            claim.getDisplayValue(
+                "final_payout"
+            ) || "₹0";
+
+
+        /* =================================================
+           PAYMENT STATUS
+        ================================================== */
+
+        var paymentStatus =
+            claim.getDisplayValue(
+                "payment_status"
+            );
+
+
+        if (!paymentStatus) {
+
+            paymentStatus =
+                "Pending";
+
+        }
+
+
+        /* =================================================
+           PAYMENT REFERENCE
+        ================================================== */
+
+        var paymentReference =
+            "PAY-" +
+            actualClaimNumber +
+            "-001";
+
+
+        /* =================================================
+           RETURN DATA
+        ================================================== */
+
+        data.payment = {
+
+            sys_id:
+                claim.getUniqueValue(),
+
+            claim_number:
+                actualClaimNumber,
+
+            claim_type:
+                claimType,
+
+            policy_number:
+                policyNumber,
+
+            claim_amount:
+                claimAmount,
+
+            recommended_payout:
+                recommendedPayout,
+
+            final_payout:
+                finalPayout,
+
+            payment_status:
+                paymentStatus,
+
+            payment_reference:
+                paymentReference
+
+        };
+
+
+        data.success = true;
+
+        data.paymentFound = true;
+
+        return;
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-29 10:09:22</sys_created_on>
+        <sys_id>6cb03972102f03107f446b235e7d6f2b</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Insurance Claim Payment Status</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_widget_6cb03972102f03107f446b235e7d6f2b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-29 15:03:26</sys_updated_on>
+        <template><![CDATA[<div
+    class="payment-container"
+    ng-if="
+        !c.loading &&
+        c.paymentFound
+    ">
+
+    <div class="claim-payment-card">
+
+        <div>
+
+            <span class="field-label">
+                Claim Number
+            </span>
+
+            <div class="claim-number">
+                {{c.payment.claim_number}}
+            </div>
+
+        </div>
+
+        <span
+            class="payment-status"
+            ng-class="
+                c.getPaymentStatusClass(
+                    c.payment.payment_status
+                )
+            ">
+
+            {{c.payment.payment_status}}
+
+        </span>
+
+    </div>
+
+
+    <div class="payment-card">
+
+        <div class="card-title">
+
+            <span>]]>💰<![CDATA[</span>
+
+            <h2>
+                Settlement Details
+            </h2>
+
+        </div>
+
+
+        <div class="payment-grid">
+
+            <div class="payment-item">
+
+                <span class="field-label">
+                    Claim Type
+                </span>
+
+                <strong>
+                    {{c.payment.claim_type}}
+                </strong>
+
+            </div>
+
+
+            <div class="payment-item">
+
+                <span class="field-label">
+                    Policy Number
+                </span>
+
+                <strong>
+                    {{c.payment.policy_number}}
+                </strong>
+
+            </div>
+
+
+            <div class="payment-item">
+
+                <span class="field-label">
+                    Claim Amount
+                </span>
+
+                <strong>
+                    {{c.payment.claim_amount}}
+                </strong>
+
+            </div>
+
+
+            <div class="payment-item">
+
+                <span class="field-label">
+                    Recommended Payout
+                </span>
+
+                <strong>
+                    {{c.payment.recommended_payout}}
+                </strong>
+
+            </div>
+
+
+            <div class="payment-item">
+
+                <span class="field-label">
+                    Final Payout
+                </span>
+
+                <strong>
+                    {{c.payment.final_payout}}
+                </strong>
+
+            </div>
+
+
+            <div class="payment-item">
+
+                <span class="field-label">
+                    Payment Status
+                </span>
+
+                <strong>
+                    {{c.payment.payment_status}}
+                </strong>
+
+            </div>
+
+
+            <div class="payment-item">
+
+                <span class="field-label">
+                    Payment Reference
+                </span>
+
+                <strong>
+                    {{c.payment.payment_reference}}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PAYMENT STATUS -->
+
+    <div class="payment-card">
+
+        <div class="card-title">
+
+            <span>]]>💳<![CDATA[</span>
+
+            <h2>
+                Payment Status
+            </h2>
+
+        </div>
+
+
+        <div
+            class="status-message"
+            ng-if="
+                c.payment.payment_status
+                .toLowerCase() == 'pending'
+            ">
+
+            <div class="status-large-icon">
+                ⏳
+            </div>
+
+            <div>
+
+                <h3>
+                    Payment Pending
+                </h3>
+
+                <p>
+                    Your claim has not been paid yet.
+                    Payment will be processed after claim approval.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="status-message"
+            ng-if="
+                c.payment.payment_status
+                .toLowerCase() == 'processing'
+            ">
+
+            <div class="status-large-icon">
+                ]]>🔄
+<![CDATA[            </div>
+
+            <div>
+
+                <h3>
+                    Payment Processing
+                </h3>
+
+                <p>
+                    Your claim payment is currently being processed.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="status-message"
+            ng-if="
+                c.payment.payment_status
+                .toLowerCase() == 'paid'
+            ">
+
+            <div class="status-large-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <h3>
+                    Payment Successful
+                </h3>
+
+                <p>
+                    Your claim payment has been successfully processed.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PAYMENT PROGRESS -->
+
+    <div class="payment-card">
+
+        <div class="card-title">
+
+            <span>]]>📊<![CDATA[</span>
+
+            <h2>
+                Payment Progress
+            </h2>
+
+        </div>
+
+
+        <div class="payment-timeline">
+
+            <div
+                class="payment-step"
+                ng-class="c.getStepClass(1)">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <div>
+
+                    <h3>
+                        Claim Approved
+                    </h3>
+
+                    <p>
+                        Claim approval completed.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="payment-step"
+                ng-class="c.getStepClass(2)">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <div>
+
+                    <h3>
+                        Payment Processing
+                    </h3>
+
+                    <p>
+                        Payment is being processed.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="payment-step"
+                ng-class="c.getStepClass(3)">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <div>
+
+                    <h3>
+                        Payment Completed
+                    </h3>
+
+                    <p>
+                        Payment has been successfully completed.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="payment-actions">
+
+        <button
+            type="button"
+            ng-click="c.refreshPayment()">
+
+            ↻ Refresh Payment
+
+        </button>
+
+
+        <button
+            type="button"
+            ng-click="c.goHome()">
+
+            ]]>🏠<![CDATA[ Home
+
+        </button>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

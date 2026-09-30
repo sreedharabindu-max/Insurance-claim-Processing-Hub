@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="89f314dfb11703107f44639b25435ab5" label="Settlement" max_length="40" name="x_snc_insurance_0_settlement" type="collection">
+        <element label="Recommended Payout" max_length="20" name="recommended_payout" type="currency"/>
+        <element label="Claim" max_length="32" name="claim" reference="x_snc_insurance_0_claim" type="reference"/>
+        <element label="Adjuster Comments" max_length="40" name="adjuster_comments" type="string"/>
+        <element label="Claim Amount" max_length="20" name="claim_amount" type="currency"/>
+        <element choice="1" display="true" label="Settlement Status" max_length="40" name="settlement_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Under Review" sequence="4" value="under_review"/>
+                <element inactive_on_update="false" label="Rejected" sequence="3" value="rejected"/>
+                <element inactive_on_update="false" label="Paid" sequence="1" value="paid"/>
+                <element inactive_on_update="false" label="Pending" sequence="2" value="pending"/>
+                <element inactive_on_update="false" label="Approved" sequence="0" value="approved"/>
+            </choice>
+        </element>
+        <element label="Recommended Maximum" max_length="20" name="recommended_maximum" type="currency"/>
+        <element label="Final Payout" max_length="20" name="final_payout" type="currency"/>
+        <element label="Coverage Limit" max_length="20" name="coverage_limit" type="currency"/>
+        <element label="Settlement Number" max_length="40" name="settlement_number" type="string"/>
+        <element label="Rationale" max_length="40" name="rationale" type="string"/>
+        <element choice="1" label="Adjuster Decision" max_length="40" name="adjuster_decision" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Reject" value="reject"/>
+                <element inactive_on_update="false" label="Override" value="override"/>
+                <element inactive_on_update="false" label="Accept" value="accept"/>
+            </choice>
+        </element>
+        <element choice="1" label="Payment Status" max_length="40" name="payment_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Successful" sequence="1" value="successful"/>
+                <element inactive_on_update="false" label="Pending" sequence="0" value="pending"/>
+                <element inactive_on_update="false" label="Failed" sequence="2" value="failed"/>
+            </choice>
+        </element>
+        <element label="Payment Transaction ID" max_length="40" name="payment_transaction_id" type="string"/>
+        <element label="Override Reason" max_length="40" name="override_reason" type="string"/>
+        <element label="Recommended Minimum" max_length="20" name="recommended_minimum" type="currency"/>
+        <element label="Adjuster Amount" max_length="40" name="adjuster_amount" type="currency"/>
+        <element label="Decision Date" max_length="40" name="decision_date" type="glide_date_time"/>
+        <index name="index">
+            <element name="claim"/>
+        </index>
+    </element>
+</database>

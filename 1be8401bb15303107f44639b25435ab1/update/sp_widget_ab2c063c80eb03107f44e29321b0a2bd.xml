@@ -1,0 +1,1305 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($location) {
+
+    var c = this;
+
+    // ==========================================
+    // VARIABLES
+    // ==========================================
+
+    c.loading = true;
+    c.documentFound = false;
+    c.document = {};
+    c.processing = false;
+
+    c.showRejectionBox = false;
+    c.rejectionReason = "";
+    c.redirecting = false;
+
+
+    // ==========================================
+    // LOAD / REFRESH DOCUMENT
+    // ==========================================
+
+    c.loadDocument = function() {
+
+        c.loading = true;
+
+        var params = $location.search();
+
+        var documentSysId =
+            params.document_sys_id || "";
+
+        if (!documentSysId) {
+
+            c.loading = false;
+            c.documentFound = false;
+
+            return;
+        }
+
+        c.server.get({
+
+            action: "get_document",
+
+            document_sys_id: documentSysId
+
+        }).then(function(response) {
+
+            c.loading = false;
+
+            if (response.data.success === true) {
+
+                c.documentFound = true;
+                c.document = response.data.document;
+
+            } else {
+
+                c.documentFound = false;
+
+            }
+
+        }, function() {
+
+            c.loading = false;
+            c.documentFound = false;
+
+        });
+
+    };
+
+
+    // ==========================================
+    // APPROVE DOCUMENT
+    // ==========================================
+
+    c.approveDocument = function() {
+
+        var params = $location.search();
+
+        var documentSysId =
+            params.document_sys_id || "";
+
+        if (!documentSysId) {
+
+            alert("Document information is missing.");
+            return;
+        }
+
+        c.processing = true;
+
+        c.server.get({
+
+            action: "update_status",
+
+            document_sys_id: documentSysId,
+
+            new_status: "approved"
+
+        }).then(function(response) {
+
+            c.processing = false;
+
+            if (response.data.success === true) {
+
+                c.showRejectionBox = false;
+                c.rejectionReason = "";
+
+                // Show Approved status
+                c.loadDocument();
+
+                // Enable redirect
+                c.redirecting = true;
+
+                // Go to Home after 3 seconds
+                setTimeout(function() {
+
+                    $location.search({
+                        id: "claim_home"
+                    });
+
+                }, 3000);
+
+            } else {
+
+                alert(
+                    response.data.message ||
+                    "Unable to approve document."
+                );
+
+            }
+
+        }, function() {
+
+            c.processing = false;
+
+            alert(
+                "Unable to update document status."
+            );
+
+        });
+
+    };
+
+
+    // ==========================================
+    // SHOW REJECTION BOX
+    // ==========================================
+
+    c.showRejectBox = function() {
+
+        c.showRejectionBox = true;
+        c.rejectionReason = "";
+
+    };
+
+
+    // ==========================================
+    // CANCEL REJECTION
+    // ==========================================
+
+    c.cancelReject = function() {
+
+        c.showRejectionBox = false;
+        c.rejectionReason = "";
+
+    };
+
+
+    // ==========================================
+    // CONFIRM REJECTION
+    // ==========================================
+
+    c.confirmReject = function() {
+
+        var params = $location.search();
+
+        var documentSysId =
+            params.document_sys_id || "";
+
+        if (!documentSysId) {
+
+            alert("Document information is missing.");
+            return;
+        }
+
+        if (!c.rejectionReason ||
+            !c.rejectionReason.trim()) {
+
+            alert("Please enter a rejection reason.");
+            return;
+        }
+
+        c.processing = true;
+
+        c.server.get({
+
+            action: "update_status",
+
+            document_sys_id: documentSysId,
+
+            new_status: "rejected",
+
+            rejection_reason:
+                c.rejectionReason.trim()
+
+        }).then(function(response) {
+
+            c.processing = false;
+
+            if (response.data.success === true) {
+
+                c.showRejectionBox = false;
+
+                // Show Rejected status
+                c.loadDocument();
+
+                // Enable redirect
+                c.redirecting = true;
+
+                // Go to Home after 3 seconds
+                setTimeout(function() {
+
+                    $location.search({
+                        id: "claim_home"
+                    });
+
+                }, 3000);
+
+            } else {
+
+                alert(
+                    response.data.message ||
+                    "Unable to reject document."
+                );
+
+            }
+
+        }, function() {
+
+            c.processing = false;
+
+            alert(
+                "Unable to update document status."
+            );
+
+        });
+
+    };
+
+
+    // ==========================================
+    // INITIAL LOAD
+    // ==========================================
+
+    c.loadDocument();
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.status-container {&#13;
+    max-width: 900px;&#13;
+    margin: 40px auto;&#13;
+    padding: 20px;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* HEADER */&#13;
+/* ============================= */&#13;
+&#13;
+.status-header {&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    gap: 18px;&#13;
+    margin-bottom: 25px;&#13;
+}&#13;
+&#13;
+.status-icon {&#13;
+    width: 58px;&#13;
+    height: 58px;&#13;
+    border-radius: 14px;&#13;
+    background: #eaf3ff;&#13;
+&#13;
+    display: flex;&#13;
+    align-items: center;&#13;
+    justify-content: center;&#13;
+&#13;
+    font-size: 28px;&#13;
+}&#13;
+&#13;
+.status-header h1 {&#13;
+    margin: 0;&#13;
+    font-size: 30px;&#13;
+    color: #1f2937;&#13;
+}&#13;
+&#13;
+.status-header p {&#13;
+    margin: 6px 0 0;&#13;
+    color: #6b7280;&#13;
+    font-size: 15px;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* CARD */&#13;
+/* ============================= */&#13;
+&#13;
+.status-card {&#13;
+    background: #ffffff;&#13;
+    border-radius: 14px;&#13;
+    padding: 30px;&#13;
+&#13;
+    box-shadow:&#13;
+        0 5px 20px rgba(0, 0, 0, 0.08);&#13;
+&#13;
+    border: 1px solid #e5e7eb;&#13;
+}&#13;
+&#13;
+.status-card h2 {&#13;
+    margin-top: 0;&#13;
+    margin-bottom: 25px;&#13;
+&#13;
+    color: #1f2937;&#13;
+    font-size: 22px;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* INFORMATION */&#13;
+/* ============================= */&#13;
+&#13;
+.info-row {&#13;
+    display: flex;&#13;
+    justify-content: space-between;&#13;
+    align-items: center;&#13;
+&#13;
+    padding: 17px 0;&#13;
+&#13;
+    border-bottom: 1px solid #eeeeee;&#13;
+}&#13;
+&#13;
+.info-row span:first-child {&#13;
+    color: #6b7280;&#13;
+    font-size: 15px;&#13;
+}&#13;
+&#13;
+.info-row strong {&#13;
+    color: #1f2937;&#13;
+    font-size: 15px;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* STATUS BADGE */&#13;
+/* ============================= */&#13;
+&#13;
+.status-badge {&#13;
+    padding: 7px 15px;&#13;
+&#13;
+    border-radius: 20px;&#13;
+&#13;
+    font-size: 13px;&#13;
+    font-weight: 600;&#13;
+}&#13;
+&#13;
+.status-badge.pending {&#13;
+    background: #fff3cd;&#13;
+    color: #856404;&#13;
+}&#13;
+&#13;
+.status-badge.approved {&#13;
+    background: #d1e7dd;&#13;
+    color: #0f5132;&#13;
+}&#13;
+&#13;
+.status-badge.rejected {&#13;
+    background: #f8d7da;&#13;
+    color: #842029;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* STATUS MESSAGE */&#13;
+/* ============================= */&#13;
+&#13;
+.status-message {&#13;
+    margin-top: 25px;&#13;
+&#13;
+    padding: 15px;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    background: #fff8e1;&#13;
+    color: #795548;&#13;
+}&#13;
+&#13;
+.approved-message {&#13;
+    background: #e8f5e9;&#13;
+    color: #2e7d32;&#13;
+}&#13;
+&#13;
+.rejected-message {&#13;
+    background: #ffebee;&#13;
+    color: #c62828;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* APPROVE / REJECT BUTTONS */&#13;
+/* ============================= */&#13;
+&#13;
+.validation-actions {&#13;
+    display: flex;&#13;
+    gap: 15px;&#13;
+&#13;
+    margin-top: 25px;&#13;
+}&#13;
+&#13;
+.approve-btn,&#13;
+.reject-btn {&#13;
+    border: none;&#13;
+&#13;
+    padding: 13px 24px;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    font-size: 15px;&#13;
+    font-weight: 600;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+    transition: 0.2s;&#13;
+}&#13;
+&#13;
+.approve-btn {&#13;
+    background: #198754;&#13;
+    color: white;&#13;
+}&#13;
+&#13;
+.approve-btn:hover {&#13;
+    background: #157347;&#13;
+}&#13;
+&#13;
+.reject-btn {&#13;
+    background: #dc3545;&#13;
+    color: white;&#13;
+}&#13;
+&#13;
+.reject-btn:hover {&#13;
+    background: #bb2d3b;&#13;
+}&#13;
+&#13;
+.approve-btn:disabled,&#13;
+.reject-btn:disabled {&#13;
+    opacity: 0.6;&#13;
+    cursor: not-allowed;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* REJECTION BOX */&#13;
+/* ============================= */&#13;
+&#13;
+.reject-box {&#13;
+    margin-top: 25px;&#13;
+&#13;
+    padding: 20px;&#13;
+&#13;
+    border: 1px solid #f1caca;&#13;
+&#13;
+    border-radius: 10px;&#13;
+&#13;
+    background: #fff8f8;&#13;
+}&#13;
+&#13;
+.reject-box h3 {&#13;
+    margin-top: 0;&#13;
+    margin-bottom: 8px;&#13;
+&#13;
+    color: #b42318;&#13;
+&#13;
+    font-size: 18px;&#13;
+}&#13;
+&#13;
+.reject-box p {&#13;
+    margin-bottom: 15px;&#13;
+&#13;
+    color: #666;&#13;
+&#13;
+    font-size: 14px;&#13;
+}&#13;
+&#13;
+&#13;
+/* REJECTION TEXTAREA */&#13;
+&#13;
+.rejection-input {&#13;
+    width: 100%;&#13;
+&#13;
+    min-height: 100px;&#13;
+&#13;
+    padding: 12px;&#13;
+&#13;
+    border: 1px solid #d5d5d5;&#13;
+&#13;
+    border-radius: 7px;&#13;
+&#13;
+    resize: vertical;&#13;
+&#13;
+    font-size: 14px;&#13;
+&#13;
+    box-sizing: border-box;&#13;
+}&#13;
+&#13;
+.rejection-input:focus {&#13;
+    outline: none;&#13;
+&#13;
+    border-color: #dc3545;&#13;
+}&#13;
+&#13;
+&#13;
+/* REJECTION BUTTONS */&#13;
+&#13;
+.reject-box-actions {&#13;
+    display: flex;&#13;
+&#13;
+    justify-content: flex-end;&#13;
+&#13;
+    gap: 12px;&#13;
+&#13;
+    margin-top: 15px;&#13;
+}&#13;
+&#13;
+.cancel-reject-btn {&#13;
+    padding: 10px 18px;&#13;
+&#13;
+    border: 1px solid #999;&#13;
+&#13;
+    background: white;&#13;
+&#13;
+    color: #555;&#13;
+&#13;
+    border-radius: 7px;&#13;
+&#13;
+    cursor: pointer;&#13;
+}&#13;
+&#13;
+.cancel-reject-btn:hover {&#13;
+    background: #f5f5f5;&#13;
+}&#13;
+&#13;
+.confirm-reject-btn {&#13;
+    padding: 10px 18px;&#13;
+&#13;
+    border: none;&#13;
+&#13;
+    background: #dc3545;&#13;
+&#13;
+    color: white;&#13;
+&#13;
+    border-radius: 7px;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+    font-weight: 600;&#13;
+}&#13;
+&#13;
+.confirm-reject-btn:hover {&#13;
+    background: #bb2d3b;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* REJECTION REASON */&#13;
+/* ============================= */&#13;
+&#13;
+.rejection-reason {&#13;
+    margin-top: 12px;&#13;
+&#13;
+    padding: 10px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    border-radius: 6px;&#13;
+&#13;
+    color: #7f1d1d;&#13;
+}&#13;
+&#13;
+.rejection-reason strong {&#13;
+    margin-right: 5px;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* PROCESSING */&#13;
+/* ============================= */&#13;
+&#13;
+.processing-message {&#13;
+    margin-top: 20px;&#13;
+&#13;
+    padding: 12px;&#13;
+&#13;
+    background: #eef4ff;&#13;
+&#13;
+    color: #2457a6;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    text-align: center;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* REFRESH BUTTON */&#13;
+/* ============================= */&#13;
+&#13;
+.refresh-btn {&#13;
+    margin-top: 25px;&#13;
+&#13;
+    padding: 11px 20px;&#13;
+&#13;
+    border: 1px solid #2563eb;&#13;
+&#13;
+    background: white;&#13;
+&#13;
+    color: #2563eb;&#13;
+&#13;
+    border-radius: 8px;&#13;
+&#13;
+    font-weight: 600;&#13;
+&#13;
+    cursor: pointer;&#13;
+}&#13;
+&#13;
+.refresh-btn:hover {&#13;
+    background: #eff6ff;&#13;
+}&#13;
+&#13;
+.refresh-btn:disabled {&#13;
+    opacity: 0.6;&#13;
+&#13;
+    cursor: not-allowed;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* LOADING */&#13;
+/* ============================= */&#13;
+&#13;
+.loading {&#13;
+    text-align: center;&#13;
+&#13;
+    padding: 30px;&#13;
+&#13;
+    color: #6b7280;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* ERROR */&#13;
+/* ============================= */&#13;
+&#13;
+.error-card {&#13;
+    text-align: center;&#13;
+}&#13;
+&#13;
+.error-card h2 {&#13;
+    color: #dc3545;&#13;
+}&#13;
+&#13;
+&#13;
+/* ============================= */&#13;
+/* MOBILE */&#13;
+/* ============================= */&#13;
+&#13;
+@media (max-width: 600px) {&#13;
+&#13;
+    .status-container {&#13;
+        margin: 20px auto;&#13;
+        padding: 12px;&#13;
+    }&#13;
+&#13;
+    .status-card {&#13;
+        padding: 20px;&#13;
+    }&#13;
+&#13;
+    .info-row {&#13;
+        flex-direction: column;&#13;
+        align-items: flex-start;&#13;
+&#13;
+        gap: 8px;&#13;
+    }&#13;
+&#13;
+    .validation-actions {&#13;
+        flex-direction: column;&#13;
+    }&#13;
+&#13;
+    .approve-btn,&#13;
+    .reject-btn {&#13;
+        width: 100%;&#13;
+    }&#13;
+&#13;
+    .reject-box-actions {&#13;
+        flex-direction: column;&#13;
+    }&#13;
+&#13;
+    .cancel-reject-btn,&#13;
+    .confirm-reject-btn {&#13;
+        width: 100%;&#13;
+    }&#13;
+&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>Displays claim document details and validation status.</description>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>insurance_claim_document_status</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Insurance Claim Document Status</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.success = false;
+
+    data.document = {};
+
+    data.message = "";
+
+
+    // ==========================================
+    // CHECK INPUT
+    // ==========================================
+
+    if (!input) {
+
+        return;
+
+    }
+
+
+    // ==========================================
+    // GET DOCUMENT
+    // ==========================================
+
+    if (input.action == "get_document") {
+
+
+        var documentSysId =
+            String(
+                input.document_sys_id || ""
+            );
+
+
+        if (!documentSysId) {
+
+            data.message =
+                "Document information is missing.";
+
+            return;
+
+        }
+
+
+        // Find document
+
+        var document =
+            new GlideRecord(
+                "x_snc_insurance_0_claim_document"
+            );
+
+
+        if (!document.get(documentSysId)) {
+
+            data.message =
+                "Document not found.";
+
+            return;
+
+        }
+
+
+        // ======================================
+        // GET CLAIM NUMBER
+        // ======================================
+
+        var claimNumber = "";
+
+
+        var claimSysId =
+            document.getValue("claim");
+
+
+        if (claimSysId) {
+
+
+            var claim =
+                new GlideRecord(
+                    "x_snc_insurance_0_claim"
+                );
+
+
+            if (claim.get(claimSysId)) {
+
+                claimNumber =
+                    claim.getValue(
+                        "claim_number"
+                    );
+
+            }
+
+        }
+
+
+        // ======================================
+        // RETURN DOCUMENT
+        // ======================================
+
+        data.success = true;
+
+
+        data.document = {
+
+            claim_number:
+                claimNumber,
+
+
+            document_name:
+                document.getValue(
+                    "document_name"
+                ) || "",
+
+
+            document_type:
+                document.getDisplayValue(
+                    "document_type"
+                ) || "",
+
+
+            validation_status:
+                document.getDisplayValue(
+                    "document_validation_status"
+                ) || "Pending",
+
+
+            rejection_reason:
+                document.getValue(
+                    "rejection_reason"
+                ) || ""
+
+        };
+
+
+        return;
+
+    }
+
+
+
+    // ==========================================
+    // UPDATE DOCUMENT STATUS
+    // ==========================================
+
+    if (input.action == "update_status") {
+
+
+        var updateDocumentSysId =
+            String(
+                input.document_sys_id || ""
+            );
+
+
+        var newStatus =
+            String(
+                input.new_status || ""
+            );
+
+
+        var rejectionReason =
+            String(
+                input.rejection_reason || ""
+            );
+
+
+        // ======================================
+        // CHECK DOCUMENT ID
+        // ======================================
+
+        if (!updateDocumentSysId) {
+
+            data.message =
+                "Document information is missing.";
+
+            return;
+
+        }
+
+
+        // ======================================
+        // CHECK STATUS
+        // ======================================
+
+        if (newStatus != "approved" &&
+            newStatus != "rejected") {
+
+            data.message =
+                "Invalid document status.";
+
+            return;
+
+        }
+
+
+        // ======================================
+        // FIND DOCUMENT
+        // ======================================
+
+        var documentToUpdate =
+            new GlideRecord(
+                "x_snc_insurance_0_claim_document"
+            );
+
+
+        if (!documentToUpdate.get(
+                updateDocumentSysId
+            )) {
+
+            data.message =
+                "Document was not found.";
+
+            return;
+
+        }
+
+
+        // ======================================
+        // UPDATE STATUS
+        // ======================================
+
+        documentToUpdate.setValue(
+            "document_validation_status",
+            newStatus
+        );
+
+
+        // ======================================
+        // REJECTION REASON
+        // ======================================
+
+        if (newStatus == "rejected") {
+
+
+            if (!rejectionReason ||
+                !rejectionReason.trim()) {
+
+                data.message =
+                    "Please enter a rejection reason.";
+
+                return;
+
+            }
+
+
+            documentToUpdate.setValue(
+                "rejection_reason",
+                rejectionReason.trim()
+            );
+
+
+        } else {
+
+
+            // If approved,
+            // remove any old rejection reason
+
+            documentToUpdate.setValue(
+                "rejection_reason",
+                ""
+            );
+
+        }
+
+
+        // ======================================
+        // SAVE RECORD
+        // ======================================
+
+        var updateResult =
+            documentToUpdate.update();
+
+
+        if (!updateResult) {
+
+            data.message =
+                "Unable to update document status.";
+
+            return;
+
+        }
+
+
+        // ======================================
+        // SUCCESS
+        // ======================================
+
+        data.success = true;
+
+        data.message =
+            "Document status updated successfully.";
+
+        return;
+
+    }
+
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-23 07:00:38</sys_created_on>
+        <sys_id>ab2c063c80eb03107f44e29321b0a2bd</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Insurance Claim Document Status</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_widget_ab2c063c80eb03107f44e29321b0a2bd</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-23 09:14:40</sys_updated_on>
+        <template><![CDATA[<div class="status-container">
+
+    <!-- HEADER -->
+    <div class="status-header">
+
+        <div class="status-icon">
+            ]]>📄
+<![CDATA[        </div>
+
+        <div>
+            <h1>Document Status</h1>
+
+            <p>
+                View and manage the validation status of your submitted document.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- LOADING -->
+    <div class="status-card"
+         ng-if="c.loading">
+
+        <div class="loading">
+            Loading document information...
+        </div>
+
+    </div>
+
+
+    <!-- DOCUMENT FOUND -->
+    <div class="status-card"
+         ng-if="!c.loading && c.documentFound">
+
+        <h2>Document Information</h2>
+
+
+        <!-- CLAIM NUMBER -->
+        <div class="info-row">
+
+            <span>
+                Claim Number
+            </span>
+
+            <strong>
+                {{c.document.claim_number}}
+            </strong>
+
+        </div>
+
+
+        <!-- DOCUMENT NAME -->
+        <div class="info-row">
+
+            <span>
+                Document Name
+            </span>
+
+            <strong>
+                {{c.document.document_name}}
+            </strong>
+
+        </div>
+
+
+        <!-- DOCUMENT TYPE -->
+        <div class="info-row">
+
+            <span>
+                Document Type
+            </span>
+
+            <strong>
+                {{c.document.document_type}}
+            </strong>
+
+        </div>
+
+
+        <!-- VALIDATION STATUS -->
+        <div class="info-row">
+
+            <span>
+                Validation Status
+            </span>
+
+            <span class="status-badge"
+                  ng-class="{
+                      'pending':
+                          c.document.validation_status == 'Pending',
+
+                      'approved':
+                          c.document.validation_status == 'Approved',
+
+                      'rejected':
+                          c.document.validation_status == 'Rejected'
+                  }">
+
+                {{c.document.validation_status}}
+
+            </span>
+
+        </div>
+
+
+        <!-- PENDING MESSAGE -->
+        <div class="status-message"
+             ng-if="c.document.validation_status == 'Pending'">
+
+            ⏳ Your document is currently under validation.
+
+        </div>
+
+
+        <!-- APPROVE / REJECT BUTTONS -->
+        <div class="validation-actions"
+             ng-if="c.document.validation_status == 'Pending'
+                    && !c.showRejectionBox">
+
+            <button type="button"
+                    class="approve-btn"
+                    ng-click="c.approveDocument()"
+                    ng-disabled="c.processing">
+
+                ✓ Approve Document
+
+            </button>
+
+
+            <button type="button"
+                    class="reject-btn"
+                    ng-click="c.showRejectBox()"
+                    ng-disabled="c.processing">
+
+                ✕ Reject Document
+
+            </button>
+
+        </div>
+
+
+        <!-- REJECTION BOX -->
+        <div class="reject-box"
+             ng-if="c.showRejectionBox">
+
+            <h3>
+                Reject Document
+            </h3>
+
+            <p>
+                Please provide a reason for rejecting this document.
+            </p>
+
+
+            <textarea
+                class="rejection-input"
+                ng-model="c.rejectionReason"
+                placeholder="Enter rejection reason..."
+                maxlength="500"
+                rows="4">
+            </textarea>
+
+
+            <div class="reject-box-actions">
+
+                <button type="button"
+                        class="cancel-reject-btn"
+                        ng-click="c.cancelReject()"
+                        ng-disabled="c.processing">
+
+                    Cancel
+
+                </button>
+
+
+                <button type="button"
+                        class="confirm-reject-btn"
+                        ng-click="c.confirmReject()"
+                        ng-disabled="c.processing">
+
+                    <span ng-if="!c.processing">
+                        Confirm Rejection
+                    </span>
+
+                    <span ng-if="c.processing">
+                        Rejecting...
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- APPROVED MESSAGE -->
+        <div class="status-message approved-message"
+             ng-if="c.document.validation_status == 'Approved'">
+
+            ✓ Your document has been successfully validated.
+
+        </div>
+
+
+        <!-- REJECTED MESSAGE -->
+        <div class="status-message rejected-message"
+             ng-if="c.document.validation_status == 'Rejected'">
+
+            ⚠ Your document was rejected.
+
+
+            <div class="rejection-reason"
+                 ng-if="c.document.rejection_reason">
+
+                <strong>
+                    Reason:
+                </strong>
+
+                {{c.document.rejection_reason}}
+
+            </div>
+
+
+            <p>
+                Please upload a valid document.
+            </p>
+
+        </div>
+
+
+        <!-- PROCESSING -->
+        <div class="processing-message"
+             ng-if="c.processing">
+
+            Updating document status...
+
+        </div>
+
+
+        <!-- REFRESH -->
+        <button type="button"
+                class="refresh-btn"
+                ng-click="c.loadDocument()"
+                ng-disabled="c.processing || c.redirecting">
+
+            ]]>🔄<![CDATA[ Refresh Status
+
+        </button>
+
+    </div>
+
+
+    <!-- DOCUMENT NOT FOUND -->
+    <div class="status-card error-card"
+         ng-if="!c.loading && !c.documentFound">
+
+        <h2>
+            Document Not Found
+        </h2>
+
+        <p>
+            No document was found for this request.
+        </p>
+
+    </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>
