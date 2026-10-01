@@ -3,8 +3,8 @@
         <element choice="1" label="Risk Level" max_length="40" name="risk_level" type="choice">
             <choice>
                 <element inactive_on_update="false" label="High" value="high"/>
-                <element inactive_on_update="false" label="Medium" value="medium"/>
                 <element inactive_on_update="false" label="Low" value="low"/>
+                <element inactive_on_update="false" label="Medium" value="medium"/>
             </choice>
         </element>
         <element label="Investigation Notes" max_length="40" name="investigation_notes" type="string"/>
@@ -12,10 +12,10 @@
         <element display="true" label="Assessment Number" max_length="40" name="assessment_number" reference="x_snc_insurance_0_fraud_assessment" type="reference"/>
         <element choice="1" label="Investigation Result" max_length="40" name="investigation_result" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Inconclusive" value="inconclusive"/>
-                <element inactive_on_update="false" label="Fraud Suspected" value="fraud_suspected"/>
-                <element inactive_on_update="false" label="No Fraud" value="no_fraud"/>
                 <element inactive_on_update="false" label="Fraud Confirmed" value="fraud_confirmed"/>
+                <element inactive_on_update="false" label="Fraud Suspected" value="fraud_suspected"/>
+                <element inactive_on_update="false" label="Inconclusive" value="inconclusive"/>
+                <element inactive_on_update="false" label="No Fraud" value="no_fraud"/>
             </choice>
         </element>
         <element label="Claim" max_length="32" name="claim" reference="x_snc_insurance_0_claim" type="reference"/>
@@ -23,10 +23,10 @@
         <element label="Closed Date" max_length="40" name="closed_date" type="glide_date_time"/>
         <element choice="1" label="Case Status" max_length="40" name="case_status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Open" value="open"/>
                 <element inactive_on_update="false" label="Closed" value="closed"/>
-                <element inactive_on_update="false" label="Under Investigation" value="under_investigation"/>
                 <element inactive_on_update="false" label="Escalated" value="escalated"/>
+                <element inactive_on_update="false" label="Open" value="open"/>
+                <element inactive_on_update="false" label="Under Investigation" value="under_investigation"/>
             </choice>
         </element>
         <index name="index">

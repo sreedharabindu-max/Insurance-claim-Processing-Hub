@@ -10,26 +10,26 @@
         <element label="Final Payout" max_length="20" name="final_payout" type="currency"/>
         <element choice="1" default="pending" label="Payment Status" max_length="40" name="payment_status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Processing" sequence="20" value="processing"/>
                 <element inactive_on_update="false" label="Failed" sequence="40" value="failed"/>
-                <element inactive_on_update="false" label="Paid" sequence="30" value="paid"/>
+                <element inactive_on_update="false" label="Processing" sequence="20" value="processing"/>
                 <element inactive_on_update="false" label="Pending" sequence="10" value="pending"/>
+                <element inactive_on_update="false" label="Paid" sequence="30" value="paid"/>
             </choice>
         </element>
         <element label="OTP Code" max_length="6" name="otp_code" type="string"/>
         <element choice="1" label="Status" max_length="40" name="status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Settled" value="Settled"/>
-                <element inactive_on_update="false" label="Fraud Assessment" value="Fraud Assessment"/>
+                <element inactive_on_update="false" label="Approved" value="Approved"/>
+                <element inactive_on_update="false" label="Approval Pending" value="Approval Pending"/>
                 <element inactive_on_update="false" label="Document Verification" value="Document Verification"/>
                 <element inactive_on_update="false" label="Matching Verification" value="Matching Verification"/>
-                <element inactive_on_update="false" label="Approved" value="Approved"/>
-                <element inactive_on_update="false" label="SIU Investigation" value="SIU Investigation"/>
+                <element inactive_on_update="false" label="Payment Processing" value="Payment Processing"/>
+                <element inactive_on_update="false" label="Settled" value="Settled"/>
+                <element inactive_on_update="false" label="Fraud Assessment" value="Fraud Assessment"/>
                 <element inactive_on_update="false" label="OTP Verification" value="OTP Verification"/>
                 <element inactive_on_update="false" label="Rejected" value="Rejected"/>
-                <element inactive_on_update="false" label="Approval Pending" value="Approval Pending"/>
+                <element inactive_on_update="false" label="SIU Investigation" value="SIU Investigation"/>
                 <element inactive_on_update="false" label="Settlement Review" value="Settlement Review"/>
-                <element inactive_on_update="false" label="Payment Processing" value="Payment Processing"/>
                 <element inactive_on_update="false" label="Submitted" value="Submitted"/>
             </choice>
         </element>
@@ -40,26 +40,26 @@
         <element choice="1" label="Adjuster decision" max_length="40" name="adjuster_decision" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Accept" value="Accept"/>
-                <element inactive_on_update="false" label="Override" value="Override"/>
                 <element inactive_on_update="false" label="Pending" value="Pending"/>
+                <element inactive_on_update="false" label="Override" value="Override"/>
                 <element inactive_on_update="false" label="Reject" value="Reject"/>
             </choice>
         </element>
         <element label="Fraud Score" max_length="40" name="fraud_score" type="integer"/>
         <element choice="1" label="Claim Type" max_length="40" name="claim_type" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Property" value="Property"/>
                 <element inactive_on_update="false" label="Health" value="Health"/>
-                <element inactive_on_update="false" label="Life" value="Life"/>
                 <element inactive_on_update="false" label="Motor" value="Motor"/>
                 <element inactive_on_update="false" label="Travel" value="Travel"/>
+                <element inactive_on_update="false" label="Life" value="Life"/>
+                <element inactive_on_update="false" label="Property" value="Property"/>
             </choice>
         </element>
         <element choice="1" label="Fraud Risk" max_length="40" name="fraud_risk" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Low" value="Low"/>
-                <element inactive_on_update="false" label="Medium" value="Medium"/>
                 <element inactive_on_update="false" label="High" value="High"/>
+                <element inactive_on_update="false" label="Medium" value="Medium"/>
+                <element inactive_on_update="false" label="Low" value="Low"/>
             </choice>
         </element>
         <element display="true" label="Claim Number" max_length="40" name="claim_number" type="string"/>

@@ -6,6 +6,7 @@
             <sys_class_name>sys_choice_set</sys_class_name>
             <sys_created_by>admin</sys_created_by>
             <sys_created_on>2026-09-28 13:35:03</sys_created_on>
+            <sys_id>44969da6e06343107f44c89b50c4a44c</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_name>notification_type</sys_name>
             <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
@@ -29,6 +30,7 @@
             <sys_created_on>2026-09-28 13:35:03</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
+            <sys_id>7e05f317786b03107f44b1a9cb0dd514</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2026-09-28 13:35:03</sys_updated_on>
@@ -48,6 +50,7 @@
             <sys_created_on>2026-09-28 13:36:18</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
+            <sys_id>7e05f317786b03107f44b1a9cb0dd515</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2026-09-28 13:36:18</sys_updated_on>
@@ -67,6 +70,7 @@
             <sys_created_on>2026-09-28 13:37:08</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
+            <sys_id>7e05f317786b03107f44b1a9cb0dd516</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2026-09-28 13:37:08</sys_updated_on>
@@ -86,6 +90,7 @@
             <sys_created_on>2026-09-28 13:37:55</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
+            <sys_id>3605f317786b03107f44b1a9cb0dd524</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2026-09-28 13:37:55</sys_updated_on>
@@ -105,6 +110,7 @@
             <sys_created_on>2026-09-28 13:38:25</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
+            <sys_id>3605f317786b03107f44b1a9cb0dd525</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2026-09-28 13:38:25</sys_updated_on>
@@ -124,6 +130,7 @@
             <sys_created_on>2026-09-28 13:39:08</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
+            <sys_id>3605f317786b03107f44b1a9cb0dd526</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2026-09-28 13:39:08</sys_updated_on>
@@ -143,6 +150,7 @@
             <sys_created_on>2026-09-28 13:39:44</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
+            <sys_id>3605f317786b03107f44b1a9cb0dd527</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2026-09-28 13:39:44</sys_updated_on>
