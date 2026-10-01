@@ -580,11 +580,7 @@
         <div class="form-group">
           <label>Policy Number <span>*</span></label>
 
-          <input type="text"
-                 class="form-control"
-                 ng-model="c.form.policy_number"
-                 placeholder="Example: POL1001"
-                 required>
+          <select class="form-control" ng-model="c.form.policy_number" required="required"><option value="" disabled="disabled" selected="selected">Select a Policy...</option><option ng-repeat="pol in c.data.policies" value="{{pol.number}}">{{pol.number}}</option></select>
         </div>
 
       </div>
