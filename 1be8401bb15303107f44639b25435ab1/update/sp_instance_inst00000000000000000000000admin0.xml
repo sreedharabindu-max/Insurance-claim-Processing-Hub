@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
     <sp_instance action="INSERT_OR_UPDATE">
         <active>true</active>
         <class_name/>
@@ -11,7 +11,7 @@
         <short_description/>
         <size>md</size>
         <sp_column display_value="1">col000000000000000000000000admin0</sp_column>
-        <sp_widget display_value="Admin Dashboard Widget">widget000000000000000000000admin0</sp_widget>
+        <sp_widget display_value="Insurance Claim Admin Portal">widget000000000000000000000admin99</sp_widget>
         <sys_class_name>sp_instance</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-10-01 00:00:00</sys_created_on>

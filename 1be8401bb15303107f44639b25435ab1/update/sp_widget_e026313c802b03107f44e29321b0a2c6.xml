@@ -433,6 +433,26 @@
             policy.getUniqueValue()
         );
 
+        // Link to current user
+        
+        var userEmail = gs.getUser().getEmail();
+        var ph = new GlideRecord("x_snc_insurance_0_policyholder");
+        ph.addQuery("email", userEmail);
+        ph.setLimit(1);
+        ph.query();
+        var phSysId = ph.next() ? ph.getUniqueValue() : "invalid";
+        
+        if (policy.getValue("policyholder") != phSysId) {
+            data.message = "You are not authorized to submit a claim for this policy.";
+            return;
+        }
+
+        claim.setValue(
+            "policyholder",
+            phSysId
+        );
+
+
         // Incident Date
         claim.setValue(
             "incident_date",

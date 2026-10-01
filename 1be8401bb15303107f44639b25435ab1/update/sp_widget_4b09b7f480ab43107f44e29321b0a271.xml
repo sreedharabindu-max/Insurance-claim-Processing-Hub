@@ -121,7 +121,8 @@
             "/sys_attachment.do?sys_id=" +
             encodeURIComponent(
                 document.attachment_sys_id
-            );
+            ) +
+            "&view=true";
 
 
         window.open(

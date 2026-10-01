@@ -691,55 +691,109 @@
         <sys_update_name>sp_widget_e5213dfc80e703107f44e29321b0a260</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2026-09-23 18:17:07</sys_updated_on>
-        <template><![CDATA[<div class="claim-hub-modern">
-  <section class="hero-section text-center">
-    <div class="container">
-      <div class="hero-badge">
-        <i class="fa fa-shield"></i> Insurance Claim Management
+        <template><![CDATA[<div class="claim-hub-home">
+
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-logo">
+        <i class="fa fa-shield"></i>
       </div>
-      <h1 class="hero-title">Everything You Need in One Place</h1>
-      <p class="hero-subtitle">Manage your insurance claim journey from submission to settlement with a seamless, secure, and transparent experience.</p>
+      <div class="hero-badge">INSURANCE CLAIM MANAGEMENT</div>
+      <h1>Everything You Need in One Place</h1>
+      <h2>Secure Claims. Smarter Tomorrow.</h2>
+      <p>Manage your insurance claim journey from submission to settlement with a seamless, secure, and transparent experience.</p>
       
       <div class="hero-actions">
-        <button class="btn custom-btn custom-btn-primary" ng-click="c.goToPage('submit_claim')">
-          <i class="fa fa-paper-plane"></i> File a New Claim
+        <button class="btn-primary" ng-click="c.goToPage('submit_claim')">
+          File a New Claim
         </button>
-        <button class="btn custom-btn custom-btn-outline" ng-click="c.goToPage('track_claim')">
-          <i class="fa fa-search"></i> Track Claim Status
+        <button class="btn-outline" ng-click="c.goToPage('track_claim')">
+          Track Claim Status
         </button>
       </div>
     </div>
-  </section>
-  <section class="quick-actions-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 col-sm-12">
-          <div class="glass-card" ng-click="c.goToPage('submit_claim')">
-            <div class="card-icon bg-blue"><i class="fa fa-file-text-o"></i></div>
-            <h3>Submit a Claim</h3>
-            <p>Start a new insurance claim and provide the required initial details securely.</p>
-            <span class="card-link">Start Submission <i class="fa fa-arrow-right"></i></span>
-          </div>
+  </div>
+
+  <!-- QUICK ACTIONS -->
+  <div class="welcome">
+    <div class="section-heading">
+      <div class="small-title">GET STARTED</div>
+      <h2>Quick Actions</h2>
+      <p>Select an option below to proceed.</p>
+    </div>
+
+    <div class="quick-actions">
+      <!-- Submit Claim -->
+      <div class="action-card action-blue" ng-click="c.goToPage('submit_claim')">
+        <div class="action-icon"><i class="fa fa-file-text-o"></i></div>
+        <div class="action-content">
+          <h3>Submit a Claim</h3>
+          <p>Start a new insurance claim.</p>
+          <span>Start Submission &rarr;</span>
         </div>
-        <div class="col-md-4 col-sm-12">
-          <div class="glass-card" ng-click="c.goToPage('my_claims')">
-            <div class="card-icon bg-green"><i class="fa fa-folder-open-o"></i></div>
-            <h3>My Claims</h3>
-            <p>View your submitted claims, upload pending documents, and manage your policies.</p>
-            <span class="card-link">View Claims <i class="fa fa-arrow-right"></i></span>
-          </div>
+      </div>
+
+      <!-- My Claims -->
+      <div class="action-card action-green" ng-click="c.goToPage('my_claims')">
+        <div class="action-icon"><i class="fa fa-folder-open-o"></i></div>
+        <div class="action-content">
+          <h3>My Claims</h3>
+          <p>View your submitted claims.</p>
+          <span>View Claims &rarr;</span>
         </div>
-        <div class="col-md-4 col-sm-12">
-          <div class="glass-card" ng-click="c.goToPage('track_claim')">
-            <div class="card-icon bg-purple"><i class="fa fa-line-chart"></i></div>
-            <h3>Track Progress</h3>
-            <p>Check the live status of your claim through verification, assessment, and settlement.</p>
-            <span class="card-link">Track Progress <i class="fa fa-arrow-right"></i></span>
-          </div>
+      </div>
+
+      <!-- Track Progress -->
+      <div class="action-card action-purple" ng-click="c.goToPage('track_claim')">
+        <div class="action-icon"><i class="fa fa-line-chart"></i></div>
+        <div class="action-content">
+          <h3>Track Progress</h3>
+          <p>Check the live status of your claim.</p>
+          <span>Track Progress &rarr;</span>
+        </div>
+      </div>
+      
+      <!-- Documents -->
+      <div class="action-card action-orange" ng-click="c.goToPage('documents')">
+        <div class="action-icon"><i class="fa fa-file-pdf-o"></i></div>
+        <div class="action-content">
+          <h3>Documents</h3>
+          <p>Upload and manage documents.</p>
+          <span>Manage Documents &rarr;</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- HELP SECTION -->
+  <div class="help-section">
+    <div class="help-content">
+      <div>
+        <h2>Need Assistance?</h2>
+        <p>Our support team and virtual agent are here to help you.</p>
+      </div>
+      <div class="help-actions">
+        <button class="help-btn">Contact Support</button>
+        <button class="help-btn secondary">View FAQs</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="hub-footer">
+    <div class="footer-brand">
+      <div class="footer-shield"><i class="fa fa-shield"></i></div>
+      <div>
+        <strong>Insurance Claim Hub</strong>
+        <small>Powered by ServiceNow</small>
+      </div>
+    </div>
+    <div class="footer-text">
+      &copy; 2026 Insurance Claim Processing Hub. All rights reserved.
+    </div>
+  </div>
+
 </div>]]></template>
     </sp_widget>
 </record_update>

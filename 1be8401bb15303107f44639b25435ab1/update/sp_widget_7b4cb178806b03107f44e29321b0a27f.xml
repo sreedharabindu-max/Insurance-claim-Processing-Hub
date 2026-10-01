@@ -237,16 +237,40 @@
             var claim = new GlideRecord("x_snc_insurance_0_claim");
 
             if (claim.get(claimSysId)) {
+                
+        var userEmail = gs.getUser().getEmail();
+        var ph = new GlideRecord("x_snc_insurance_0_policyholder");
+        ph.addQuery("email", userEmail);
+        ph.setLimit(1);
+        ph.query();
+        var phSysId = ph.next() ? ph.getUniqueValue() : "invalid";
+        if (claim.getValue("policyholder") != phSysId) {
+
+                    data.message = "Access denied.";
+                    return;
+                }
+                
+                var expectedOTP = claim.getValue("otp_code");
+                if (!expectedOTP) {
+                    data.message = "OTP not generated yet. Please wait.";
+                    return;
+                }
+                
+                if (enteredOTP !== expectedOTP) {
+                    data.message = "Invalid OTP.";
+                    return;
+                }
 
                 claim.setValue("otp_entered", enteredOTP);
                 claim.setValue("otp_verified", true);
                 claim.update();
-
+                
+                data.success = true;
+                data.message = "OTP verified successfully.";
+                return;
             }
         }
-
-        data.success = true;
-        data.message = "OTP verified successfully.";
+        data.message = "Claim not found.";
 
     }
 
