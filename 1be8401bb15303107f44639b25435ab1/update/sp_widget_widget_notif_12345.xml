@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
-<sp_widget action="INSERT_OR_UPDATE">
-    <category>custom</category>
-    <client_script><![CDATA[api.controller=function() { var c = this; };]]></client_script>
-    <controller_as>c</controller_as>
-    <css><![CDATA[
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() { var c = this; };]]></client_script>
+        <controller_as>c</controller_as>
+        <css>
         .notif-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .notif-item { display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee; }
         .notif-item:last-child { border-bottom: none; }
@@ -12,11 +12,21 @@
         .icon-info { background: #3b82f6; }
         .notif-content { flex: 1; }
         .notif-time { color: #9ca3af; font-size: 12px; }
-    ]]></css>
-    <data_table>sp_instance</data_table>
-    <id>claim_notif_widget</id>
-    <name>Claim Notifications Widget</name>
-    <script><![CDATA[(function() {
+    </css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>claim_notif_widget</id>
+        <internal>false</internal>
+        <link/>
+        <name>Claim Notifications Widget</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
         data.notifications = [];
         var userEmail = gs.getUser().getEmail();
         var ph = new GlideRecordSecure('x_snc_insurance_0_policyholder');
@@ -40,9 +50,20 @@
             }
         }
     })();]]></script>
-    <sys_class_name>sp_widget</sys_class_name>
-    <sys_id>widget_notif_12345</sys_id>
-    <template><![CDATA[
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 16:01:28</sys_created_on>
+        <sys_id>widget_notif_12345</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Claim Notifications Widget</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_widget_widget_notif_12345</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 16:01:28</sys_updated_on>
+        <template><![CDATA[
         <div class="notif-card">
             <h2>Notifications</h2>
             <div class="notif-item" ng-repeat="n in c.data.notifications | orderBy:'-time'">
@@ -55,5 +76,5 @@
             <div ng-if="c.data.notifications.length == 0">No new notifications.</div>
         </div>
     ]]></template>
-</sp_widget>
+    </sp_widget>
 </record_update>

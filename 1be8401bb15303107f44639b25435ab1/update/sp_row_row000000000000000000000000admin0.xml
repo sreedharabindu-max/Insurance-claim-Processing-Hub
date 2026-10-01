@@ -1,13 +1,15 @@
-﻿<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_row">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_row">
     <sp_row action="INSERT_OR_UPDATE">
+        <aria_label/>
         <class_name/>
         <order>1</order>
+        <semantic_tag/>
         <sp_column/>
-        <sp_container display_value="Admin Dashboard - Container 1">cont00000000000000000000000admin0</sp_container>
+        <sp_container display_value="Admin Dashboard - Container 1">cont00000000000000000000000admin</sp_container>
         <sys_class_name>sp_row</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-10-01 00:00:00</sys_created_on>
-        <sys_id>row000000000000000000000000admin0</sys_id>
+        <sys_id>row000000000000000000000000admin</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>1</sys_name>
         <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>

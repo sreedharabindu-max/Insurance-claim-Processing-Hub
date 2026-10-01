@@ -55,7 +55,7 @@
 	};
 }]]></client_script>
         <controller_as>c</controller_as>
-        <css><![CDATA[.ich-login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #edf6ff 0%, #f8fbff 50%, #edf3ff 100%); font-family: 'Segoe UI', Tahoma, sans-serif; }
+        <css>.ich-login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #edf6ff 0%, #f8fbff 50%, #edf3ff 100%); font-family: 'Segoe UI', Tahoma, sans-serif; }
 .ich-login-card { width: 100%; max-width: 440px; padding: 40px; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); position: relative; z-index: 10; border: 1px solid #eef2f6; }
 .ich-brand { text-align: center; margin-bottom: 30px; }
 .ich-logo { width: 60px; height: 60px; background: #1769d1; color: white; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(23,105,209,0.3); }
@@ -71,7 +71,7 @@
 .login-field input { width: 100%; padding: 12px 15px !important; border: 1px solid #d1d9e6 !important; border-radius: 8px !important; font-size: 14px !important; background: #fbfdff !important; box-sizing: border-box !important; height: auto !important; margin: 0 !important; }
 .login-field input:focus { border-color: #1769d1 !important; outline: none !important; box-shadow: 0 0 0 3px rgba(23,105,209,0.1) !important; }
 .login-submit { width: 100%; padding: 14px; background: #1769d1 !important; color: #fff !important; border: none !important; border-radius: 8px !important; font-size: 15px !important; font-weight: 600 !important; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
-.login-submit:hover { background: #1254a8 !important; }]]></css>
+.login-submit:hover { background: #1254a8 !important; }</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
         <description>Professional login page for Insurance Claim Hub</description>

@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
-<sp_widget action="INSERT_OR_UPDATE">
-    <category>custom</category>
-    <client_script><![CDATA[function($scope, $window){ var c = this; c.print = function(){ $window.print(); }; };]]></client_script>
-    <controller_as>c</controller_as>
-    <css><![CDATA[
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $window){ var c = this; c.print = function(){ $window.print(); }; };]]></client_script>
+        <controller_as>c</controller_as>
+        <css>
         .summary-card { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .summary-section { margin-bottom: 25px; }
         .summary-section h3 { border-bottom: 2px solid #0b63ce; padding-bottom: 5px; color: #0b63ce; }
         .row-data { display: flex; margin-bottom: 10px; }
         .row-data strong { width: 200px; color: #172033; }
         @media print { body * { visibility: hidden; } .summary-card, .summary-card * { visibility: visible; } .summary-card { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none; } .btn-print { display: none; } }
-    ]]></css>
-    <data_table>sp_instance</data_table>
-    <id>claim_summary_widget</id>
-    <name>Claim Summary Widget</name>
-    <script><![CDATA[(function() {
+    </css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>claim_summary_widget</id>
+        <internal>false</internal>
+        <link/>
+        <name>Claim Summary Widget</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
         var claimId = $sp.getParameter('sys_id');
         if(!claimId) { data.error = "No claim selected."; return; }
         var claim = new GlideRecordSecure('x_snc_insurance_0_claim');
@@ -38,9 +48,20 @@
             };
         } else { data.error = "Claim not found."; }
     })();]]></script>
-    <sys_class_name>sp_widget</sys_class_name>
-    <sys_id>widget_summary_12345</sys_id>
-    <template><![CDATA[
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 16:01:28</sys_created_on>
+        <sys_id>widget_summary_12345</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Claim Summary Widget</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_widget_widget_summary_12345</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 16:01:28</sys_updated_on>
+        <template><![CDATA[
         <div class="summary-card" ng-if="!c.data.error">
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <h2>Claim Summary: {{c.data.claim.number}}</h2>
@@ -63,5 +84,5 @@
         </div>
         <div ng-if="c.data.error" class="alert alert-danger">{{c.data.error}}</div>
     ]]></template>
-</sp_widget>
+    </sp_widget>
 </record_update>

@@ -3,18 +3,18 @@
         <element label="Claim" max_length="32" name="claim" reference="x_snc_insurance_0_claim" type="reference"/>
         <element choice="1" label="Document Type" max_length="40" name="document_type" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Aadhaar" sequence="1" value="aadhaar"/>
-                <element inactive_on_update="false" label="Vehicle Registration" sequence="4" value="vehicle_registration"/>
                 <element inactive_on_update="false" label="PAN Card" sequence="2" value="pan_card"/>
-                <element inactive_on_update="false" label="Insurance Document" sequence="5" value="insurance_document"/>
                 <element inactive_on_update="false" label="Driving License" sequence="3" value="driving_license"/>
+                <element inactive_on_update="false" label="Vehicle Registration" sequence="4" value="vehicle_registration"/>
+                <element inactive_on_update="false" label="Insurance Document" sequence="5" value="insurance_document"/>
+                <element inactive_on_update="false" label="Aadhaar" sequence="1" value="aadhaar"/>
             </choice>
         </element>
         <element label="Document Name" max_length="100" name="document_name" type="string"/>
         <element choice="1" label="Document Validation Status" max_length="60" name="document_validation_status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Rejected" sequence="30" value="rejected"/>
                 <element inactive_on_update="false" label="Approved" sequence="20" value="approved"/>
+                <element inactive_on_update="false" label="Rejected" sequence="30" value="rejected"/>
                 <element inactive_on_update="false" label="Pending" sequence="10" value="pending"/>
             </choice>
         </element>
