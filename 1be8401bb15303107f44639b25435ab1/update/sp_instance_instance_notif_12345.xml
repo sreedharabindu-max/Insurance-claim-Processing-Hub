@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+<sp_instance action="INSERT_OR_UPDATE">
+    <sp_page display_value="claim_notifications">8c85aec02cdf42e8b8265e925c1a5a61</sp_page>
+    <sp_widget display_value="claim_notif_widget">widget_notif_12345</sp_widget>
+    <sys_class_name>sp_instance</sys_class_name>
+    <sys_id>instance_notif_12345</sys_id>
+</sp_instance>
+</record_update>

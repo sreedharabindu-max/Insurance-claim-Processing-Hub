@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_rectangle_menu_item">
+    <sp_rectangle_menu_item action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <color>default</color>
+        <label>My Profile</label>
+        <order>50</order>
+        <sp_page display_value="claim_profile">cec61a4b16ac4a6e9cc4736a0ce0f5aa</sp_page>
+        <sp_rectangle_menu display_value="Insurance Claim Hub Menu">e1876c4c3c2343107f44afd2681c777e</sp_rectangle_menu>
+        <sys_class_name>sp_rectangle_menu_item</sys_class_name>
+        <sys_id>menu_profile_12345</sys_id>
+        <type>page</type>
+    </sp_rectangle_menu_item>
+</record_update>
