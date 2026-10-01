@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
         <client_script><![CDATA[api.controller=function() { var c = this; };]]></client_script>
@@ -32,17 +32,17 @@
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2026-10-01 00:00:00</sys_updated_on>
         <template><![CDATA[<div style="padding: 40px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-    <h2 style="color: #12305b; border-bottom: 2px solid #eef6ff; padding-bottom: 15px;">🛡️ Administrator Dashboard</h2>
+    <h2 style="color: #12305b; border-bottom: 2px solid #eef6ff; padding-bottom: 15px;">??? Administrator Dashboard</h2>
     <p style="color: #7c8da2; font-size: 16px;">Welcome to the Management Portal. Select a module below to process claims securely.</p>
     <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
-        <a href="/now/nav/ui/classic/params/target/x_snc_insurance_0_claim_list.do" target="_blank" style="flex: 1; min-width: 200px; padding: 25px; background: #f8fbff; border: 1px solid #1769d1; border-radius: 8px; text-decoration: none; color: #1769d1; font-weight: 600; text-align: center;">
-            <div style="font-size: 30px; margin-bottom: 10px;">📋</div>All Claims &amp; Status
+        <a href="?id=admin_dashboard&amp;view=admin_claims"  style="flex: 1; min-width: 200px; padding: 25px; background: #f8fbff; border: 1px solid #1769d1; border-radius: 8px; text-decoration: none; color: #1769d1; font-weight: 600; text-align: center;">
+            <div style="font-size: 30px; margin-bottom: 10px;">??</div>All Claims &amp; Status
         </a>
-        <a href="/now/nav/ui/classic/params/target/x_snc_insurance_0_claim_document_list.do" target="_blank" style="flex: 1; min-width: 200px; padding: 25px; background: #f8fbff; border: 1px solid #1769d1; border-radius: 8px; text-decoration: none; color: #1769d1; font-weight: 600; text-align: center;">
-            <div style="font-size: 30px; margin-bottom: 10px;">📄</div>Document Validation
+        <a href="?id=admin_dashboard&amp;view=admin_documents"  style="flex: 1; min-width: 200px; padding: 25px; background: #f8fbff; border: 1px solid #1769d1; border-radius: 8px; text-decoration: none; color: #1769d1; font-weight: 600; text-align: center;">
+            <div style="font-size: 30px; margin-bottom: 10px;">??</div>Document Validation
         </a>
-        <a href="/now/nav/ui/classic/params/target/pa_dashboards.do" target="_blank" style="flex: 1; min-width: 200px; padding: 25px; background: #f8fbff; border: 1px solid #1769d1; border-radius: 8px; text-decoration: none; color: #1769d1; font-weight: 600; text-align: center;">
-            <div style="font-size: 30px; margin-bottom: 10px;">📊</div>Reports &amp; Analytics
+        <a href="?id=admin_dashboard&amp;view=admin_reports"  style="flex: 1; min-width: 200px; padding: 25px; background: #f8fbff; border: 1px solid #1769d1; border-radius: 8px; text-decoration: none; color: #1769d1; font-weight: 600; text-align: center;">
+            <div style="font-size: 30px; margin-bottom: 10px;">??</div>Reports &amp; Analytics
         </a>
     </div>
 </div>]]></template>
