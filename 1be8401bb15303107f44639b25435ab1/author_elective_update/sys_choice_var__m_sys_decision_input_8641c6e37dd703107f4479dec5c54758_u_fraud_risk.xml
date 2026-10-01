@@ -6,6 +6,7 @@
             <sys_class_name>sys_choice_set</sys_class_name>
             <sys_created_by>admin</sys_created_by>
             <sys_created_on>2026-09-19 09:50:37</sys_created_on>
+            <sys_id>a4ec42277d5b03107f4479dec5c5476c</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_name>u_fraud_risk</sys_name>
             <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
@@ -29,6 +30,7 @@
             <sys_created_on>2026-09-22 09:05:49</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
+            <sys_id>696f112c516703107f444ed624f3c966</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2026-09-22 09:05:49</sys_updated_on>
@@ -48,6 +50,7 @@
             <sys_created_on>2026-09-22 09:05:49</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
+            <sys_id>6d6f112c516703107f444ed624f3c969</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2026-09-22 09:05:49</sys_updated_on>
@@ -67,6 +70,7 @@
             <sys_created_on>2026-09-22 09:05:49</sys_created_on>
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
+            <sys_id>ad6f112c516703107f444ed624f3c96c</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2026-09-22 09:05:49</sys_updated_on>

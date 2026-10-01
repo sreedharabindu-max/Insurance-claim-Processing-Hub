@@ -1,5 +1,6 @@
-﻿<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container">
     <sp_container action="INSERT_OR_UPDATE">
+        <aria_label/>
         <background_color/>
         <background_image/>
         <background_style>default</background_style>
@@ -8,12 +9,13 @@
         <container_class_name/>
         <name>Admin Dashboard - Container 1</name>
         <order>1</order>
-        <sp_page display_value="admin_dashboard">page00000000000000000000000admin0</sp_page>
+        <semantic_tag/>
+        <sp_page display_value="">page00000000000000000000000admin</sp_page>
         <subheader>false</subheader>
         <sys_class_name>sp_container</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-10-01 00:00:00</sys_created_on>
-        <sys_id>cont00000000000000000000000admin0</sys_id>
+        <sys_id>cont00000000000000000000000admin</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>Admin Dashboard - Container 1</sys_name>
         <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>

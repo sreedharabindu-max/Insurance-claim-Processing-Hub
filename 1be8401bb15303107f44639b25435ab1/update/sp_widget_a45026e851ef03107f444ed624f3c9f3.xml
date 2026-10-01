@@ -905,21 +905,21 @@
     <div class="ich-bg-circle ich-circle-two"></div>
     <div class="ich-login-card">
         <div class="ich-brand">
-            <div class="ich-logo">🛡️</div>
+            <div class="ich-logo">]]>🛡<![CDATA[️</div>
             <h1>Insurance Claim Hub</h1>
             <p>Welcome to the Claim Processing Portal</p>
         </div>
         <div ng-if="!c.loginMode" class="login-mode-selector">
             <h3 style="text-align:center; color:#12305b; margin-bottom: 20px; font-weight:600;">Choose Login Type</h3>
             <button class="mode-btn customer-btn" ng-click="c.loginMode = 'customer'; c.message = ''">
-                <div class="mode-icon">👤</div>
+                <div class="mode-icon">]]>👤<![CDATA[</div>
                 <div class="mode-text">
                     <strong>CUSTOMER LOGIN</strong>
                     <span>For policyholders / customers</span>
                 </div>
             </button>
             <button class="mode-btn admin-btn" ng-click="c.loginMode = 'admin'; c.message = ''">
-                <div class="mode-icon">🛡</div>
+                <div class="mode-icon">]]>🛡<![CDATA[</div>
                 <div class="mode-text">
                     <strong>ADMIN LOGIN</strong>
                     <span>For authorized administrators</span>

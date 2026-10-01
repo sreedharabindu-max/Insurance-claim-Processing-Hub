@@ -53,6 +53,7 @@
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-09-28 09:42:04</sys_created_on>
+        <sys_id>0f31a8a6e06b03107f44c89b50c4a400</sys_id>
         <sys_name>x_snc_insurance_0_claim_notification</sys_name>
         <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
         <sys_policy/>
