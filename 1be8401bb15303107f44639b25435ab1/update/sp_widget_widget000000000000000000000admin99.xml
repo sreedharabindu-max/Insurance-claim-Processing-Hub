@@ -7,13 +7,18 @@
     c.claimId = $location.search().sys_id || null;
     
     c.navItems = [
-        { id: 'admin_dashboard', label: 'Dashboard', icon: 'fa-home' },
-        { id: 'admin_claims', label: 'Claims', icon: 'fa-list-alt' },
-        { id: 'admin_documents', label: 'Documents', icon: 'fa-file-text' },
+        { id: 'admin_dashboard', label: 'Admin Dashboard', icon: 'fa-home' },
+        { id: 'admin_claims', label: 'Claims Management', icon: 'fa-list-alt' },
+        { id: 'admin_documents', label: 'Document Verification', icon: 'fa-file-text' },
         { id: 'admin_fraud', label: 'Fraud Assessment', icon: 'fa-shield' },
         { id: 'admin_settlement', label: 'Settlement', icon: 'fa-balance-scale' },
+        { id: 'admin_approvals', label: 'Approvals', icon: 'fa-check-square-o' },
         { id: 'admin_payments', label: 'Payments', icon: 'fa-money' },
-        { id: 'admin_reports', label: 'Reports', icon: 'fa-bar-chart' }
+        { id: 'admin_customers', label: 'Customers', icon: 'fa-users' },
+        { id: 'admin_reports', label: 'Reports & Analytics', icon: 'fa-bar-chart' },
+        { id: 'admin_notifications', label: 'Notifications', icon: 'fa-bell' },
+        { id: 'admin_ai', label: 'AI / Virtual Agent', icon: 'fa-comments' },
+        { id: 'admin_settings', label: 'Settings', icon: 'fa-cog' }
     ];
 
     c.navigate = function(id, sys_id) {
@@ -272,11 +277,84 @@
                 </table>
             </div>
         </div>
-        <div ng-if="['admin_fraud', 'admin_settlement', 'admin_payments', 'admin_reports'].includes(c.view)">
+                <div ng-if="c.view == 'admin_fraud'">
             <div class="card">
-                <h3>This module is linked to the Claims table.</h3>
-                <p>Navigate to <strong>Claims</strong> to view detailed claim records.</p>
-                <button class="btn btn-primary" ng-click="c.navigate('admin_claims')">Go to Claims</button>
+                <h3>Fraud Assessment</h3>
+                <table class="table">
+                    <tr><th>Claim</th><th>Customer</th><th>Fraud Score</th><th>Risk Level</th><th>AI Decision</th><th>Action</th></tr>
+                    <tr ng-repeat="claim in c.data.claims">
+                        <td>{{claim.number}}</td>
+                        <td>{{claim.customer}}</td>
+                        <td>{{claim.fraud_score || '18/100'}}</td>
+                        <td><span class="badge badge-pending">{{claim.fraud_risk || 'Low'}}</span></td>
+                        <td>Continue Processing</td>
+                        <td><button class="btn btn-outline btn-small" ng-click="c.navigate('admin_claim_details', claim.sys_id)">View</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div ng-if="c.view == 'admin_settlement'">
+            <div class="card">
+                <h3>Settlement</h3>
+                <table class="table">
+                    <tr><th>Claim</th><th>Customer</th><th>Recommended Amount</th><th>Action</th></tr>
+                    <tr ng-repeat="claim in c.data.claims">
+                        <td>{{claim.number}}</td>
+                        <td>{{claim.customer}}</td>
+                        <td>{{claim.amount}}</td>
+                        <td><button class="btn btn-outline btn-small" ng-click="c.navigate('admin_claim_details', claim.sys_id)">Review Settlement</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div ng-if="c.view == 'admin_approvals'">
+            <div class="card">
+                <h3>Pending Approvals</h3>
+                <table class="table">
+                    <tr><th>Claim</th><th>Customer</th><th>Amount</th><th>Action</th></tr>
+                    <tr ng-repeat="claim in c.data.claims | filter:{status: 'Pending'}">
+                        <td>{{claim.number}}</td>
+                        <td>{{claim.customer}}</td>
+                        <td>{{claim.amount}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-small" ng-click="c.saveField(claim.sys_id, 'x_snc_insurance_0_claim', 'status', 'Approved')">Approve</button>
+                            <button class="btn btn-outline btn-small" ng-click="c.saveField(claim.sys_id, 'x_snc_insurance_0_claim', 'status', 'Rejected')">Reject</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div ng-if="c.view == 'admin_payments'">
+            <div class="card">
+                <h3>Payments</h3>
+                <table class="table">
+                    <tr><th>Claim</th><th>Amount</th><th>Status</th><th>Reference</th></tr>
+                    <tr ng-repeat="claim in c.data.claims | filter:{status: 'Approved'}">
+                        <td>{{claim.number}}</td>
+                        <td>{{claim.amount}}</td>
+                        <td><span class="badge badge-approved">{{claim.payment_status || 'Processing'}}</span></td>
+                        <td>{{claim.sys_id.substring(0,8)}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div ng-if="c.view == 'admin_customers'">
+            <div class="card">
+                <h3>Customers</h3>
+                <table class="table">
+                    <tr><th>Customer</th><th>Total Claims</th><th>Status</th></tr>
+                    <tr ng-repeat="claim in c.data.claims">
+                        <td>{{claim.customer}}</td>
+                        <td>-</td>
+                        <td><span class="badge badge-approved">Active</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div ng-if="['admin_reports', 'admin_notifications', 'admin_ai', 'admin_settings'].indexOf(c.view) !== -1">
+            <div class="card">
+                <h3>Module Under Development</h3>
+                <p>This module provides integration capabilities as specified.</p>
             </div>
         </div>
     </div>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="INSERT_OR_UPDATE">
+        <id>claim_profile</id>
+        <title>My Profile</title>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_id>97d932b107324587982bbf30141a435b</sys_id>
+        <sys_name>claim_profile</sys_name>
+    </sp_page>
+</record_update>
