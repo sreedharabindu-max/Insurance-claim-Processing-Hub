@@ -4,13 +4,13 @@
         <element label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
         <element choice="1" label="Notification Type" max_length="40" name="notification_type" type="choice">
             <choice>
-                <element inactive_on_update="false" label="OTP" sequence="20" value="otp"/>
-                <element inactive_on_update="false" label="General" sequence="70" value="general"/>
-                <element inactive_on_update="false" label="Payment" sequence="50" value="payment"/>
-                <element inactive_on_update="false" label="Document" sequence="30" value="document"/>
-                <element inactive_on_update="false" label="Claim Submitted" sequence="10" value="claim_submitted"/>
                 <element inactive_on_update="false" label="Claim Status" sequence="40" value="claim_status"/>
+                <element inactive_on_update="false" label="Payment" sequence="50" value="payment"/>
                 <element inactive_on_update="false" label="Settlement" sequence="60" value="settlement"/>
+                <element inactive_on_update="false" label="General" sequence="70" value="general"/>
+                <element inactive_on_update="false" label="Claim Submitted" sequence="10" value="claim_submitted"/>
+                <element inactive_on_update="false" label="OTP" sequence="20" value="otp"/>
+                <element inactive_on_update="false" label="Document" sequence="30" value="document"/>
             </choice>
         </element>
         <element label="Message" max_length="500" name="message" type="string"/>

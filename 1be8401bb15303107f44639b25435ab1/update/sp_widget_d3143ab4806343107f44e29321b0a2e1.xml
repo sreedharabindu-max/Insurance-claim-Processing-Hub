@@ -675,15 +675,6 @@
                 "x_snc_insurance_0_claim"
             );
 
-        
-        var userEmail = gs.getUser().getEmail();
-        var ph = new GlideRecord("x_snc_insurance_0_policyholder");
-        ph.addQuery("email", userEmail);
-        ph.setLimit(1);
-        ph.query();
-        var phSysId = ph.next() ? ph.getUniqueValue() : "invalid";
-        claim.addQuery("policyholder", phSysId);
-
 
         claim.orderByDesc(
             "sys_created_on"

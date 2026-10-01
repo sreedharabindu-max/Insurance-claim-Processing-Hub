@@ -891,22 +891,6 @@
 
 
         /* =================================================
-           AUTHORIZATION CHECK
-        ================================================== */
-        
-        var userEmail = gs.getUser().getEmail();
-        var ph = new GlideRecord("x_snc_insurance_0_policyholder");
-        ph.addQuery("email", userEmail);
-        ph.setLimit(1);
-        ph.query();
-        var phSysId = ph.next() ? ph.getUniqueValue() : "invalid";
-        if (claim.getValue("policyholder") != phSysId) {
-
-            data.message = "Claim was not found or access denied.";
-            return;
-        }
-
-        /* =================================================
            CLAIM DATA
         ================================================== */
 
