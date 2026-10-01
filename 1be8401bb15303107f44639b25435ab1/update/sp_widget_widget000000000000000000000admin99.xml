@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
         <client_script><![CDATA[function($scope, $location, $http, spUtil, $window) {
@@ -121,17 +121,15 @@
         return;
     }
 
-    var claimGR = new GlideAggregate('x_snc_insurance_0_claim');
-    claimGR.addAggregate('COUNT', 'status');
-    claimGR.query();
     data.stats = { total: 0, pending: 0, approved: 0, rejected: 0 };
-    while (claimGR.next()) {
-        var st = claimGR.status.toString();
-        var cnt = parseInt(claimGR.getAggregate('COUNT', 'status'));
-        data.stats.total += cnt;
-        if (st == 'Pending') data.stats.pending = cnt;
-        if (st == 'Approved') data.stats.approved = cnt;
-        if (st == 'Rejected') data.stats.rejected = cnt;
+    var claimCount = new GlideRecordSecure('x_snc_insurance_0_claim');
+    claimCount.query();
+    while (claimCount.next()) {
+        data.stats.total++;
+        var st = claimCount.getValue('status');
+        if (st == 'Pending') data.stats.pending++;
+        if (st == 'Approved') data.stats.approved++;
+        if (st == 'Rejected') data.stats.rejected++;
     }
 
     data.claims = [];
@@ -141,16 +139,16 @@
     while (cl.next()) {
         data.claims.push({
             sys_id: cl.getUniqueValue(),
-            number: cl.getValue('claim_number'),
-            customer: cl.getDisplayValue('policyholder'),
-            type: cl.getValue('claim_type'),
-            amount: cl.getDisplayValue('claim_amount'),
-            status: cl.getValue('status'),
-            fraud_risk: cl.getValue('fraud_risk'),
-            fraud_score: cl.getValue('fraud_score'),
-            adjuster_decision: cl.getValue('adjuster_decision'),
-            payment_status: cl.getValue('payment_status'),
-            final_payout: cl.getDisplayValue('final_payout')
+            number: cl.getValue('claim_number') || '',
+            customer: cl.getDisplayValue('policyholder') || '',
+            type: cl.getValue('claim_type') || '',
+            amount: cl.getDisplayValue('claim_amount') || '',
+            status: cl.getValue('status') || '',
+            fraud_risk: cl.getValue('fraud_risk') || '',
+            fraud_score: cl.getValue('fraud_score') || '',
+            adjuster_decision: cl.getValue('adjuster_decision') || '',
+            payment_status: cl.getValue('payment_status') || '',
+            final_payout: cl.getDisplayValue('final_payout') || ''
         });
     }
 
@@ -161,10 +159,10 @@
     while (docs.next()) {
         data.documents.push({
             sys_id: docs.getUniqueValue(),
-            name: docs.getValue('document_name'),
-            claim_number: docs.claim.claim_number.toString(),
-            type: docs.getValue('document_type'),
-            status: docs.getValue('document_validation_status')
+            name: docs.getValue('document_name') || '',
+            claim_number: docs.getDisplayValue('claim') || '',
+            type: docs.getValue('document_type') || '',
+            status: docs.getValue('document_validation_status') || ''
         });
     }
 })();]]></script>
@@ -174,7 +172,7 @@
 <div class="admin-portal" ng-if="c.data.is_admin">
     <div class="sidebar">
         <div class="sidebar-header">
-            <h2>🛡️ Admin</h2>
+            <h2>??? Admin</h2>
         </div>
         <a ng-repeat="item in c.navItems" 
            ng-click="c.navigate(item.id)" 
@@ -234,7 +232,7 @@
             </div>
         </div>
         <div ng-if="c.view == 'admin_claim_details'">
-            <button class="btn btn-outline" ng-click="c.navigate('admin_claims')" style="margin-bottom: 20px;">← Back to Claims</button>
+            <button class="btn btn-outline" ng-click="c.navigate('admin_claims')" style="margin-bottom: 20px;">? Back to Claims</button>
             <div ng-repeat="claim in c.data.claims | filter:{sys_id: c.claimId}:true">
                 <div class="card">
                     <h3>Claim: {{claim.number}}</h3>
@@ -242,7 +240,7 @@
                         <strong>Status:</strong>
                         <span ng-if="!c.editing[claim.sys_id].status">
                             <span class="badge" ng-class="'badge-' + claim.status.toLowerCase()">{{claim.status}}</span>
-                            <button class="btn btn-outline btn-small" ng-click="c.editField(claim.sys_id, 'status')">✎ Edit</button>
+                            <button class="btn btn-outline btn-small" ng-click="c.editField(claim.sys_id, 'status')">? Edit</button>
                         </span>
                         <span ng-if="c.editing[claim.sys_id].status" class="edit-inline">
                             <select ng-model="claim.status" class="form-control" style="width: auto; display: inline-block;">
@@ -292,3 +290,4 @@
         ]]></template>
     </sp_widget>
 </record_update>
+
