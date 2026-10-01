@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced_placeholder_dimensions>false</advanced_placeholder_dimensions>
+        <async_load>false</async_load>
+        <async_load_device_type>desktop,tablet,mobile</async_load_device_type>
+        <async_load_trigger>viewport</async_load_trigger>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <placeholder_dimensions>{&#13;	"mobile": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	},&#13;	"desktop": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	},&#13;	"tablet": {&#13;		"height": "250px",&#13;		"width": "100%"&#13;	}&#13;}</placeholder_dimensions>
+        <placeholder_dimensions_script><![CDATA[function evaluateConfig(options) { return {	"mobile": {		"height": "250px",		"width": "100%"	},	"desktop": {		"height": "250px",		"width": "100%"	},	"tablet": {		"height": "250px",		"width": "100%"	}}; }]]></placeholder_dimensions_script>
+        <placeholder_template>&lt;!-- 
+	AngularJS template with configurable options.
+	Use the `options` object to control dynamic behavior.
+	Example: Display an element when max row count is 10:
+	&lt;div ng-if="options.maxRowCount === 10"&gt;&lt;/div&gt;
+	The `skeleton-container` class is used for loading placeholders.
+--&gt;
+	&lt;div class="skeleton-container"&gt;
+	&lt;!-- Header Skeleton --&gt;
+	&lt;div class="skeleton-box skeleton-header"&gt;&lt;/div&gt;
+	&lt;!-- Body Skeleton --&gt;
+	&lt;div class="skeleton-box skeleton-line"&gt;&lt;/div&gt;
+	&lt;div class="skeleton-box skeleton-line small"&gt;&lt;/div&gt;
+	&lt;div class="skeleton-box skeleton-line medium"&gt;&lt;/div&gt;
+&lt;/div&gt;</placeholder_template>
+        <preserve_placeholder_size>false</preserve_placeholder_size>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">25aac39b78a303107f44b1a9cb0dd5c3</sp_column>
+        <sp_widget display_value="HTML">8679ef89cb21120000f8d856634c9c4f</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-10-01 05:58:02</sys_created_on>
+        <sys_id>eaba479b78a303107f44b1a9cb0dd5bf</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Admin Login</sys_name>
+        <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
+        <sys_update_name>sp_instance_eaba479b78a303107f44b1a9cb0dd5bf</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-10-01 05:58:57</sys_updated_on>
+        <title>Admin Login</title>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"html": {
+		"value": "<div style=\"padding: 40px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);\">\r\n<h2 style=\"color: #12305b; border-bottom: 2px solid #eef6ff; padding-bottom: 15px;\">]]>🛡<![CDATA[️ Administrator Dashboard</h2>\r\n<p style=\"color: #7c8da2; font-size: 16px;\">Welcome to the Management Portal. Select a module below to process claims securely.</p>\r\n<div style=\"display: flex; gap: 20px; flex-wrap: wrap; margin-top: 30px;\"><a style=\"flex: 1; min-width: 200px; padding: 25px; background: #f8fbff; border: 1px solid #1769d1; border-radius: 8px; text-decoration: none; color: #1769d1; font-weight: 600; text-align: center;\" href=\"/now/nav/ui/classic/params/target/x_snc_insurance_0_claim_list.do\" target=\"_blank\" rel=\"noopener\">\r\n<div style=\"font-size: 30px; margin-bottom: 10px;\">]]>📋<![CDATA[</div>\r\nAll Claims &amp; Status</a><a style=\"flex: 1; min-width: 200px; padding: 25px; background: #f8fbff; border: 1px solid #1769d1; border-radius: 8px; text-decoration: none; color: #1769d1; font-weight: 600; text-align: center;\" href=\"/now/nav/ui/classic/params/target/x_snc_insurance_0_claim_document_list.do\" target=\"_blank\" rel=\"noopener\">\r\n<div style=\"font-size: 30px; margin-bottom: 10px;\">]]>📄<![CDATA[</div>\r\nDocument Validation</a><a style=\"flex: 1; min-width: 200px; padding: 25px; background: #f8fbff; border: 1px solid #1769d1; border-radius: 8px; text-decoration: none; color: #1769d1; font-weight: 600; text-align: center;\" href=\"/now/nav/ui/classic/params/target/pa_dashboards.do\" target=\"_blank\" rel=\"noopener\">\r\n<div style=\"font-size: 30px; margin-bottom: 10px;\">]]>📊<![CDATA[</div>\r\nReports &amp; Analytics</a></div>\r\n</div>",
+		"displayValue": "<div style=\"padding: 40px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);\">\n<h2 style=\"color: #12305b; border-bottom: 2px solid #eef6ff; padding-bottom: 15px;\">]]>🛡<![CDATA[️ Administrator Dashboard</h2>\n<p style=\"color: #7c8da2; font-size: 16px;\">Welcome to the Management Portal. Select a module below to process claims securely.</p>\n<div style=\"display: flex; gap: 20px; flex-wrap: wrap; margin-top: 30px;\"><a style=\"flex: 1; min-width: 200px; padding: 25px; background: #f8fbff; border: 1px solid #1769d1; border-radius: 8px; text-decoration: none; color: #1769d1; font-weight: 600; text-align: center;\" href=\"/now/nav/ui/classic/params/target/x_snc_insurance_0_claim_list.do\" target=\"_blank\" rel=\"noopener\">\n<div style=\"font-size: 30px; margin-bottom: 10px;\">]]>📋<![CDATA[</div>\nAll Claims &amp; Status</a><a style=\"flex: 1; min-width: 200px; padding: 25px; background: #f8fbff; border: 1px solid #1769d1; border-radius: 8px; text-decoration: none; color: #1769d1; font-weight: 600; text-align: center;\" href=\"/now/nav/ui/classic/params/target/x_snc_insurance_0_claim_document_list.do\" target=\"_blank\" rel=\"noopener\">\n<div style=\"font-size: 30px; margin-bottom: 10px;\">]]>📄<![CDATA[</div>\nDocument Validation</a><a style=\"flex: 1; min-width: 200px; padding: 25px; background: #f8fbff; border: 1px solid #1769d1; border-radius: 8px; text-decoration: none; color: #1769d1; font-weight: 600; text-align: center;\" href=\"/now/nav/ui/classic/params/target/pa_dashboards.do\" target=\"_blank\" rel=\"noopener\">\n<div style=\"font-size: 30px; margin-bottom: 10px;\">]]>📊<![CDATA[</div>\nReports &amp; Analytics</a></div>\n</div>"
+	}
+}]]></widget_parameters>
+    </sp_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=eaba479b78a303107f44b1a9cb0dd5bf"/>
+</record_update>
