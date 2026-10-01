@@ -726,6 +726,7 @@
         <public>false</public>
         <roles/>
         <script><![CDATA[(function() {
+    data.is_admin = gs.hasRole('admin') || gs.hasRole('x_snc_insurance_0.claim admin');
 
     data.success = false;
 

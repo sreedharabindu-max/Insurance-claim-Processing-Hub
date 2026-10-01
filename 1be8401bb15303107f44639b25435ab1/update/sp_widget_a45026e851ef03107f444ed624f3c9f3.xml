@@ -2,265 +2,729 @@
     <sp_widget action="INSERT_OR_UPDATE">
         <category>standard</category>
         <client_script><![CDATA[function loginCtrl($scope, $http, $window, $location, glideUserSession, glideSystemProperties, spUtil) {
-    
-    /* widget controller */
-    var c = this;
+	var c = this;
+	c.loginMode = null;
+	c.username = "";
+	c.password = "";
 
-    // ==========================================
-    // INITIAL SETTINGS
-    // ==========================================
-    c.remember_me = c.data.forgetMe ? false : c.data.rememberMeDefault;
-    c.data.url_suffix = $scope.portal ? $scope.portal.url_suffix : "";
-    c.masked = true;
+	c.executeLogin = function() {
+		c.message = "";
+		c.submitting = true;
 
-    // ==========================================
-    // SSO REDIRECT LOGIC
-    // ==========================================
-    if (!c.data.is_logged_in && c.data.multisso_enabled && c.data.default_idp) {
-        var pageId = $location.search().id || $scope.page.id;
-        var isLoginPage = ($scope.portal.login_page_dv == pageId) || ('login' == pageId);
-        c.server.get({
-            action: "set_sso_destination",
-            pageURI: isLoginPage ? null : $location.url()
-        }).then(function() {
-            $window.location = "/login_with_sso.do?glide_sso_id=" + c.data.default_idp;
-        });
-    }
+		var url = spUtil.getURL({ sysparm_type: 'view_form.login' });
 
-    // ==========================================
-    // NEW CUSTOM LOGIN LOGIC
-    // ==========================================
-    c.loginMode = null;
-    c.username = "";
-    c.password = "";
+		$http({
+			method: 'post',
+			url: url,
+			data: $.param({
+				'sysparm_type': 'login',
+				'user_name': c.username,
+				'user_password': c.password
+			}),
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).then(function(response) {
+			c.submitting = false;
 
-    c.executeLogin = function() {
-        c.message = "";
-        c.submitting = true;
+			if (!response.data || response.data.status !== 'success') {
+				c.message = "Invalid username or password.";
+				return;
+			}
 
-        var url = spUtil.getURL({ sysparm_type: 'view_form.login' });
+			if (response.data.session_token) {
+				window.g_ck = response.data.session_token;
+			}
 
-        $http({
-            method: 'post',
-            url: url,
-            data: $.param({
-                'sysparm_type': 'login',
-                'user_name': c.username,
-                'user_password': c.password
-            }),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        }).then(function(response) {
-            c.submitting = false;
+			if (c.loginMode === 'admin') {
+				c.server.get({ action: 'verify_admin' }).then(function(authRes) {
+					if (authRes.data.is_admin) {
+						$window.location.href = "?id=admin_dashboard";
+					} else {
+						$http.get('/logout.do').then(function() {
+							c.message = "Access denied. You are not authorized to access the Admin Portal.";
+						});
+					}
+				});
+			} else {
+				$window.location.href = "?id=claim_home";
+			}
 
-            if (!response.data || response.data.status !== 'success') {
-                c.message = "Invalid username or password.";
-                return;
-            }
-
-            // Capture secure session token
-            if (response.data.session_token) {
-                window.g_ck = response.data.session_token;
-            }
-
-            if (c.loginMode === 'admin') {
-                // Server-side role check
-                c.server.get({ action: 'verify_admin' }).then(function(authRes) {
-                    if (authRes.data.is_admin) {
-                        $window.location.href = "?id=admin_dashboard";
-                    } else {
-                        // Role validation failed - force secure logout
-                        $http.get('/logout.do').then(function() {
-                            c.message = "Access denied. You are not authorized to access the Admin Portal.";
-                        });
-                    }
-                });
-            } else {
-                $window.location.href = "?id=claim_home";
-            }
-
-        }, function() {
-            c.submitting = false;
-            c.message = "Error connecting to server.";
-        });
-    };
+		}, function() {
+			c.submitting = false;
+			c.message = "Error connecting to server.";
+		});
+	};
 }]]></client_script>
         <controller_as>c</controller_as>
         <css>/* ==========================================&#13;
-   PAGE &amp; CARD LAYOUT&#13;
+   LOGIN PAGE&#13;
    ========================================== */&#13;
+&#13;
 .ich-login-page {&#13;
+&#13;
     min-height: 100vh;&#13;
+&#13;
     display: flex;&#13;
+&#13;
     align-items: center;&#13;
+&#13;
     justify-content: center;&#13;
-    background: linear-gradient(135deg, #eef6ff, #f8fbff, #edf4ff);&#13;
+&#13;
+    position: relative;&#13;
+&#13;
+    overflow: hidden;&#13;
+&#13;
+    padding: 35px 20px;&#13;
+&#13;
+    box-sizing: border-box;&#13;
+&#13;
+    background:&#13;
+        linear-gradient(&#13;
+            135deg,&#13;
+            #edf6ff 0%,&#13;
+            #f8fbff 50%,&#13;
+            #edf3ff 100%&#13;
+        );&#13;
+&#13;
 }&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   BACKGROUND&#13;
+   ========================================== */&#13;
+&#13;
+.ich-bg-circle {&#13;
+&#13;
+    position: absolute;&#13;
+&#13;
+    border-radius: 50%;&#13;
+&#13;
+    pointer-events: none;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-circle-one {&#13;
+&#13;
+    width: 430px;&#13;
+&#13;
+    height: 430px;&#13;
+&#13;
+    top: -220px;&#13;
+&#13;
+    left: -140px;&#13;
+&#13;
+    background:&#13;
+        rgba(37, 99, 235, 0.08);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-circle-two {&#13;
+&#13;
+    width: 380px;&#13;
+&#13;
+    height: 380px;&#13;
+&#13;
+    right: -150px;&#13;
+&#13;
+    bottom: -200px;&#13;
+&#13;
+    background:&#13;
+        rgba(59, 130, 246, 0.07);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   LOGIN CARD&#13;
+   ========================================== */&#13;
 &#13;
 .ich-login-card {&#13;
+&#13;
     width: 100%;&#13;
+&#13;
     max-width: 440px;&#13;
+&#13;
+    padding: 38px 42px 28px;&#13;
+&#13;
     background: #ffffff;&#13;
-    padding: 35px 40px;&#13;
+&#13;
     border-radius: 20px;&#13;
-    box-shadow: 0 20px 60px rgba(30, 64, 175, 0.14);&#13;
-    border: 1px solid #e5ebf3;&#13;
+&#13;
+    border: 1px solid #e4ebf4;&#13;
+&#13;
+    box-shadow:&#13;
+        0 25px 70px&#13;
+        rgba(30, 64, 175, 0.14);&#13;
+&#13;
+    position: relative;&#13;
+&#13;
+    z-index: 2;&#13;
+&#13;
+    box-sizing: border-box;&#13;
+&#13;
 }&#13;
 &#13;
+&#13;
 /* ==========================================&#13;
-   BRANDING &amp; HEADER&#13;
+   BRAND&#13;
    ========================================== */&#13;
+&#13;
 .ich-brand {&#13;
+&#13;
     text-align: center;&#13;
-    margin-bottom: 25px;&#13;
+&#13;
+    margin-bottom: 28px;&#13;
+&#13;
 }&#13;
+&#13;
 &#13;
 .ich-logo {&#13;
-    width: 60px;&#13;
-    height: 60px;&#13;
-    margin: auto;&#13;
-    border-radius: 16px;&#13;
+&#13;
+    width: 68px;&#13;
+&#13;
+    height: 68px;&#13;
+&#13;
+    margin: 0 auto 14px;&#13;
+&#13;
     display: flex;&#13;
+&#13;
     align-items: center;&#13;
+&#13;
     justify-content: center;&#13;
-    font-size: 28px;&#13;
-    background: linear-gradient(135deg, #1261d6, #2383e2);&#13;
-    box-shadow: 0 4px 15px rgba(18, 97, 214, 0.3);&#13;
+&#13;
+    border-radius: 18px;&#13;
+&#13;
+    font-size: 32px;&#13;
+&#13;
+    background:&#13;
+        linear-gradient(&#13;
+            135deg,&#13;
+            #0757c9,&#13;
+            #2486e8&#13;
+        );&#13;
+&#13;
+    box-shadow:&#13;
+        0 12px 28px&#13;
+        rgba(37, 99, 235, 0.25);&#13;
+&#13;
 }&#13;
+&#13;
 &#13;
 .ich-brand h1 {&#13;
-    margin: 12px 0 4px;&#13;
-    color: #12305b;&#13;
-    font-size: 23px;&#13;
+&#13;
+    margin: 0;&#13;
+&#13;
+    color: #12315b;&#13;
+&#13;
+    font-size: 25px;&#13;
+&#13;
     font-weight: 700;&#13;
+&#13;
+    letter-spacing: -0.4px;&#13;
+&#13;
 }&#13;
+&#13;
 &#13;
 .ich-brand p {&#13;
-    color: #7c8da2;&#13;
-    font-size: 14px;&#13;
-    margin: 0;&#13;
-}&#13;
 &#13;
-/* ==========================================&#13;
-   LOGIN MODE SELECTOR (CUSTOMER VS ADMIN)&#13;
-   ========================================== */&#13;
-.login-mode-selector {&#13;
-    display: flex;&#13;
-    flex-direction: column;&#13;
-    gap: 15px;&#13;
-    margin-bottom: 20px;&#13;
-}&#13;
+    margin: 6px 0 0;&#13;
 &#13;
-.mode-btn {&#13;
-    display: flex;&#13;
-    align-items: center;&#13;
-    background: #f8fbff;&#13;
-    border: 2px solid #e5ebf3;&#13;
-    border-radius: 12px;&#13;
-    padding: 15px;&#13;
-    cursor: pointer;&#13;
-    transition: all 0.3s;&#13;
-    text-align: left;&#13;
-    width: 100%;&#13;
-}&#13;
+    color: #718198;&#13;
 &#13;
-.mode-btn:hover {&#13;
-    border-color: #1769d1;&#13;
-    background: #eef6ff;&#13;
-    transform: translateY(-2px);&#13;
-    box-shadow: 0 4px 12px rgba(23, 105, 209, 0.1);&#13;
-}&#13;
-&#13;
-.mode-icon {&#13;
-    font-size: 28px;&#13;
-    margin-right: 18px;&#13;
-}&#13;
-&#13;
-.mode-text strong {&#13;
-    display: block;&#13;
-    color: #12305b;&#13;
-    font-size: 15px;&#13;
-}&#13;
-&#13;
-.mode-text span {&#13;
-    color: #7c8da2;&#13;
     font-size: 12px;&#13;
+&#13;
 }&#13;
+&#13;
 &#13;
 /* ==========================================&#13;
-   FORM FIELDS &amp; BUTTONS&#13;
+   WELCOME&#13;
    ========================================== */&#13;
-.login-field {&#13;
-    margin-bottom: 18px;&#13;
-    text-align: left;&#13;
-}&#13;
 &#13;
-.login-field label {&#13;
-    display: block;&#13;
-    margin-bottom: 6px;&#13;
-    color: #12305b;&#13;
-    font-size: 13px;&#13;
-    font-weight: 600;&#13;
-}&#13;
+.ich-welcome {&#13;
 &#13;
-.login-field input {&#13;
-    width: 100%;&#13;
-    padding: 12px 16px;&#13;
-    background: #f8fafc;&#13;
-    border: 1px solid #e5ebf3;&#13;
-    border-radius: 10px;&#13;
-    font-size: 14px;&#13;
-    transition: border 0.3s;&#13;
-}&#13;
-&#13;
-.login-field input:focus {&#13;
-    border-color: #1769d1;&#13;
-    outline: none;&#13;
-    background: #ffffff;&#13;
-}&#13;
-&#13;
-.login-submit {&#13;
-    width: 100%;&#13;
-    padding: 14px;&#13;
-    background: linear-gradient(135deg, #1261d6, #2383e2);&#13;
-    color: #ffffff;&#13;
-    border: none;&#13;
-    border-radius: 10px;&#13;
-    font-size: 15px;&#13;
-    font-weight: 700;&#13;
-    cursor: pointer;&#13;
-    transition: transform 0.2s, box-shadow 0.2s;&#13;
-    margin-top: 10px;&#13;
-}&#13;
-&#13;
-.login-submit:hover {&#13;
-    transform: translateY(-2px);&#13;
-    box-shadow: 0 6px 15px rgba(18, 97, 214, 0.4);&#13;
-}&#13;
-&#13;
-.login-submit:disabled {&#13;
-    opacity: 0.6;&#13;
-    cursor: not-allowed;&#13;
-    transform: none;&#13;
-}&#13;
-&#13;
-/* ==========================================&#13;
-   FOOTER LINKS&#13;
-   ========================================== */&#13;
-.login-register {&#13;
     text-align: center;&#13;
-    margin-top: 22px;&#13;
+&#13;
+    margin-bottom: 25px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-welcome h2 {&#13;
+&#13;
+    margin: 0;&#13;
+&#13;
+    color: #16365f;&#13;
+&#13;
+    font-size: 22px;&#13;
+&#13;
+    font-weight: 700;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-welcome p {&#13;
+&#13;
+    margin: 7px auto 0;&#13;
+&#13;
+    max-width: 320px;&#13;
+&#13;
+    color: #7b8ca2;&#13;
+&#13;
     font-size: 13px;&#13;
-    color: #7c8da2;&#13;
+&#13;
+    line-height: 1.5;&#13;
+&#13;
 }&#13;
 &#13;
-.login-register a {&#13;
-    color: #1769d1;&#13;
+&#13;
+/* ==========================================&#13;
+   FORM&#13;
+   ========================================== */&#13;
+&#13;
+.ich-field {&#13;
+&#13;
+    margin-bottom: 18px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-field label {&#13;
+&#13;
+    display: block;&#13;
+&#13;
+    margin-bottom: 8px;&#13;
+&#13;
+    color: #344a68;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
     font-weight: 600;&#13;
-    text-decoration: none;&#13;
+&#13;
 }&#13;
 &#13;
-.login-register a:hover {&#13;
+&#13;
+.ich-password-label {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    justify-content: space-between;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-password-label label {&#13;
+&#13;
+    margin-bottom: 8px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-password-label a {&#13;
+&#13;
+    color: #1769d1;&#13;
+&#13;
+    font-size: 11px;&#13;
+&#13;
+    text-decoration: none;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-password-label a:hover {&#13;
+&#13;
     text-decoration: underline;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   INPUT&#13;
+   ========================================== */&#13;
+&#13;
+.ich-input-wrapper {&#13;
+&#13;
+    position: relative;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-input-icon {&#13;
+&#13;
+    position: absolute;&#13;
+&#13;
+    left: 14px;&#13;
+&#13;
+    top: 50%;&#13;
+&#13;
+    transform: translateY(-50%);&#13;
+&#13;
+    font-size: 15px;&#13;
+&#13;
+    opacity: 0.65;&#13;
+&#13;
+    pointer-events: none;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-input {&#13;
+&#13;
+    width: 100%;&#13;
+&#13;
+    height: 48px;&#13;
+&#13;
+    padding:&#13;
+        0 14px 0 43px;&#13;
+&#13;
+    border:&#13;
+        1px solid #d5dfeb;&#13;
+&#13;
+    border-radius: 9px;&#13;
+&#13;
+    background: #f8fbff;&#13;
+&#13;
+    color: #263d5c;&#13;
+&#13;
+    font-size: 13px;&#13;
+&#13;
+    outline: none;&#13;
+&#13;
+    box-sizing: border-box;&#13;
+&#13;
+    transition:&#13;
+        border 0.2s,&#13;
+        box-shadow 0.2s,&#13;
+        background 0.2s;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-input::placeholder {&#13;
+&#13;
+    color: #a0adbc;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-input:focus {&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    border-color: #2774d7;&#13;
+&#13;
+    box-shadow:&#13;
+        0 0 0 3px&#13;
+        rgba(39, 116, 215, 0.10);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   REMEMBER ME&#13;
+   ========================================== */&#13;
+&#13;
+.ich-options {&#13;
+&#13;
+    margin:&#13;
+        2px 0 18px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-remember {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    gap: 7px;&#13;
+&#13;
+    color: #718198;&#13;
+&#13;
+    font-size: 11px;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-remember input {&#13;
+&#13;
+    width: 14px;&#13;
+&#13;
+    height: 14px;&#13;
+&#13;
+    accent-color: #1769d1;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   LOGIN BUTTON&#13;
+   ========================================== */&#13;
+&#13;
+.ich-login-btn {&#13;
+&#13;
+    width: 100%;&#13;
+&#13;
+    height: 49px;&#13;
+&#13;
+    border: none;&#13;
+&#13;
+    border-radius: 9px;&#13;
+&#13;
+    background:&#13;
+        linear-gradient(&#13;
+            135deg,&#13;
+            #1467d5,&#13;
+            #2582e3&#13;
+        );&#13;
+&#13;
+    color: #ffffff;&#13;
+&#13;
+    font-size: 14px;&#13;
+&#13;
+    font-weight: 700;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    gap: 10px;&#13;
+&#13;
+    box-shadow:&#13;
+        0 9px 22px&#13;
+        rgba(37, 99, 235, 0.22);&#13;
+&#13;
+    transition:&#13;
+        transform 0.2s,&#13;
+        box-shadow 0.2s;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-login-btn:hover {&#13;
+&#13;
+    transform: translateY(-1px);&#13;
+&#13;
+    box-shadow:&#13;
+        0 12px 27px&#13;
+        rgba(37, 99, 235, 0.28);&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-arrow {&#13;
+&#13;
+    font-size: 18px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   ERROR MESSAGE&#13;
+   ========================================== */&#13;
+&#13;
+.ich-message {&#13;
+&#13;
+    margin-top: 13px;&#13;
+&#13;
+    padding: 10px 12px;&#13;
+&#13;
+    border-radius: 7px;&#13;
+&#13;
+    background: #fff1f2;&#13;
+&#13;
+    border: 1px solid #fecdd3;&#13;
+&#13;
+    color: #be123c;&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    font-size: 12px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   DIVIDER&#13;
+   ========================================== */&#13;
+&#13;
+.ich-divider {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    gap: 10px;&#13;
+&#13;
+    margin: 25px 0 17px;&#13;
+&#13;
+    color: #9aa8b8;&#13;
+&#13;
+    font-size: 10px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-divider::before,&#13;
+.ich-divider::after {&#13;
+&#13;
+    content: "";&#13;
+&#13;
+    flex: 1;&#13;
+&#13;
+    height: 1px;&#13;
+&#13;
+    background: #e7edf3;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-divider span {&#13;
+&#13;
+    white-space: nowrap;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   SIGNUP BUTTON&#13;
+   ========================================== */&#13;
+&#13;
+.ich-signup-btn {&#13;
+&#13;
+    width: 100%;&#13;
+&#13;
+    height: 46px;&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    gap: 8px;&#13;
+&#13;
+    border:&#13;
+        1px solid #2471d5;&#13;
+&#13;
+    border-radius: 9px;&#13;
+&#13;
+    background: #ffffff;&#13;
+&#13;
+    color: #1769d1;&#13;
+&#13;
+    font-size: 13px;&#13;
+&#13;
+    font-weight: 600;&#13;
+&#13;
+    cursor: pointer;&#13;
+&#13;
+    transition:&#13;
+        background 0.2s,&#13;
+        border 0.2s;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-signup-btn:hover {&#13;
+&#13;
+    background: #f0f6ff;&#13;
+&#13;
+    border-color: #145db8;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+.ich-signup-btn span:last-child {&#13;
+&#13;
+    font-size: 17px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   SECURITY&#13;
+   ========================================== */&#13;
+&#13;
+.ich-security {&#13;
+&#13;
+    display: flex;&#13;
+&#13;
+    justify-content: center;&#13;
+&#13;
+    align-items: center;&#13;
+&#13;
+    gap: 6px;&#13;
+&#13;
+    margin-top: 21px;&#13;
+&#13;
+    padding-top: 17px;&#13;
+&#13;
+    border-top: 1px solid #edf1f5;&#13;
+&#13;
+    color: #8b99aa;&#13;
+&#13;
+    font-size: 10px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   FOOTER&#13;
+   ========================================== */&#13;
+&#13;
+.ich-footer {&#13;
+&#13;
+    text-align: center;&#13;
+&#13;
+    margin-top: 13px;&#13;
+&#13;
+    color: #b2bcc8;&#13;
+&#13;
+    font-size: 9px;&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+/* ==========================================&#13;
+   MOBILE&#13;
+   ========================================== */&#13;
+&#13;
+@media (max-width: 500px) {&#13;
+&#13;
+    .ich-login-page {&#13;
+&#13;
+        padding:&#13;
+            20px 12px;&#13;
+&#13;
+    }&#13;
+&#13;
+&#13;
+    .ich-login-card {&#13;
+&#13;
+        padding:&#13;
+            30px 24px 24px;&#13;
+&#13;
+        border-radius: 17px;&#13;
+&#13;
+    }&#13;
+&#13;
+&#13;
+    .ich-brand h1 {&#13;
+&#13;
+        font-size: 22px;&#13;
+&#13;
+    }&#13;
+&#13;
 }</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -276,8 +740,7 @@
         <public>true</public>
         <roles/>
         <script><![CDATA[(function() {
-	if (input && input.action === 'verify_admin') {
-        // Only grant access if they hold the backend admin role or custom claim admin role
+    if (input && input.action === 'verify_admin') {
         data.is_admin = gs.hasRole('admin') || gs.hasRole('x_snc_insurance_0.claim admin');
         return;
     }
@@ -429,52 +892,40 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-09-22 13:49:28</sys_created_on>
         <sys_id>a45026e851ef03107f444ed624f3c9f3</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>Insurance Claim Hub Login</sys_name>
         <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>
         <sys_policy/>
         <sys_scope display_value="Insurance Claim Processing Hub">1be8401bb15303107f44639b25435ab1</sys_scope>
         <sys_update_name>sp_widget_a45026e851ef03107f444ed624f3c9f3</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-10-01 05:51:12</sys_updated_on>
+        <sys_updated_on>2026-09-23 09:41:54</sys_updated_on>
         <template><![CDATA[<div class="ich-login-page">
-
-    <!-- Background decorations -->
     <div class="ich-bg-circle ich-circle-one"></div>
     <div class="ich-bg-circle ich-circle-two"></div>
-
-    <!-- LOGIN CARD -->
     <div class="ich-login-card">
-
-        <!-- BRAND -->
         <div class="ich-brand">
-            <div class="ich-logo">]]>🛡<![CDATA[️</div>
+            <div class="ich-logo">🛡️</div>
             <h1>Insurance Claim Hub</h1>
             <p>Welcome to the Claim Processing Portal</p>
         </div>
-
-        <!-- MODE SELECTOR (Shows when no mode is selected) -->
         <div ng-if="!c.loginMode" class="login-mode-selector">
             <h3 style="text-align:center; color:#12305b; margin-bottom: 20px; font-weight:600;">Choose Login Type</h3>
-            
             <button class="mode-btn customer-btn" ng-click="c.loginMode = 'customer'; c.message = ''">
-                <div class="mode-icon">]]>👤<![CDATA[</div>
+                <div class="mode-icon">👤</div>
                 <div class="mode-text">
                     <strong>CUSTOMER LOGIN</strong>
                     <span>For policyholders / customers</span>
                 </div>
             </button>
-            
             <button class="mode-btn admin-btn" ng-click="c.loginMode = 'admin'; c.message = ''">
-                <div class="mode-icon">]]>🛡<![CDATA[</div>
+                <div class="mode-icon">🛡</div>
                 <div class="mode-text">
                     <strong>ADMIN LOGIN</strong>
                     <span>For authorized administrators</span>
                 </div>
             </button>
         </div>
-
-        <!-- LOGIN FORM (Shows when a mode is selected) -->
         <form ng-if="c.loginMode" ng-submit="c.executeLogin()">
             <div style="margin-bottom:20px; text-align:center;">
                 <h2 style="color:#12305b; margin:0 0 5px; font-weight: 700;">
@@ -482,34 +933,23 @@
                 </h2>
                 <a href="javascript:void(0)" ng-click="c.loginMode = null; c.message = ''" style="font-size:12px; color:#1769d1; font-weight: 600;">← Back to login options</a>
             </div>
-
-            <!-- Error Message Alert -->
             <div class="alert alert-danger" ng-if="c.message" style="font-size: 13px;">{{c.message}}</div>
-
-            <!-- Username Field -->
             <div class="login-field">
                 <label>{{ c.loginMode === 'admin' ? 'Admin Username' : 'Username or Email' }}</label>
                 <input type="text" ng-model="c.username" placeholder="{{ c.loginMode === 'admin' ? 'Enter admin username' : 'Enter username' }}" required>
             </div>
-
-            <!-- Password Field -->
             <div class="login-field">
                 <label>{{ c.loginMode === 'admin' ? 'Admin Password' : 'Password' }}</label>
                 <input type="password" ng-model="c.password" placeholder="Enter password" required>
             </div>
-
-            <!-- Submit Button -->
             <button type="submit" class="login-submit" ng-disabled="c.submitting">
                 {{ c.loginMode === 'admin' ? 'Admin Sign In' : 'Sign In' }}
             </button>
-
-            <!-- Registration Link (Only for Customers) -->
             <div class="login-register" ng-if="c.loginMode === 'customer'">
                 Don't have an account? 
                 <a href="?id=claim_signup">Register here</a>
             </div>
         </form>
-
     </div>
 </div>]]></template>
     </sp_widget>
