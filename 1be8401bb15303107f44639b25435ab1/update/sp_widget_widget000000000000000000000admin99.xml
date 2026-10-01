@@ -3,7 +3,7 @@
         <category>custom</category>
         <client_script><![CDATA[function($scope, $location, $http, spUtil, $window) {
     var c = this;
-    c.view = $location.search().id || 'admin_dashboard';
+    c.view = $location.search().view || $location.search().id || 'admin_dashboard';
     c.claimId = $location.search().sys_id || null;
     
     c.navItems = [
@@ -21,8 +21,7 @@
         { id: 'admin_settings', label: 'Settings', icon: 'fa-cog' }
     ];
 
-    c.navigate = function(id, sys_id) {
-        var params = { id: id };
+    c.navigate = function(view_id, sys_id) { var params = { id: $location.search().id || 'admin_dashboard', view: view_id }; if (sys_id) params.sys_id = sys_id; $location.search(params); };
         if (sys_id) params.sys_id = sys_id;
         $location.search(params);
     };
