@@ -71,6 +71,12 @@
         }
 
 
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(c.form.email)) {
+            c.errorMessage = "Please enter a valid email address (e.g., name@gmail.com).";
+            return;
+        }
+
         c.submitting = true;
 
 
