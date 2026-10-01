@@ -6,37 +6,37 @@
         <element choice="1" label="Document Type" max_length="40" name="document_type" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Driving License" value="driving_license"/>
-                <element inactive_on_update="false" label="Vehicle Registration" value="vehicle_registration"/>
+                <element inactive_on_update="false" label="FNOL Form" value="fnol_form"/>
                 <element inactive_on_update="false" label="Medical Report" value="medical_report"/>
                 <element inactive_on_update="false" label="Other" value="other"/>
-                <element inactive_on_update="false" label="FNOL Form" value="fnol_form"/>
                 <element inactive_on_update="false" label="Police Report" value="police_report"/>
                 <element inactive_on_update="false" label="Repair Estimate" value="repair_estimate"/>
+                <element inactive_on_update="false" label="Vehicle Registration" value="vehicle_registration"/>
             </choice>
         </element>
         <element choice="1" label="OCR Status" max_length="40" name="ocr_status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Not Started" value="not_started"/>
-                <element inactive_on_update="false" label="Processing" value="processing"/>
                 <element inactive_on_update="false" label="Completed" value="completed"/>
                 <element inactive_on_update="false" label="Failed" value="failed"/>
+                <element inactive_on_update="false" label="Not Started" value="not_started"/>
+                <element inactive_on_update="false" label="Processing" value="processing"/>
             </choice>
         </element>
         <element choice="1" label="Matching Status" max_length="40" name="matching_status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Pending" value="pending"/>
                 <element inactive_on_update="false" label="Manual Review" value="manual_review"/>
                 <element inactive_on_update="false" label="Matched" value="matched"/>
                 <element inactive_on_update="false" label="Mismatch" value="mismatch"/>
+                <element inactive_on_update="false" label="Pending" value="pending"/>
             </choice>
         </element>
         <element choice="1" label="Document Status" max_length="40" name="document_status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Uploaded" value="uploaded"/>
+                <element inactive_on_update="false" label="Missing" value="missing"/>
                 <element inactive_on_update="false" label="Pending" value="pending"/>
                 <element inactive_on_update="false" label="Rejected" value="rejected"/>
+                <element inactive_on_update="false" label="Uploaded" value="uploaded"/>
                 <element inactive_on_update="false" label="Verified" value="verified"/>
-                <element inactive_on_update="false" label="Missing" value="missing"/>
             </choice>
         </element>
         <element label="Required" max_length="40" name="required" type="boolean"/>

@@ -2,15 +2,15 @@
     <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="27a8105bb15703107f44639b25435afa" label="Approval" max_length="40" name="x_snc_insurance_0_approval" type="collection">
         <element choice="1" label="Approver Level" max_length="40" name="approver_level" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Manager" value="Manager"/>
                 <element inactive_on_update="false" label="Adjuster" value="Adjuster"/>
+                <element inactive_on_update="false" label="Manager" value="Manager"/>
             </choice>
         </element>
         <element choice="1" label="Approval Status" max_length="40" name="approval_status" type="choice">
             <choice>
+                <element inactive_on_update="false" label="Approved" value="Approved"/>
                 <element inactive_on_update="false" label="Pending" value="Pending"/>
                 <element inactive_on_update="false" label="Rejected" value="Rejected"/>
-                <element inactive_on_update="false" label="Approved" value="Approved"/>
             </choice>
         </element>
         <element label="Settlement Number" max_length="32" name="settlement_number" reference="x_snc_insurance_0_settlement" type="reference"/>

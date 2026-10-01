@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
-    <sp_page action="INSERT_OR_UPDATE">
-        <id>claim_summary</id>
-        <title>Claim Summary</title>
-        <sys_class_name>sp_page</sys_class_name>
-        <sys_id>cec61a4b16ac4a6e9cc4736a0ce0f5aa</sys_id>
-        <sys_name>claim_summary</sys_name>
-    </sp_page>
-</record_update>
