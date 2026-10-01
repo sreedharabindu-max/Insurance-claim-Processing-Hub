@@ -6,11 +6,11 @@
         <element label="Claim Amount" max_length="20" name="claim_amount" type="currency"/>
         <element choice="1" display="true" label="Settlement Status" max_length="40" name="settlement_status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Under Review" sequence="4" value="under_review"/>
-                <element inactive_on_update="false" label="Rejected" sequence="3" value="rejected"/>
+                <element inactive_on_update="false" label="Approved" sequence="0" value="approved"/>
                 <element inactive_on_update="false" label="Paid" sequence="1" value="paid"/>
                 <element inactive_on_update="false" label="Pending" sequence="2" value="pending"/>
-                <element inactive_on_update="false" label="Approved" sequence="0" value="approved"/>
+                <element inactive_on_update="false" label="Rejected" sequence="3" value="rejected"/>
+                <element inactive_on_update="false" label="Under Review" sequence="4" value="under_review"/>
             </choice>
         </element>
         <element label="Recommended Maximum" max_length="20" name="recommended_maximum" type="currency"/>
@@ -20,15 +20,15 @@
         <element label="Rationale" max_length="40" name="rationale" type="string"/>
         <element choice="1" label="Adjuster Decision" max_length="40" name="adjuster_decision" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Reject" value="reject"/>
-                <element inactive_on_update="false" label="Override" value="override"/>
                 <element inactive_on_update="false" label="Accept" value="accept"/>
+                <element inactive_on_update="false" label="Override" value="override"/>
+                <element inactive_on_update="false" label="Reject" value="reject"/>
             </choice>
         </element>
         <element choice="1" label="Payment Status" max_length="40" name="payment_status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Successful" sequence="1" value="successful"/>
                 <element inactive_on_update="false" label="Pending" sequence="0" value="pending"/>
+                <element inactive_on_update="false" label="Successful" sequence="1" value="successful"/>
                 <element inactive_on_update="false" label="Failed" sequence="2" value="failed"/>
             </choice>
         </element>

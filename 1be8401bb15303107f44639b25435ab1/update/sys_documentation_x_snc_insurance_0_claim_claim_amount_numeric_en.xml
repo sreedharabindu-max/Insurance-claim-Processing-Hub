@@ -11,6 +11,7 @@
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>admin</sys_created_by>
             <sys_created_on>2026-09-20 15:48:43</sys_created_on>
+            <sys_id>f368a8cc3c2343107f44afd2681c77d7</sys_id>
             <sys_mod_count>3</sys_mod_count>
             <sys_name>Claim Amount Numeric</sys_name>
             <sys_package display_value="Insurance Claim Processing Hub" source="x_snc_insurance_0">1be8401bb15303107f44639b25435ab1</sys_package>

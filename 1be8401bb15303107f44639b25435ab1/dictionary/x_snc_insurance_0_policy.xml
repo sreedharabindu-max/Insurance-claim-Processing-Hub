@@ -4,17 +4,17 @@
         <element label="Policyholder" max_length="32" name="policyholder" reference="x_snc_insurance_0_policyholder" type="reference"/>
         <element choice="1" label="Policy Type" max_length="40" name="policy_type" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Motor" value="motor"/>
-                <element inactive_on_update="false" label="Travel" value="travel"/>
                 <element inactive_on_update="false" label="Property" value="property"/>
+                <element inactive_on_update="false" label="Travel" value="travel"/>
                 <element inactive_on_update="false" label="Health" value="health"/>
+                <element inactive_on_update="false" label="Motor" value="motor"/>
             </choice>
         </element>
         <element choice="1" label="Policy Status" max_length="40" name="policy_status" type="choice">
             <choice>
-                <element inactive_on_update="false" label="Expired" value="expired"/>
-                <element inactive_on_update="false" label="Cancelled" value="cancelled"/>
                 <element inactive_on_update="false" label="Active" value="active"/>
+                <element inactive_on_update="false" label="Cancelled" value="cancelled"/>
+                <element inactive_on_update="false" label="Expired" value="expired"/>
             </choice>
         </element>
         <element label="Coverage Amount" max_length="20" name="coverage_amount" type="currency"/>
